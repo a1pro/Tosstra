@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,39 @@
 		5602466524AD9391003A67E9 /* Tosstra.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5602466324AD9391003A67E9 /* Tosstra.xcdatamodeld */; };
 		5602466724AD9393003A67E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5602466624AD9393003A67E9 /* Assets.xcassets */; };
 		5602466A24AD9393003A67E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5602466824AD9393003A67E9 /* LaunchScreen.storyboard */; };
+		5602467224AD949B003A67E9 /* StartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602467124AD949B003A67E9 /* StartedViewController.swift */; };
+		5602467824AD951A003A67E9 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602467724AD951A003A67E9 /* CardView.swift */; };
+		5602467A24AD9529003A67E9 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602467924AD9529003A67E9 /* Constant.swift */; };
+		5602467C24AD9539003A67E9 /* FontModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602467B24AD9539003A67E9 /* FontModel.swift */; };
+		5602467E24AD9ABD003A67E9 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602467D24AD9ABD003A67E9 /* RoundedButton.swift */; };
+		5602468024ADA2D2003A67E9 /* UserTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602467F24ADA2D2003A67E9 /* UserTypeViewController.swift */; };
+		5602468224ADA82F003A67E9 /* DisSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602468124ADA82F003A67E9 /* DisSignupVC.swift */; };
+		5602468424ADB89B003A67E9 /* DriverSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602468324ADB89B003A67E9 /* DriverSignupVC.swift */; };
+		5602864D24ADBBBC0013A826 /* DisSigninVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602864C24ADBBBC0013A826 /* DisSigninVC.swift */; };
+		5635CA4D24ADCDBC00A65374 /* DriverHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635CA4C24ADCDBC00A65374 /* DriverHomeVC.swift */; };
+		5635CA5524ADD1F400A65374 /* Proxima Nova Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA4F24ADD1F300A65374 /* Proxima Nova Bold.otf */; };
+		5635CA5624ADD1F400A65374 /* Proxima Nova Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA5024ADD1F300A65374 /* Proxima Nova Black.otf */; };
+		5635CA5724ADD1F400A65374 /* Proxima Nova Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA5124ADD1F300A65374 /* Proxima Nova Thin.otf */; };
+		5635CA5824ADD1F400A65374 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA5224ADD1F400A65374 /* ProximaNova-Regular.otf */; };
+		5635CA5924ADD1F400A65374 /* Proxima Nova Alt Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA5324ADD1F400A65374 /* Proxima Nova Alt Bold.otf */; };
+		5635CA5A24ADD1F400A65374 /* Proxima Nova Alt Black Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA5424ADD1F400A65374 /* Proxima Nova Alt Black Italic.otf */; };
+		5635CA5C24ADDABB00A65374 /* Proxima Nova Semibold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA5B24ADDABB00A65374 /* Proxima Nova Semibold Italic.otf */; };
+		5635CA5F24ADE07E00A65374 /* AllTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635CA5D24ADE07E00A65374 /* AllTrackTableViewCell.swift */; };
+		5635CA6024ADE07E00A65374 /* AllTrackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA5E24ADE07E00A65374 /* AllTrackTableViewCell.xib */; };
+		5635CA6324ADE65D00A65374 /* SeniorTrackTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635CA6124ADE65D00A65374 /* SeniorTrackTCell.swift */; };
+		5635CA6424ADE65D00A65374 /* SeniorTrackTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA6224ADE65D00A65374 /* SeniorTrackTCell.xib */; };
+		564F2AAF24ADC1C5004116A4 /* DisSidebarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F2AAE24ADC1C5004116A4 /* DisSidebarVC.swift */; };
+		564F2AB224ADC237004116A4 /* DisSideTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F2AB024ADC236004116A4 /* DisSideTCell.swift */; };
+		564F2AB324ADC237004116A4 /* DisSideTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 564F2AB124ADC236004116A4 /* DisSideTCell.xib */; };
+		564F2AB524ADC5F1004116A4 /* DisHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F2AB424ADC5F1004116A4 /* DisHomeVC.swift */; };
+		56D085EF24ADF3F000E6D2BF /* ActiveDriverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085EE24ADF3F000E6D2BF /* ActiveDriverVC.swift */; };
+		56D085F224ADF66300E6D2BF /* ActiveDriverTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085F024ADF66300E6D2BF /* ActiveDriverTCell.swift */; };
+		56D085F324ADF66300E6D2BF /* ActiveDriverTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56D085F124ADF66300E6D2BF /* ActiveDriverTCell.xib */; };
+		56D085F524ADF9C600E6D2BF /* DisProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085F424ADF9C600E6D2BF /* DisProfileVC.swift */; };
+		56D085F724ADFF8000E6D2BF /* DisSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085F624ADFF8000E6D2BF /* DisSettingVC.swift */; };
+		56D085FA24AE032C00E6D2BF /* SettingTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085F824AE032C00E6D2BF /* SettingTCell.swift */; };
+		56D085FB24AE032C00E6D2BF /* SettingTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56D085F924AE032C00E6D2BF /* SettingTCell.xib */; };
+		94763B89D70CC1BBCFE16223 /* Pods_Tosstra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B18A390511219F857BB0E1 /* Pods_Tosstra.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +59,41 @@
 		5602466624AD9393003A67E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5602466924AD9393003A67E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5602466B24AD9393003A67E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5602467124AD949B003A67E9 /* StartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedViewController.swift; sourceTree = "<group>"; };
+		5602467724AD951A003A67E9 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		5602467924AD9529003A67E9 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		5602467B24AD9539003A67E9 /* FontModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontModel.swift; sourceTree = "<group>"; };
+		5602467D24AD9ABD003A67E9 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		5602467F24ADA2D2003A67E9 /* UserTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeViewController.swift; sourceTree = "<group>"; };
+		5602468124ADA82F003A67E9 /* DisSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSignupVC.swift; sourceTree = "<group>"; };
+		5602468324ADB89B003A67E9 /* DriverSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverSignupVC.swift; sourceTree = "<group>"; };
+		5602864C24ADBBBC0013A826 /* DisSigninVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSigninVC.swift; sourceTree = "<group>"; };
+		5635CA4C24ADCDBC00A65374 /* DriverHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverHomeVC.swift; sourceTree = "<group>"; };
+		5635CA4F24ADD1F300A65374 /* Proxima Nova Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Bold.otf"; path = "Font/Proxima Nova Bold.otf"; sourceTree = SOURCE_ROOT; };
+		5635CA5024ADD1F300A65374 /* Proxima Nova Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Black.otf"; path = "Font/Proxima Nova Black.otf"; sourceTree = SOURCE_ROOT; };
+		5635CA5124ADD1F300A65374 /* Proxima Nova Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Thin.otf"; path = "Font/Proxima Nova Thin.otf"; sourceTree = SOURCE_ROOT; };
+		5635CA5224ADD1F400A65374 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Regular.otf"; path = "Font/ProximaNova-Regular.otf"; sourceTree = SOURCE_ROOT; };
+		5635CA5324ADD1F400A65374 /* Proxima Nova Alt Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Alt Bold.otf"; path = "Font/Proxima Nova Alt Bold.otf"; sourceTree = SOURCE_ROOT; };
+		5635CA5424ADD1F400A65374 /* Proxima Nova Alt Black Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Alt Black Italic.otf"; path = "Font/Proxima Nova Alt Black Italic.otf"; sourceTree = SOURCE_ROOT; };
+		5635CA5B24ADDABB00A65374 /* Proxima Nova Semibold Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Semibold Italic.otf"; path = "Font/Proxima Nova Semibold Italic.otf"; sourceTree = SOURCE_ROOT; };
+		5635CA5D24ADE07E00A65374 /* AllTrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTrackTableViewCell.swift; sourceTree = "<group>"; };
+		5635CA5E24ADE07E00A65374 /* AllTrackTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllTrackTableViewCell.xib; sourceTree = "<group>"; };
+		5635CA6124ADE65D00A65374 /* SeniorTrackTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeniorTrackTCell.swift; sourceTree = "<group>"; };
+		5635CA6224ADE65D00A65374 /* SeniorTrackTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeniorTrackTCell.xib; sourceTree = "<group>"; };
+		564F2AAE24ADC1C5004116A4 /* DisSidebarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSidebarVC.swift; sourceTree = "<group>"; };
+		564F2AB024ADC236004116A4 /* DisSideTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSideTCell.swift; sourceTree = "<group>"; };
+		564F2AB124ADC236004116A4 /* DisSideTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisSideTCell.xib; sourceTree = "<group>"; };
+		564F2AB424ADC5F1004116A4 /* DisHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisHomeVC.swift; sourceTree = "<group>"; };
+		56D085EE24ADF3F000E6D2BF /* ActiveDriverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveDriverVC.swift; sourceTree = "<group>"; };
+		56D085F024ADF66300E6D2BF /* ActiveDriverTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveDriverTCell.swift; sourceTree = "<group>"; };
+		56D085F124ADF66300E6D2BF /* ActiveDriverTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveDriverTCell.xib; sourceTree = "<group>"; };
+		56D085F424ADF9C600E6D2BF /* DisProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisProfileVC.swift; sourceTree = "<group>"; };
+		56D085F624ADFF8000E6D2BF /* DisSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSettingVC.swift; sourceTree = "<group>"; };
+		56D085F824AE032C00E6D2BF /* SettingTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTCell.swift; sourceTree = "<group>"; };
+		56D085F924AE032C00E6D2BF /* SettingTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTCell.xib; sourceTree = "<group>"; };
+		E5B18A390511219F857BB0E1 /* Pods_Tosstra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tosstra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E645612C3ACD9FFE04591AA5 /* Pods-Tosstra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tosstra.release.xcconfig"; path = "Target Support Files/Pods-Tosstra/Pods-Tosstra.release.xcconfig"; sourceTree = "<group>"; };
+		F86A1CC6F6FE719B3020AAFC /* Pods-Tosstra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tosstra.debug.xcconfig"; path = "Target Support Files/Pods-Tosstra/Pods-Tosstra.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +101,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94763B89D70CC1BBCFE16223 /* Pods_Tosstra.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		162B62BA97D99A5C3EAC5591 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E5B18A390511219F857BB0E1 /* Pods_Tosstra.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5602464E24AD9391003A67E9 = {
 			isa = PBXGroup;
 			children = (
 				5602465924AD9391003A67E9 /* Tosstra */,
 				5602465824AD9391003A67E9 /* Products */,
+				CE9DAA8037C2DE3353A7472D /* Pods */,
+				162B62BA97D99A5C3EAC5591 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,9 +137,10 @@
 		5602465924AD9391003A67E9 /* Tosstra */ = {
 			isa = PBXGroup;
 			children = (
+				5635CA4E24ADD15400A65374 /* Font */,
+				5602467324AD94A8003A67E9 /* MVC */,
 				5602465A24AD9391003A67E9 /* AppDelegate.swift */,
 				5602465C24AD9391003A67E9 /* SceneDelegate.swift */,
-				5602465E24AD9391003A67E9 /* ViewController.swift */,
 				5602466024AD9391003A67E9 /* Main.storyboard */,
 				5602466624AD9393003A67E9 /* Assets.xcassets */,
 				5602466824AD9393003A67E9 /* LaunchScreen.storyboard */,
@@ -70,6 +150,86 @@
 			path = Tosstra;
 			sourceTree = "<group>";
 		};
+		5602467324AD94A8003A67E9 /* MVC */ = {
+			isa = PBXGroup;
+			children = (
+				5602467624AD94C2003A67E9 /* Controller */,
+				5602467524AD94BB003A67E9 /* View */,
+				5602467424AD94B3003A67E9 /* Model */,
+			);
+			path = MVC;
+			sourceTree = "<group>";
+		};
+		5602467424AD94B3003A67E9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5602467724AD951A003A67E9 /* CardView.swift */,
+				5602467924AD9529003A67E9 /* Constant.swift */,
+				5602467B24AD9539003A67E9 /* FontModel.swift */,
+				5602467D24AD9ABD003A67E9 /* RoundedButton.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5602467524AD94BB003A67E9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				564F2AB024ADC236004116A4 /* DisSideTCell.swift */,
+				564F2AB124ADC236004116A4 /* DisSideTCell.xib */,
+				5635CA5D24ADE07E00A65374 /* AllTrackTableViewCell.swift */,
+				5635CA5E24ADE07E00A65374 /* AllTrackTableViewCell.xib */,
+				5635CA6124ADE65D00A65374 /* SeniorTrackTCell.swift */,
+				5635CA6224ADE65D00A65374 /* SeniorTrackTCell.xib */,
+				56D085F024ADF66300E6D2BF /* ActiveDriverTCell.swift */,
+				56D085F124ADF66300E6D2BF /* ActiveDriverTCell.xib */,
+				56D085F824AE032C00E6D2BF /* SettingTCell.swift */,
+				56D085F924AE032C00E6D2BF /* SettingTCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5602467624AD94C2003A67E9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5602465E24AD9391003A67E9 /* ViewController.swift */,
+				5602467124AD949B003A67E9 /* StartedViewController.swift */,
+				5602467F24ADA2D2003A67E9 /* UserTypeViewController.swift */,
+				5602468124ADA82F003A67E9 /* DisSignupVC.swift */,
+				5602468324ADB89B003A67E9 /* DriverSignupVC.swift */,
+				5602864C24ADBBBC0013A826 /* DisSigninVC.swift */,
+				564F2AAE24ADC1C5004116A4 /* DisSidebarVC.swift */,
+				564F2AB424ADC5F1004116A4 /* DisHomeVC.swift */,
+				5635CA4C24ADCDBC00A65374 /* DriverHomeVC.swift */,
+				56D085EE24ADF3F000E6D2BF /* ActiveDriverVC.swift */,
+				56D085F424ADF9C600E6D2BF /* DisProfileVC.swift */,
+				56D085F624ADFF8000E6D2BF /* DisSettingVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5635CA4E24ADD15400A65374 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				5635CA5B24ADDABB00A65374 /* Proxima Nova Semibold Italic.otf */,
+				5635CA5424ADD1F400A65374 /* Proxima Nova Alt Black Italic.otf */,
+				5635CA5324ADD1F400A65374 /* Proxima Nova Alt Bold.otf */,
+				5635CA5024ADD1F300A65374 /* Proxima Nova Black.otf */,
+				5635CA4F24ADD1F300A65374 /* Proxima Nova Bold.otf */,
+				5635CA5124ADD1F300A65374 /* Proxima Nova Thin.otf */,
+				5635CA5224ADD1F400A65374 /* ProximaNova-Regular.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		CE9DAA8037C2DE3353A7472D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F86A1CC6F6FE719B3020AAFC /* Pods-Tosstra.debug.xcconfig */,
+				E645612C3ACD9FFE04591AA5 /* Pods-Tosstra.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,9 +237,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5602466E24AD9393003A67E9 /* Build configuration list for PBXNativeTarget "Tosstra" */;
 			buildPhases = (
+				605DCC702F9428B339FEDE0C /* [CP] Check Pods Manifest.lock */,
 				5602465324AD9391003A67E9 /* Sources */,
 				5602465424AD9391003A67E9 /* Frameworks */,
 				5602465524AD9391003A67E9 /* Resources */,
+				6CD7A0D359F540390437D5D6 /* [CP] Embed Pods Frameworks */,
+				FCA04D83C22B56180AFDEA74 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,21 +292,112 @@
 			buildActionMask = 2147483647;
 			files = (
 				5602466A24AD9393003A67E9 /* LaunchScreen.storyboard in Resources */,
+				56D085FB24AE032C00E6D2BF /* SettingTCell.xib in Resources */,
+				5635CA5824ADD1F400A65374 /* ProximaNova-Regular.otf in Resources */,
 				5602466724AD9393003A67E9 /* Assets.xcassets in Resources */,
+				5635CA5624ADD1F400A65374 /* Proxima Nova Black.otf in Resources */,
+				5635CA5A24ADD1F400A65374 /* Proxima Nova Alt Black Italic.otf in Resources */,
+				564F2AB324ADC237004116A4 /* DisSideTCell.xib in Resources */,
+				5635CA5C24ADDABB00A65374 /* Proxima Nova Semibold Italic.otf in Resources */,
 				5602466224AD9391003A67E9 /* Main.storyboard in Resources */,
+				5635CA5524ADD1F400A65374 /* Proxima Nova Bold.otf in Resources */,
+				5635CA5724ADD1F400A65374 /* Proxima Nova Thin.otf in Resources */,
+				56D085F324ADF66300E6D2BF /* ActiveDriverTCell.xib in Resources */,
+				5635CA5924ADD1F400A65374 /* Proxima Nova Alt Bold.otf in Resources */,
+				5635CA6424ADE65D00A65374 /* SeniorTrackTCell.xib in Resources */,
+				5635CA6024ADE07E00A65374 /* AllTrackTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		605DCC702F9428B339FEDE0C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tosstra-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6CD7A0D359F540390437D5D6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tosstra/Pods-Tosstra-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tosstra/Pods-Tosstra-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tosstra/Pods-Tosstra-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FCA04D83C22B56180AFDEA74 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tosstra/Pods-Tosstra-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tosstra/Pods-Tosstra-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tosstra/Pods-Tosstra-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5602465324AD9391003A67E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5602467A24AD9529003A67E9 /* Constant.swift in Sources */,
+				564F2AB224ADC237004116A4 /* DisSideTCell.swift in Sources */,
 				5602466524AD9391003A67E9 /* Tosstra.xcdatamodeld in Sources */,
+				5602467C24AD9539003A67E9 /* FontModel.swift in Sources */,
+				5602467224AD949B003A67E9 /* StartedViewController.swift in Sources */,
+				56D085F724ADFF8000E6D2BF /* DisSettingVC.swift in Sources */,
+				5602467E24AD9ABD003A67E9 /* RoundedButton.swift in Sources */,
+				56D085FA24AE032C00E6D2BF /* SettingTCell.swift in Sources */,
 				5602465F24AD9391003A67E9 /* ViewController.swift in Sources */,
+				56D085F224ADF66300E6D2BF /* ActiveDriverTCell.swift in Sources */,
+				564F2AAF24ADC1C5004116A4 /* DisSidebarVC.swift in Sources */,
+				5602468424ADB89B003A67E9 /* DriverSignupVC.swift in Sources */,
+				5635CA5F24ADE07E00A65374 /* AllTrackTableViewCell.swift in Sources */,
+				5635CA4D24ADCDBC00A65374 /* DriverHomeVC.swift in Sources */,
+				5635CA6324ADE65D00A65374 /* SeniorTrackTCell.swift in Sources */,
+				56D085EF24ADF3F000E6D2BF /* ActiveDriverVC.swift in Sources */,
+				5602864D24ADBBBC0013A826 /* DisSigninVC.swift in Sources */,
+				56D085F524ADF9C600E6D2BF /* DisProfileVC.swift in Sources */,
 				5602465B24AD9391003A67E9 /* AppDelegate.swift in Sources */,
+				5602468024ADA2D2003A67E9 /* UserTypeViewController.swift in Sources */,
+				564F2AB524ADC5F1004116A4 /* DisHomeVC.swift in Sources */,
+				5602468224ADA82F003A67E9 /* DisSignupVC.swift in Sources */,
+				5602467824AD951A003A67E9 /* CardView.swift in Sources */,
 				5602465D24AD9391003A67E9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,11 +540,13 @@
 		};
 		5602466F24AD9393003A67E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F86A1CC6F6FE719B3020AAFC /* Pods-Tosstra.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7YAQNH24G;
 				INFOPLIST_FILE = Tosstra/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,11 +560,13 @@
 		};
 		5602467024AD9393003A67E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E645612C3ACD9FFE04591AA5 /* Pods-Tosstra.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7YAQNH24G;
 				INFOPLIST_FILE = Tosstra/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

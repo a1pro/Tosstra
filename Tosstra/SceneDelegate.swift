@@ -7,19 +7,58 @@
 //
 
 import UIKit
-
+import KYDrawerController
+  @available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
 
+  
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        if (DEFAULT.value(forKey: "APITOKEN") as? String) != nil
+                                    {
+
+                                    loadLoginView()
+
+                                    }
+                                    else
+                                    {
+                                       loadLoginView()
+                                    }
+        
+        
         guard let _ = (scene as? UIWindowScene) else { return }
     }
+    
+    func loadLoginView()
+       {
+           let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+           let initialViewController = storyboard.instantiateViewController(withIdentifier: "nav") as! UINavigationController
+           self.window?.rootViewController = initialViewController
+           self.window?.makeKeyAndVisible()
+       }
+    
 
+    func loadHomeView()
+    {
+       let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "KYDrawerController") as! KYDrawerController
+     
+        self.window?.rootViewController = initialViewController
+      self.window?.makeKeyAndVisible()
+    }
+    func loadDriverHomeView()
+            {
+               let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "DriverDrawer") as! KYDrawerController
+             
+                self.window?.rootViewController = initialViewController
+              self.window?.makeKeyAndVisible()
+            }
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

@@ -8,25 +8,97 @@
 
 import UIKit
 import CoreData
+import IQKeyboardManagerSwift
+import GoogleMaps
+import GooglePlaces
+import KYDrawerController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
-
+var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        IQKeyboardManager.shared.enable=true
+              IQKeyboardManager.shared.shouldResignOnTouchOutside=true
+              GMSPlacesClient.provideAPIKey("AIzaSyCmujmy2_NQH2T4OGWOcwV2wp6QhOc3t28")
+              GMSServices.provideAPIKey("AIzaSyCmujmy2_NQH2T4OGWOcwV2wp6QhOc3t28")
+                UIFont.familyNames.forEach({ familyName in
+                    let fontNames = UIFont.fontNames(forFamilyName: familyName)
+                    print(familyName, fontNames)
+                })
+        if (DEFAULT.value(forKey: "APITOKEN") as? String) != nil
+                             {
+
+                             loadLoginView()
+
+                             }
+                             else
+                             {
+                                loadLoginView()
+                             }
+               
         return true
     }
+    
+    func loadLoginView()
+       {
+           let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+           let initialViewController = storyboard.instantiateViewController(withIdentifier: "nav") as! UINavigationController
+           self.window?.rootViewController = initialViewController
+           self.window?.makeKeyAndVisible()
+       }
+       func loadConfirmView()
+          {
+              let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+              let initialViewController = storyboard.instantiateViewController(withIdentifier: "confirmNavi") as! UINavigationController
+              self.window?.rootViewController = initialViewController
+              self.window?.makeKeyAndVisible()
+          }
+          
+       func loadHomeView()
+       {
+          let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+           let initialViewController = storyboard.instantiateViewController(withIdentifier: "KYDrawerController") as! KYDrawerController
+        
+           self.window?.rootViewController = initialViewController
+         self.window?.makeKeyAndVisible()
+       }
+    
+    func loadDriverHomeView()
+          {
+             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+              let initialViewController = storyboard.instantiateViewController(withIdentifier: "DriverDrawer") as! KYDrawerController
+           
+              self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+          }
+
+       override init() {
+                super.init()
+                let navigationBarAppearace = UINavigationBar.appearance()
+                       navigationBarAppearace.titleTextAttributes =
+                           [NSAttributedString.Key.foregroundColor: UIColor.white,
+                            NSAttributedString.Key.font: UIFont(name: "ProximaNova-Black", size: 21)!]
+
+
+
+
+               UIFont.overrideInitialize()
+            }
 
     // MARK: UISceneSession Lifecycle
 
+    
+    @available(iOS 13.0, *)
+    
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-
+@available(iOS 13.0, *)
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
