@@ -11,6 +11,11 @@ import UIKit
 class DisSigninVC: UIViewController {
     
     @IBOutlet var signInBtn:UIButton!
+    
+    @IBOutlet var userNameTxt:UITextField!
+    
+    @IBOutlet var passwordTxt:UITextField!
+    
     var Apptype = ""
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,20 +40,24 @@ class DisSigninVC: UIViewController {
     
     @IBAction func signInAct(_ sender: Any)
     {
+        let type = userNameTxt.text!
         
-        if self.Apptype == "driver"
-        {
-            DEFAULT.set("driver", forKey: "APPTYPE")
-            if #available(iOS 13.0, *)
+       
+            if type == "driver@gmail.com"
             {
-                SCENEDEL.loadDriverHomeView()
+                 DEFAULT.set("driver", forKey: "APPTYPE")
+                if #available(iOS 13.0, *)
+                           {
+                               SCENEDEL.loadDriverHomeView()
+                           }
+                           else
+                           {
+                               APPDEL.loadDriverHomeView()
+                           }
             }
-            else
-            {
-                APPDEL.loadDriverHomeView()
-            }
-        }
-        else
+           
+        
+        else if  type == "dispatcher@gmail.com"
         {
              DEFAULT.set("dispatcher", forKey: "APPTYPE")
             if #available(iOS 13.0, *) {

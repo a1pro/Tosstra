@@ -1,43 +1,38 @@
 //
-//  DisSettingVC.swift
+//  DriverNotificationVC.swift
 //  Tosstra
 //
-//  Created by Eweb on 02/07/20.
+//  Created by Eweb on 04/07/20.
 //  Copyright © 2020 Eweb. All rights reserved.
 //
 
 import UIKit
 import KYDrawerController
 
-class DisSettingVC: UIViewController {
-
-      @IBOutlet var myTable:UITableView!
-    
-    var titleArray = ["Term & Conditions","Privacy Policy","Contact Us","Help","Delete Account","Log Out","offline/Online"]
-      
-      var DisIconArray = ["term&conditions","Privacy-policy","Contact-us","Help","Delete-icon","Log-out","online"]
-    
-    
+class DriverNotificationVC: UIViewController {
+ @IBOutlet var myTable:UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         myTable.delegate=self
-                             myTable.dataSource=self
-                             myTable.separatorStyle = .none
-                      myTable.register(UINib(nibName: "SettingTCell", bundle: nil), forCellReuseIdentifier: "SettingTCell")
+                                    myTable.dataSource=self
+                                    myTable.separatorStyle = .none
+                             myTable.register(UINib(nibName: "DriverNotiCell", bundle: nil), forCellReuseIdentifier: "DriverNotiCell")
     }
+    
     @IBAction func MenuAct(_ sender: UIButton)
-    {
-        let drawer = navigationController?.parent as? KYDrawerController
-        drawer?.setDrawerState(.opened, animated: true)
-    }
+       {
+           let drawer = navigationController?.parent as? KYDrawerController
+           drawer?.setDrawerState(.opened, animated: true)
+       }
+
 }
-extension DisSettingVC:UITableViewDelegate,UITableViewDataSource
+extension DriverNotificationVC:UITableViewDelegate,UITableViewDataSource
 {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
       
-        return self.titleArray.count
+        return 10
         
         
     }
@@ -49,21 +44,11 @@ extension DisSettingVC:UITableViewDelegate,UITableViewDataSource
                  
     
         
-    let cell = tableView.dequeueReusableCell(withIdentifier: "SettingTCell") as! SettingTCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: "DriverNotiCell") as! DriverNotiCell
         //cell.selectedBackgroundView = bgColorView
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        cell.iconImg.image = UIImage(named: self.DisIconArray[indexPath.row])
-                  
-        cell.itleLbl.text  = self.titleArray[indexPath.row]
+       
         
-        if indexPath.row == self.titleArray.count-1
-        {
-            cell.offOnSwicth.isHidden = false
-        }
-        else
-        {
-            cell.offOnSwicth.isHidden = true
-        }
         
                   return cell
            
@@ -91,6 +76,6 @@ extension DisSettingVC:UITableViewDelegate,UITableViewDataSource
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 80
     }
 }

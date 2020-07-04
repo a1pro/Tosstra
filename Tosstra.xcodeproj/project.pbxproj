@@ -23,6 +23,15 @@
 		5602468224ADA82F003A67E9 /* DisSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602468124ADA82F003A67E9 /* DisSignupVC.swift */; };
 		5602468424ADB89B003A67E9 /* DriverSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602468324ADB89B003A67E9 /* DriverSignupVC.swift */; };
 		5602864D24ADBBBC0013A826 /* DisSigninVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602864C24ADBBBC0013A826 /* DisSigninVC.swift */; };
+		5626EE1824B043E200CAEA70 /* DriverMyJobVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE1724B043E200CAEA70 /* DriverMyJobVC.swift */; };
+		5626EE1B24B045BE00CAEA70 /* DriveMyJobCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE1924B045BE00CAEA70 /* DriveMyJobCell.swift */; };
+		5626EE1C24B045BE00CAEA70 /* DriveMyJobCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5626EE1A24B045BE00CAEA70 /* DriveMyJobCell.xib */; };
+		5626EE1E24B04B6F00CAEA70 /* DriverProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE1D24B04B6F00CAEA70 /* DriverProfileVC.swift */; };
+		5626EE2024B04C8000CAEA70 /* DriverSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE1F24B04C8000CAEA70 /* DriverSettingVC.swift */; };
+		5626EE2224B04F7F00CAEA70 /* DriverNotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE2124B04F7F00CAEA70 /* DriverNotificationVC.swift */; };
+		5626EE2524B04FA100CAEA70 /* DriverNotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE2324B04FA100CAEA70 /* DriverNotiCell.swift */; };
+		5626EE2624B04FA100CAEA70 /* DriverNotiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5626EE2424B04FA100CAEA70 /* DriverNotiCell.xib */; };
+		5626EE2824B0553100CAEA70 /* DriverJobDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE2724B0553100CAEA70 /* DriverJobDetailVC.swift */; };
 		5635CA4D24ADCDBC00A65374 /* DriverHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635CA4C24ADCDBC00A65374 /* DriverHomeVC.swift */; };
 		5635CA5524ADD1F400A65374 /* Proxima Nova Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA4F24ADD1F300A65374 /* Proxima Nova Bold.otf */; };
 		5635CA5624ADD1F400A65374 /* Proxima Nova Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA5024ADD1F300A65374 /* Proxima Nova Black.otf */; };
@@ -39,6 +48,10 @@
 		564F2AB224ADC237004116A4 /* DisSideTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F2AB024ADC236004116A4 /* DisSideTCell.swift */; };
 		564F2AB324ADC237004116A4 /* DisSideTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 564F2AB124ADC236004116A4 /* DisSideTCell.xib */; };
 		564F2AB524ADC5F1004116A4 /* DisHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F2AB424ADC5F1004116A4 /* DisHomeVC.swift */; };
+		5653E7EF24AEECA8006C8C20 /* DisjobDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653E7EE24AEECA8006C8C20 /* DisjobDescriptionVC.swift */; };
+		5653E7F124AF37F6006C8C20 /* DisJobDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653E7F024AF37F6006C8C20 /* DisJobDetailsVC.swift */; };
+		5653E7F424AF4E39006C8C20 /* DisEndJonTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653E7F224AF4E39006C8C20 /* DisEndJonTCell.swift */; };
+		5653E7F524AF4E39006C8C20 /* DisEndJonTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5653E7F324AF4E39006C8C20 /* DisEndJonTCell.xib */; };
 		56D085EF24ADF3F000E6D2BF /* ActiveDriverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085EE24ADF3F000E6D2BF /* ActiveDriverVC.swift */; };
 		56D085F224ADF66300E6D2BF /* ActiveDriverTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085F024ADF66300E6D2BF /* ActiveDriverTCell.swift */; };
 		56D085F324ADF66300E6D2BF /* ActiveDriverTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56D085F124ADF66300E6D2BF /* ActiveDriverTCell.xib */; };
@@ -68,6 +81,15 @@
 		5602468124ADA82F003A67E9 /* DisSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSignupVC.swift; sourceTree = "<group>"; };
 		5602468324ADB89B003A67E9 /* DriverSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverSignupVC.swift; sourceTree = "<group>"; };
 		5602864C24ADBBBC0013A826 /* DisSigninVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSigninVC.swift; sourceTree = "<group>"; };
+		5626EE1724B043E200CAEA70 /* DriverMyJobVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverMyJobVC.swift; sourceTree = "<group>"; };
+		5626EE1924B045BE00CAEA70 /* DriveMyJobCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveMyJobCell.swift; sourceTree = "<group>"; };
+		5626EE1A24B045BE00CAEA70 /* DriveMyJobCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriveMyJobCell.xib; sourceTree = "<group>"; };
+		5626EE1D24B04B6F00CAEA70 /* DriverProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverProfileVC.swift; sourceTree = "<group>"; };
+		5626EE1F24B04C8000CAEA70 /* DriverSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverSettingVC.swift; sourceTree = "<group>"; };
+		5626EE2124B04F7F00CAEA70 /* DriverNotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverNotificationVC.swift; sourceTree = "<group>"; };
+		5626EE2324B04FA100CAEA70 /* DriverNotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverNotiCell.swift; sourceTree = "<group>"; };
+		5626EE2424B04FA100CAEA70 /* DriverNotiCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverNotiCell.xib; sourceTree = "<group>"; };
+		5626EE2724B0553100CAEA70 /* DriverJobDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverJobDetailVC.swift; sourceTree = "<group>"; };
 		5635CA4C24ADCDBC00A65374 /* DriverHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverHomeVC.swift; sourceTree = "<group>"; };
 		5635CA4F24ADD1F300A65374 /* Proxima Nova Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Bold.otf"; path = "Font/Proxima Nova Bold.otf"; sourceTree = SOURCE_ROOT; };
 		5635CA5024ADD1F300A65374 /* Proxima Nova Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Black.otf"; path = "Font/Proxima Nova Black.otf"; sourceTree = SOURCE_ROOT; };
@@ -84,6 +106,10 @@
 		564F2AB024ADC236004116A4 /* DisSideTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSideTCell.swift; sourceTree = "<group>"; };
 		564F2AB124ADC236004116A4 /* DisSideTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisSideTCell.xib; sourceTree = "<group>"; };
 		564F2AB424ADC5F1004116A4 /* DisHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisHomeVC.swift; sourceTree = "<group>"; };
+		5653E7EE24AEECA8006C8C20 /* DisjobDescriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisjobDescriptionVC.swift; sourceTree = "<group>"; };
+		5653E7F024AF37F6006C8C20 /* DisJobDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisJobDetailsVC.swift; sourceTree = "<group>"; };
+		5653E7F224AF4E39006C8C20 /* DisEndJonTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisEndJonTCell.swift; sourceTree = "<group>"; };
+		5653E7F324AF4E39006C8C20 /* DisEndJonTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisEndJonTCell.xib; sourceTree = "<group>"; };
 		56D085EE24ADF3F000E6D2BF /* ActiveDriverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveDriverVC.swift; sourceTree = "<group>"; };
 		56D085F024ADF66300E6D2BF /* ActiveDriverTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveDriverTCell.swift; sourceTree = "<group>"; };
 		56D085F124ADF66300E6D2BF /* ActiveDriverTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveDriverTCell.xib; sourceTree = "<group>"; };
@@ -184,6 +210,12 @@
 				56D085F124ADF66300E6D2BF /* ActiveDriverTCell.xib */,
 				56D085F824AE032C00E6D2BF /* SettingTCell.swift */,
 				56D085F924AE032C00E6D2BF /* SettingTCell.xib */,
+				5653E7F224AF4E39006C8C20 /* DisEndJonTCell.swift */,
+				5653E7F324AF4E39006C8C20 /* DisEndJonTCell.xib */,
+				5626EE1924B045BE00CAEA70 /* DriveMyJobCell.swift */,
+				5626EE1A24B045BE00CAEA70 /* DriveMyJobCell.xib */,
+				5626EE2324B04FA100CAEA70 /* DriverNotiCell.swift */,
+				5626EE2424B04FA100CAEA70 /* DriverNotiCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -191,18 +223,25 @@
 		5602467624AD94C2003A67E9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5602465E24AD9391003A67E9 /* ViewController.swift */,
-				5602467124AD949B003A67E9 /* StartedViewController.swift */,
-				5602467F24ADA2D2003A67E9 /* UserTypeViewController.swift */,
-				5602468124ADA82F003A67E9 /* DisSignupVC.swift */,
-				5602468324ADB89B003A67E9 /* DriverSignupVC.swift */,
-				5602864C24ADBBBC0013A826 /* DisSigninVC.swift */,
-				564F2AAE24ADC1C5004116A4 /* DisSidebarVC.swift */,
-				564F2AB424ADC5F1004116A4 /* DisHomeVC.swift */,
-				5635CA4C24ADCDBC00A65374 /* DriverHomeVC.swift */,
 				56D085EE24ADF3F000E6D2BF /* ActiveDriverVC.swift */,
+				564F2AB424ADC5F1004116A4 /* DisHomeVC.swift */,
+				5653E7EE24AEECA8006C8C20 /* DisjobDescriptionVC.swift */,
+				5653E7F024AF37F6006C8C20 /* DisJobDetailsVC.swift */,
 				56D085F424ADF9C600E6D2BF /* DisProfileVC.swift */,
 				56D085F624ADFF8000E6D2BF /* DisSettingVC.swift */,
+				564F2AAE24ADC1C5004116A4 /* DisSidebarVC.swift */,
+				5602864C24ADBBBC0013A826 /* DisSigninVC.swift */,
+				5602468124ADA82F003A67E9 /* DisSignupVC.swift */,
+				5635CA4C24ADCDBC00A65374 /* DriverHomeVC.swift */,
+				5626EE1724B043E200CAEA70 /* DriverMyJobVC.swift */,
+				5626EE2124B04F7F00CAEA70 /* DriverNotificationVC.swift */,
+				5626EE1D24B04B6F00CAEA70 /* DriverProfileVC.swift */,
+				5626EE1F24B04C8000CAEA70 /* DriverSettingVC.swift */,
+				5602468324ADB89B003A67E9 /* DriverSignupVC.swift */,
+				5602467124AD949B003A67E9 /* StartedViewController.swift */,
+				5602467F24ADA2D2003A67E9 /* UserTypeViewController.swift */,
+				5602465E24AD9391003A67E9 /* ViewController.swift */,
+				5626EE2724B0553100CAEA70 /* DriverJobDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -292,10 +331,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5602466A24AD9393003A67E9 /* LaunchScreen.storyboard in Resources */,
+				5626EE2624B04FA100CAEA70 /* DriverNotiCell.xib in Resources */,
 				56D085FB24AE032C00E6D2BF /* SettingTCell.xib in Resources */,
 				5635CA5824ADD1F400A65374 /* ProximaNova-Regular.otf in Resources */,
+				5626EE1C24B045BE00CAEA70 /* DriveMyJobCell.xib in Resources */,
 				5602466724AD9393003A67E9 /* Assets.xcassets in Resources */,
 				5635CA5624ADD1F400A65374 /* Proxima Nova Black.otf in Resources */,
+				5653E7F524AF4E39006C8C20 /* DisEndJonTCell.xib in Resources */,
 				5635CA5A24ADD1F400A65374 /* Proxima Nova Alt Black Italic.otf in Resources */,
 				564F2AB324ADC237004116A4 /* DisSideTCell.xib in Resources */,
 				5635CA5C24ADDABB00A65374 /* Proxima Nova Semibold Italic.otf in Resources */,
@@ -376,24 +418,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				5602467A24AD9529003A67E9 /* Constant.swift in Sources */,
+				5626EE2224B04F7F00CAEA70 /* DriverNotificationVC.swift in Sources */,
 				564F2AB224ADC237004116A4 /* DisSideTCell.swift in Sources */,
 				5602466524AD9391003A67E9 /* Tosstra.xcdatamodeld in Sources */,
 				5602467C24AD9539003A67E9 /* FontModel.swift in Sources */,
+				5626EE1E24B04B6F00CAEA70 /* DriverProfileVC.swift in Sources */,
 				5602467224AD949B003A67E9 /* StartedViewController.swift in Sources */,
 				56D085F724ADFF8000E6D2BF /* DisSettingVC.swift in Sources */,
+				5626EE1B24B045BE00CAEA70 /* DriveMyJobCell.swift in Sources */,
+				5653E7F124AF37F6006C8C20 /* DisJobDetailsVC.swift in Sources */,
 				5602467E24AD9ABD003A67E9 /* RoundedButton.swift in Sources */,
 				56D085FA24AE032C00E6D2BF /* SettingTCell.swift in Sources */,
 				5602465F24AD9391003A67E9 /* ViewController.swift in Sources */,
 				56D085F224ADF66300E6D2BF /* ActiveDriverTCell.swift in Sources */,
+				5653E7EF24AEECA8006C8C20 /* DisjobDescriptionVC.swift in Sources */,
 				564F2AAF24ADC1C5004116A4 /* DisSidebarVC.swift in Sources */,
 				5602468424ADB89B003A67E9 /* DriverSignupVC.swift in Sources */,
 				5635CA5F24ADE07E00A65374 /* AllTrackTableViewCell.swift in Sources */,
 				5635CA4D24ADCDBC00A65374 /* DriverHomeVC.swift in Sources */,
+				5626EE1824B043E200CAEA70 /* DriverMyJobVC.swift in Sources */,
+				5626EE2524B04FA100CAEA70 /* DriverNotiCell.swift in Sources */,
+				5626EE2824B0553100CAEA70 /* DriverJobDetailVC.swift in Sources */,
 				5635CA6324ADE65D00A65374 /* SeniorTrackTCell.swift in Sources */,
 				56D085EF24ADF3F000E6D2BF /* ActiveDriverVC.swift in Sources */,
+				5653E7F424AF4E39006C8C20 /* DisEndJonTCell.swift in Sources */,
 				5602864D24ADBBBC0013A826 /* DisSigninVC.swift in Sources */,
 				56D085F524ADF9C600E6D2BF /* DisProfileVC.swift in Sources */,
 				5602465B24AD9391003A67E9 /* AppDelegate.swift in Sources */,
+				5626EE2024B04C8000CAEA70 /* DriverSettingVC.swift in Sources */,
 				5602468024ADA2D2003A67E9 /* UserTypeViewController.swift in Sources */,
 				564F2AB524ADC5F1004116A4 /* DisHomeVC.swift in Sources */,
 				5602468224ADA82F003A67E9 /* DisSignupVC.swift in Sources */,
@@ -456,6 +508,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amarinder Gurna (CXXR6BK656)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -516,6 +569,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amarinder Gurna (CXXR6BK656)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -543,7 +597,8 @@
 			baseConfigurationReference = F86A1CC6F6FE719B3020AAFC /* Pods-Tosstra.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amarinder Gurna (CXXR6BK656)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N7YAQNH24G;
 				INFOPLIST_FILE = Tosstra/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
@@ -551,10 +606,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Tosstra;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MeetShort;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = CareTaker_15Sept;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -563,7 +619,8 @@
 			baseConfigurationReference = E645612C3ACD9FFE04591AA5 /* Pods-Tosstra.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amarinder Gurna (CXXR6BK656)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N7YAQNH24G;
 				INFOPLIST_FILE = Tosstra/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
@@ -571,10 +628,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Tosstra;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MeetShort;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = CareTaker_15Sept;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

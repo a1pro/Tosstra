@@ -25,6 +25,8 @@ class ActiveDriverVC: UIViewController {
                       myTable.separatorStyle = .none
                myTable.register(UINib(nibName: "ActiveDriverTCell", bundle: nil), forCellReuseIdentifier: "ActiveDriverTCell")
         
+           myTable.register(UINib(nibName: "DisEndJonTCell", bundle: nil), forCellReuseIdentifier: "DisEndJonTCell")
+        
         self.mapView.isHidden = true
         self.listView.isHidden = false
     }
@@ -62,35 +64,44 @@ extension ActiveDriverVC:UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
       
-             return 10
+             return 8
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-     
+     let bgColorView = UIView()
+          bgColorView.backgroundColor = UIColor.clear
+                 
+                
                   let cell = tableView.dequeueReusableCell(withIdentifier: "ActiveDriverTCell") as! ActiveDriverTCell
-                  
+                   //cell.selectedBackgroundView = bgColorView
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
                   return cell
-           
-             
-        
-        
-        
-        
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         
-        if indexPath.row == 0
-        {
-            
-        }
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisJobDetailsVC") as! DisJobDetailsVC
+        
+    self.navigationController?.pushViewController(vc, animated: true)
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DisEndJonTCell") as! DisEndJonTCell
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
+    {
+    return 110
     }
 }

@@ -22,12 +22,18 @@ class StartedViewController: UIViewController {
            let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserTypeViewController") as! UserTypeViewController
            vc.loginsignUp = "signup"
            self.navigationController?.pushViewController(vc, animated: true)
+        
+        
        }
     @IBAction func loginBtn(_ sender: Any)
           {
+            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisSigninVC") as! DisSigninVC
+            vc.Apptype = "driver"
+                self.navigationController?.pushViewController(vc, animated: true)
               
-              let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserTypeViewController") as! UserTypeViewController
-              vc.loginsignUp = "signin"
-              self.navigationController?.pushViewController(vc, animated: true)
+//              let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserTypeViewController") as! UserTypeViewController
+//              vc.loginsignUp = "signin"
+//              self.navigationController?.pushViewController(vc, animated: true)
           }
 }

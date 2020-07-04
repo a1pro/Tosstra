@@ -20,6 +20,22 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>${PRODUCT_NAME}  would like to use your current location to display it on the app, also for directions and estimation of your travel times. It is secure and private.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>${PRODUCT_NAME}  would like to use your current location to display it on the app, also for directions and estimation of your travel times. It is secure and private.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>${PRODUCT_NAME}  would like to use your current location to display it on the app, also for directions and estimation of your travel times. It is secure and private.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ProximaNova-Regular.otf</string>
+		<string>Proxima Nova Thin.otf</string>
+		<string>Proxima Nova Bold.otf</string>
+		<string>Proxima Nova Black.otf</string>
+		<string>Proxima Nova Alt Bold.otf</string>
+		<string>Proxima Nova Alt Black Italic.otf</string>
+		<string>Proxima Nova Semibold Italic.otf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -60,21 +76,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>ProximaNova-Regular.otf</string>
-		<string>Proxima Nova Thin.otf</string>
-		<string>Proxima Nova Bold.otf</string>
-		<string>Proxima Nova Black.otf</string>
-		<string>Proxima Nova Alt Bold.otf</string>
-		<string>Proxima Nova Alt Black Italic.otf</string>
-		<string>Proxima Nova Semibold Italic.otf</string>
-	</array>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>${PRODUCT_NAME}  would like to use your current location to display it on the app, also for directions and estimation of your travel times. It is secure and private.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>${PRODUCT_NAME}  would like to use your current location to display it on the app, also for directions and estimation of your travel times. It is secure and private.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>${PRODUCT_NAME}  would like to use your current location to display it on the app, also for directions and estimation of your travel times. It is secure and private.</string>
 </dict>
 </plist>

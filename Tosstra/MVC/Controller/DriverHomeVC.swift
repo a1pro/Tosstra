@@ -53,6 +53,15 @@ class DriverHomeVC: UIViewController {
         let drawer = navigationController?.parent as? KYDrawerController
         drawer?.setDrawerState(.opened, animated: true)
     }
+    @IBAction func profileAct(_ sender: UIButton)
+       {
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverProfileVC") as! DriverProfileVC
+        vc.fromSideBar = "no"
+           self.navigationController?.pushViewController(vc, animated: true)
+       }
+       
+   
+    
     override func viewWillAppear(_ animated: Bool)
         {
             super.viewWillAppear(true)

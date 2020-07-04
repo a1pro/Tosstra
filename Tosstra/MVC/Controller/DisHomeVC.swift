@@ -40,6 +40,12 @@ class DisHomeVC: UIViewController
             let drawer = navigationController?.parent as? KYDrawerController
             drawer?.setDrawerState(.opened, animated: true)
         }
+    
+    @IBAction func plusAct(_ sender: UIButton)
+          {
+             let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisjobDescriptionVC") as! DisjobDescriptionVC
+              self.navigationController?.pushViewController(vc, animated: true)
+          }
 
     @IBAction func allTruckAct(_ sender: UIButton)
            {
@@ -83,17 +89,23 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+      
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor.clear
+               
+             
        if self.truckType == "all"
               {
                   let cell = tableView.dequeueReusableCell(withIdentifier: "AllTrackTableViewCell") as! AllTrackTableViewCell
-                  
+                   // cell.selectedBackgroundView = bgColorView
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
                   return cell
               }
               else
               {
                   let cell = tableView.dequeueReusableCell(withIdentifier: "SeniorTrackTCell") as! SeniorTrackTCell
-                   
+                    // cell.selectedBackgroundView = bgColorView
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
                    return cell
               }
              

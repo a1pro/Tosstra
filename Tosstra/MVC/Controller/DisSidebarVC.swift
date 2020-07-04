@@ -13,10 +13,12 @@ class DisSidebarVC: UIViewController {
     @IBOutlet var myTable:UITableView!
     @IBOutlet weak var headerUIView: UIView!
     
-    var DisArray = ["Active Trucks","Active Driver","Profile","Notification","Setting"]
+    @IBOutlet weak var DriverLbl: UILabel!
+    
+    var DisArray = ["Active Trucks","Add a new Job","Active Driver","Profile","Notification","Setting"]
     var DriverArray = ["All Jobs","My Jobs","Profile","Notification","Setting"]
     
-    var DisIconArray = ["all-job","all-job","Profile","notification","setting"]
+    var DisIconArray = ["all-job","Add-icon-1","all-job","Profile","notification","setting"]
     
     var DriverIconArray = ["all-job","all-job","Profile","notification","setting"]
     
@@ -35,6 +37,15 @@ class DisSidebarVC: UIViewController {
         self.appType = DEFAULT.value(forKey: "APPTYPE") as? String ?? "Dispatcher"
         
         
+        if appType == "driver"
+        {
+            self.DriverLbl.isHidden = false
+        }
+        else
+        
+        {
+              self.DriverLbl.isHidden = true
+        }
     }
     
 }
@@ -61,6 +72,12 @@ extension DisSidebarVC:UITableViewDelegate,UITableViewDataSource
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "DisSideTCell") as! DisSideTCell
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = APPCOLOL
+        
+        //cell.selectedBackgroundView = bgColorView
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        
         if appType == "driver"
         {
             cell.iconImg.image = UIImage(named: self.DriverIconArray[indexPath.row])
@@ -93,48 +110,104 @@ extension DisSidebarVC:UITableViewDelegate,UITableViewDataSource
                 elDrawer?.mainViewController = _nav
                 elDrawer?.setDrawerState(.closed, animated: true)
             }
+            else if indexPath.row == 1
+            {
+                let elDrawer = navigationController?.parent as? KYDrawerController
+                let home = storyboard?.instantiateViewController(withIdentifier: "DriverMyJobVC") as? DriverMyJobVC
+                let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+                _nav.isNavigationBarHidden = true
+                elDrawer?.mainViewController = _nav
+                elDrawer?.setDrawerState(.closed, animated: true)
+            }
+            else if indexPath.row == 2
+            {
+                let elDrawer = navigationController?.parent as? KYDrawerController
+                let home = storyboard?.instantiateViewController(withIdentifier: "DriverProfileVC") as? DriverProfileVC
+                
+                
+                let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+                _nav.isNavigationBarHidden = true
+                elDrawer?.mainViewController = _nav
+                elDrawer?.setDrawerState(.closed, animated: true)
+            }
+                else if indexPath.row == 3
+                           {
+                               let elDrawer = navigationController?.parent as? KYDrawerController
+                               let home = storyboard?.instantiateViewController(withIdentifier: "DriverNotificationVC") as? DriverNotificationVC
+                               
+                               
+                               let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+                               _nav.isNavigationBarHidden = true
+                               elDrawer?.mainViewController = _nav
+                               elDrawer?.setDrawerState(.closed, animated: true)
+                           }
+                
+            else if indexPath.row == 4
+            {
+                let elDrawer = navigationController?.parent as? KYDrawerController
+                let home = storyboard?.instantiateViewController(withIdentifier: "DriverSettingVC") as? DriverSettingVC
+                
+                
+                let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+                _nav.isNavigationBarHidden = true
+                elDrawer?.mainViewController = _nav
+                elDrawer?.setDrawerState(.closed, animated: true)
+            }
         }
         else
         {
             if indexPath.row == 0
-                       {
-                           let elDrawer = navigationController?.parent as? KYDrawerController
-                           let home = storyboard?.instantiateViewController(withIdentifier: "DisHomeVC") as? DisHomeVC
-                        
-                           let _nav = UINavigationController(rootViewController: home ?? UIViewController())
-                           _nav.isNavigationBarHidden = true
-                           elDrawer?.mainViewController = _nav
-                           elDrawer?.setDrawerState(.closed, animated: true)
-                       }
-            
-           else if indexPath.row == 1
-                       {
-                           let elDrawer = navigationController?.parent as? KYDrawerController
-                           let home = storyboard?.instantiateViewController(withIdentifier: "ActiveDriverVC") as? ActiveDriverVC
-                        
-                           let _nav = UINavigationController(rootViewController: home ?? UIViewController())
-                           _nav.isNavigationBarHidden = true
-                           elDrawer?.mainViewController = _nav
-                           elDrawer?.setDrawerState(.closed, animated: true)
-                       }
+            {
+                let elDrawer = navigationController?.parent as? KYDrawerController
+                let home = storyboard?.instantiateViewController(withIdentifier: "DisHomeVC") as? DisHomeVC
+                
+                let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+                _nav.isNavigationBarHidden = true
+                elDrawer?.mainViewController = _nav
+                elDrawer?.setDrawerState(.closed, animated: true)
+            }
+                
+            else if indexPath.row == 1
+            {
+                let elDrawer = navigationController?.parent as? KYDrawerController
+                let home = storyboard?.instantiateViewController(withIdentifier: "DisjobDescriptionVC") as? DisjobDescriptionVC
+                
+                let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+                _nav.isNavigationBarHidden = true
+                elDrawer?.mainViewController = _nav
+                elDrawer?.setDrawerState(.closed, animated: true)
+            }
+                
             else if indexPath.row == 2
-                                 {
-                                     let elDrawer = navigationController?.parent as? KYDrawerController
-                                     let home = storyboard?.instantiateViewController(withIdentifier: "DisProfileVC") as? DisProfileVC
-                                    
-                                  
-                                     let _nav = UINavigationController(rootViewController: home ?? UIViewController())
-                                     _nav.isNavigationBarHidden = true
-                                     elDrawer?.mainViewController = _nav
-                                     elDrawer?.setDrawerState(.closed, animated: true)
-                                 }
-            
-            else if indexPath.row == 4
+            {
+                let elDrawer = navigationController?.parent as? KYDrawerController
+                let home = storyboard?.instantiateViewController(withIdentifier: "ActiveDriverVC") as? ActiveDriverVC
+                
+                
+                let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+                _nav.isNavigationBarHidden = true
+                elDrawer?.mainViewController = _nav
+                elDrawer?.setDrawerState(.closed, animated: true)
+            }
+                
+            else if indexPath.row == 3
+            {
+                let elDrawer = navigationController?.parent as? KYDrawerController
+                let home = storyboard?.instantiateViewController(withIdentifier: "DisProfileVC") as? DisProfileVC
+                
+                
+                let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+                _nav.isNavigationBarHidden = true
+                elDrawer?.mainViewController = _nav
+                elDrawer?.setDrawerState(.closed, animated: true)
+            }
+                
+            else if indexPath.row == 5
             {
                 let elDrawer = navigationController?.parent as? KYDrawerController
                 let home = storyboard?.instantiateViewController(withIdentifier: "DisSettingVC") as? DisSettingVC
-               
-             
+                
+                
                 let _nav = UINavigationController(rootViewController: home ?? UIViewController())
                 _nav.isNavigationBarHidden = true
                 elDrawer?.mainViewController = _nav

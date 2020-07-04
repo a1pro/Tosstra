@@ -28,6 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                     else
                                     {
                                        loadLoginView()
+                                        
+                                         // loadDriverHomeView()
                                     }
         
         
@@ -47,7 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     {
        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let initialViewController = storyboard.instantiateViewController(withIdentifier: "KYDrawerController") as! KYDrawerController
-     
+      DEFAULT.set("dispatcher", forKey: "APPTYPE")
         self.window?.rootViewController = initialViewController
       self.window?.makeKeyAndVisible()
     }
@@ -55,7 +57,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             {
                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
                 let initialViewController = storyboard.instantiateViewController(withIdentifier: "DriverDrawer") as! KYDrawerController
-             
+              DEFAULT.set("driver", forKey: "APPTYPE")
                 self.window?.rootViewController = initialViewController
               self.window?.makeKeyAndVisible()
             }

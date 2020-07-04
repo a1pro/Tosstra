@@ -24,10 +24,10 @@ var window: UIWindow?
               IQKeyboardManager.shared.shouldResignOnTouchOutside=true
               GMSPlacesClient.provideAPIKey("AIzaSyCmujmy2_NQH2T4OGWOcwV2wp6QhOc3t28")
               GMSServices.provideAPIKey("AIzaSyCmujmy2_NQH2T4OGWOcwV2wp6QhOc3t28")
-                UIFont.familyNames.forEach({ familyName in
-                    let fontNames = UIFont.fontNames(forFamilyName: familyName)
-                    print(familyName, fontNames)
-                })
+//                UIFont.familyNames.forEach({ familyName in
+//                    let fontNames = UIFont.fontNames(forFamilyName: familyName)
+//                    print(familyName, fontNames)
+//                })
         if (DEFAULT.value(forKey: "APITOKEN") as? String) != nil
                              {
 
@@ -62,6 +62,7 @@ var window: UIWindow?
           let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
            let initialViewController = storyboard.instantiateViewController(withIdentifier: "KYDrawerController") as! KYDrawerController
         
+        DEFAULT.set("dispatcher", forKey: "APPTYPE")
            self.window?.rootViewController = initialViewController
          self.window?.makeKeyAndVisible()
        }
@@ -70,7 +71,7 @@ var window: UIWindow?
           {
              let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
               let initialViewController = storyboard.instantiateViewController(withIdentifier: "DriverDrawer") as! KYDrawerController
-           
+            DEFAULT.set("driver", forKey: "APPTYPE")
               self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
           }

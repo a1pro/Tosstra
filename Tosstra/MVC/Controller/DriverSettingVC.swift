@@ -1,37 +1,37 @@
 //
-//  DisSettingVC.swift
+//  DriverSettingVC.swift
 //  Tosstra
 //
-//  Created by Eweb on 02/07/20.
+//  Created by Eweb on 04/07/20.
 //  Copyright © 2020 Eweb. All rights reserved.
 //
 
 import UIKit
 import KYDrawerController
-
-class DisSettingVC: UIViewController {
+class DriverSettingVC: UIViewController {
 
       @IBOutlet var myTable:UITableView!
-    
-    var titleArray = ["Term & Conditions","Privacy Policy","Contact Us","Help","Delete Account","Log Out","offline/Online"]
-      
-      var DisIconArray = ["term&conditions","Privacy-policy","Contact-us","Help","Delete-icon","Log-out","online"]
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        myTable.delegate=self
-                             myTable.dataSource=self
-                             myTable.separatorStyle = .none
-                      myTable.register(UINib(nibName: "SettingTCell", bundle: nil), forCellReuseIdentifier: "SettingTCell")
-    }
-    @IBAction func MenuAct(_ sender: UIButton)
-    {
-        let drawer = navigationController?.parent as? KYDrawerController
-        drawer?.setDrawerState(.opened, animated: true)
-    }
+     
+     var titleArray = ["Term & Conditions","Privacy Policy","Contact Us","Help","Delete Account","Log Out"]
+       
+       var DisIconArray = ["term&conditions","Privacy-policy","Contact-us","Help","Delete-icon","Log-out"]
+     
+     
+     override func viewDidLoad() {
+         super.viewDidLoad()
+         myTable.delegate=self
+                              myTable.dataSource=self
+                              myTable.separatorStyle = .none
+                       myTable.register(UINib(nibName: "SettingTCell", bundle: nil), forCellReuseIdentifier: "SettingTCell")
+     }
+     @IBAction func MenuAct(_ sender: UIButton)
+     {
+         let drawer = navigationController?.parent as? KYDrawerController
+         drawer?.setDrawerState(.opened, animated: true)
+     }
+
 }
-extension DisSettingVC:UITableViewDelegate,UITableViewDataSource
+extension DriverSettingVC:UITableViewDelegate,UITableViewDataSource
 {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -56,14 +56,9 @@ extension DisSettingVC:UITableViewDelegate,UITableViewDataSource
                   
         cell.itleLbl.text  = self.titleArray[indexPath.row]
         
-        if indexPath.row == self.titleArray.count-1
-        {
-            cell.offOnSwicth.isHidden = false
-        }
-        else
-        {
+
             cell.offOnSwicth.isHidden = true
-        }
+        
         
                   return cell
            
