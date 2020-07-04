@@ -98,12 +98,16 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
               {
                   let cell = tableView.dequeueReusableCell(withIdentifier: "AllTrackTableViewCell") as! AllTrackTableViewCell
                    // cell.selectedBackgroundView = bgColorView
+                cell.checkBtn.tag = indexPath.row
+                cell.checkBtn.addTarget(self, action: #selector(AllTrackcheckAct), for: UIControl.Event.touchUpInside)
                 cell.selectionStyle = UITableViewCell.SelectionStyle.none
                   return cell
               }
               else
               {
                   let cell = tableView.dequeueReusableCell(withIdentifier: "SeniorTrackTCell") as! SeniorTrackTCell
+                cell.checkBtn.tag = indexPath.row
+                cell.checkBtn.addTarget(self, action: #selector(SeniorTrackcheckAct), for: UIControl.Event.touchUpInside)
                     // cell.selectedBackgroundView = bgColorView
                 cell.selectionStyle = UITableViewCell.SelectionStyle.none
                    return cell
@@ -128,4 +132,41 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+    
+    @objc func AllTrackcheckAct(_ sender:UIButton)
+    {
+        let indexPath = IndexPath(row: sender.tag, section: 0)
+                      let cell = self.myTable.cellForRow(at: indexPath) as! AllTrackTableViewCell
+
+                               if sender.image(for: .normal) == UIImage(named: "check-box")
+                               {
+                                   sender.setImage(#imageLiteral(resourceName: "check-box-1"), for: .normal)
+                            
+                               }
+                               else
+                               {
+                                   sender.setImage(#imageLiteral(resourceName: "check-box"), for: .normal)
+                               
+                                  
+                               }
+    }
+    
+    @objc func SeniorTrackcheckAct(_ sender:UIButton)
+       {
+           let indexPath = IndexPath(row: sender.tag, section: 0)
+                         let cell = self.myTable.cellForRow(at: indexPath) as! SeniorTrackTCell
+
+                                  if sender.image(for: .normal) == UIImage(named: "check-box")
+                                  {
+                                      sender.setImage(#imageLiteral(resourceName: "check-box-1"), for: .normal)
+                               
+                                  }
+                                  else
+                                  {
+                                      sender.setImage(#imageLiteral(resourceName: "check-box"), for: .normal)
+                                  
+                                     
+                                  }
+       }
 }

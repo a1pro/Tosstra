@@ -49,9 +49,10 @@ extension DriverMyJobVC:UITableViewDelegate,UITableViewDataSource
     
         
     let cell = tableView.dequeueReusableCell(withIdentifier: "DriveMyJobCell") as! DriveMyJobCell
-      
+        cell.startBtn.tag = indexPath.row
+                     cell.startBtn.addTarget(self, action: #selector(startBtnAct), for: UIControl.Event.touchUpInside)
         
-return cell
+     return cell
            
              
         
@@ -72,5 +73,26 @@ return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
+    }
+    
+    @objc func startBtnAct(_ sender:UIButton)
+    {
+        let indexPath = IndexPath(row: sender.tag, section: 0)
+                      let cell = self.myTable.cellForRow(at: indexPath) as! DriveMyJobCell
+
+        if sender.backgroundColor == UIColor.white
+                               {
+                                sender.backgroundColor = APPCOLOL
+                                cell.startBtn.setTitle("Started", for: .normal)
+                                cell.startBtn.setTitleColor(UIColor.white, for: UIControl.State.normal)
+                            
+                               }
+                               else
+                               {
+                                 cell.startBtn.setTitle("Start", for: .normal)
+                                  sender.backgroundColor = UIColor.white
+                                cell.startBtn.setTitleColor(APPCOLOL, for: UIControl.State.normal)
+                                  
+                               }
     }
 }

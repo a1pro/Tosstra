@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,7 +28,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1y-iX-gKd">
-                                <rect key="frame" x="43" y="25.5" width="266" height="21"/>
+                                <rect key="frame" x="50" y="25.5" width="259" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -38,7 +39,7 @@
                             <constraint firstItem="u1y-iX-gKd" firstAttribute="centerY" secondItem="Iin-8g-Xaq" secondAttribute="centerY" id="Lcj-je-AzU"/>
                             <constraint firstItem="Iin-8g-Xaq" firstAttribute="centerY" secondItem="cgV-ao-ph8" secondAttribute="centerY" id="MwG-Zg-BFL"/>
                             <constraint firstAttribute="trailing" secondItem="u1y-iX-gKd" secondAttribute="trailing" constant="8" id="PUg-es-kvi"/>
-                            <constraint firstItem="u1y-iX-gKd" firstAttribute="leading" secondItem="Iin-8g-Xaq" secondAttribute="trailing" constant="8" id="Z0l-ba-qxG"/>
+                            <constraint firstItem="u1y-iX-gKd" firstAttribute="leading" secondItem="Iin-8g-Xaq" secondAttribute="trailing" constant="15" id="Z0l-ba-qxG"/>
                             <constraint firstItem="Iin-8g-Xaq" firstAttribute="leading" secondItem="cgV-ao-ph8" secondAttribute="leading" constant="15" id="zDO-8J-9oU"/>
                         </constraints>
                     </view>

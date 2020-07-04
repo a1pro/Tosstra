@@ -88,6 +88,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="backView" destination="P2L-xF-KoI" id="mnX-3b-ayO"/>
+                <outlet property="companyNameLbl" destination="kJX-oq-nOQ" id="3DD-Y4-iGw"/>
+                <outlet property="startBtn" destination="GpH-13-NlR" id="ZPQ-gU-KeM"/>
+                <outlet property="userNaleLb" destination="Nal-LR-C5z" id="dsg-Bk-UWD"/>
+            </connections>
             <point key="canvasLocation" x="195.6521739130435" y="117.85714285714285"/>
         </tableViewCell>
     </objects>

@@ -9,7 +9,11 @@
 import UIKit
 
 class DriveMyJobCell: UITableViewCell {
-
+    @IBOutlet weak var userNaleLb: UILabel!
+    
+    @IBOutlet weak var startBtn: RoundedButton!
+    @IBOutlet weak var companyNameLbl: UILabel!
+    @IBOutlet weak var backView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
