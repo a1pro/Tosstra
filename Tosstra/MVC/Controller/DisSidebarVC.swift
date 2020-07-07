@@ -14,6 +14,7 @@ class DisSidebarVC: UIViewController {
     @IBOutlet weak var headerUIView: UIView!
     
     @IBOutlet weak var DriverLbl: UILabel!
+    var viewProfiledata:ViewProfileModel?
     
     var DisArray = ["Active Trucks","Add a new Job","Active Driver","Profile","Notification","Setting"]
     var DriverArray = ["All Jobs","My Jobs","Profile","Notification","Setting"]
@@ -23,6 +24,10 @@ class DisSidebarVC: UIViewController {
     var DriverIconArray = ["all-job","all-job","Profile","notification","setting"]
     
     var appType="Dispatcher"
+    
+    
+    @IBOutlet weak var companyName: UILabel!
+           @IBOutlet weak var type: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +42,7 @@ class DisSidebarVC: UIViewController {
         self.appType = DEFAULT.value(forKey: "APPTYPE") as? String ?? "Dispatcher"
         
         
-        if appType == "driver"
+        if appType == "Driver"
         {
             self.DriverLbl.isHidden = false
         }
@@ -222,3 +227,68 @@ extension DisSidebarVC:UITableViewDelegate,UITableViewDataSource
     }
 }
 
+extension DisSidebarVC
+{
+    //MARK:- Login With Email Api
+       
+       func viewProfileAPI()
+       {
+        var id = ""
+        if let userID = DEFAULT.value(forKey: "USERID") as? String
+        {
+            id = userID
+        }
+      
+           let params = ["userId" : id]   as [String : String]
+           
+           ApiHandler.ModelApiPostMethod(url: VIEW_PROFILE_API, parameters: params) { (response, error) in
+               
+               if error == nil
+               {
+                   let decoder = JSONDecoder()
+                   do
+                   {
+                       self.viewProfiledata = try decoder.decode(ViewProfileModel.self, from: response!)
+                    
+                    if self.viewProfiledata?.code == "200"
+                           
+                       {
+                           self.view.makeToast(self.viewProfiledata?.message)
+            
+                       }
+                       else
+                       {
+                        let count = self.viewProfiledata?.data?.count ?? 0
+                        if count > 0
+                        {
+                            var type = self.viewProfiledata?.data?[0].userType
+                            
+                           
+                            self.companyName.text = self.viewProfiledata?.data?[0].companyName
+                            self.DriverLbl.text = self.viewProfiledata?.data?[0].userType
+                            
+                            
+                            
+                                                     
+                              //  hello
+                                                   
+                        }
+                       
+                       }
+                       
+                       
+                   }
+                   catch let error
+                   {
+                       self.view.makeToast(error.localizedDescription)
+                   }
+                   
+               }
+               else
+               {
+                   self.view.makeToast(error)
+               }
+           }
+       }
+       
+}

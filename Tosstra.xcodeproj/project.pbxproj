@@ -44,6 +44,7 @@
 		5635CA6024ADE07E00A65374 /* AllTrackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA5E24ADE07E00A65374 /* AllTrackTableViewCell.xib */; };
 		5635CA6324ADE65D00A65374 /* SeniorTrackTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635CA6124ADE65D00A65374 /* SeniorTrackTCell.swift */; };
 		5635CA6424ADE65D00A65374 /* SeniorTrackTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA6224ADE65D00A65374 /* SeniorTrackTCell.xib */; };
+		5647CF0E24B34D3800EEBFBB /* ViewProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5647CF0D24B34D3800EEBFBB /* ViewProfileModel.swift */; };
 		564F2AAF24ADC1C5004116A4 /* DisSidebarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F2AAE24ADC1C5004116A4 /* DisSidebarVC.swift */; };
 		564F2AB224ADC237004116A4 /* DisSideTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F2AB024ADC236004116A4 /* DisSideTCell.swift */; };
 		564F2AB324ADC237004116A4 /* DisSideTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 564F2AB124ADC236004116A4 /* DisSideTCell.xib */; };
@@ -59,6 +60,13 @@
 		56D085F724ADFF8000E6D2BF /* DisSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085F624ADFF8000E6D2BF /* DisSettingVC.swift */; };
 		56D085FA24AE032C00E6D2BF /* SettingTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085F824AE032C00E6D2BF /* SettingTCell.swift */; };
 		56D085FB24AE032C00E6D2BF /* SettingTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56D085F924AE032C00E6D2BF /* SettingTCell.xib */; };
+		56D2D1E524B3233D0087B7B9 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1E424B3233D0087B7B9 /* APIHandler.swift */; };
+		56D2D1E724B3237E0087B7B9 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1E624B3237E0087B7B9 /* WebServices.swift */; };
+		56D2D1E924B3239D0087B7B9 /* NetworkEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1E824B3239D0087B7B9 /* NetworkEngine.swift */; };
+		56D2D1EB24B326790087B7B9 /* Dis_Register_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1EA24B326790087B7B9 /* Dis_Register_Model.swift */; };
+		56D2D1ED24B32EBB0087B7B9 /* Dis_Login_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1EC24B32EBB0087B7B9 /* Dis_Login_Model.swift */; };
+		56D2D1EF24B334E40087B7B9 /* ForgotPassswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1EE24B334E40087B7B9 /* ForgotPassswordVC.swift */; };
+		56D2D1F124B339890087B7B9 /* ForgotpassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1F024B339890087B7B9 /* ForgotpassVC.swift */; };
 		94763B89D70CC1BBCFE16223 /* Pods_Tosstra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B18A390511219F857BB0E1 /* Pods_Tosstra.framework */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +110,7 @@
 		5635CA5E24ADE07E00A65374 /* AllTrackTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllTrackTableViewCell.xib; sourceTree = "<group>"; };
 		5635CA6124ADE65D00A65374 /* SeniorTrackTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeniorTrackTCell.swift; sourceTree = "<group>"; };
 		5635CA6224ADE65D00A65374 /* SeniorTrackTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeniorTrackTCell.xib; sourceTree = "<group>"; };
+		5647CF0D24B34D3800EEBFBB /* ViewProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProfileModel.swift; sourceTree = "<group>"; };
 		564F2AAE24ADC1C5004116A4 /* DisSidebarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSidebarVC.swift; sourceTree = "<group>"; };
 		564F2AB024ADC236004116A4 /* DisSideTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSideTCell.swift; sourceTree = "<group>"; };
 		564F2AB124ADC236004116A4 /* DisSideTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisSideTCell.xib; sourceTree = "<group>"; };
@@ -117,6 +126,13 @@
 		56D085F624ADFF8000E6D2BF /* DisSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSettingVC.swift; sourceTree = "<group>"; };
 		56D085F824AE032C00E6D2BF /* SettingTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTCell.swift; sourceTree = "<group>"; };
 		56D085F924AE032C00E6D2BF /* SettingTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTCell.xib; sourceTree = "<group>"; };
+		56D2D1E424B3233D0087B7B9 /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
+		56D2D1E624B3237E0087B7B9 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
+		56D2D1E824B3239D0087B7B9 /* NetworkEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEngine.swift; sourceTree = "<group>"; };
+		56D2D1EA24B326790087B7B9 /* Dis_Register_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dis_Register_Model.swift; sourceTree = "<group>"; };
+		56D2D1EC24B32EBB0087B7B9 /* Dis_Login_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dis_Login_Model.swift; sourceTree = "<group>"; };
+		56D2D1EE24B334E40087B7B9 /* ForgotPassswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassswordVC.swift; sourceTree = "<group>"; };
+		56D2D1F024B339890087B7B9 /* ForgotpassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotpassVC.swift; sourceTree = "<group>"; };
 		E5B18A390511219F857BB0E1 /* Pods_Tosstra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tosstra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E645612C3ACD9FFE04591AA5 /* Pods-Tosstra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tosstra.release.xcconfig"; path = "Target Support Files/Pods-Tosstra/Pods-Tosstra.release.xcconfig"; sourceTree = "<group>"; };
 		F86A1CC6F6FE719B3020AAFC /* Pods-Tosstra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tosstra.debug.xcconfig"; path = "Target Support Files/Pods-Tosstra/Pods-Tosstra.debug.xcconfig"; sourceTree = "<group>"; };
@@ -193,6 +209,12 @@
 				5602467924AD9529003A67E9 /* Constant.swift */,
 				5602467B24AD9539003A67E9 /* FontModel.swift */,
 				5602467D24AD9ABD003A67E9 /* RoundedButton.swift */,
+				56D2D1E424B3233D0087B7B9 /* APIHandler.swift */,
+				56D2D1E624B3237E0087B7B9 /* WebServices.swift */,
+				56D2D1E824B3239D0087B7B9 /* NetworkEngine.swift */,
+				56D2D1EA24B326790087B7B9 /* Dis_Register_Model.swift */,
+				56D2D1EC24B32EBB0087B7B9 /* Dis_Login_Model.swift */,
+				5647CF0D24B34D3800EEBFBB /* ViewProfileModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,6 +264,8 @@
 				5602467F24ADA2D2003A67E9 /* UserTypeViewController.swift */,
 				5602465E24AD9391003A67E9 /* ViewController.swift */,
 				5626EE2724B0553100CAEA70 /* DriverJobDetailVC.swift */,
+				56D2D1EE24B334E40087B7B9 /* ForgotPassswordVC.swift */,
+				56D2D1F024B339890087B7B9 /* ForgotpassVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -424,6 +448,7 @@
 				5602467C24AD9539003A67E9 /* FontModel.swift in Sources */,
 				5626EE1E24B04B6F00CAEA70 /* DriverProfileVC.swift in Sources */,
 				5602467224AD949B003A67E9 /* StartedViewController.swift in Sources */,
+				56D2D1E524B3233D0087B7B9 /* APIHandler.swift in Sources */,
 				56D085F724ADFF8000E6D2BF /* DisSettingVC.swift in Sources */,
 				5626EE1B24B045BE00CAEA70 /* DriveMyJobCell.swift in Sources */,
 				5653E7F124AF37F6006C8C20 /* DisJobDetailsVC.swift in Sources */,
@@ -434,19 +459,26 @@
 				5653E7EF24AEECA8006C8C20 /* DisjobDescriptionVC.swift in Sources */,
 				564F2AAF24ADC1C5004116A4 /* DisSidebarVC.swift in Sources */,
 				5602468424ADB89B003A67E9 /* DriverSignupVC.swift in Sources */,
+				56D2D1F124B339890087B7B9 /* ForgotpassVC.swift in Sources */,
 				5635CA5F24ADE07E00A65374 /* AllTrackTableViewCell.swift in Sources */,
 				5635CA4D24ADCDBC00A65374 /* DriverHomeVC.swift in Sources */,
 				5626EE1824B043E200CAEA70 /* DriverMyJobVC.swift in Sources */,
 				5626EE2524B04FA100CAEA70 /* DriverNotiCell.swift in Sources */,
+				56D2D1E924B3239D0087B7B9 /* NetworkEngine.swift in Sources */,
 				5626EE2824B0553100CAEA70 /* DriverJobDetailVC.swift in Sources */,
 				5635CA6324ADE65D00A65374 /* SeniorTrackTCell.swift in Sources */,
+				56D2D1ED24B32EBB0087B7B9 /* Dis_Login_Model.swift in Sources */,
 				56D085EF24ADF3F000E6D2BF /* ActiveDriverVC.swift in Sources */,
 				5653E7F424AF4E39006C8C20 /* DisEndJonTCell.swift in Sources */,
+				56D2D1E724B3237E0087B7B9 /* WebServices.swift in Sources */,
 				5602864D24ADBBBC0013A826 /* DisSigninVC.swift in Sources */,
 				56D085F524ADF9C600E6D2BF /* DisProfileVC.swift in Sources */,
+				5647CF0E24B34D3800EEBFBB /* ViewProfileModel.swift in Sources */,
 				5602465B24AD9391003A67E9 /* AppDelegate.swift in Sources */,
 				5626EE2024B04C8000CAEA70 /* DriverSettingVC.swift in Sources */,
 				5602468024ADA2D2003A67E9 /* UserTypeViewController.swift in Sources */,
+				56D2D1EF24B334E40087B7B9 /* ForgotPassswordVC.swift in Sources */,
+				56D2D1EB24B326790087B7B9 /* Dis_Register_Model.swift in Sources */,
 				564F2AB524ADC5F1004116A4 /* DisHomeVC.swift in Sources */,
 				5602468224ADA82F003A67E9 /* DisSignupVC.swift in Sources */,
 				5602467824AD951A003A67E9 /* CardView.swift in Sources */,

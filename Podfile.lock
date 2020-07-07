@@ -1,4 +1,6 @@
 PODS:
+  - Alamofire (4.9.1)
+  - CountryList (1.1)
   - GoogleMaps (3.1.0):
     - GoogleMaps/Maps (= 3.1.0)
   - GoogleMaps/Base (3.1.0)
@@ -11,29 +13,57 @@ PODS:
     - GoogleMaps/Base (= 3.1.0)
   - IQKeyboardManagerSwift (6.5.5)
   - KYDrawerController (2.1.0)
+  - Letters (2.1.1)
+  - SDWebImage (5.8.1):
+    - SDWebImage/Core (= 5.8.1)
+  - SDWebImage/Core (5.8.1)
+  - SVProgressHUD (2.2.5)
+  - SwiftyJSON (5.0.0)
+  - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.0)
+  - CountryList
   - GoogleMaps
   - GooglePlacePicker
   - GooglePlaces
   - IQKeyboardManagerSwift
   - KYDrawerController
+  - Letters
+  - SDWebImage
+  - SVProgressHUD
+  - SwiftyJSON
+  - Toast-Swift
 
 SPEC REPOS:
   trunk:
+    - Alamofire
+    - CountryList
     - GoogleMaps
     - GooglePlacePicker
     - GooglePlaces
     - IQKeyboardManagerSwift
     - KYDrawerController
+    - Letters
+    - SDWebImage
+    - SVProgressHUD
+    - SwiftyJSON
+    - Toast-Swift
 
 SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  CountryList: ad58cd670c4ecab6bb014abebc12e63f619174b2
   GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
   GooglePlacePicker: fa975116ac202ac29822c0a79758ea1c4db5a95f
   GooglePlaces: e874db179f2675c4f3eeda0b686b540273a578b0
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   KYDrawerController: baad0e63b09c0cb564bd48f0f7f70f45d9176ebc
+  Letters: 34476b0d413813bcf9273b2760be7ff4cd75f5c7
+  SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 9cbe502f62f31806c98966a432aba583b38bb624
+PODFILE CHECKSUM: c51c0831dc5ffa4e46130f097d18b23d6f1f553c
 
 COCOAPODS: 1.9.3
