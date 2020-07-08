@@ -44,7 +44,20 @@ let CHANGE_PASSWORD_API = BASEURL + "change-Password"
 
 let CHANGE_ONLINESTATUS_API = BASEURL + "change-Online-Status"
 
+let CREATE_JOB_API = BASEURL + "create-Job-By-dispatcher"
+
+let GET_ALL_DRIVER_API = BASEURL + "get-All-Drivers"
+
+let GET_FAV_DRIVER_API = BASEURL + "get-Only-FavDrivers"
+
+let driver_Favorite_Unfavorite_API = BASEURL + "driver-Favorite-Unfavorite"
+
 //MARK:- Driver API
 
 let DRIVER_REGISTER_API = BASEURL + "driver-Register"
+
+let GET_ALLJOB_API = BASEURL + "get-All-Jobs-To-drivers"
+
+let ACEEPT_REJECT_JOB_API = BASEURL + "job-Accecpt-Reject"
+
 

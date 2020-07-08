@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-class DisSigninVC: UIViewController {
+import CoreLocation
+class DisSigninVC: UIViewController,CLLocationManagerDelegate {
     
     @IBOutlet var signInBtn:UIButton!
     
@@ -17,7 +17,35 @@ class DisSigninVC: UIViewController {
     @IBOutlet var passwordTxt:UITextField!
     
     var Apptype = ""
+    var useLocation = ""
     
+    var groupLat = ""
+    var groupLong = ""
+    var groupCity = ""
+    var groupState = ""
+    var groupCountry = ""
+    var groupLocation = ""
+    var firstName = ""
+    var lastName = ""
+    var gender = ""
+    var currentLat = ""
+    var currentLong = ""
+    var age = ""
+    var coutry = ""
+    var selectedLocation = ""
+    var selectedAge = ""
+       var selectedGender = ""
+       var selectedLookingFor = ""
+       var fromGender = ""
+       
+       var contactNumber = ""
+       var lookingFor = ""
+       var aboutMe = ""
+       var country_code = ""
+       var state = ""
+       var city = ""
+    // For location
+    let manager = CLLocationManager()
     var signInData:Dis_Login_Model?
     
     @IBOutlet var forGotBtn:UIButton!
@@ -36,6 +64,10 @@ class DisSigninVC: UIViewController {
         let attributeString = NSMutableAttributedString(string: "Forgot Password?",
                                                         attributes: underLineText)
         forGotBtn.setAttributedTitle(attributeString, for: .normal)
+        manager.delegate = self
+               manager.desiredAccuracy = kCLLocationAccuracyBest
+               manager.requestWhenInUseAuthorization()
+               manager.startUpdatingLocation()
     }
     
     @IBAction func goBackBtn(_ sender: Any)
@@ -119,6 +151,8 @@ extension DisSigninVC
         
         let params = ["email" : userNameTxt.text!,
                       "password" : passwordTxt.text!,
+                      "latitude" : "\(CURRENTLOCATIONLAT)",
+                      "longitude" : "\(CURRENTLOCATIONLONG)",
                       "deviceId" : DEVICEID,
                       "deviceType" : DEVICETYPE]   as [String : String]
         
@@ -209,5 +243,52 @@ extension DisSigninVC
             }
         }
     }
-    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let _ :CLLocation = locations[0] as CLLocation
+        
+        if let lastLocation = locations.last
+        {
+            let geocoder = CLGeocoder()
+            
+            geocoder.reverseGeocodeLocation(lastLocation) { [weak self] (placemarks, error) in
+                if error == nil
+                {
+                    if let firstLocation = placemarks?[0],
+                        let cityName = firstLocation.locality,   // locality
+                        let stateName = firstLocation.subLocality,
+                        let nationality = firstLocation.administrativeArea,
+                        let latitude = firstLocation.location?.coordinate.latitude,
+                        let longitude = firstLocation.location?.coordinate.longitude
+                    {
+                        print(firstLocation)
+                        
+                        print(cityName + stateName + nationality)
+                        
+                        let address = stateName + " , " + cityName + " , " + nationality
+                        self?.selectedLocation = address
+                        self?.coutry = firstLocation.country!
+                        self?.city = cityName
+                        self?.state = stateName
+                        self?.country_code = firstLocation.isoCountryCode ?? "IND"
+                        print("Address =  \(address)")
+                        self?.currentLong = "\(longitude)"
+                        self?.currentLat = "\(latitude)"
+                        CURRENTLOCATIONLAT = latitude
+                        CURRENTLOCATIONLONG = longitude
+                        
+                        DEFAULT.set("\(latitude)", forKey: "CURRENTLAT")
+                        DEFAULT.set("\(longitude)", forKey: "CURRENTLONG")
+                        //  self?.CompanyLocationTF.text! = address
+                        self?.manager.stopUpdatingLocation()
+                       
+                    }
+                }
+            }
+        }
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        print(error)
+    }
 }
+

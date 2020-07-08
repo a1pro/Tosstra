@@ -1019,7 +1019,7 @@
                                         <rect key="frame" x="0.0" y="60" width="320" height="1040"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ge-LD-VOG">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wcY-i1-BmN">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
@@ -1053,7 +1053,7 @@
                                                                     <constraint firstItem="sVb-tl-vys" firstAttribute="leading" secondItem="6NT-iU-iVY" secondAttribute="leading" id="fv5-Ts-unM"/>
                                                                 </constraints>
                                                             </view>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="$15 " placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fpl-zb-7jq">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="amount (In $)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fpl-zb-7jq">
                                                                 <rect key="frame" x="15" y="109" width="297" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="Qej-sE-rjD"/>
@@ -1097,7 +1097,7 @@
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Street" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3sI-nW-ffv">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Street" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3sI-nW-ffv">
                                                                 <rect key="frame" x="15" y="39.5" width="297" height="44.5"/>
                                                                 <color key="textColor" red="0.2098918259" green="0.1605701149" blue="0.90191358330000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1225,7 +1225,7 @@
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Street" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pEW-TR-5AQ">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Street" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pEW-TR-5AQ">
                                                                 <rect key="frame" x="15" y="39.5" width="297" height="44.5"/>
                                                                 <color key="textColor" red="0.2098918259" green="0.1605701149" blue="0.90191358330000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1553,6 +1553,7 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="loginBtn:" destination="KaB-3K-6qM" eventType="touchUpInside" id="G64-ex-CRx"/>
+                                                            <action selector="sendJobAct:" destination="EOC-wZ-qR2" eventType="touchUpInside" id="6Pm-2g-sUg"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1574,7 +1575,7 @@
                                                     <constraint firstItem="yAZ-YG-GFb" firstAttribute="leading" secondItem="2ge-LD-VOG" secondAttribute="leading" constant="15" id="Z6B-7K-lf6"/>
                                                     <constraint firstItem="bP9-0B-YoX" firstAttribute="trailing" secondItem="Hr2-b6-9D1" secondAttribute="trailing" id="dLp-CZ-Yc8"/>
                                                     <constraint firstAttribute="trailing" secondItem="wcY-i1-BmN" secondAttribute="trailing" id="feP-tz-j7X"/>
-                                                    <constraint firstAttribute="height" constant="100" id="i6E-i3-9C2"/>
+                                                    <constraint firstAttribute="height" constant="1000" id="i6E-i3-9C2"/>
                                                     <constraint firstAttribute="trailing" secondItem="yAZ-YG-GFb" secondAttribute="trailing" constant="15" id="inC-Zt-BWC"/>
                                                     <constraint firstItem="gRi-2s-KbD" firstAttribute="top" secondItem="LBm-9d-ABe" secondAttribute="bottom" id="kd3-UY-Cw5"/>
                                                     <constraint firstItem="Hr2-b6-9D1" firstAttribute="top" secondItem="wcY-i1-BmN" secondAttribute="bottom" id="m7b-2W-3lT"/>
@@ -1618,8 +1619,21 @@
                     <size key="freeformSize" width="320" height="1100"/>
                     <connections>
                         <outlet property="addInfoText" destination="SuX-bl-P8M" id="AY0-pw-A7b"/>
+                        <outlet property="amountTxt" destination="fpl-zb-7jq" id="dQc-aB-gAn"/>
+                        <outlet property="d_cityTxt" destination="TZc-GW-Rrr" id="0y1-NZ-Coi"/>
+                        <outlet property="d_stateTxt" destination="2ZB-Yq-KSz" id="HzQ-ZJ-hCW"/>
+                        <outlet property="d_stresttxt" destination="pEW-TR-5AQ" id="Sl1-CI-hg8"/>
+                        <outlet property="d_zipTxt" destination="899-ht-lT2" id="w1M-K6-bsZ"/>
+                        <outlet property="date_fromTxt" destination="Vvc-MP-Mcs" id="nwr-Oc-aRS"/>
+                        <outlet property="date_totxt" destination="UJt-is-Glx" id="ErS-vw-Sub"/>
+                        <outlet property="endTimeTxt" destination="Qfk-Ck-vNt" id="n07-ZY-E6R"/>
+                        <outlet property="p_cityTxt" destination="tH0-yV-Z6D" id="qC6-ym-n6q"/>
+                        <outlet property="p_stateTxt" destination="0Av-Vc-4fM" id="9kt-DX-BHk"/>
+                        <outlet property="p_stresttxt" destination="3sI-nW-ffv" id="mIs-i2-3fU"/>
+                        <outlet property="p_zipTxt" destination="tkG-Xx-CeH" id="C00-54-BY3"/>
                         <outlet property="segmentOuterView" destination="6NT-iU-iVY" id="euT-5k-4Vs"/>
                         <outlet property="segmentedControl" destination="sVb-tl-vys" id="3Vr-jo-MbX"/>
+                        <outlet property="stsrt_FromTxt" destination="g0R-3U-gRi" id="9CD-6N-NiQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yr3-Q3-6Kk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -6542,7 +6556,7 @@
                                                                     <action selector="loginBtn:" destination="KaB-3K-6qM" eventType="touchUpInside" id="xTI-Kl-ccS"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YmN-fV-Izr" customClass="RoundedButton" customModule="Tosstra" customModuleProvider="target">
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YmN-fV-Izr" customClass="RoundedButton" customModule="Tosstra" customModuleProvider="target">
                                                                 <rect key="frame" x="145" y="0.0" width="110" height="50"/>
                                                                 <color key="backgroundColor" red="0.2098918259" green="0.1605701149" blue="0.90191358330000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -6550,6 +6564,7 @@
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
+                                                                    <action selector="acceptRejAct:" destination="kuu-HC-gSv" eventType="touchUpInside" id="qHI-Su-UNL"/>
                                                                     <action selector="loginBtn:" destination="KaB-3K-6qM" eventType="touchUpInside" id="dz1-6S-tpZ"/>
                                                                 </connections>
                                                             </button>
@@ -6625,6 +6640,21 @@
                     <size key="freeformSize" width="320" height="1200"/>
                     <connections>
                         <outlet property="addInfoText" destination="xBi-TS-FEw" id="ggB-3i-eQM"/>
+                        <outlet property="amountTxt" destination="jsD-5f-EHK" id="7yi-A5-QYi"/>
+                        <outlet property="buttonStack" destination="E8s-M4-veJ" id="Fk5-50-xPk"/>
+                        <outlet property="companyName" destination="bqi-Kh-YPo" id="4lZ-YE-eaI"/>
+                        <outlet property="d_cityTxt" destination="NOe-sg-6Gj" id="SHv-TM-YDQ"/>
+                        <outlet property="d_stateTxt" destination="P3H-Rb-S5O" id="eZN-U4-IEg"/>
+                        <outlet property="d_stresttxt" destination="l1g-zI-GYi" id="qpe-En-ix6"/>
+                        <outlet property="d_zipTxt" destination="oFX-62-ZYA" id="YBW-Od-e8p"/>
+                        <outlet property="date_fromTxt" destination="04D-sl-Cg6" id="cO4-i1-Mz8"/>
+                        <outlet property="date_totxt" destination="nQ8-Rs-lhH" id="IR9-O4-6Zf"/>
+                        <outlet property="endTimeTxt" destination="MrM-as-a2n" id="mZZ-rA-B09"/>
+                        <outlet property="p_cityTxt" destination="2QS-bj-433" id="o6o-Rz-tUq"/>
+                        <outlet property="p_stateTxt" destination="koP-U9-sDA" id="soU-sX-JCm"/>
+                        <outlet property="p_stresttxt" destination="l6w-f8-HH2" id="Lzj-wN-hm8"/>
+                        <outlet property="p_zipTxt" destination="9KF-iK-9W2" id="Nhm-n4-CVu"/>
+                        <outlet property="stsrt_FromTxt" destination="LX7-VA-FAt" id="qip-VE-8XG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1lk-Wc-6F3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

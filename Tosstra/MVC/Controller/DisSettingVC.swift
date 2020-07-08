@@ -355,7 +355,9 @@ extension DisSettingVC
                          }
                        
                             let params = ["userId" : id,
-                                          "onlineStatus" : self.onlineStatus]   as [String : String]
+                                          "onlineStatus" : self.onlineStatus,
+                                           "longitude" : "\(CURRENTLOCATIONLAT)",
+                                           "latitude" : "\(CURRENTLOCATIONLONG)"]   as [String : String]
                             
                   ApiHandler.ModelApiPostMethod2(url: CHANGE_ONLINESTATUS_API, parameters: params) { (response, error) in
                       

@@ -25,6 +25,58 @@ enum ApiMethod
 class ApiHandler: NSObject
 {
     
+    static func PostMethod(url:String,parameters:[String:Any], completion: @escaping (_ data:[String:Any]? ,  _ error:String?) -> Void)
+    {
+        print(url)
+        print(parameters)
+        
+        
+        SVProgressHUD.show()
+        SVProgressHUD.setBorderColor(UIColor.white)
+        SVProgressHUD.setForegroundColor(UIColor.white)
+        SVProgressHUD.setBackgroundColor(APPCOLOL)
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        let manager = Alamofire.SessionManager.default
+        manager.session.configuration.timeoutIntervalForRequest = 60
+        
+        manager.request(url, method:.post, parameters: parameters, encoding: URLEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            
+           SVProgressHUD.dismiss()
+            
+            if response.result.isSuccess
+            {
+                print("Response Data: \(response)")
+                
+                if let data = response.result.value as? [String:Any]
+                {
+                    completion(data , nil)
+                   SVProgressHUD.dismiss()
+                }else{
+                    //Helper.Alertmessage(title: "Alert", message: (response.error?.localizedDescription)!, vc: nil)
+                   SVProgressHUD.dismiss()
+                 //   completion(nil,response.error)
+                      completion(nil,response.error?.localizedDescription)
+                  //  SVProgressHUD.showError(withStatus: response.result.error?.localizedDescription)
+                }
+            }
+            else
+            {
+                //Helper.Alertmessage(title: "Alert", message: (response.error?.localizedDescription)!, vc: nil)
+               SVProgressHUD.dismiss()
+               
+                print("Error \(String(describing: response.result.error?.localizedDescription))")
+               // SVProgressHUD.showError(withStatus: response.result.error?.localizedDescription)
+                  completion(nil,response.error?.localizedDescription)
+            }
+            
+        }
+
+    }
+    
     static func ModelApiPostMethod(url:String,parameters:[String:Any], completion: @escaping (_ data:Data? ,  _ error:String?) -> Void)
     {
         print(url)

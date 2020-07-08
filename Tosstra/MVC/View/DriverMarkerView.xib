@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="markerDetailView" customModule="Tosstra" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="116" height="134"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WtK-ez-vFY">
+                    <rect key="frame" x="0.0" y="0.0" width="116" height="134"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aP7-Zs-eWU">
+                            <rect key="frame" x="13" y="8" width="90" height="90"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="ubj-tK-2HY"/>
+                                <constraint firstAttribute="height" constant="90" id="yWv-xV-CoT"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5v4-0I-9x3" customClass="RoundedButton" customModule="Tosstra" customModuleProvider="target">
+                            <rect key="frame" x="13" y="8" width="90" height="90"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="0.5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="normalBorderColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Driver" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="UOi-au-hre">
+                            <rect key="frame" x="13" y="99" width="90" height="20.5"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.2098918259" green="0.1605701149" blue="0.90191358330000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="UOi-au-hre" firstAttribute="top" secondItem="aP7-Zs-eWU" secondAttribute="bottom" constant="1" id="3au-Xi-VpY"/>
+                        <constraint firstItem="aP7-Zs-eWU" firstAttribute="top" secondItem="WtK-ez-vFY" secondAttribute="top" constant="8" id="AgD-bt-Gql"/>
+                        <constraint firstItem="5v4-0I-9x3" firstAttribute="top" secondItem="aP7-Zs-eWU" secondAttribute="top" id="TS1-Ng-sI4"/>
+                        <constraint firstItem="aP7-Zs-eWU" firstAttribute="centerX" secondItem="WtK-ez-vFY" secondAttribute="centerX" id="WTr-B3-1zm"/>
+                        <constraint firstItem="5v4-0I-9x3" firstAttribute="leading" secondItem="aP7-Zs-eWU" secondAttribute="leading" id="bhs-bI-tAU"/>
+                        <constraint firstItem="5v4-0I-9x3" firstAttribute="trailing" secondItem="aP7-Zs-eWU" secondAttribute="trailing" id="g26-bA-xPE"/>
+                        <constraint firstItem="UOi-au-hre" firstAttribute="leading" secondItem="5v4-0I-9x3" secondAttribute="leading" id="hPC-Ov-h8z"/>
+                        <constraint firstItem="UOi-au-hre" firstAttribute="trailing" secondItem="5v4-0I-9x3" secondAttribute="trailing" id="pu8-6A-FXz"/>
+                        <constraint firstItem="5v4-0I-9x3" firstAttribute="bottom" secondItem="aP7-Zs-eWU" secondAttribute="bottom" id="qAk-O7-U5Y"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="WtK-ez-vFY" secondAttribute="trailing" id="AHu-OL-qqe"/>
+                <constraint firstItem="WtK-ez-vFY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="BWE-mk-zb3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="WtK-ez-vFY" secondAttribute="bottom" id="QVY-Ma-ikf"/>
+                <constraint firstItem="WtK-ez-vFY" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="eb2-Y4-Z8E"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="profileBtn" destination="5v4-0I-9x3" id="lEV-oS-vY9"/>
+                <outlet property="profileImg" destination="aP7-Zs-eWU" id="jiy-St-Smz"/>
+                <outlet property="userName" destination="UOi-au-hre" id="emX-t7-CJF"/>
+            </connections>
+            <point key="canvasLocation" x="-436.875" y="-289.43661971830988"/>
+        </view>
+    </objects>
+</document>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5600A85F24B59A4E00C87FBB /* markerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5600A85E24B59A4E00C87FBB /* markerDetailView.swift */; };
 		5602465B24AD9391003A67E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602465A24AD9391003A67E9 /* AppDelegate.swift */; };
 		5602465D24AD9391003A67E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602465C24AD9391003A67E9 /* SceneDelegate.swift */; };
 		5602465F24AD9391003A67E9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602465E24AD9391003A67E9 /* ViewController.swift */; };
@@ -32,6 +33,8 @@
 		5626EE2524B04FA100CAEA70 /* DriverNotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE2324B04FA100CAEA70 /* DriverNotiCell.swift */; };
 		5626EE2624B04FA100CAEA70 /* DriverNotiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5626EE2424B04FA100CAEA70 /* DriverNotiCell.xib */; };
 		5626EE2824B0553100CAEA70 /* DriverJobDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE2724B0553100CAEA70 /* DriverJobDetailVC.swift */; };
+		562DC88324B5D7C6006C5C83 /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562DC88224B5D7C6006C5C83 /* CustomMarkerView.swift */; };
+		56301FDD24B587B700B7D463 /* DriverMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56301FDC24B587B700B7D463 /* DriverMarkerView.xib */; };
 		5635CA4D24ADCDBC00A65374 /* DriverHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635CA4C24ADCDBC00A65374 /* DriverHomeVC.swift */; };
 		5635CA5524ADD1F400A65374 /* Proxima Nova Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA4F24ADD1F300A65374 /* Proxima Nova Bold.otf */; };
 		5635CA5624ADD1F400A65374 /* Proxima Nova Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA5024ADD1F300A65374 /* Proxima Nova Black.otf */; };
@@ -74,6 +77,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5600A85E24B59A4E00C87FBB /* markerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = markerDetailView.swift; sourceTree = "<group>"; };
 		5602465724AD9391003A67E9 /* Tosstra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tosstra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5602465A24AD9391003A67E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5602465C24AD9391003A67E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 		5626EE2324B04FA100CAEA70 /* DriverNotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverNotiCell.swift; sourceTree = "<group>"; };
 		5626EE2424B04FA100CAEA70 /* DriverNotiCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverNotiCell.xib; sourceTree = "<group>"; };
 		5626EE2724B0553100CAEA70 /* DriverJobDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverJobDetailVC.swift; sourceTree = "<group>"; };
+		562DC88224B5D7C6006C5C83 /* CustomMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
+		56301FDC24B587B700B7D463 /* DriverMarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverMarkerView.xib; sourceTree = "<group>"; };
 		5635CA4C24ADCDBC00A65374 /* DriverHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverHomeVC.swift; sourceTree = "<group>"; };
 		5635CA4F24ADD1F300A65374 /* Proxima Nova Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Bold.otf"; path = "Font/Proxima Nova Bold.otf"; sourceTree = SOURCE_ROOT; };
 		5635CA5024ADD1F300A65374 /* Proxima Nova Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Black.otf"; path = "Font/Proxima Nova Black.otf"; sourceTree = SOURCE_ROOT; };
@@ -245,6 +251,9 @@
 				5626EE1A24B045BE00CAEA70 /* DriveMyJobCell.xib */,
 				5626EE2324B04FA100CAEA70 /* DriverNotiCell.swift */,
 				5626EE2424B04FA100CAEA70 /* DriverNotiCell.xib */,
+				56301FDC24B587B700B7D463 /* DriverMarkerView.xib */,
+				5600A85E24B59A4E00C87FBB /* markerDetailView.swift */,
+				562DC88224B5D7C6006C5C83 /* CustomMarkerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -363,6 +372,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56301FDD24B587B700B7D463 /* DriverMarkerView.xib in Resources */,
 				5602466A24AD9393003A67E9 /* LaunchScreen.storyboard in Resources */,
 				5626EE2624B04FA100CAEA70 /* DriverNotiCell.xib in Resources */,
 				56D085FB24AE032C00E6D2BF /* SettingTCell.xib in Resources */,
@@ -455,6 +465,7 @@
 				5626EE2224B04F7F00CAEA70 /* DriverNotificationVC.swift in Sources */,
 				5676A45424B4639000AFBCB4 /* ChangePasswordVC.swift in Sources */,
 				564F2AB224ADC237004116A4 /* DisSideTCell.swift in Sources */,
+				5600A85F24B59A4E00C87FBB /* markerDetailView.swift in Sources */,
 				5602466524AD9391003A67E9 /* Tosstra.xcdatamodeld in Sources */,
 				5602467C24AD9539003A67E9 /* FontModel.swift in Sources */,
 				5626EE1E24B04B6F00CAEA70 /* DriverProfileVC.swift in Sources */,
@@ -467,6 +478,7 @@
 				56D085FA24AE032C00E6D2BF /* SettingTCell.swift in Sources */,
 				5602465F24AD9391003A67E9 /* ViewController.swift in Sources */,
 				56D085F224ADF66300E6D2BF /* ActiveDriverTCell.swift in Sources */,
+				562DC88324B5D7C6006C5C83 /* CustomMarkerView.swift in Sources */,
 				5653E7EF24AEECA8006C8C20 /* DisjobDescriptionVC.swift in Sources */,
 				564F2AAF24ADC1C5004116A4 /* DisSidebarVC.swift in Sources */,
 				5602468424ADB89B003A67E9 /* DriverSignupVC.swift in Sources */,
