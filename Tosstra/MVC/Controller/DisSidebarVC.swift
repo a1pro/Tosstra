@@ -9,6 +9,9 @@
 
 import UIKit
 import KYDrawerController
+import SVProgressHUD
+import SDWebImage
+import Letters
 class DisSidebarVC: UIViewController {
     @IBOutlet var myTable:UITableView!
     @IBOutlet weak var headerUIView: UIView!
@@ -16,7 +19,7 @@ class DisSidebarVC: UIViewController {
     @IBOutlet weak var DriverLbl: UILabel!
     var viewProfiledata:ViewProfileModel?
     
-    var DisArray = ["Active Trucks","Add a new Job","Active Driver","Profile","Notification","Setting"]
+    var DisArray = ["Available Trucks","Add a new Job","Active Driver","Profile","Notification","Setting"]
     var DriverArray = ["All Jobs","My Jobs","Profile","Notification","Setting"]
     
     var DisIconArray = ["all-job","Add-icon-1","all-job","Profile","notification","setting"]
@@ -25,6 +28,7 @@ class DisSidebarVC: UIViewController {
     
     var appType="Dispatcher"
     
+     @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var companyName: UILabel!
            @IBOutlet weak var type: UILabel!
@@ -36,20 +40,47 @@ class DisSidebarVC: UIViewController {
         myTable.dataSource=self
         myTable.separatorStyle = .none
         myTable.tableHeaderView=headerUIView
+        self.profileImage.layer.cornerRadius = self.profileImage.frame.height/2
+               self.profileImage.contentMode = .scaleAspectFill
+               
+               self.profileImage.clipsToBounds=true
+        
         myTable.register(UINib(nibName: "DisSideTCell", bundle: nil), forCellReuseIdentifier: "DisSideTCell")
         
         
-        self.appType = DEFAULT.value(forKey: "APPTYPE") as? String ?? "Dispatcher"
+            self.appType = DEFAULT.value(forKey: "APPTYPE") as? String ?? "Dispatcher"
         
         
-        if appType == "Driver"
+        if !(NetworkEngine.networkEngineObj.isInternetAvailable())
         {
-            self.DriverLbl.isHidden = false
+            NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+        }
+        else
+        {
+         self.viewProfileAPI()
+        }
+        
+        if appType == "Dispatcher"
+        {
+           
+             self.DriverLbl.isHidden = true
         }
         else
         
         {
-              self.DriverLbl.isHidden = true
+              self.DriverLbl.isHidden = false
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+        {
+            NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+        }
+        else
+        {
+         self.viewProfileAPI()
         }
     }
     
@@ -241,7 +272,7 @@ extension DisSidebarVC
       
            let params = ["userId" : id]   as [String : String]
            
-           ApiHandler.ModelApiPostMethod(url: VIEW_PROFILE_API, parameters: params) { (response, error) in
+           ApiHandler.ModelApiPostMethod2(url: VIEW_PROFILE_API, parameters: params) { (response, error) in
                
                if error == nil
                {
@@ -261,16 +292,39 @@ extension DisSidebarVC
                         let count = self.viewProfiledata?.data?.count ?? 0
                         if count > 0
                         {
-                            var type = self.viewProfiledata?.data?[0].userType
-                            
+                            let name1 = self.viewProfiledata?.data?[0].firstName ?? ""
+                             let name2 = self.viewProfiledata?.data?[0].lastName ?? ""
                            
-                            self.companyName.text = self.viewProfiledata?.data?[0].companyName
-                            self.DriverLbl.text = self.viewProfiledata?.data?[0].userType
                             
+                            self.companyName.text = name1 + " " + name2
                             
+                            self.DriverLbl.text = self.viewProfiledata?.data?[0].companyName
+                           
+                            DEFAULT.set(self.viewProfiledata?.data?[0].userType, forKey: "APPTYPE")
+                            DEFAULT.set(self.viewProfiledata?.data?[0].userType, forKey: "USERTYPE")
+                            DEFAULT.synchronize()
                             
-                                                     
-                              //  hello
+                              DEFAULT.setValue(self.viewProfiledata?.data?[0].onlineStatus, forKey: "ONLINESTATUS")
+                            DEFAULT.synchronize()
+                            
+                            if let profile = self.viewProfiledata?.data?[0].profileImg
+                            {
+                                let fullurl = IMAGEBASEURL + profile
+                                let fullUrl = URL(string: fullurl)!
+                                
+                                DEFAULT.setValue(profile, forKey: "PROFILEIMAGE")
+                                DEFAULT.synchronize()
+                                
+                                // headerView.profileImge.sd_setImage(with: fullUrl, completed: nil)
+                             self.profileImage.sd_setImage(with: fullUrl, placeholderImage: #imageLiteral(resourceName: "logo"), options: .refreshCached, context: nil)
+                            }
+                            else
+                                
+                            {
+                             
+                             self.profileImage.setImage(string: (self.companyName.text!), color: nil, circular: true,textAttributes: attrs)
+
+                            }
                                                    
                         }
                        

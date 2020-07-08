@@ -21,7 +21,7 @@ class DriverHomeVC: UIViewController {
     @IBOutlet weak var onOfflineLbl: UILabel!
     @IBOutlet weak var onLineBtn: UIButton!
     @IBOutlet weak var OfflineBtn: UIButton!
-    
+     var apiData:ForgotPasswordModel?
        var geoCoder:CLGeocoder!
           var destinationMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: 37.0, longitude: 45.0))
          let currentLocationMarker = GMSMarker()
@@ -33,6 +33,8 @@ class DriverHomeVC: UIViewController {
          public var longitude:Double = 77.38066792488098
          public var latitude:Double = 28.6517752463408
     
+    var onlineStatus = "0"
+    
     
     
     override func viewDidLoad() {
@@ -43,9 +45,38 @@ class DriverHomeVC: UIViewController {
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
         initGoogleMaps()
-         self.onOfflineLbl.text = "You are online"
-         self.OfflineBtn.isHidden = false
-        self.onLineBtn.isHidden = true
+        
+        
+        
+        if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
+               {
+                   if status == "1"
+                   {
+                        self.onOfflineLbl.text = "You are online"
+                               self.OfflineBtn.isHidden = false
+                              self.onLineBtn.isHidden = true
+                    self.myMapView.isUserInteractionEnabled = true
+                   }
+                   else
+                   {
+                       self.onOfflineLbl.text = "You are offline"
+                                   self.onlineStatus = "1"
+                                  self.OfflineBtn.isHidden = true
+                                  self.onLineBtn.isHidden = false
+                    self.myMapView.isUserInteractionEnabled = false
+                   }
+               }
+               else
+               {
+                   self.onOfflineLbl.text = "You are offline"
+                               self.onlineStatus = "1"
+                              self.OfflineBtn.isHidden = true
+                              self.onLineBtn.isHidden = false
+                 self.myMapView.isUserInteractionEnabled = false
+               }
+               
+        
+        
     }
     
     @IBAction func MenuAct(_ sender: UIButton)
@@ -73,15 +104,27 @@ class DriverHomeVC: UIViewController {
         if sender.tag == 0
         {
             self.onOfflineLbl.text = "You are online"
+            self.onlineStatus = "1"
             self.OfflineBtn.isHidden = false
              self.onLineBtn.isHidden = true
+             self.myMapView.isUserInteractionEnabled = true
         }
         else
         {
             self.onOfflineLbl.text = "You are offline"
+             self.onlineStatus = "1"
             self.OfflineBtn.isHidden = true
             self.onLineBtn.isHidden = false
+             self.myMapView.isUserInteractionEnabled = false
         }
+        if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                                                       {
+                                                           NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                                                       }
+                                                       else
+                                                       {
+                                                        self.UserStatusAPI()
+                                                       }
     }
   
 }
@@ -226,11 +269,9 @@ extension DriverHomeVC : CLLocationManagerDelegate, GMSMapViewDelegate, GMSAutoc
         // MARK: GOOGLE MAP DELEGATE
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool
         {
-//            guard let customMarkerView = marker.iconView as? CustomMarkerView else { return false }
-//            let img = customMarkerView.img!
-//            let customMarker = CustomMarkerView(frame: CGRect(x: 0, y: 0, width: customMarkerWidth, height: customMarkerHeight), image: img, borderColor: UIColor.white, tag: customMarkerView.tag)
-//
-//            marker.iconView = customMarker
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
+               
+                    self.navigationController?.pushViewController(vc, animated: true)
 
             return false
         }
@@ -262,6 +303,62 @@ extension DriverHomeVC : CLLocationManagerDelegate, GMSMapViewDelegate, GMSAutoc
         }
         
 }
+extension DriverHomeVC
+{
+    //MARK:- Change Status Account
+     func UserStatusAPI()
+          {
+              
+         
+              var id = ""
+                     if let userID = DEFAULT.value(forKey: "USERID") as? String
+                     {
+                         id = userID
+                     }
+                   
+                        let params = ["userId" : id,
+                                      "onlineStatus" : self.onlineStatus]   as [String : String]
+                        
+              ApiHandler.ModelApiPostMethod2(url: CHANGE_ONLINESTATUS_API, parameters: params) { (response, error) in
+                  
+                  if error == nil
+                  {
+                      let decoder = JSONDecoder()
+                      do
+                      {
+                          self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
+                       
+                       if self.apiData?.code == "200"
+                              
+                          {
+                              self.view.makeToast(self.apiData?.message)
+               
+                          }
+                          else
+                          {
+    
+                           self.view.makeToast(self.apiData?.message)
+                          }
+                          
+                          
+                      }
+                      catch let error
+                      {
+                          self.view.makeToast(error.localizedDescription)
+                      }
+                      
+                  }
+                  else
+                  {
+                      self.view.makeToast(error)
+                  }
+              }
+          }
+        
+}
+
+
+
 struct MyPlace {
     var name: String
     var lat: Double

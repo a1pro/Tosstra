@@ -76,5 +76,26 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>http://a1professionals.net</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>${PRODUCT_NAME} need Camera access permission to Take Photos </string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>App would like to access your photo gallery for your profile photo upload. Your photos wont be shared without your permission.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App would like to access your photo gallery for your profile photo upload. Your photos wont be shared without your permission.</string>
 </dict>
 </plist>

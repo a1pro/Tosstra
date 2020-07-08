@@ -28,16 +28,27 @@ var window: UIWindow?
 //                    let fontNames = UIFont.fontNames(forFamilyName: familyName)
 //                    print(familyName, fontNames)
 //                })
-        if (DEFAULT.value(forKey: "APITOKEN") as? String) != nil
-                             {
+        
+      if let type = DEFAULT.value(forKey: "USERTYPE") as? String
+                                           {
 
-                             loadLoginView()
+                                               if type == "Dispatcher"
+                                               {
+                                                   loadHomeView()
+                                               }
+                                               else
+                                               {
+                                                 loadDriverHomeView()
+                                               }
+                                          
 
-                             }
-                             else
-                             {
-                                loadLoginView()
-                             }
+                                           }
+                                           else
+                                           {
+                                              loadLoginView()
+                                               
+                                           }
+               
                
         return true
     }

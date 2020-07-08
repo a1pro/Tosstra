@@ -10,6 +10,7 @@ import UIKit
 
 class UserTypeViewController: UIViewController {
 
+    
     var loginsignUp = ""
     var Apptype = ""
     override func viewDidLoad() {

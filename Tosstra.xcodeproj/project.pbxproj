@@ -53,6 +53,11 @@
 		5653E7F124AF37F6006C8C20 /* DisJobDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653E7F024AF37F6006C8C20 /* DisJobDetailsVC.swift */; };
 		5653E7F424AF4E39006C8C20 /* DisEndJonTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653E7F224AF4E39006C8C20 /* DisEndJonTCell.swift */; };
 		5653E7F524AF4E39006C8C20 /* DisEndJonTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5653E7F324AF4E39006C8C20 /* DisEndJonTCell.xib */; };
+		5676A44E24B4397300AFBCB4 /* ForPassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676A44D24B4397300AFBCB4 /* ForPassVC.swift */; };
+		5676A45024B43BE600AFBCB4 /* NewPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676A44F24B43BE600AFBCB4 /* NewPasswordVC.swift */; };
+		5676A45224B43D4300AFBCB4 /* ForgotPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676A45124B43D4300AFBCB4 /* ForgotPasswordModel.swift */; };
+		5676A45424B4639000AFBCB4 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676A45324B4639000AFBCB4 /* ChangePasswordVC.swift */; };
+		5676A46224B4978A00AFBCB4 /* DriverJobOfferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676A46124B4978A00AFBCB4 /* DriverJobOfferVC.swift */; };
 		56D085EF24ADF3F000E6D2BF /* ActiveDriverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085EE24ADF3F000E6D2BF /* ActiveDriverVC.swift */; };
 		56D085F224ADF66300E6D2BF /* ActiveDriverTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085F024ADF66300E6D2BF /* ActiveDriverTCell.swift */; };
 		56D085F324ADF66300E6D2BF /* ActiveDriverTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56D085F124ADF66300E6D2BF /* ActiveDriverTCell.xib */; };
@@ -65,8 +70,6 @@
 		56D2D1E924B3239D0087B7B9 /* NetworkEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1E824B3239D0087B7B9 /* NetworkEngine.swift */; };
 		56D2D1EB24B326790087B7B9 /* Dis_Register_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1EA24B326790087B7B9 /* Dis_Register_Model.swift */; };
 		56D2D1ED24B32EBB0087B7B9 /* Dis_Login_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1EC24B32EBB0087B7B9 /* Dis_Login_Model.swift */; };
-		56D2D1EF24B334E40087B7B9 /* ForgotPassswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1EE24B334E40087B7B9 /* ForgotPassswordVC.swift */; };
-		56D2D1F124B339890087B7B9 /* ForgotpassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1F024B339890087B7B9 /* ForgotpassVC.swift */; };
 		94763B89D70CC1BBCFE16223 /* Pods_Tosstra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B18A390511219F857BB0E1 /* Pods_Tosstra.framework */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +122,11 @@
 		5653E7F024AF37F6006C8C20 /* DisJobDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisJobDetailsVC.swift; sourceTree = "<group>"; };
 		5653E7F224AF4E39006C8C20 /* DisEndJonTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisEndJonTCell.swift; sourceTree = "<group>"; };
 		5653E7F324AF4E39006C8C20 /* DisEndJonTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisEndJonTCell.xib; sourceTree = "<group>"; };
+		5676A44D24B4397300AFBCB4 /* ForPassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForPassVC.swift; sourceTree = "<group>"; };
+		5676A44F24B43BE600AFBCB4 /* NewPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordVC.swift; sourceTree = "<group>"; };
+		5676A45124B43D4300AFBCB4 /* ForgotPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordModel.swift; sourceTree = "<group>"; };
+		5676A45324B4639000AFBCB4 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
+		5676A46124B4978A00AFBCB4 /* DriverJobOfferVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverJobOfferVC.swift; sourceTree = "<group>"; };
 		56D085EE24ADF3F000E6D2BF /* ActiveDriverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveDriverVC.swift; sourceTree = "<group>"; };
 		56D085F024ADF66300E6D2BF /* ActiveDriverTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveDriverTCell.swift; sourceTree = "<group>"; };
 		56D085F124ADF66300E6D2BF /* ActiveDriverTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveDriverTCell.xib; sourceTree = "<group>"; };
@@ -131,8 +139,6 @@
 		56D2D1E824B3239D0087B7B9 /* NetworkEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEngine.swift; sourceTree = "<group>"; };
 		56D2D1EA24B326790087B7B9 /* Dis_Register_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dis_Register_Model.swift; sourceTree = "<group>"; };
 		56D2D1EC24B32EBB0087B7B9 /* Dis_Login_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dis_Login_Model.swift; sourceTree = "<group>"; };
-		56D2D1EE24B334E40087B7B9 /* ForgotPassswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassswordVC.swift; sourceTree = "<group>"; };
-		56D2D1F024B339890087B7B9 /* ForgotpassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotpassVC.swift; sourceTree = "<group>"; };
 		E5B18A390511219F857BB0E1 /* Pods_Tosstra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tosstra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E645612C3ACD9FFE04591AA5 /* Pods-Tosstra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tosstra.release.xcconfig"; path = "Target Support Files/Pods-Tosstra/Pods-Tosstra.release.xcconfig"; sourceTree = "<group>"; };
 		F86A1CC6F6FE719B3020AAFC /* Pods-Tosstra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tosstra.debug.xcconfig"; path = "Target Support Files/Pods-Tosstra/Pods-Tosstra.debug.xcconfig"; sourceTree = "<group>"; };
@@ -215,6 +221,7 @@
 				56D2D1EA24B326790087B7B9 /* Dis_Register_Model.swift */,
 				56D2D1EC24B32EBB0087B7B9 /* Dis_Login_Model.swift */,
 				5647CF0D24B34D3800EEBFBB /* ViewProfileModel.swift */,
+				5676A45124B43D4300AFBCB4 /* ForgotPasswordModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -264,8 +271,10 @@
 				5602467F24ADA2D2003A67E9 /* UserTypeViewController.swift */,
 				5602465E24AD9391003A67E9 /* ViewController.swift */,
 				5626EE2724B0553100CAEA70 /* DriverJobDetailVC.swift */,
-				56D2D1EE24B334E40087B7B9 /* ForgotPassswordVC.swift */,
-				56D2D1F024B339890087B7B9 /* ForgotpassVC.swift */,
+				5676A44D24B4397300AFBCB4 /* ForPassVC.swift */,
+				5676A44F24B43BE600AFBCB4 /* NewPasswordVC.swift */,
+				5676A45324B4639000AFBCB4 /* ChangePasswordVC.swift */,
+				5676A46124B4978A00AFBCB4 /* DriverJobOfferVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -441,8 +450,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5676A45224B43D4300AFBCB4 /* ForgotPasswordModel.swift in Sources */,
 				5602467A24AD9529003A67E9 /* Constant.swift in Sources */,
 				5626EE2224B04F7F00CAEA70 /* DriverNotificationVC.swift in Sources */,
+				5676A45424B4639000AFBCB4 /* ChangePasswordVC.swift in Sources */,
 				564F2AB224ADC237004116A4 /* DisSideTCell.swift in Sources */,
 				5602466524AD9391003A67E9 /* Tosstra.xcdatamodeld in Sources */,
 				5602467C24AD9539003A67E9 /* FontModel.swift in Sources */,
@@ -459,7 +470,6 @@
 				5653E7EF24AEECA8006C8C20 /* DisjobDescriptionVC.swift in Sources */,
 				564F2AAF24ADC1C5004116A4 /* DisSidebarVC.swift in Sources */,
 				5602468424ADB89B003A67E9 /* DriverSignupVC.swift in Sources */,
-				56D2D1F124B339890087B7B9 /* ForgotpassVC.swift in Sources */,
 				5635CA5F24ADE07E00A65374 /* AllTrackTableViewCell.swift in Sources */,
 				5635CA4D24ADCDBC00A65374 /* DriverHomeVC.swift in Sources */,
 				5626EE1824B043E200CAEA70 /* DriverMyJobVC.swift in Sources */,
@@ -468,16 +478,18 @@
 				5626EE2824B0553100CAEA70 /* DriverJobDetailVC.swift in Sources */,
 				5635CA6324ADE65D00A65374 /* SeniorTrackTCell.swift in Sources */,
 				56D2D1ED24B32EBB0087B7B9 /* Dis_Login_Model.swift in Sources */,
+				5676A44E24B4397300AFBCB4 /* ForPassVC.swift in Sources */,
 				56D085EF24ADF3F000E6D2BF /* ActiveDriverVC.swift in Sources */,
 				5653E7F424AF4E39006C8C20 /* DisEndJonTCell.swift in Sources */,
 				56D2D1E724B3237E0087B7B9 /* WebServices.swift in Sources */,
 				5602864D24ADBBBC0013A826 /* DisSigninVC.swift in Sources */,
 				56D085F524ADF9C600E6D2BF /* DisProfileVC.swift in Sources */,
 				5647CF0E24B34D3800EEBFBB /* ViewProfileModel.swift in Sources */,
+				5676A46224B4978A00AFBCB4 /* DriverJobOfferVC.swift in Sources */,
 				5602465B24AD9391003A67E9 /* AppDelegate.swift in Sources */,
 				5626EE2024B04C8000CAEA70 /* DriverSettingVC.swift in Sources */,
 				5602468024ADA2D2003A67E9 /* UserTypeViewController.swift in Sources */,
-				56D2D1EF24B334E40087B7B9 /* ForgotPassswordVC.swift in Sources */,
+				5676A45024B43BE600AFBCB4 /* NewPasswordVC.swift in Sources */,
 				56D2D1EB24B326790087B7B9 /* Dis_Register_Model.swift in Sources */,
 				564F2AB524ADC5F1004116A4 /* DisHomeVC.swift in Sources */,
 				5602468224ADA82F003A67E9 /* DisSignupVC.swift in Sources */,

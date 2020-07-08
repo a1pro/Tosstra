@@ -17,6 +17,10 @@ class DisSigninVC: UIViewController {
     @IBOutlet var passwordTxt:UITextField!
     
     var Apptype = ""
+    
+    var signInData:Dis_Login_Model?
+    
+    @IBOutlet var forGotBtn:UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         let attrs1 = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor : UIColor.lightGray]
@@ -29,6 +33,9 @@ class DisSigninVC: UIViewController {
         
         attributedString1.append(attributedString2)
         self.signInBtn.setAttributedTitle(attributedString1, for: .normal)
+        let attributeString = NSMutableAttributedString(string: "Forgot Password?",
+                                                        attributes: underLineText)
+        forGotBtn.setAttributedTitle(attributeString, for: .normal)
     }
     
     @IBAction func goBackBtn(_ sender: Any)
@@ -38,37 +45,49 @@ class DisSigninVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func forGotpasswordAct(_ sender: Any)
+    {
+        
+        
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ForPassVC") as! ForPassVC
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     @IBAction func signInAct(_ sender: Any)
     {
-        let type = userNameTxt.text!
         
-       
-            if type == "driver@gmail.com"
-            {
-                 DEFAULT.set("driver", forKey: "APPTYPE")
-                if #available(iOS 13.0, *)
-                           {
-                               SCENEDEL.loadDriverHomeView()
-                           }
-                           else
-                           {
-                               APPDEL.loadDriverHomeView()
-                           }
-            }
-           
-        
-        else if  type == "dispatcher@gmail.com"
+        if userNameTxt.text == ""
         {
-             DEFAULT.set("dispatcher", forKey: "APPTYPE")
-            if #available(iOS 13.0, *) {
-                SCENEDEL.loadHomeView()
+            
+            NetworkEngine.commonAlert(message: "Please enter email id.", vc: self)
+            
+        }
+        else if !NetworkEngine.networkEngineObj.validateEmail(candidate: userNameTxt.text!)
+        {
+            NetworkEngine.commonAlert(message: "Please enter valid email.", vc: self)
+        }
+        else if passwordTxt.text == ""
+        {
+            NetworkEngine.commonAlert(message: "Please enter password.", vc: self)
+            
+        }
+        else
+        {
+            
+            if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+            {
+                NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
             }
             else
             {
-                APPDEL.loadHomeView()
+                self.SignInWithEmailAPI()
             }
+            
         }
-        DEFAULT.synchronize()
+  
         
         
     }
@@ -87,6 +106,108 @@ class DisSigninVC: UIViewController {
         }
         
         
+    }
+    
+}
+extension DisSigninVC
+{
+    //MARK:- Login With Email Api
+    
+    func SignInWithEmailAPI()
+    {
+        
+        
+        let params = ["email" : userNameTxt.text!,
+                      "password" : passwordTxt.text!,
+                      "deviceId" : DEVICEID,
+                      "deviceType" : DEVICETYPE]   as [String : String]
+        
+        ApiHandler.ModelApiPostMethod(url: DISPATCHER_LOGIN_API, parameters: params) { (response, error) in
+            
+            if error == nil
+            {
+                let decoder = JSONDecoder()
+                do
+                {
+                    self.signInData = try decoder.decode(Dis_Login_Model.self, from: response!)
+                    
+                    if self.signInData?.code == "200"
+                        
+                    {
+                        self.view.makeToast(self.signInData?.message)
+                        
+                    }
+                    else
+                    {
+                        let count = self.signInData?.data?.count ?? 0
+                        
+                        
+                        
+                        if count > 0
+                        {
+                            var type = self.signInData?.data?[0].userType
+                            
+                            var status = self.signInData?.data?[0].verifiedStatus
+                            
+                            if status == "0"
+                            {
+                                NetworkEngine.commonAlert(message: "Please verify email first!", vc: self)
+                            }
+                            else{
+                                
+                                
+                                DEFAULT.set(self.signInData?.data?[0].id, forKey: "USERID")
+                                DEFAULT.set(type, forKey: "USERTYPE")
+                                DEFAULT.set(type, forKey: "APPTYPE")
+                                
+                                DEFAULT.synchronize()
+                                
+                                if type == "Dispatcher"
+                                {
+                                    if #available(iOS 13.0, *) {
+                                        SCENEDEL.loadHomeView()
+                                        
+                                    }
+                                    else
+                                    {
+                                        APPDEL.loadHomeView()
+                                    }
+                                }
+                                else
+                                {
+                                    if #available(iOS 13.0, *)
+                                    {
+                                        SCENEDEL.loadDriverHomeView()
+                                        
+                                    }
+                                    else
+                                    {
+                                        APPDEL.loadDriverHomeView()
+                                    }
+                                }
+                            }
+                            
+                            
+                            
+                            
+                            
+                        }
+                        
+                    }
+                    
+                    
+                }
+                catch let error
+                {
+                    self.view.makeToast(error.localizedDescription)
+                }
+                
+            }
+            else
+            {
+                self.view.makeToast(error)
+            }
+        }
     }
     
 }

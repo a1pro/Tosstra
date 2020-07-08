@@ -41,7 +41,18 @@ let longX = DEFAULT.value(forKey: "CURRENTLONG") as? String ?? "76.0"
 var CURRENTLOCATIONLAT = Double(latX)!
 var CURRENTLOCATIONLONG = Double(longX)!
 
+var DEVICEID = "1213"
+var DEVICETYPE = "2"
 
+let underLineText: [NSAttributedString.Key: Any] = [
+.font: UIFont.systemFont(ofSize: 14),
+.foregroundColor: UIColor.lightGray,
+.underlineStyle: NSUnderlineStyle.single.rawValue]
+
+let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22),NSAttributedString.Key.foregroundColor: UIColor.white]
+let attrs2 = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 13),NSAttributedString.Key.foregroundColor: UIColor.white]
 
 @available(iOS 13.0, *)
 let SCENEDEL = UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate
+
+
