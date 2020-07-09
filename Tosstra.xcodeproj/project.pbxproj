@@ -13,7 +13,6 @@
 		5602465F24AD9391003A67E9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602465E24AD9391003A67E9 /* ViewController.swift */; };
 		5602466224AD9391003A67E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5602466024AD9391003A67E9 /* Main.storyboard */; };
 		5602466524AD9391003A67E9 /* Tosstra.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5602466324AD9391003A67E9 /* Tosstra.xcdatamodeld */; };
-		5602466724AD9393003A67E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5602466624AD9393003A67E9 /* Assets.xcassets */; };
 		5602466A24AD9393003A67E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5602466824AD9393003A67E9 /* LaunchScreen.storyboard */; };
 		5602467224AD949B003A67E9 /* StartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602467124AD949B003A67E9 /* StartedViewController.swift */; };
 		5602467824AD951A003A67E9 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602467724AD951A003A67E9 /* CardView.swift */; };
@@ -48,6 +47,11 @@
 		5635CA6324ADE65D00A65374 /* SeniorTrackTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635CA6124ADE65D00A65374 /* SeniorTrackTCell.swift */; };
 		5635CA6424ADE65D00A65374 /* SeniorTrackTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5635CA6224ADE65D00A65374 /* SeniorTrackTCell.xib */; };
 		5647CF0E24B34D3800EEBFBB /* ViewProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5647CF0D24B34D3800EEBFBB /* ViewProfileModel.swift */; };
+		5649EE6124B6F1ED00AEF83E /* JobModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5649EE6024B6F1ED00AEF83E /* JobModel.swift */; };
+		5649EE6324B70A7800AEF83E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5649EE6224B70A7600AEF83E /* Assets.xcassets */; };
+		5649EE6624B70CE500AEF83E /* ClusterCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5649EE6424B70CE500AEF83E /* ClusterCollectionCell.swift */; };
+		5649EE6724B70CE500AEF83E /* ClusterCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5649EE6524B70CE500AEF83E /* ClusterCollectionCell.xib */; };
+		5649EE6924B7225F00AEF83E /* ViewProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5649EE6824B7225F00AEF83E /* ViewProfileVC.swift */; };
 		564F2AAF24ADC1C5004116A4 /* DisSidebarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F2AAE24ADC1C5004116A4 /* DisSidebarVC.swift */; };
 		564F2AB224ADC237004116A4 /* DisSideTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F2AB024ADC236004116A4 /* DisSideTCell.swift */; };
 		564F2AB324ADC237004116A4 /* DisSideTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 564F2AB124ADC236004116A4 /* DisSideTCell.xib */; };
@@ -84,7 +88,6 @@
 		5602465E24AD9391003A67E9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5602466124AD9391003A67E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5602466424AD9391003A67E9 /* Tosstra.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tosstra.xcdatamodel; sourceTree = "<group>"; };
-		5602466624AD9393003A67E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5602466924AD9393003A67E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5602466B24AD9393003A67E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5602467124AD949B003A67E9 /* StartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +123,12 @@
 		5635CA6124ADE65D00A65374 /* SeniorTrackTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeniorTrackTCell.swift; sourceTree = "<group>"; };
 		5635CA6224ADE65D00A65374 /* SeniorTrackTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeniorTrackTCell.xib; sourceTree = "<group>"; };
 		5647CF0D24B34D3800EEBFBB /* ViewProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProfileModel.swift; sourceTree = "<group>"; };
+		5649EE5F24B6DE2100AEF83E /* Tosstra.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tosstra.entitlements; sourceTree = "<group>"; };
+		5649EE6024B6F1ED00AEF83E /* JobModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobModel.swift; sourceTree = "<group>"; };
+		5649EE6224B70A7600AEF83E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5649EE6424B70CE500AEF83E /* ClusterCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterCollectionCell.swift; sourceTree = "<group>"; };
+		5649EE6524B70CE500AEF83E /* ClusterCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClusterCollectionCell.xib; sourceTree = "<group>"; };
+		5649EE6824B7225F00AEF83E /* ViewProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProfileVC.swift; sourceTree = "<group>"; };
 		564F2AAE24ADC1C5004116A4 /* DisSidebarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSidebarVC.swift; sourceTree = "<group>"; };
 		564F2AB024ADC236004116A4 /* DisSideTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSideTCell.swift; sourceTree = "<group>"; };
 		564F2AB124ADC236004116A4 /* DisSideTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisSideTCell.xib; sourceTree = "<group>"; };
@@ -191,12 +200,13 @@
 		5602465924AD9391003A67E9 /* Tosstra */ = {
 			isa = PBXGroup;
 			children = (
+				5649EE6224B70A7600AEF83E /* Assets.xcassets */,
+				5649EE5F24B6DE2100AEF83E /* Tosstra.entitlements */,
 				5635CA4E24ADD15400A65374 /* Font */,
 				5602467324AD94A8003A67E9 /* MVC */,
 				5602465A24AD9391003A67E9 /* AppDelegate.swift */,
 				5602465C24AD9391003A67E9 /* SceneDelegate.swift */,
 				5602466024AD9391003A67E9 /* Main.storyboard */,
-				5602466624AD9393003A67E9 /* Assets.xcassets */,
 				5602466824AD9393003A67E9 /* LaunchScreen.storyboard */,
 				5602466B24AD9393003A67E9 /* Info.plist */,
 				5602466324AD9391003A67E9 /* Tosstra.xcdatamodeld */,
@@ -228,6 +238,7 @@
 				56D2D1EC24B32EBB0087B7B9 /* Dis_Login_Model.swift */,
 				5647CF0D24B34D3800EEBFBB /* ViewProfileModel.swift */,
 				5676A45124B43D4300AFBCB4 /* ForgotPasswordModel.swift */,
+				5649EE6024B6F1ED00AEF83E /* JobModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -254,6 +265,8 @@
 				56301FDC24B587B700B7D463 /* DriverMarkerView.xib */,
 				5600A85E24B59A4E00C87FBB /* markerDetailView.swift */,
 				562DC88224B5D7C6006C5C83 /* CustomMarkerView.swift */,
+				5649EE6424B70CE500AEF83E /* ClusterCollectionCell.swift */,
+				5649EE6524B70CE500AEF83E /* ClusterCollectionCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -284,6 +297,7 @@
 				5676A44F24B43BE600AFBCB4 /* NewPasswordVC.swift */,
 				5676A45324B4639000AFBCB4 /* ChangePasswordVC.swift */,
 				5676A46124B4978A00AFBCB4 /* DriverJobOfferVC.swift */,
+				5649EE6824B7225F00AEF83E /* ViewProfileVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -375,11 +389,12 @@
 				56301FDD24B587B700B7D463 /* DriverMarkerView.xib in Resources */,
 				5602466A24AD9393003A67E9 /* LaunchScreen.storyboard in Resources */,
 				5626EE2624B04FA100CAEA70 /* DriverNotiCell.xib in Resources */,
+				5649EE6324B70A7800AEF83E /* Assets.xcassets in Resources */,
 				56D085FB24AE032C00E6D2BF /* SettingTCell.xib in Resources */,
 				5635CA5824ADD1F400A65374 /* ProximaNova-Regular.otf in Resources */,
 				5626EE1C24B045BE00CAEA70 /* DriveMyJobCell.xib in Resources */,
-				5602466724AD9393003A67E9 /* Assets.xcassets in Resources */,
 				5635CA5624ADD1F400A65374 /* Proxima Nova Black.otf in Resources */,
+				5649EE6724B70CE500AEF83E /* ClusterCollectionCell.xib in Resources */,
 				5653E7F524AF4E39006C8C20 /* DisEndJonTCell.xib in Resources */,
 				5635CA5A24ADD1F400A65374 /* Proxima Nova Alt Black Italic.otf in Resources */,
 				564F2AB324ADC237004116A4 /* DisSideTCell.xib in Resources */,
@@ -471,6 +486,7 @@
 				5626EE1E24B04B6F00CAEA70 /* DriverProfileVC.swift in Sources */,
 				5602467224AD949B003A67E9 /* StartedViewController.swift in Sources */,
 				56D2D1E524B3233D0087B7B9 /* APIHandler.swift in Sources */,
+				5649EE6624B70CE500AEF83E /* ClusterCollectionCell.swift in Sources */,
 				56D085F724ADFF8000E6D2BF /* DisSettingVC.swift in Sources */,
 				5626EE1B24B045BE00CAEA70 /* DriveMyJobCell.swift in Sources */,
 				5653E7F124AF37F6006C8C20 /* DisJobDetailsVC.swift in Sources */,
@@ -504,9 +520,11 @@
 				5676A45024B43BE600AFBCB4 /* NewPasswordVC.swift in Sources */,
 				56D2D1EB24B326790087B7B9 /* Dis_Register_Model.swift in Sources */,
 				564F2AB524ADC5F1004116A4 /* DisHomeVC.swift in Sources */,
+				5649EE6124B6F1ED00AEF83E /* JobModel.swift in Sources */,
 				5602468224ADA82F003A67E9 /* DisSignupVC.swift in Sources */,
 				5602467824AD951A003A67E9 /* CardView.swift in Sources */,
 				5602465D24AD9391003A67E9 /* SceneDelegate.swift in Sources */,
+				5649EE6924B7225F00AEF83E /* ViewProfileVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,6 +671,7 @@
 			baseConfigurationReference = F86A1CC6F6FE719B3020AAFC /* Pods-Tosstra.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				CODE_SIGN_ENTITLEMENTS = Tosstra/Tosstra.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Amarinder Gurna (CXXR6BK656)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N7YAQNH24G;
@@ -675,6 +694,7 @@
 			baseConfigurationReference = E645612C3ACD9FFE04591AA5 /* Pods-Tosstra.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				CODE_SIGN_ENTITLEMENTS = Tosstra/Tosstra.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Amarinder Gurna (CXXR6BK656)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N7YAQNH24G;

@@ -12,9 +12,10 @@ import IQKeyboardManagerSwift
 import GoogleMaps
 import GooglePlaces
 import KYDrawerController
-
+import UserNotifications
+import UserNotificationsUI
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate {
 
 
 var window: UIWindow?
@@ -28,7 +29,7 @@ var window: UIWindow?
 //                    let fontNames = UIFont.fontNames(forFamilyName: familyName)
 //                    print(familyName, fontNames)
 //                })
-        
+        registerForRemoteNotification()
       if let type = DEFAULT.value(forKey: "USERTYPE") as? String
                                            {
 
@@ -162,5 +163,165 @@ var window: UIWindow?
         }
     }
 
+    
+    //MARK:-- remote notifications methods---
+    func registerForRemoteNotification() {
+        if #available(iOS 10.0, *)
+        {
+            let center  = UNUserNotificationCenter.current()
+            center.delegate = self
+            center.requestAuthorization(options: [.sound, .alert, .badge]) { (granted, error) in
+                if error == nil
+                {
+                    DispatchQueue.main.async {
+                       UIApplication.shared.registerForRemoteNotifications()
+                    }
+                    
+                }
+            }
+            // For iOS 10 data message (sent via FCM
+            //            Messaging.messaging().delegate = self
+            
+        }
+        else
+        {
+            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+        
+    }
+    //MARK:-- remote notifications methods---
+    func UnregisterForRemoteNotification() {
+        if #available(iOS 10.0, *)
+        {
+            let center  = UNUserNotificationCenter.current()
+            center.delegate = self
+            center.requestAuthorization(options: []) { (granted, error) in
+                if error == nil
+                {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+            // For iOS 10 data message (sent via FCM
+            //            Messaging.messaging().delegate = self
+            
+        }
+        else
+        {
+            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [], categories: nil))
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+        
+    }
+    
+    func notificationBlock()
+    {
+        UIApplication.shared.unregisterForRemoteNotifications()
+    }
+    
+    //MARK:- Notification Methods------
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        print(notification.request.content.userInfo)
+        
+        let userInfo = notification.request.content.userInfo
+        print(userInfo)
+        
+        if DEFAULT.value(forKey: "NOTION") != nil
+        {
+            if let info = userInfo["aps"] as? Dictionary<String, AnyObject>
+            {
+                
+                if let dict = info["0"] as? NSDictionary
+                {
+                    let noti_type = dict.value(forKey: "type") as? String
+                    
+                    if noti_type == "22"
+                    {
+                        completionHandler([])
+                    }
+                    else
+                    {
+                        completionHandler([.alert, .badge, .sound])
+                    }
+                }
+                else
+                {
+                    completionHandler([.alert, .badge, .sound])
+                }
+            }
+            else
+            {
+                completionHandler([.alert, .badge, .sound])
+            }
+        }
+        else
+        {
+            completionHandler([.alert, .badge, .sound])
+        }
+        
+        
+        
+        //completionHandler([.alert, .badge, .sound])
+    }
+    //Called to let your app know which action was selected by the user for a given notification.
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        let storyBoard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+        
+        print("Notification Data = \(userInfo)")
+        
+        if let info = userInfo["aps"] as? Dictionary<String, AnyObject>
+        {
+            
+            let dict = info["0"] as! NSDictionary
+    
+            
+            let noti_type = dict.value(forKey: "type") as? String
+            
+
+            print(dict)
+        }
+        
+        
+        completionHandler()
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        
+        // Print message ID.
+        //        if let messageID = userInfo[gcmMessageIDKey] {
+        //            print("Message ID: \(messageID)")
+        //        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    
+    //--MARK:--Get Token-----
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        var token = ""
+        for i in 0..<deviceToken.count
+        {
+            token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
+        }
+        print("device token =  \(token)")
+        
+        UserDefaults.standard.setValue(token, forKey: "DEVICETOKEN")
+        UserDefaults.standard.synchronize()
+        
+    }
 }
 

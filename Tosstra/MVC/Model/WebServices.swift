@@ -60,4 +60,8 @@ let GET_ALLJOB_API = BASEURL + "get-All-Jobs-To-drivers"
 
 let ACEEPT_REJECT_JOB_API = BASEURL + "job-Accecpt-Reject"
 
+let GET_MY_JOB_API = BASEURL + "get-Our-All-Jobs"
+
+let START_JOB_API = BASEURL + "work-Start-Status"
+
 

@@ -16,10 +16,21 @@ class DisHomeVC: UIViewController
     @IBOutlet var allTruckView:UIView!
     @IBOutlet var seniorTruckView:UIView!
     
+    @IBOutlet var lblCount:UILabel!
+    
+    @IBOutlet var noDataLbl:UILabel!
+    
+      @IBOutlet var pBtn:UIButton!
+    
     var viewProfiledata:ViewProfileModel?
     var apiData:ForgotPasswordModel?
     var truckType="all"
     var driverId = ""
+    
+    var selectedDriverArray = NSMutableArray()
+    var selectedgroupCatArray = NSMutableArray()
+    var checkArray = NSMutableArray()
+     private let refreshControl = UIRefreshControl()
     
     
     override func viewDidLoad()
@@ -38,12 +49,48 @@ class DisHomeVC: UIViewController
         {
             self.get_All_DriversAPI()
         }
+        
+        if #available(iOS 10.0, *) {
+                   self.myTable.refreshControl = refreshControl
+               } else {
+                   self.myTable.addSubview(refreshControl)
+               }
+               
+               refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
     }
+    
+    @objc private func refreshData(_ sender: Any)
+    {
+        
+        if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+        {
+            NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+        }
+        else
+        {
+            DispatchQueue.main.async {
+               
+                
+                if self.truckType == "all"
+                {
+                     self.get_All_DriversAPI()
+                }
+                else
+                {
+                    self.get_Only_FavDriversAPI()
+                }
+                
+            }
+            
+        }
+         
+    }
+     
     @IBAction func MenuAct(_ sender: UIButton)
     {
         let drawer = navigationController?.parent as? KYDrawerController
@@ -53,11 +100,21 @@ class DisHomeVC: UIViewController
     @IBAction func plusAct(_ sender: UIButton)
     {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisjobDescriptionVC") as! DisjobDescriptionVC
+        vc.offerForSelectedDrivers = self.selectedDriverArray.componentsJoined(by: ",")
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func allTruckAct(_ sender: UIButton)
     {
+        if self.selectedDriverArray.count>0
+               {
+                   self.selectedDriverArray.removeAllObjects()
+               }
+               if self.selectedgroupCatArray.count>0
+               {
+                   self.selectedgroupCatArray.removeAllObjects()
+               }
         self.truckType = "all"
         self.allTruckView.backgroundColor = APPCOLOL
         self.seniorTruckView.backgroundColor = UIColor.lightGray
@@ -75,6 +132,14 @@ class DisHomeVC: UIViewController
     
     @IBAction func seniorTruckAct(_ sender: UIButton)
     {
+        if self.selectedDriverArray.count>0
+               {
+                   self.selectedDriverArray.removeAllObjects()
+               }
+               if self.selectedgroupCatArray.count>0
+               {
+                   self.selectedgroupCatArray.removeAllObjects()
+               }
         self.truckType = "senior"
         self.allTruckView.backgroundColor = UIColor.lightGray
         self.seniorTruckView.backgroundColor = APPCOLOL
@@ -128,11 +193,45 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
             
             cell.trsportName.text = celldData?.companyName
             
-            cell.checkBtn.tag = indexPath.row
-            // cell.f.addTarget(self, action: #selector(AllTrackcheckAct), for: UIControl.Event.touchUpInside)
+       cell.checkBtn.tag = indexPath.row
+               cell.checkBtn.addTarget(self, action: #selector(AllTrackcheckAct), for: UIControl.Event.touchUpInside)
             
-            cell.checkBtn.tag = indexPath.row
-            cell.checkBtn.addTarget(self, action: #selector(AllTrackcheckAct), for: UIControl.Event.touchUpInside)
+            if self.checkArray.contains(indexPath.row)
+                   {
+                    let id = celldData?.id ?? ""
+                       
+                    if self.selectedDriverArray.contains(id)
+                       {
+                           
+                       }
+                       else
+                       {
+                        self.selectedDriverArray.add(id)
+                      
+                       }
+                       
+                       
+                       cell.checkBtn.setImage(UIImage(named: "check-box"), for: .normal)
+                   }
+                   else
+                   {
+                       cell.checkBtn.setImage(UIImage(named: "check-box-1"), for: .normal)
+                   }
+            
+          
+            if self.selectedDriverArray.count>0
+            {
+                self.pBtn.isEnabled = true
+                self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
+            }
+            else
+            {
+                self.pBtn.isEnabled = false
+                self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
+            }
+           
+            
+        
             cell.favBtn.tag = indexPath.row
             cell.favBtn.addTarget(self, action: #selector(UnfavBtnAct), for: UIControl.Event.touchUpInside)
             
@@ -150,6 +249,45 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
             
             cell.checkBtn.tag = indexPath.row
             cell.checkBtn.addTarget(self, action: #selector(SeniorTrackcheckAct), for: UIControl.Event.touchUpInside)
+            
+            if self.checkArray.contains(indexPath.row)
+                              {
+                               let id = celldData?.id ?? ""
+                                  
+                               if self.selectedDriverArray.contains(id)
+                                  {
+                                      
+                                  }
+                                  else
+                                  {
+                                   self.selectedDriverArray.add(id)
+                                 
+                                  }
+                                  
+                                  
+                                  cell.checkBtn.setImage(UIImage(named: "check-box"), for: .normal)
+                              }
+                              else
+                              {
+                                  cell.checkBtn.setImage(UIImage(named: "check-box-1"), for: .normal)
+                              }
+                       
+                     
+                       if self.selectedDriverArray.count>0
+                       {
+                           self.pBtn.isEnabled = true
+                           self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
+                       }
+                       else
+                       {
+                           self.pBtn.isEnabled = false
+                           self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
+                       }
+                      
+            
+            
+            
+            
             cell.favBtn.tag = indexPath.row
             cell.favBtn.addTarget(self, action: #selector(UnfavBtnAct), for: UIControl.Event.touchUpInside)
             
@@ -167,16 +305,18 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         
-        if indexPath.row == 0
-        {
-            
-        }
+     let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewProfileVC") as! ViewProfileVC
+        let celldData =  self.viewProfiledata?.data?.reversed()[indexPath.row]
+    
+        vc.userId = celldData?.id ?? ""
+           self.navigationController?.pushViewController(vc, animated: true)
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
     
+   
     
     
     @objc func UnfavBtnAct(_ sender:UIButton)
@@ -197,38 +337,56 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
     
     @objc func AllTrackcheckAct(_ sender:UIButton)
     {
-        let indexPath = IndexPath(row: sender.tag, section: 0)
-        let cell = self.myTable.cellForRow(at: indexPath) as! AllTrackTableViewCell
+       
         
-        if sender.image(for: .normal) == UIImage(named: "check-box")
+        if self.selectedDriverArray.count>0
         {
-            sender.setImage(#imageLiteral(resourceName: "check-box-1"), for: .normal)
-            
+            self.selectedDriverArray.removeAllObjects()
         }
-        else
+        if self.selectedgroupCatArray.count>0
         {
-            sender.setImage(#imageLiteral(resourceName: "check-box"), for: .normal)
-            
-            
+            self.selectedgroupCatArray.removeAllObjects()
         }
+        
+        if self.checkArray.contains(sender.tag)
+               {
+                   self.checkArray.remove(sender.tag)
+               }
+               else
+               {
+                   self.checkArray.add(sender.tag)
+               }
+               print("check array = \(self.checkArray)")
+               
+               
+        self.myTable.reloadData()
+        
     }
     
     @objc func SeniorTrackcheckAct(_ sender:UIButton)
     {
-        let indexPath = IndexPath(row: sender.tag, section: 0)
-        let cell = self.myTable.cellForRow(at: indexPath) as! SeniorTrackTCell
         
-        if sender.image(for: .normal) == UIImage(named: "check-box")
-        {
-            sender.setImage(#imageLiteral(resourceName: "check-box-1"), for: .normal)
-            
-        }
-        else
-        {
-            sender.setImage(#imageLiteral(resourceName: "check-box"), for: .normal)
-            
-            
-        }
+        if self.selectedDriverArray.count>0
+               {
+                   self.selectedDriverArray.removeAllObjects()
+               }
+               if self.selectedgroupCatArray.count>0
+               {
+                   self.selectedgroupCatArray.removeAllObjects()
+               }
+               
+               if self.checkArray.contains(sender.tag)
+                      {
+                          self.checkArray.remove(sender.tag)
+                      }
+                      else
+                      {
+                          self.checkArray.add(sender.tag)
+                      }
+                      print("check array = \(self.checkArray)")
+                      
+                      
+               self.myTable.reloadData()
     }
 }
 extension DisHomeVC
@@ -237,6 +395,7 @@ extension DisHomeVC
     
     func get_All_DriversAPI()
     {
+        
         var id = ""
         if let userID = DEFAULT.value(forKey: "USERID") as? String
         {
@@ -249,6 +408,7 @@ extension DisHomeVC
             
             if error == nil
             {
+                self.refreshControl.endRefreshing()
                 let decoder = JSONDecoder()
                 do
                 {
@@ -256,7 +416,14 @@ extension DisHomeVC
                     
                     self.myTable.reloadData()
                     
-                    
+                   if self.viewProfiledata?.data?.count ?? 0 > 0
+                    {
+                        self.noDataLbl.isHidden = true
+                    }
+                    else
+                    {
+                       self.noDataLbl.isHidden = false
+                    }
                 }
                 catch let error
                 {
@@ -266,6 +433,7 @@ extension DisHomeVC
             }
             else
             {
+                self.refreshControl.endRefreshing()
                 self.view.makeToast(error)
             }
         }
@@ -286,11 +454,20 @@ extension DisHomeVC
             
             if error == nil
             {
+                self.refreshControl.endRefreshing()
                 let decoder = JSONDecoder()
                 do
                 {
                     self.viewProfiledata = try decoder.decode(ViewProfileModel.self, from: response!)
                     
+                    if self.viewProfiledata?.data?.count ?? 0 > 0
+                                       {
+                                           self.noDataLbl.isHidden = true
+                                       }
+                                       else
+                                       {
+                                          self.noDataLbl.isHidden = false
+                                       }
                     self.myTable.reloadData()
                     
                     
@@ -303,6 +480,7 @@ extension DisHomeVC
             }
             else
             {
+                self.refreshControl.endRefreshing()
                 self.view.makeToast(error)
             }
         }
@@ -332,7 +510,15 @@ extension DisHomeVC
                     self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
                     
                     self.myTable.reloadData()
-                    
+                    if self.truckType == "all"
+                                   {
+                                        self.get_All_DriversAPI()
+                                   }
+                                   else
+                                   {
+                                       self.get_Only_FavDriversAPI()
+                                   }
+                                   
                     
                 }
                 catch let error

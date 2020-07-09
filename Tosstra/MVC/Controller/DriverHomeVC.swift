@@ -43,6 +43,12 @@ class DriverHomeVC: UIViewController {
     var customInfoWindow : markerDetailView?
     var tappedMarker : GMSMarker?
     
+    //MARK:- Collection setup
+    
+    @IBOutlet weak var myCollection: UICollectionView!
+    @IBOutlet weak var clusterView: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.startUpdatingLocation()
@@ -52,22 +58,33 @@ class DriverHomeVC: UIViewController {
         locationManager.startMonitoringSignificantLocationChanges()
         self.customInfoWindow = markerDetailView().loadView()
         initGoogleMaps()
-        
-        
+        self.collectionSetup()
+         self.clusterView.isHidden = false
         
         if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
         {
             if status == "1"
             {
                 self.onOfflineLbl.text = "You are online"
+                self.onlineStatus = "0"
                 self.OfflineBtn.isHidden = false
                 self.onLineBtn.isHidden = true
                 self.myMapView.isUserInteractionEnabled = true
+                if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                {
+                    NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                }
+                else
+                {
+                    self.allDriverAPI()
+                }
+                 self.clusterView.isHidden = false
             }
             else
             {
                 self.onOfflineLbl.text = "You are offline"
                 self.onlineStatus = "1"
+                 self.clusterView.isHidden = true
                 self.OfflineBtn.isHidden = true
                 self.onLineBtn.isHidden = false
                 self.myMapView.isUserInteractionEnabled = false
@@ -77,35 +94,20 @@ class DriverHomeVC: UIViewController {
         {
             self.onOfflineLbl.text = "You are offline"
             self.onlineStatus = "1"
+                self.clusterView.isHidden = true
             self.OfflineBtn.isHidden = true
             self.onLineBtn.isHidden = false
             self.myMapView.isUserInteractionEnabled = false
         }
         
-        if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-        {
-            NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-        }
-        else
-        {
-            self.allDriverAPI()
-        }
+        
         
     }
     override func viewWillAppear(_ animated: Bool)
     {
         
         super.viewWillAppear(true)
-        customInfoWindow?.removeFromSuperview()
-        self.locationCheck()
-        if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-               {
-                   NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-               }
-               else
-               {
-                   self.allDriverAPI()
-               }
+        //self.pageRefresh()
     }
     
     @IBAction func MenuAct(_ sender: UIButton)
@@ -119,7 +121,51 @@ class DriverHomeVC: UIViewController {
         vc.fromSideBar = "no"
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+    @IBAction func mapRefreshAct(_ sender: UIButton)
+       {
+          pageRefresh()
+       }
+       
+     func pageRefresh()
+      {
+        customInfoWindow?.removeFromSuperview()
+               self.locationCheck()
+                if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
+                     {
+                         if status == "1"
+                         {
+                             self.onOfflineLbl.text = "You are online"
+                             self.OfflineBtn.isHidden = false
+                             self.onLineBtn.isHidden = true
+                             self.myMapView.isUserInteractionEnabled = true
+                             if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                             {
+                                 NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                             }
+                             else
+                             {
+                                 self.allDriverAPI()
+                             }
+                         }
+                         else
+                         {
+                             self.onOfflineLbl.text = "You are offline"
+                            
+                             self.onlineStatus = "1"
+                             self.OfflineBtn.isHidden = true
+                             self.onLineBtn.isHidden = false
+                             self.myMapView.isUserInteractionEnabled = false
+                         }
+                     }
+                     else
+                     {
+                         self.onOfflineLbl.text = "You are offline"
+                         self.onlineStatus = "1"
+                         self.OfflineBtn.isHidden = true
+                         self.onLineBtn.isHidden = false
+                         self.myMapView.isUserInteractionEnabled = false
+                     }
+    }
     
     
     
@@ -133,11 +179,22 @@ class DriverHomeVC: UIViewController {
             self.OfflineBtn.isHidden = false
             self.onLineBtn.isHidden = true
             self.myMapView.isUserInteractionEnabled = true
+            if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+            {
+                NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+            }
+            else
+            {
+                self.allDriverAPI()
+            }
+            self.clusterView.isHidden = false
         }
         else
         {
             self.onOfflineLbl.text = "You are offline"
-            self.onlineStatus = "1"
+            self.onlineStatus = "0"
+            self.clusterView.isHidden = true
+            self.myMapView.clear()
             self.OfflineBtn.isHidden = true
             self.onLineBtn.isHidden = false
             self.myMapView.isUserInteractionEnabled = false
@@ -161,6 +218,7 @@ extension DriverHomeVC
     func allDriverAPI()
     {
         
+        self.clusterView.isHidden = false
         
         var id = ""
         if let userID = DEFAULT.value(forKey: "USERID") as? String
@@ -177,7 +235,7 @@ extension DriverHomeVC
             
              if error == nil
                        {
-                           print(response)
+                         
                            if let dict = response as? NSDictionary
                            {
                                if let dataArray = dict.value(forKey: "data") as? NSArray
@@ -189,7 +247,7 @@ extension DriverHomeVC
                                }
                                
                            }
-                          // self.markerCollection.reloadData()
+                           self.myCollection.reloadData()
                            self.showPartyMarkers()
                        }
                        else
@@ -212,8 +270,8 @@ extension DriverHomeVC
         
         let params = ["userId" : id,
                       "onlineStatus" : self.onlineStatus,
-                              "longitude" : "\(CURRENTLOCATIONLAT)",
-                                "latitude" : "\(CURRENTLOCATIONLONG)"]   as [String : String]
+                    "latitude" : "\(CURRENTLOCATIONLAT)",
+                    "longitude" : "\(CURRENTLOCATIONLONG)"]   as [String : String]
         
         ApiHandler.ModelApiPostMethod2(url: CHANGE_ONLINESTATUS_API, parameters: params) { (response, error) in
             
@@ -257,37 +315,29 @@ extension DriverHomeVC
           {
               self.markers.removeAll()
           }
-//        if allMarkerArray.count>0
-//        {
-//            self.allMarkerArray.removeAllObjects()
-//        }
 
-        
-          //clusterManager.clearItems()
           for i in 0..<self.allMarkerArray.count
           {
-              let dict = self.allMarkerArray.object(at: i) as! NSDictionary
-              
+            if  let dict = self.allMarkerArray.object(at: i) as? NSDictionary
+            {
               
              
           
               
-              let lat = Double(dict.value(forKey: "latitude") as! String)
-              let long = Double(dict.value(forKey: "longitude") as! String)
+              let lat = Double(dict.value(forKey: "latitude") as? String ?? "30.0")
+              let long = Double(dict.value(forKey: "longitude") as? String ?? "76.00")
               
               if lat != nil || long != nil
               {
                  let marker=GMSMarker()
                  marker.position = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
-                 // let item = MoccherPOIItem(position: CLLocationCoordinate2DMake(lat!, long!), name: "\(i)", Tb_Type: "event")
-                  //clusterManager.add(item)
+        
                 marker.icon = UIImage(named: "selectedmarker")
-                 // marker.iconView = customInfoWindow
                 self.markers.append(marker)
-                             marker.map = self.myMapView
+            marker.map = self.myMapView
               }
               
-             
+        }
           }
       }
 }
@@ -303,7 +353,7 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
              
             vc.dict = self.allMarkerArray.object(at: sender.tag) as! NSDictionary
             
-             self.navigationController?.pushViewController(vc, animated: false)
+             self.navigationController?.pushViewController(vc, animated: true)
              
          }
     
@@ -319,6 +369,8 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
               self.myMapView.settings.compassButton = true
               self.myMapView.settings.myLocationButton=true
               self.myMapView.isMyLocationEnabled = true
+            self.myMapView.padding = UIEdgeInsets(top: 0, left: 0, bottom: 210, right: 0)
+
               showPartyMarkers()
           }
     
@@ -607,6 +659,109 @@ extension DriverHomeVC:CLLocationManagerDelegate
     }
     
 }
+
+extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
+{
+    
+    func collectionSetup()
+    {
+        self.myCollection.delegate = self
+        myCollection.dataSource = self
+        
+        
+        self.myCollection.register(UINib(nibName: "ClusterCollectionCell", bundle: nil), forCellWithReuseIdentifier: "ClusterCollectionCell")
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return self.allMarkerArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClusterCollectionCell", for: indexPath) as! ClusterCollectionCell
+        
+       if let dict = self.allMarkerArray.object(at: indexPath.row) as? NSDictionary
+       {
+        
+        cell.nameLbl.text  = "Comapny Name - " + (dict.value(forKey: "companyName") as? String ?? "")
+        
+        let d_add = (dict.value(forKey: "drpStreet") as? String ?? "") + " " + (dict.value(forKey: "drpCity") as? String ?? "")
+              
+              let d =  (dict.value(forKey: "drpState") as? String ?? "" ?? "") + " " + (dict.value(forKey: "drpZipcode") as? String ?? "")
+              
+       // cell.dropLbl.text = "Drop off - " + d_add + " " + d
+              
+              let p_add = (dict.value(forKey: "pupStreet") as? String ?? "") + " " + (dict.value(forKey: "pupCity") as? String ?? "")
+                  
+                 let p = (dict.value(forKey: "pupState") as? String ?? "" ?? "") + " " + (dict.value(forKey: "pupZipcode") as? String ?? "")
+                     
+                     
+      //  cell.pickeUpLbl.text = "Pick up - " + p_add + " " + p
+              
+        
+        
+        let rate = dict.value(forKey: "rateType") as? String ?? ""
+        
+        if rate == "perHours"
+        {
+          cell.priceLbl.text =  "$ " + (dict.value(forKey: "rate") as? String ?? "") + " " + ("per Hours")
+        }
+        else
+        {
+            cell.priceLbl.text =   "$ " + (dict.value(forKey: "rate") as? String ?? "") + " " + ("per Load")
+        }
+        
+        
+        cell.profileImg.layer.cornerRadius = cell.profileImg.bounds.height/2
+        cell.profileImg.contentMode = .scaleAspectFill
+        cell.profileImg.clipsToBounds = true
+                     
+                     if let groupIcon = dict.value(forKey: "profileImg") as? String
+                         
+                     {
+                         if groupIcon != ""
+                         {
+                             let fullurl = IMAGEBASEURL + groupIcon
+                             let url = URL(string: fullurl)!
+                             cell.profileImg.image = nil
+                             cell.profileImg.sd_setImage(with: url, completed: nil)
+                         }
+                         else
+                         {
+                             
+                              cell.profileImg.setImage(string: (dict.value(forKey: "companyName") as? String ?? "") , color: APPCOLOL, circular: true,textAttributes: attrs)
+                         }
+                         
+                     }
+                     else
+                     {
+                         
+                         
+                          cell.profileImg.setImage(string: (dict.value(forKey: "companyName") as? String ?? ""), color: APPCOLOL, circular: true,textAttributes: attrs)
+                         
+                     }
+    }
+                 
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
+         
+        vc.dict = self.allMarkerArray.object(at: indexPath.row) as! NSDictionary
+        
+         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: SCREENWIDTH-30, height: 150)
+    }
+    
+}
+
 struct MyPlace {
     var name: String
     var lat: Double

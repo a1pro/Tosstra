@@ -54,11 +54,23 @@ class DriverJobOfferVC: UIViewController {
              
         self.companyName.text = dict.value(forKey: "companyName") as? String ?? ""
         
-      let amount = (dict.value(forKey: "rate") as? String ?? "") + " " + (dict.value(forKey: "rateType") as? String ?? "")
+    
+        
         self.amountTxt.isUserInteractionEnabled = false
         
+
         
-        self.amountTxt.text = "$ " + amount
+        let rate = dict.value(forKey: "rateType") as? String ?? ""
+               
+               if rate == "perHours"
+               {
+                 self.amountTxt.text  = "$ " + (dict.value(forKey: "rate") as? String ?? "") + " " + ("per Hours")
+               }
+               else
+               {
+                self.amountTxt.text  = "$ " + (dict.value(forKey: "rate") as? String ?? "") + " " + ("per Load")
+               }
+        
         
         self.stsrt_FromTxt.text = dict.value(forKey: "startTime") as? String ?? ""
         

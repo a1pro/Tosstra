@@ -44,7 +44,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dO5-0R-R1S">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="40"/>
-                                        <state key="normal" image="Favorite"/>
+                                        <state key="normal" image="Dislike"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cuS-X7-qAS">
                                         <rect key="frame" x="30" y="0.0" width="30" height="40"/>
@@ -92,7 +92,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Favorite" width="16" height="13"/>
+        <image name="Dislike" width="16" height="14.5"/>
         <image name="check-box-1" width="16" height="16"/>
     </resources>
 </document>

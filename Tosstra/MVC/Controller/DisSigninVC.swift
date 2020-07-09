@@ -147,13 +147,18 @@ extension DisSigninVC
     
     func SignInWithEmailAPI()
     {
+        var DEVICETOKEN = "12312"
+               if let userID = DEFAULT.value(forKey: "DEVICETOKEN") as? String
+               {
+                   DEVICETOKEN = userID
+               }
         
         
         let params = ["email" : userNameTxt.text!,
                       "password" : passwordTxt.text!,
                       "latitude" : "\(CURRENTLOCATIONLAT)",
                       "longitude" : "\(CURRENTLOCATIONLONG)",
-                      "deviceId" : DEVICEID,
+                      "deviceId" : DEVICETOKEN,
                       "deviceType" : DEVICETYPE]   as [String : String]
         
         ApiHandler.ModelApiPostMethod(url: DISPATCHER_LOGIN_API, parameters: params) { (response, error) in

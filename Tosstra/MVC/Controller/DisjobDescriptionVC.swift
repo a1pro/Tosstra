@@ -8,6 +8,7 @@
 
 import UIKit
 import KYDrawerController
+//ADD JOB
 
 class DisjobDescriptionVC: UIViewController {
     @IBOutlet var addInfoText:UITextView!
@@ -36,6 +37,8 @@ class DisjobDescriptionVC: UIViewController {
     
     @IBOutlet weak var date_totxt: UITextField!
     var selectedDate = ""
+    
+    var offerForSelectedDrivers = ""
     
     var currentTag = 0
     var apiData:ForgotPasswordModel?
@@ -79,8 +82,10 @@ class DisjobDescriptionVC: UIViewController {
     
     @IBAction func MenuAct(_ sender: UIButton)
     {
-        let drawer = navigationController?.parent as? KYDrawerController
-        drawer?.setDrawerState(.opened, animated: true)
+        //let drawer = navigationController?.parent as? KYDrawerController
+        //drawer?.setDrawerState(.opened, animated: true)
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func sendJobAct(_ sender: UIButton)
@@ -302,6 +307,7 @@ extension DisjobDescriptionVC
                   
       
         let params = ["dispatcherId" : useriD,
+                      "offerForSelectedDrivers" : self.offerForSelectedDrivers,
                       "rateType" : rateType,
                          "rate" : amountTxt.text!,
                          "pupStreet" : p_stresttxt.text!,
