@@ -9,7 +9,11 @@
 import UIKit
 
 class DriverNotiCell: UITableViewCell {
-
+    @IBOutlet weak var dayAgoLbl: UILabel!
+    
+    @IBOutlet weak var dateLbl: UILabel!
+    @IBOutlet weak var timeLbl: UILabel!
+    @IBOutlet weak var messageTitle: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

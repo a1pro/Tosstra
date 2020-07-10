@@ -219,17 +219,17 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
                    }
             
           
-            if self.selectedDriverArray.count>0
-            {
-                self.pBtn.isEnabled = true
-                self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
-            }
-            else
-            {
-                self.pBtn.isEnabled = false
-                self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
-            }
-           
+//            if self.selectedDriverArray.count>0
+//            {
+//                self.pBtn.isEnabled = true
+//                self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
+//            }
+//            else
+//            {
+//                self.pBtn.isEnabled = false
+//                self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
+//            }
+//
             
         
             cell.favBtn.tag = indexPath.row

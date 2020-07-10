@@ -52,6 +52,12 @@ let GET_FAV_DRIVER_API = BASEURL + "get-Only-FavDrivers"
 
 let driver_Favorite_Unfavorite_API = BASEURL + "driver-Favorite-Unfavorite"
 
+
+let GET_DIS_NOTI_API = BASEURL + "get-Dispatcher-Nofitications"
+
+let GET_ACTIVE_DRIVER_API = BASEURL + "active-Driver-List"
+
+
 //MARK:- Driver API
 
 let DRIVER_REGISTER_API = BASEURL + "driver-Register"
@@ -63,5 +69,10 @@ let ACEEPT_REJECT_JOB_API = BASEURL + "job-Accecpt-Reject"
 let GET_MY_JOB_API = BASEURL + "get-Our-All-Jobs"
 
 let START_JOB_API = BASEURL + "work-Start-Status"
+
+
+let GET_DRIVER_NOTI_API = BASEURL + "get-Driver-Nofitications"
+
+let DRIVER_COPLETE_API = BASEURL + "job-Complete-Status"
 
 

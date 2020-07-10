@@ -10,7 +10,26 @@ import UIKit
 import KYDrawerController
 class DisJobDetailsVC: UIViewController {
 
-    override func viewDidLoad() {
+    var dict = NSDictionary()
+    @IBOutlet var addInfoText:UITextView!
+      
+       @IBOutlet weak var companyName: UILabel!
+    
+    @IBOutlet weak var pickupAddress: UILabel!
+    @IBOutlet weak var dropOffAddress: UILabel!
+    
+    @IBOutlet weak var nameTxt: UITextField!
+    @IBOutlet weak var emailTxt: UITextField!
+    @IBOutlet weak var locationTxt: UITextField!
+    
+           @IBOutlet weak var stsrt_FromTxt: UITextField!
+           
+           @IBOutlet weak var endTimeTxt: UITextField!
+           @IBOutlet weak var date_fromTxt: UITextField!
+           
+           @IBOutlet weak var date_totxt: UITextField!
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.

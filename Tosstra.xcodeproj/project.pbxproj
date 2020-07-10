@@ -65,6 +65,7 @@
 		5676A45224B43D4300AFBCB4 /* ForgotPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676A45124B43D4300AFBCB4 /* ForgotPasswordModel.swift */; };
 		5676A45424B4639000AFBCB4 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676A45324B4639000AFBCB4 /* ChangePasswordVC.swift */; };
 		5676A46224B4978A00AFBCB4 /* DriverJobOfferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676A46124B4978A00AFBCB4 /* DriverJobOfferVC.swift */; };
+		5698CB2324B8351800A7CED2 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5698CB2224B8351800A7CED2 /* NotificationModel.swift */; };
 		56D085EF24ADF3F000E6D2BF /* ActiveDriverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085EE24ADF3F000E6D2BF /* ActiveDriverVC.swift */; };
 		56D085F224ADF66300E6D2BF /* ActiveDriverTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085F024ADF66300E6D2BF /* ActiveDriverTCell.swift */; };
 		56D085F324ADF66300E6D2BF /* ActiveDriverTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56D085F124ADF66300E6D2BF /* ActiveDriverTCell.xib */; };
@@ -142,6 +143,7 @@
 		5676A45124B43D4300AFBCB4 /* ForgotPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordModel.swift; sourceTree = "<group>"; };
 		5676A45324B4639000AFBCB4 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		5676A46124B4978A00AFBCB4 /* DriverJobOfferVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverJobOfferVC.swift; sourceTree = "<group>"; };
+		5698CB2224B8351800A7CED2 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		56D085EE24ADF3F000E6D2BF /* ActiveDriverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveDriverVC.swift; sourceTree = "<group>"; };
 		56D085F024ADF66300E6D2BF /* ActiveDriverTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveDriverTCell.swift; sourceTree = "<group>"; };
 		56D085F124ADF66300E6D2BF /* ActiveDriverTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveDriverTCell.xib; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				5647CF0D24B34D3800EEBFBB /* ViewProfileModel.swift */,
 				5676A45124B43D4300AFBCB4 /* ForgotPasswordModel.swift */,
 				5649EE6024B6F1ED00AEF83E /* JobModel.swift */,
+				5698CB2224B8351800A7CED2 /* NotificationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				56D085F724ADFF8000E6D2BF /* DisSettingVC.swift in Sources */,
 				5626EE1B24B045BE00CAEA70 /* DriveMyJobCell.swift in Sources */,
 				5653E7F124AF37F6006C8C20 /* DisJobDetailsVC.swift in Sources */,
+				5698CB2324B8351800A7CED2 /* NotificationModel.swift in Sources */,
 				5602467E24AD9ABD003A67E9 /* RoundedButton.swift in Sources */,
 				56D085FA24AE032C00E6D2BF /* SettingTCell.swift in Sources */,
 				5602465F24AD9391003A67E9 /* ViewController.swift in Sources */,

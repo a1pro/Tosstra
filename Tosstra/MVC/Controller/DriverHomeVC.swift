@@ -686,19 +686,19 @@ extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICol
         
         cell.nameLbl.text  = "Comapny Name - " + (dict.value(forKey: "companyName") as? String ?? "")
         
-        let d_add = (dict.value(forKey: "drpStreet") as? String ?? "") + " " + (dict.value(forKey: "drpCity") as? String ?? "")
-              
-              let d =  (dict.value(forKey: "drpState") as? String ?? "" ?? "") + " " + (dict.value(forKey: "drpZipcode") as? String ?? "")
-              
-       // cell.dropLbl.text = "Drop off - " + d_add + " " + d
-              
-              let p_add = (dict.value(forKey: "pupStreet") as? String ?? "") + " " + (dict.value(forKey: "pupCity") as? String ?? "")
-                  
-                 let p = (dict.value(forKey: "pupState") as? String ?? "" ?? "") + " " + (dict.value(forKey: "pupZipcode") as? String ?? "")
-                     
-                     
-      //  cell.pickeUpLbl.text = "Pick up - " + p_add + " " + p
-              
+//        let d_add = (dict.value(forKey: "drpStreet") as? String ?? "") + " " + (dict.value(forKey: "drpCity") as? String ?? "")
+//
+//              let d =  (dict.value(forKey: "drpState") as? String ?? "" ?? "") + " " + (dict.value(forKey: "drpZipcode") as? String ?? "")
+//
+//       // cell.dropLbl.text = "Drop off - " + d_add + " " + d
+//
+//              let p_add = (dict.value(forKey: "pupStreet") as? String ?? "") + " " + (dict.value(forKey: "pupCity") as? String ?? "")
+//
+//                 let p = (dict.value(forKey: "pupState") as? String ?? "" ?? "") + " " + (dict.value(forKey: "pupZipcode") as? String ?? "")
+//
+//
+//      //  cell.pickeUpLbl.text = "Pick up - " + p_add + " " + p
+//
         
         
         let rate = dict.value(forKey: "rateType") as? String ?? ""

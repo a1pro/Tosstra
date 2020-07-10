@@ -52,6 +52,9 @@ let underLineText: [NSAttributedString.Key: Any] = [
 let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22),NSAttributedString.Key.foregroundColor: UIColor.white]
 let attrs2 = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 13),NSAttributedString.Key.foregroundColor: UIColor.white]
 
+let locale = NSLocale.current
+ var TIMEFORMATE = "12"
+
 @available(iOS 13.0, *)
 let SCENEDEL = UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate
 
