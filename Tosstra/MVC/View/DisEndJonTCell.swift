@@ -9,7 +9,8 @@
 import UIKit
 
 class DisEndJonTCell: UITableViewCell {
-
+    @IBOutlet weak var endJob: RoundedButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

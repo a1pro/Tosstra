@@ -15,7 +15,7 @@ import CoreLocation
 class ActiveDriverVC: UIViewController {
 
     @IBOutlet var myTable:UITableView!
-      
+      var apiData:ForgotPasswordModel?
       @IBOutlet var listLineView:UIView!
        @IBOutlet var mapLineView:UIView!
      @IBOutlet var listView:UIView!
@@ -105,10 +105,58 @@ class ActiveDriverVC: UIViewController {
               self.mapView.isHidden = false
               self.listView.isHidden = true
                self.listLineView.backgroundColor = UIColor.lightGray
-                        self.mapLineView.backgroundColor = APPCOLOL
+            self.mapLineView.backgroundColor = APPCOLOL
+                self.myCollection.reloadData()
                 self.clusterView.isHidden = false
                  self.myTable.reloadData()
               }
+    
+    
+    @objc func PhoneCallAct(_ sender:UIButton)
+         {
+            
+            if let dict = self.allMarkerArray.object(at: sender.tag) as? NSDictionary
+                  {
+                    let phone = (dict.value(forKey: "phone") as? String ?? "")
+            guard let number = URL(string: "tel://" + phone) else { return }
+            UIApplication.shared.open(number)
+            }
+    }
+    @objc func endJobAct(_ sender:UIButton)
+            {
+                let alert = UIAlertController(title: "Alert", message: "Are you sure you want to end job?", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+                                print("Handle Cancel Logic here")
+                            }))
+                    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+                       if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                        {
+                            NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                        }
+                        else
+                        {
+                           if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                                    {
+                                        NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                                    }
+                                    else
+                                    {
+                                        
+                                        
+                                        
+                                        //self.EndJobStartAPI()
+                                        
+                                        
+                                    }
+                        }
+                       
+                        
+                    }))
+                
+                    present(alert, animated: true, completion: nil)
+    }
+              
+    
     
       @objc func AllTrackcheckAct(_ sender:UIButton)
       {
@@ -158,6 +206,10 @@ extension ActiveDriverVC:UITableViewDelegate,UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActiveDriverTCell") as! ActiveDriverTCell
         cell.checkBtn.tag = indexPath.row
         cell.checkBtn.addTarget(self, action: #selector(AllTrackcheckAct), for: UIControl.Event.touchUpInside)
+        
+        cell.favBtn.tag = indexPath.row
+        cell.favBtn.addTarget(self, action: #selector(PhoneCallAct), for: UIControl.Event.touchUpInside)
+        
         
         if let dict = self.allMarkerArray.object(at: indexPath.row) as? NSDictionary
               {
@@ -209,7 +261,10 @@ extension ActiveDriverVC:UITableViewDelegate,UITableViewDataSource
     {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisJobDetailsVC") as! DisJobDetailsVC
-        
+        if let dict = self.allMarkerArray.object(at: indexPath.row) as? NSDictionary
+        {
+            vc.dict = dict
+        }
     self.navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -221,6 +276,7 @@ extension ActiveDriverVC:UITableViewDelegate,UITableViewDataSource
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "DisEndJonTCell") as! DisEndJonTCell
         
+        cell.endJob.addTarget(self, action: #selector(endJobAct), for: UIControl.Event.touchUpInside)
         return cell
     }
     
@@ -264,6 +320,7 @@ extension ActiveDriverVC
                                
                            }
                         self.myTable.reloadData()
+                        
                            self.showPartyMarkers()
                        }
                        else
@@ -304,6 +361,49 @@ extension ActiveDriverVC
            }
              }
          }
+    
+    //MARK:- JoBStartAPI Api
+    
+    func EndJobStartAPI()
+    {
+        var id = ""
+        if let userID = DEFAULT.value(forKey: "USERID") as? String
+        {
+            id = userID
+        }
+        
+        let params = ["userId" : id,
+                      "jobId" : ""]   as [String : String]
+        
+        ApiHandler.ModelApiPostMethod(url: START_JOB_API, parameters: params) { (response, error) in
+            
+            if error == nil
+            {
+                let decoder = JSONDecoder()
+                do
+                {
+                    self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
+                    
+                    self.myTable.reloadData()
+                    
+                   
+                    
+                    
+                    
+                    
+                }
+                catch let error
+                {
+                    self.view.makeToast(error.localizedDescription)
+                }
+                
+            }
+            else
+            {
+                self.view.makeToast(error)
+            }
+        }
+    }
   
 }
 //MARK:- Map Work
@@ -313,11 +413,13 @@ extension ActiveDriverVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelega
     @objc func btnMarkerDetails(_ sender:UIButton)
          {
              print("btnGroupDetails click")
-             let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisJobDetailsVC") as! DisJobDetailsVC
-             
-            vc.dict = self.allMarkerArray.object(at: sender.tag) as! NSDictionary
-            
-             self.navigationController?.pushViewController(vc, animated: true)
+              let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisJobDetailsVC") as! DisJobDetailsVC
+            if let dict = self.allMarkerArray.object(at: sender.tag) as? NSDictionary
+                      {
+                        vc.dict = dict
+                      }
+                    
+                    self.navigationController?.pushViewController(vc, animated: true)
              
          }
     
@@ -333,7 +435,7 @@ extension ActiveDriverVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelega
               self.myMapView.settings.compassButton = true
               self.myMapView.settings.myLocationButton=true
               self.myMapView.isMyLocationEnabled = true
-            self.myMapView.padding = UIEdgeInsets(top: 0, left: 0, bottom: 210, right: 0)
+            self.myMapView.padding = UIEdgeInsets(top: 0, left: 0, bottom: 170, right: 0)
 
               showPartyMarkers()
           }
@@ -611,17 +713,17 @@ extension ActiveDriverVC:UICollectionViewDelegate,UICollectionViewDataSource,UIC
 //
         
         
-        let rate = dict.value(forKey: "rateType") as? String ?? ""
+        //let rate = dict.value(forKey: "rateType") as? String ?? ""
         
-        if rate == "perHours"
-        {
-          cell.priceLbl.text =  "$ " + (dict.value(forKey: "rate") as? String ?? "") + " " + ("per Hours")
-        }
-        else
-        {
-            cell.priceLbl.text =   "$ " + (dict.value(forKey: "rate") as? String ?? "") + " " + ("per Load")
-        }
-        
+//        if rate == "perHours"
+//        {
+//          cell.priceLbl.text =  "$ " + (dict.value(forKey: "rate") as? String ?? "") + " " + ("per Hours")
+//        }
+//        else
+//        {
+//            cell.priceLbl.text =   "$ " + (dict.value(forKey: "rate") as? String ?? "") + " " + ("per Load")
+//        }
+        cell.priceLbl.text =   (dict.value(forKey: "firstName") as? String ?? "")
         
         cell.profileImg.layer.cornerRadius = cell.profileImg.bounds.height/2
         cell.profileImg.contentMode = .scaleAspectFill
@@ -658,11 +760,13 @@ extension ActiveDriverVC:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
-         
-        vc.dict = self.allMarkerArray.object(at: indexPath.row) as! NSDictionary
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisJobDetailsVC") as! DisJobDetailsVC
+          if let dict = self.allMarkerArray.object(at: indexPath.row) as? NSDictionary
+          {
+            vc.dict = dict
+          }
         
-         self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

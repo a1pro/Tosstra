@@ -2166,7 +2166,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="loginBtn:" destination="KaB-3K-6qM" eventType="touchUpInside" id="bZB-6U-atk"/>
+                                                            <action selector="endJobAct:" destination="i7r-MF-zUs" eventType="touchUpInside" id="Od4-FF-xak"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -2227,6 +2227,18 @@
                         <viewLayoutGuide key="safeArea" id="ema-8m-wkm"/>
                     </view>
                     <size key="freeformSize" width="320" height="1000"/>
+                    <connections>
+                        <outlet property="companyName" destination="sVb-Oh-vXC" id="Xyu-7r-FqQ"/>
+                        <outlet property="date_fromTxt" destination="Gue-6a-jyw" id="CAQ-a9-Rwc"/>
+                        <outlet property="date_totxt" destination="T6I-zm-eiB" id="Dan-hF-iDv"/>
+                        <outlet property="dropOffAddress" destination="Ghf-L8-WAW" id="jQg-uO-WjQ"/>
+                        <outlet property="emailTxt" destination="oQ7-hh-87T" id="zlE-ey-acs"/>
+                        <outlet property="endTimeTxt" destination="5Vg-GR-M6u" id="6qz-o4-aYO"/>
+                        <outlet property="locationTxt" destination="z5r-CD-oBL" id="bEc-aL-RPd"/>
+                        <outlet property="nameTxt" destination="CO8-SW-EzF" id="Zfd-Hp-WMc"/>
+                        <outlet property="pickupAddress" destination="8dm-Cq-2E0" id="y6v-f0-cJm"/>
+                        <outlet property="stsrt_FromTxt" destination="XUm-FY-3K0" id="sm2-Se-b1e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gn2-a7-gss" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
