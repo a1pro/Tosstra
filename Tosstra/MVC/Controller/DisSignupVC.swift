@@ -52,6 +52,23 @@ class DisSignupVC: UIViewController {
        
        self.navigationController?.popViewController(animated: true)
     }
+    @IBAction func termBtnAct(_ sender: UIButton)
+          {
+            if sender.isSelected
+            {
+                sender.isSelected = false
+                self.agreeBtn.setImage(UIImage(named: "check-box"), for: UIControl.State.normal)
+            }
+            else
+            
+            {
+                sender.isSelected = true
+                self.agreeBtn.setImage(UIImage(named: "check-box-1"), for: UIControl.State.normal)
+            }
+             
+           
+          }
+       
 
     @IBAction func signInAct(_ sender: Any)
        {
@@ -116,6 +133,11 @@ class DisSignupVC: UIViewController {
                   {
                       NetworkEngine.commonAlert(message: "Please enter valid email.", vc: self)
                   }
+               else if self.agreeBtn.image(for: .normal) == UIImage(named: "check-box-1")
+                                 {
+                                     NetworkEngine.commonAlert(message: "Please agree the T&C.", vc: self)
+                                 }
+
 
                   else
                   {

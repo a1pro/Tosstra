@@ -29,7 +29,7 @@ class DisJobDetailsVC: UIViewController {
            
            @IBOutlet weak var date_totxt: UITextField!
     var jobId = ""
-    
+    var apiData:ForgotPasswordModel?
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -75,6 +75,88 @@ class DisJobDetailsVC: UIViewController {
     
     @IBAction func endJobAct(_ sender: UIButton)
           {
-           self.navigationController?.popViewController(animated: true)
+            
+            
+          let alert = UIAlertController(title: "Alert", message: "Are you sure you want to end job?", preferredStyle: UIAlertController.Style.alert)
+                             alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+                                         print("Handle Cancel Logic here")
+                                     }))
+                             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+                                if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                                 {
+                                     NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                                 }
+                                 else
+                                 {
+                                    if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                                             {
+                                                 NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                                             }
+                                             else
+                                             {
+                                                 
+                                                 
+                                                
+                                                 self.EndJobStartAPI()
+                                                 
+                                                 
+                                             }
+                                 }
+                                
+                                 
+                             }))
+                         
+                             present(alert, animated: true, completion: nil)
           }
+    
+    //MARK:- JoBEndAPI Api
+       
+       func EndJobStartAPI()
+       {
+           var id = ""
+           if let userID = DEFAULT.value(forKey: "USERID") as? String
+           {
+               id = userID
+           }
+           
+           let params = ["userId" : id,
+                         "jobId" : self.jobId]   as [String : String]
+           
+           ApiHandler.ModelApiPostMethod(url: END_JOB_API, parameters: params) { (response, error) in
+               
+               if error == nil
+               {
+                   let decoder = JSONDecoder()
+                   do
+                   {
+                       self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
+                       
+                
+                       
+                      
+                       let elDrawer = self.navigationController?.parent as? KYDrawerController
+                       let home = self.storyboard?.instantiateViewController(withIdentifier: "ActiveDriverVC") as? ActiveDriverVC
+                       
+                       
+                       let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+                       _nav.isNavigationBarHidden = true
+                       elDrawer?.mainViewController = _nav
+                       elDrawer?.setDrawerState(.closed, animated: true)
+                       
+                       
+                       
+                       
+                   }
+                   catch let error
+                   {
+                       self.view.makeToast(error.localizedDescription)
+                   }
+                   
+               }
+               else
+               {
+                   self.view.makeToast(error)
+               }
+           }
+       }
 }

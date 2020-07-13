@@ -172,6 +172,7 @@ class DriverHomeVC: UIViewController {
     
     @IBAction func offlineOnlineAct(_ sender: UIButton)
     {
+        customInfoWindow?.removeFromSuperview()
         if sender.tag == 0
         {
             self.onOfflineLbl.text = "You are online"
@@ -684,7 +685,7 @@ extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICol
        if let dict = self.allMarkerArray.object(at: indexPath.row) as? NSDictionary
        {
         
-        cell.nameLbl.text  = "Comapny Name - " + (dict.value(forKey: "companyName") as? String ?? "")
+        cell.nameLbl.text  = "Company Name - " + (dict.value(forKey: "companyName") as? String ?? "")
         
 //        let d_add = (dict.value(forKey: "drpStreet") as? String ?? "") + " " + (dict.value(forKey: "drpCity") as? String ?? "")
 //
@@ -757,7 +758,7 @@ extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICol
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: SCREENWIDTH-30, height: 150)
+        return CGSize(width: SCREENWIDTH-8, height: 150)
     }
     
 }

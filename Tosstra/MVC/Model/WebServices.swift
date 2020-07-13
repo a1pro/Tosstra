@@ -75,4 +75,5 @@ let GET_DRIVER_NOTI_API = BASEURL + "get-Driver-Nofitications"
 
 let DRIVER_COPLETE_API = BASEURL + "job-Complete-Status"
 
+let END_JOB_API = BASEURL + "end-Driver-Job"
 

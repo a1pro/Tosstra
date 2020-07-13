@@ -111,9 +111,9 @@ class DisHomeVC: UIViewController
                {
                    self.selectedDriverArray.removeAllObjects()
                }
-               if self.selectedgroupCatArray.count>0
+               if self.checkArray.count>0
                {
-                   self.selectedgroupCatArray.removeAllObjects()
+                   self.checkArray.removeAllObjects()
                }
         self.truckType = "all"
         self.allTruckView.backgroundColor = APPCOLOL
@@ -136,9 +136,9 @@ class DisHomeVC: UIViewController
                {
                    self.selectedDriverArray.removeAllObjects()
                }
-               if self.selectedgroupCatArray.count>0
+               if self.checkArray.count>0
                {
-                   self.selectedgroupCatArray.removeAllObjects()
+                   self.checkArray.removeAllObjects()
                }
         self.truckType = "senior"
         self.allTruckView.backgroundColor = UIColor.lightGray
@@ -219,16 +219,16 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
                    }
             
           
-//            if self.selectedDriverArray.count>0
-//            {
-//                self.pBtn.isEnabled = true
-//                self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
-//            }
-//            else
-//            {
-//                self.pBtn.isEnabled = false
-//                self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
-//            }
+            if self.selectedDriverArray.count>0
+            {
+                self.pBtn.isEnabled = true
+                self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
+            }
+            else
+            {
+                self.pBtn.isEnabled = false
+                self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
+            }
 //
             
         

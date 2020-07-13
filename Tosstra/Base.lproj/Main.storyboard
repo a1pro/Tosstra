@@ -928,20 +928,36 @@
                                         <rect key="frame" x="0.0" y="110" width="320" height="458"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="P22-oA-nfl">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="398"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </tableView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lOj-dg-jJV" customClass="RoundedButton" customModule="Tosstra" customModuleProvider="target">
+                                                <rect key="frame" x="100" y="406" width="120" height="40"/>
+                                                <color key="backgroundColor" red="0.16614869239999999" green="0.17118436100000001" blue="0.85537821049999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="ZNv-VX-i9C"/>
+                                                    <constraint firstAttribute="width" constant="120" id="nu6-sD-YPT"/>
+                                                </constraints>
+                                                <state key="normal" title="End Job">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="endJobAct:" destination="XgZ-9e-mXj" eventType="touchUpInside" id="m34-wX-GDf"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="P22-oA-nfl" secondAttribute="bottom" id="NXb-ij-K3W"/>
+                                            <constraint firstItem="lOj-dg-jJV" firstAttribute="top" secondItem="P22-oA-nfl" secondAttribute="bottom" constant="8" id="9JI-xN-7KE"/>
+                                            <constraint firstAttribute="bottom" secondItem="P22-oA-nfl" secondAttribute="bottom" constant="60" id="NXb-ij-K3W"/>
                                             <constraint firstAttribute="trailing" secondItem="P22-oA-nfl" secondAttribute="trailing" id="epK-M0-qDe"/>
+                                            <constraint firstItem="lOj-dg-jJV" firstAttribute="centerX" secondItem="auR-jl-0tL" secondAttribute="centerX" id="mmH-2I-1v9"/>
                                             <constraint firstItem="P22-oA-nfl" firstAttribute="leading" secondItem="auR-jl-0tL" secondAttribute="leading" id="nzf-ms-u4x"/>
                                             <constraint firstItem="P22-oA-nfl" firstAttribute="top" secondItem="auR-jl-0tL" secondAttribute="top" id="vHQ-Gn-CoJ"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LjD-jI-K6Y">
-                                        <rect key="frame" x="0.0" y="110" width="320" height="458"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LjD-jI-K6Y">
+                                        <rect key="frame" x="-900" y="110" width="320" height="458"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ipi-Ln-jJB" customClass="GMSMapView">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
@@ -1015,6 +1031,7 @@
                     </view>
                     <connections>
                         <outlet property="clusterView" destination="qEf-hd-sDU" id="gBW-Hl-fty"/>
+                        <outlet property="endBtn" destination="lOj-dg-jJV" id="2Qn-2K-Wzv"/>
                         <outlet property="listLineView" destination="Rej-tK-SXA" id="Wxb-XV-PRT"/>
                         <outlet property="listView" destination="auR-jl-0tL" id="b16-Hi-2RN"/>
                         <outlet property="mapLineView" destination="8EK-cI-lYE" id="aaP-wF-2dY"/>
@@ -4266,6 +4283,9 @@
                                                                             <constraint firstAttribute="height" constant="30" id="ask-EU-T2v"/>
                                                                         </constraints>
                                                                         <state key="normal" image="check-box"/>
+                                                                        <connections>
+                                                                            <action selector="termBtnAct:" destination="55O-TX-Yh6" eventType="touchUpInside" id="vy1-RC-yrw"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I agree to the term of services and privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gsX-n0-f8l">
                                                                         <rect key="frame" x="45" y="16.5" width="237" height="20.5"/>
@@ -4896,6 +4916,9 @@
                                                                             <constraint firstAttribute="height" constant="30" id="mDD-Z1-qoi"/>
                                                                         </constraints>
                                                                         <state key="normal" image="check-box"/>
+                                                                        <connections>
+                                                                            <action selector="termBtnAct:" destination="D4G-fX-Web" eventType="touchUpInside" id="7iW-Fo-YAM"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I agree to the term of services and privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ae3-lx-exR">
                                                                         <rect key="frame" x="45" y="16.5" width="237" height="20.5"/>
@@ -5022,6 +5045,7 @@
                     </view>
                     <size key="freeformSize" width="320" height="1050"/>
                     <connections>
+                        <outlet property="agreeBtn" destination="gmQ-oF-SLj" id="peg-6p-xUv"/>
                         <outlet property="check1" destination="eKP-tw-NFk" id="EbI-iU-fmJ"/>
                         <outlet property="check2" destination="mhJ-8V-ahH" id="yC1-d5-5Oi"/>
                         <outlet property="companyNameTxt" destination="APu-mf-Ppl" id="27Z-SF-IZx"/>

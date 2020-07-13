@@ -26,7 +26,7 @@ class DriverSignupVC: UIViewController {
     @IBOutlet weak var lastNameTxt: UITextField!
     @IBOutlet weak var companyNameTxt: UITextField!
     @IBOutlet weak var phoneNumberTxt: UITextField!
-    
+     @IBOutlet weak var agreeBtn: UIButton!
     var signupData:Dis_Register_Model?
        
        var SubUserType = "Owner"
@@ -51,6 +51,26 @@ class DriverSignupVC: UIViewController {
          
          self.navigationController?.popViewController(animated: true)
       }
+    
+    
+    @IBAction func termBtnAct(_ sender: UIButton)
+             {
+               if sender.isSelected
+               {
+                   sender.isSelected = false
+                   self.agreeBtn.setImage(UIImage(named: "check-box"), for: UIControl.State.normal)
+               }
+               else
+               
+               {
+                   sender.isSelected = true
+                   self.agreeBtn.setImage(UIImage(named: "check-box-1"), for: UIControl.State.normal)
+               }
+                
+              
+             }
+          
+    
     @IBAction func signUpAct(_ sender: Any)
           {
 //              DEFAULT.set("dispatcher", forKey: "APPTYPE")
@@ -120,6 +140,10 @@ class DriverSignupVC: UIViewController {
               {
                   NetworkEngine.commonAlert(message: "Please enter valid email.", vc: self)
               }
+            else if self.agreeBtn.image(for: .normal) == UIImage(named: "check-box-1")
+                                            {
+                                                NetworkEngine.commonAlert(message: "Please agree the T&C.", vc: self)
+                                            }
 
               else
               {
