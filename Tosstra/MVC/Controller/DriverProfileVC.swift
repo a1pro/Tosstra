@@ -27,7 +27,7 @@ class DriverProfileVC: UIViewController {
        
        @IBOutlet weak var dotNameTxt: UITextField!
        @IBOutlet weak var lastNameTxt: UITextField!
-    
+     @IBOutlet weak var phoneNumbTxt: UITextField!
     @IBOutlet weak var companyName: UILabel!
          @IBOutlet weak var type: UILabel!
     
@@ -54,6 +54,28 @@ class DriverProfileVC: UIViewController {
                                     self.viewProfileAPI()
                                    }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(true)
+           
+           if let loc = DEFAULT.value(forKey: "CHOOSENLOC") as? String
+           {
+               self.addressTxt.text = loc
+               DEFAULT.removeObject(forKey: "CHOOSENLOC")
+               DEFAULT.synchronize()
+           }
+           
+           
+       }
+    
+       @IBAction func locationAct(_ sender: Any)
+          {
+           let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "ChooseAddressVC") as! ChooseAddressVC
+       
+           self.navigationController?.pushViewController(locationSearchTable, animated: true)
+    
+          }
+
     
     @IBAction func MenuAct(_ sender: UIButton)
     {
@@ -201,7 +223,7 @@ extension DriverProfileVC
                             self.emailTxt.text = self.viewProfiledata?.data?[0].email
                            self.firstNameTxt.text = self.viewProfiledata?.data?[0].firstName
                             self.lastNameTxt.text = self.viewProfiledata?.data?[0].lastName
-                            
+                                self.phoneNumbTxt.text = self.viewProfiledata?.data?[0].phone
                            self.dotNameTxt.text = self.viewProfiledata?.data?[0].dotNumber
                             self.addressTxt.text = self.viewProfiledata?.data?[0].address
                             
@@ -301,6 +323,7 @@ extension DriverProfileVC: UIImagePickerControllerDelegate, UINavigationControll
         let uploadDict = ["userId":useriD,
                           "firstName":self.firstNameTxt.text!,
                           "lastName":self.lastNameTxt.text!,
+                          "phone":self.phoneNumbTxt.text!,
                           "dotNumber":self.dotNameTxt.text!,
                           "address":self.addressTxt.text!,
                           "companyName":self.companyName.text!] as [String:String]

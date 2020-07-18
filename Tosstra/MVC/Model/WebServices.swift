@@ -77,3 +77,6 @@ let DRIVER_COPLETE_API = BASEURL + "job-Complete-Status"
 
 let END_JOB_API = BASEURL + "end-Driver-Job"
 
+
+let JOB_DETAILS_API = BASEURL + "get-Single-Job-Data"
+

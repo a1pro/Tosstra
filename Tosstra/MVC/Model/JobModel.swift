@@ -60,6 +60,10 @@ struct JobDatum : Codable {
               let subUserType : String?
               let phone : String?
               let onlineStatus : String?
+    let puplatitude : String?
+                 let puplongitude : String?
+                 let drplatitude : String?
+                 let drplongitude : String?
 
               enum CodingKeys: String, CodingKey {
                       case jobId = "jobId"
@@ -96,6 +100,10 @@ struct JobDatum : Codable {
                       case subUserType = "SubUserType"
                       case phone = "phone"
                       case onlineStatus = "onlineStatus"
+                case puplatitude = "puplatitude"
+                case puplongitude = "puplongitude"
+                case drplatitude = "drplatitude"
+                case drplongitude = "drplongitude"
               }
 
 

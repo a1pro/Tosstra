@@ -23,7 +23,7 @@ class DisProfileVC: UIViewController {
     var videoURL : URL?
     var apiData:ForgotPasswordModel?
     @IBOutlet weak var emailTxt: UITextField!
-       
+       @IBOutlet weak var phoneNumbTxt: UITextField!
 
        @IBOutlet weak var addressTxt: UITextField!
        @IBOutlet weak var firstNameTxt: UITextField!
@@ -34,6 +34,9 @@ class DisProfileVC: UIViewController {
     @IBOutlet weak var companyName: UILabel!
          @IBOutlet weak var type: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
+      var resultSearchController: UISearchController!
+    var latitude = ""
+    var longitude = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +55,23 @@ class DisProfileVC: UIViewController {
                                           {
                                            self.viewProfileAPI()
                                           }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if let loc = DEFAULT.value(forKey: "CHOOSENLOC") as? String
+        {
+            self.addressTxt.text = loc
+       
+            self.latitude = DEFAULT.value(forKey: "CHOOSENLAT") as? String ?? "30.99"
+            self.longitude = DEFAULT.value(forKey: "CHOOSENLONG") as? String ?? "76.9889"
+            
+            DEFAULT.removeObject(forKey: "CHOOSENLOC")
+            DEFAULT.synchronize()
+        }
+        
+        
     }
     
     @IBAction func MenuAct(_ sender: UIButton)
@@ -102,7 +122,14 @@ class DisProfileVC: UIViewController {
            
            
        }
+    @IBAction func locationAct(_ sender: Any)
+       {
+        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "ChooseAddressVC") as! ChooseAddressVC
     
+        self.navigationController?.pushViewController(locationSearchTable, animated: true)
+ 
+       }
+       
 
     @IBAction func saveProfilePic(_ sender: Any)
     {
@@ -193,7 +220,7 @@ extension DisProfileVC
                             self.emailTxt.text = self.viewProfiledata?.data?[0].email
                            self.firstNameTxt.text = self.viewProfiledata?.data?[0].firstName
                             self.lastNameTxt.text = self.viewProfiledata?.data?[0].lastName
-                            
+                            self.phoneNumbTxt.text = self.viewProfiledata?.data?[0].phone
                            self.dotNameTxt.text = self.viewProfiledata?.data?[0].dotNumber
                             self.addressTxt.text = self.viewProfiledata?.data?[0].address
                             
@@ -296,7 +323,11 @@ extension DisProfileVC: UIImagePickerControllerDelegate, UINavigationControllerD
         let uploadDict = ["userId":useriD,
                           "firstName":self.firstNameTxt.text!,
                           "lastName":self.lastNameTxt.text!,
+                          "phone":self.phoneNumbTxt.text!,
                           "dotNumber":self.dotNameTxt.text!,
+                          "latitude":self.latitude,
+                          "longitude":self.longitude,
+                          
                           "address":self.addressTxt.text!,
                           "companyName":self.companyName.text!] as [String:String]
         

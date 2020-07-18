@@ -20,7 +20,7 @@ class DisJobDetailsVC: UIViewController {
     
     @IBOutlet weak var nameTxt: UITextField!
     @IBOutlet weak var emailTxt: UITextField!
-    @IBOutlet weak var locationTxt: UITextField!
+    @IBOutlet weak var locationTxt: UILabel!
     
            @IBOutlet weak var stsrt_FromTxt: UITextField!
            
@@ -28,14 +28,33 @@ class DisJobDetailsVC: UIViewController {
            @IBOutlet weak var date_fromTxt: UITextField!
            
            @IBOutlet weak var date_totxt: UITextField!
+    
+    @IBOutlet weak var endBtn: UIButton!
     var jobId = ""
     var apiData:ForgotPasswordModel?
+    var dispatcherId = ""
+    var fromNoti = "no"
+     var JobDetailData:JobDetailMedel?
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        if fromNoti == "yes"
+             {
+                 if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                 {
+                     NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                 }
+                 else
+                 {
+                     self.JobDetalsAPI()
+                 }
+                self.endBtn.isHidden = true
+             }
+             else
+             {
+                    self.endBtn.isHidden = false
         self.companyName.text = dict.value(forKey: "companyName") as? String ?? ""
              self.emailTxt.text = dict.value(forKey: "email") as? String ?? ""
              self.locationTxt.text = dict.value(forKey: "address") as? String ?? ""
@@ -64,7 +83,7 @@ class DisJobDetailsVC: UIViewController {
              self.pickupAddress.text = p_add + " " + p
              
              self.jobId = (dict.value(forKey: "jobId") as? String ?? "")
-        
+        }
     }
     
 
@@ -159,4 +178,102 @@ class DisJobDetailsVC: UIViewController {
                }
            }
        }
+    
+    
+     //MARK:- accept reject Api
+        
+        func JobDetalsAPI()
+        {
+            var id = ""
+            if let userID = DEFAULT.value(forKey: "USERID") as? String
+            {
+                id = userID
+            }
+            
+            let params = ["jobId" : self.jobId,
+                          "dispatcherId" : self.dispatcherId]   as [String : String]
+            
+            ApiHandler.ModelApiPostMethod(url: JOB_DETAILS_API, parameters: params) { (response, error) in
+                
+                if error == nil
+                {
+                    let decoder = JSONDecoder()
+                    do
+                    {
+                        self.JobDetailData = try decoder.decode(JobDetailMedel.self, from: response!)
+                        
+                        if self.JobDetailData?.code == "200"
+                            
+                        {
+                            
+                            NetworkEngine.commonAlert(message: self.JobDetailData?.message ?? "", vc: self)
+                        }
+                        else
+                        {
+                            self.view.makeToast(self.JobDetailData?.message)
+                            if self.JobDetailData?.data?.count ?? 0 > 0
+                            {
+                                let dict = self.JobDetailData?.data?[0]
+                                self.companyName.text = dict?.companyName
+                               // self.amountTxt.isUserInteractionEnabled = false
+                               
+                                let driverId = dict?.driverId ?? ""
+                                
+               
+                                self.emailTxt.text = dict?.email ?? ""
+                                self.locationTxt.text = dict?.address ?? ""
+                           
+                                self.stsrt_FromTxt.text = dict?.startTime ?? ""
+                      
+                           self.endTimeTxt.text = dict?.endTime ?? ""
+                      
+                           self.date_fromTxt.text = dict?.dateFrom ?? ""
+                           self.date_totxt.text = dict?.dateTo ?? ""
+                            self.nameTxt.text = (dict?.firstName ?? "") + " " + (dict?.lastName ?? " ")
+                           
+                                let d_add = (dict?.drpStreet ?? " ") + " " + (dict?.drpCity ?? " ")
+                           
+                           let d =  (dict?.drpState ?? " ") + " " + (dict?.drpZipcode ?? " ")
+                           
+                          self.dropOffAddress.text = d_add + " " + d
+                           
+                           let p_add = (dict?.pupStreet ?? "") + " " + (dict?.pupCity ?? "")
+                               
+                              let p = (dict?.pupState ?? "") + " " + (dict?.pupZipcode ?? "")
+                                  
+                                  
+                           self.pickupAddress.text = p_add + " " + p
+                           
+                        
+                                
+                            }
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        }
+                        
+                        
+                    }
+                    catch let error
+                    {
+                        self.view.makeToast(error.localizedDescription)
+                    }
+                    
+                }
+                else
+                {
+                    self.view.makeToast(error)
+                }
+            }
+        }
+        
 }

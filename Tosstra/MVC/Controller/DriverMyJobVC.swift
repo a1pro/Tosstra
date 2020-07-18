@@ -137,8 +137,30 @@ extension DriverMyJobVC:UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        let celldData =  self.jobData?.data?.reversed()[indexPath.row]
         
         
+        if let status = celldData?.workStartStatus
+              {
+                  if status == "1"
+                  {
+                    
+                      let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobDetailVC") as! DriverJobDetailVC
+                                 vc.jobData = celldData
+                                 
+                                 self.navigationController?.pushViewController(vc, animated: true)
+                      
+                  }
+                  else
+                  {
+                     
+                      
+                  }
+              }
+              else
+              {
+                  
+              }
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -278,6 +300,7 @@ extension DriverMyJobVC
                 {
                     self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
                     
+                    self.view.makeToast(self.apiData?.message)
                     self.myTable.reloadData()
                     
                     self.MYJobAPI()

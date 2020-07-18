@@ -18,17 +18,17 @@ class DisjobDescriptionVC: UIViewController {
     let datePicker = UIDatePicker()
     
     @IBOutlet weak var amountTxt: UITextField!
-    @IBOutlet weak var p_stresttxt: UITextField!
-    @IBOutlet weak var p_stateTxt: UITextField!
+    @IBOutlet weak var p_stresttxt: UITextView!
+  //  @IBOutlet weak var p_stateTxt: UITextField!
     
     @IBOutlet weak var p_zipTxt: UITextField!
-    @IBOutlet weak var p_cityTxt: UITextField!
+   // @IBOutlet weak var p_cityTxt: UITextField!
     
-    @IBOutlet weak var d_stresttxt: UITextField!
-    @IBOutlet weak var d_stateTxt: UITextField!
+    @IBOutlet weak var d_stresttxt: UITextView!
+    
     
     @IBOutlet weak var d_zipTxt: UITextField!
-    @IBOutlet weak var d_cityTxt: UITextField!
+ 
     
     @IBOutlet weak var stsrt_FromTxt: UITextField!
     
@@ -42,6 +42,14 @@ class DisjobDescriptionVC: UIViewController {
     
     var currentTag = 0
     var apiData:ForgotPasswordModel?
+    
+    var puplongitude = ""
+   var puplatitude = ""
+    var drplatitude = ""
+    var drplongitude = ""
+    
+    
+    var isPickUp = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,8 +85,53 @@ class DisjobDescriptionVC: UIViewController {
         
         
     }
+  @IBAction func locationAct(_ sender: UIButton)
+          {
+           let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "ChooseAddressVC") as! ChooseAddressVC
+            if sender.tag == 0
+            {
+               self.isPickUp=true
+            }
+            else
+            {
+                self.isPickUp=false
+            }
+            
+           self.navigationController?.pushViewController(locationSearchTable, animated: true)
     
-    
+          }
+    override func viewWillAppear(_ animated: Bool) {
+              super.viewWillAppear(true)
+              
+              if let loc = DEFAULT.value(forKey: "CHOOSENLOC") as? String
+              {
+                 
+                
+                print("location = \(loc)")
+                print("isPickUp = \(isPickUp)")
+                
+                
+                if isPickUp
+                {
+                    self.puplatitude  = DEFAULT.value(forKey: "CHOOSENLAT") as? String ?? "30.99"
+                    self.puplongitude = DEFAULT.value(forKey: "CHOOSENLONG") as? String ?? "76.9889"
+                     self.p_stresttxt.text = loc
+                }
+               else
+                {
+                    self.drplatitude = DEFAULT.value(forKey: "CHOOSENLAT") as? String ?? "30.99"
+                self.drplongitude = DEFAULT.value(forKey: "CHOOSENLONG") as? String ?? "76.9889"
+                    self.d_stresttxt.text = loc
+                }
+                
+                
+                  DEFAULT.removeObject(forKey: "CHOOSENLOC")
+                  DEFAULT.synchronize()
+                
+              }
+              
+              
+          }
     
     @IBAction func MenuAct(_ sender: UIButton)
     {
@@ -90,7 +143,7 @@ class DisjobDescriptionVC: UIViewController {
     
     @IBAction func sendJobAct(_ sender: UIButton)
     {
-        if amountTxt.text == "" || p_zipTxt.text == "" || p_stateTxt.text == "" || p_cityTxt.text == "" || p_stresttxt.text == "" || d_zipTxt.text == "" || d_stateTxt.text == "" || d_cityTxt.text == "" || d_stresttxt.text == "" || date_totxt.text == "" || date_fromTxt.text == "" || stsrt_FromTxt.text == "" || endTimeTxt.text == ""
+        if amountTxt.text == "" || p_zipTxt.text == ""  || p_stresttxt.text == "" || d_zipTxt.text == ""  || d_stresttxt.text == "" || date_totxt.text == "" || date_fromTxt.text == "" || stsrt_FromTxt.text == "" || endTimeTxt.text == ""
                        {
                            
                            NetworkEngine.commonAlert(message: "Please fill all details.", vc: self)
@@ -311,17 +364,23 @@ extension DisjobDescriptionVC
                       "rateType" : rateType,
                          "rate" : amountTxt.text!,
                          "pupStreet" : p_stresttxt.text!,
-                         "pupCity" : p_cityTxt.text!,
-                         "pupState" : p_stateTxt.text!,
+                         "pupCity" : "",
+                         "pupState" : "",
                          "pupZipcode" : p_zipTxt.text!,
                          "drpStreet" : d_stresttxt.text!,
-                         "drpCity" : d_cityTxt.text!,
-                         "drpState" : d_stateTxt.text!,
+                         "drpCity" : "",
+                         "drpState" : "",
                          "drpZipcode" : d_zipTxt.text!,
                          "dateFrom" : date_fromTxt.text!,
                          "dateTo" : date_totxt.text!,
                          "startTime" : stsrt_FromTxt.text!,
                          "endTime" : endTimeTxt.text!,
+                         
+                         "puplongitude" : self.puplongitude,
+                         "puplatitude" : self.puplatitude,
+                         "drplatitude" : self.drplatitude,
+                         "drplongitude" : self.drplongitude,
+                         
                           "additinal_Instructions" : addInfoText.text!]   as [String : String]
            
            ApiHandler.ModelApiPostMethod(url: CREATE_JOB_API, parameters: params) { (response, error) in

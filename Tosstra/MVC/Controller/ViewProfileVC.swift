@@ -27,6 +27,8 @@ class ViewProfileVC: UIViewController {
        
        @IBOutlet weak var dotNameTxt: UITextField!
        @IBOutlet weak var lastNameTxt: UITextField!
+    @IBOutlet weak var phoneNumbTxt: UITextField!
+    
     
     @IBOutlet weak var companyName: UILabel!
          @IBOutlet weak var type: UILabel!
@@ -109,9 +111,13 @@ extension ViewProfileVC
                             self.addressTxt.text = self.viewProfiledata?.data?[0].address
                             
                             self.companyName.text = self.viewProfiledata?.data?[0].companyName
+                             self.phoneNumbTxt.text = self.viewProfiledata?.data?[0].phone
                             self.type.text = self.viewProfiledata?.data?[0].userType
                             DEFAULT.setValue(self.viewProfiledata?.data?[0].onlineStatus, forKey: "ONLINESTATUS")
                             DEFAULT.set(self.viewProfiledata?.data?[0].userType, forKey: "APPTYPE")
+                            
+                            
+                            
                             
                             DEFAULT.synchronize()
                               if let profile = self.viewProfiledata?.data?[0].profileImg

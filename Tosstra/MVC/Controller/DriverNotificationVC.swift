@@ -120,17 +120,33 @@ extension DriverNotificationVC:UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         
-        if indexPath.row == 5
-        {
-            if #available(iOS 13.0, *) {
-                SCENEDEL.loadLoginView()
-            }
-            else
-            {
-                APPDEL.loadLoginView()
-            }
-        }
+        let cellData = self.apiData?.data?.reversed()[indexPath.row]
+              
+        let type = cellData?.type ?? ""
         
+        if type == "3"
+        {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
+            vc.fromNoti = "yes"
+            vc.jobId = cellData?.jobId ?? ""
+    
+            vc.dispatcherId = cellData?.dispatcherId ?? ""
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+         else  if type == "4"
+                   {
+                       let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisJobDetailsVC") as! DisJobDetailsVC
+                       vc.fromNoti = "yes"
+                    vc.jobId = cellData?.jobId ?? ""
+               
+                       vc.dispatcherId = cellData?.dispatcherId ?? ""
+                       self.navigationController?.pushViewController(vc, animated: true)
+                   }
+            
+        else{
+            //NetworkEngine.commonAlert(message: cellData?.message ?? "", vc: self)
+        }
+      
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension

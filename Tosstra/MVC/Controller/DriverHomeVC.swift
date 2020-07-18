@@ -36,6 +36,10 @@ class DriverHomeVC: UIViewController {
     var onlineStatus = "0"
      //MARK:- Market task
     var allMarkerArray = NSMutableArray()
+    
+    var allMarkerArray1 = NSMutableArray()
+    
+    
        var allMarkerArray2 = NSMutableArray()
     var markers = [GMSMarker]()
    
@@ -47,6 +51,10 @@ class DriverHomeVC: UIViewController {
     
     @IBOutlet weak var myCollection: UICollectionView!
     @IBOutlet weak var clusterView: UIView!
+    var jobStatus = "1"
+    var jobId = "1"
+    var dispatcherId = "1"
+    
     
     
     override func viewDidLoad() {
@@ -242,11 +250,23 @@ extension DriverHomeVC
                                if let dataArray = dict.value(forKey: "data") as? NSArray
                                {
                                    
-                                   self.allMarkerArray = dataArray.mutableCopy() as! NSMutableArray
+                                self.allMarkerArray = dataArray.mutableCopy() as! NSMutableArray
                                    
                                    
                                }
-                               
+                               if let dataArray = dict.value(forKey: "accecptedJobs") as? NSArray
+                                {
+                                                                 
+                                    var allMarkerArray3 = dataArray.mutableCopy() as! NSMutableArray
+                                      
+                                    for dict in allMarkerArray3
+                                    {
+                                        self.allMarkerArray.add(dict)
+                                    }
+                            
+                                }
+                
+                            
                            }
                            self.myCollection.reloadData()
                            self.showPartyMarkers()
@@ -353,7 +373,7 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
              let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
              
             vc.dict = self.allMarkerArray.object(at: sender.tag) as! NSDictionary
-            
+            vc.fromNoti = "yes"
              self.navigationController?.pushViewController(vc, animated: true)
              
          }
@@ -370,7 +390,7 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
               self.myMapView.settings.compassButton = true
               self.myMapView.settings.myLocationButton=true
               self.myMapView.isMyLocationEnabled = true
-            self.myMapView.padding = UIEdgeInsets(top: 0, left: 0, bottom: 210, right: 0)
+            self.myMapView.padding = UIEdgeInsets(top: 0, left: 0, bottom: 270, right: 0)
 
               showPartyMarkers()
           }
@@ -670,7 +690,7 @@ extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICol
         myCollection.dataSource = self
         
         
-        self.myCollection.register(UINib(nibName: "ClusterCollectionCell", bundle: nil), forCellWithReuseIdentifier: "ClusterCollectionCell")
+        self.myCollection.register(UINib(nibName: "DriverHomeCCell", bundle: nil), forCellWithReuseIdentifier: "DriverHomeCCell")
         
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -680,26 +700,56 @@ extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClusterCollectionCell", for: indexPath) as! ClusterCollectionCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DriverHomeCCell", for: indexPath) as! DriverHomeCCell
         
        if let dict = self.allMarkerArray.object(at: indexPath.row) as? NSDictionary
        {
         
         cell.nameLbl.text  = "Company Name - " + (dict.value(forKey: "companyName") as? String ?? "")
+    cell.rejectBtn.tag = indexPath.row
+    cell.rejectBtn.addTarget(self, action: #selector(rejectBtnAct), for: UIControl.Event.touchUpInside)
         
-//        let d_add = (dict.value(forKey: "drpStreet") as? String ?? "") + " " + (dict.value(forKey: "drpCity") as? String ?? "")
-//
-//              let d =  (dict.value(forKey: "drpState") as? String ?? "" ?? "") + " " + (dict.value(forKey: "drpZipcode") as? String ?? "")
-//
-//       // cell.dropLbl.text = "Drop off - " + d_add + " " + d
-//
-//              let p_add = (dict.value(forKey: "pupStreet") as? String ?? "") + " " + (dict.value(forKey: "pupCity") as? String ?? "")
-//
-//                 let p = (dict.value(forKey: "pupState") as? String ?? "" ?? "") + " " + (dict.value(forKey: "pupZipcode") as? String ?? "")
-//
-//
-//      //  cell.pickeUpLbl.text = "Pick up - " + p_add + " " + p
-//
+      cell.aceeptBtn.tag = indexPath.row
+    cell.aceeptBtn.addTarget(self, action: #selector(aceeptBtnAct), for: UIControl.Event.touchUpInside)
+        
+        
+        if let driverId = dict.value(forKey: "driverId") as? String
+        {
+            print(driverId)
+            
+            if  driverId != "0"
+            {
+                
+                let workStartStatus = dict.value(forKey: "workStartStatus") as? String ?? ""
+                
+                if workStartStatus == "1"
+                {
+                     cell.rejectBtn.setTitle("Started", for: UIControl.State.normal)
+                }
+                else
+                {
+                      cell.rejectBtn.setTitle("Start", for: UIControl.State.normal)
+                }
+                
+                
+                cell.rejectBtn.isHidden=false
+              
+                cell.aceeptBtn.isHidden=true
+                
+            }
+            else
+            {
+                  cell.rejectBtn.setTitle("Reject", for: UIControl.State.normal)
+                cell.rejectBtn.isHidden=false
+                cell.aceeptBtn.isHidden=false
+            }
+        }
+        else
+       {
+         cell.rejectBtn.setTitle("Reject", for: UIControl.State.normal)
+        cell.rejectBtn.isHidden=false
+        cell.aceeptBtn.isHidden=false
+     }
         
         
         let rate = dict.value(forKey: "rateType") as? String ?? ""
@@ -717,6 +767,9 @@ extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICol
         cell.profileImg.layer.cornerRadius = cell.profileImg.bounds.height/2
         cell.profileImg.contentMode = .scaleAspectFill
         cell.profileImg.clipsToBounds = true
+        
+        
+        
                      
                      if let groupIcon = dict.value(forKey: "profileImg") as? String
                          
@@ -742,6 +795,9 @@ extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICol
                           cell.profileImg.setImage(string: (dict.value(forKey: "companyName") as? String ?? ""), color: APPCOLOL, circular: true,textAttributes: attrs)
                          
                      }
+        
+        
+        
     }
                  
         return cell
@@ -752,15 +808,192 @@ extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICol
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
          
         vc.dict = self.allMarkerArray.object(at: indexPath.row) as! NSDictionary
-        
+        vc.fromNoti = "yes"
          self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: SCREENWIDTH-8, height: 150)
+        return CGSize(width: SCREENWIDTH-8, height: 210)
     }
     
+    @objc func rejectBtnAct(_ sender:UIButton)
+    {
+        if let dict = self.allMarkerArray.object(at: sender.tag) as? NSDictionary
+            {
+             
+             self.jobId = (dict.value(forKey: "jobId") as? String ?? "")
+              self.dispatcherId = (dict.value(forKey: "dispatcherId") as? String ?? "")
+             self.jobStatus = "0"
+             if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+             {
+                 NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+             }
+             else
+             {
+                let text =  sender.titleLabel?.text ?? ""
+                
+                print(text)
+                if text == "Start"
+                {
+                    let alert = UIAlertController(title: "Alert", message: "Are you sure you want to start this job?", preferredStyle: UIAlertController.Style.alert)
+                               alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+                                           print("Handle Cancel Logic here")
+                                       }))
+                               alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+                                  if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                                   {
+                                       NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                                   }
+                                   else
+                                   {
+                                      if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                                               {
+                                                   NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                                               }
+                                               else
+                                               {
+                                                   
+                                                   
+                                                   
+                                                   self.JoBStartAPI()
+                                                   
+                                                   
+                                               }
+                                   }
+                                  
+                                   
+                               }))
+                           
+                               present(alert, animated: true, completion: nil)
+                }
+                else
+                {
+                     self.accept_rejectAPI()
+                }
+                
+                
+                
+             }
+        }
+    }
+    @objc func aceeptBtnAct(_ sender:UIButton)
+       {
+        if let dict = self.allMarkerArray.object(at: sender.tag) as? NSDictionary
+               {
+                
+                self.jobId = (dict.value(forKey: "jobId") as? String ?? "")
+                 self.dispatcherId = (dict.value(forKey: "dispatcherId") as? String ?? "")
+                self.jobStatus = "1"
+                if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                {
+                    NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                }
+                else
+                {
+                    self.accept_rejectAPI()
+                }
+           }
+       }
+    
+    //MARK:- accept reject Api
+      
+      func accept_rejectAPI()
+      {
+          var id = ""
+          if let userID = DEFAULT.value(forKey: "USERID") as? String
+          {
+              id = userID
+          }
+          
+          let params = ["driverId" : id,
+                        "jobId" : self.jobId,
+                        "dispatcherId" : self.dispatcherId,
+                        "jobStatus" : self.jobStatus]   as [String : String]
+          
+          ApiHandler.ModelApiPostMethod(url: ACEEPT_REJECT_JOB_API, parameters: params) { (response, error) in
+              
+              if error == nil
+              {
+                  let decoder = JSONDecoder()
+                  do
+                  {
+                      self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
+                      
+                      if self.apiData?.code == "200"
+                          
+                      {
+                          
+                          NetworkEngine.commonAlert(message: self.apiData?.message ?? "", vc: self)
+                      }
+                      else
+                      {
+                          self.view.makeToast(self.apiData?.message)
+                        
+                           self.allDriverAPI()
+                          
+                      }
+                      
+                      
+                  }
+                  catch let error
+                  {
+                      self.view.makeToast(error.localizedDescription)
+                  }
+                  
+              }
+              else
+              {
+                  self.view.makeToast(error)
+              }
+          }
+      }
+    
+    
+    //MARK:- JoBStartAPI Api
+       
+       func JoBStartAPI()
+       {
+           var id = ""
+           if let userID = DEFAULT.value(forKey: "USERID") as? String
+           {
+               id = userID
+           }
+           
+           let params = ["userId" : id,
+                         "jobId" : self.jobId]   as [String : String]
+           
+           ApiHandler.ModelApiPostMethod(url: START_JOB_API, parameters: params) { (response, error) in
+               
+               if error == nil
+               {
+                   let decoder = JSONDecoder()
+                   do
+                   {
+                       self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
+                       
+                       self.view.makeToast(self.apiData?.message)
+                      
+                       
+                    self.allDriverAPI()
+                       
+                       
+                       
+                       
+                   }
+                   catch let error
+                   {
+                       self.view.makeToast(error.localizedDescription)
+                   }
+                   
+               }
+               else
+               {
+                   self.view.makeToast(error)
+               }
+           }
+       }
+      
 }
 
 struct MyPlace {

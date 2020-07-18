@@ -40,18 +40,33 @@ class DriverJobDetailVC: UIViewController {
         var dispatcherId = ""
         var jobStatus = "1"
     
+    var sourceLat = "30.7041"
+     var sourceLong = "76.1025"
+     var destinationLat = "28.7041"
+    var destinationLong = "77.1025"
+    var sourceAdd = ""
+         var destinationAdd = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
        
         self.companyName.text = self.jobData?.companyName ?? ""
         self.emailTxt.text = self.jobData?.email ?? ""
-        self.locationTxt.text = self.jobData?.address ?? ""
+        self.locationTxt.text = self.jobData?.phone ?? ""
         
         self.stsrt_FromTxt.text = self.jobData?.startTime ?? ""
         self.endTimeTxt.text = self.jobData?.endTime ?? ""
         self.date_fromTxt.text = self.jobData?.dateFrom ?? ""
         self.date_totxt.text = self.jobData?.dateTo ?? ""
+        
+        self.sourceLat = self.jobData?.puplatitude ?? ""
+        self.sourceLong = self.jobData?.puplongitude ?? ""
+        
+    
+        
+        self.destinationLat = self.jobData?.drplatitude ?? ""
+        self.destinationLong = self.jobData?.drplongitude ?? ""
+        
         
          self.nameTxt.text = (self.jobData?.firstName ?? "") + " " + (self.jobData?.lastName ?? "")
         
@@ -68,8 +83,26 @@ class DriverJobDetailVC: UIViewController {
                
         self.pickupAddress.text = p_add + " " + p
         
+        self.sourceAdd = self.pickupAddress.text!
+        
+         self.destinationAdd = self.dropOffAddress.text!
+        
         self.jobId = (self.jobData?.jobId ?? "")
         
+        
+        
+    }
+    @IBAction func seeDirection(_ sender: Any)
+    {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "TrackLoactionVC") as! TrackLoactionVC
+        vc.sourceLat=self.sourceLat
+        vc.sourceLong=self.sourceLong
+        vc.sourceAdd=self.sourceAdd
+        vc.destinationLat=self.destinationLat
+        vc.destinationLong=self.destinationLong
+        vc.destinationAdd=self.destinationAdd
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func backAct(_ sender: UIButton)
     {
