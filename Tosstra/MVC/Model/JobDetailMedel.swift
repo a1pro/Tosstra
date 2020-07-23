@@ -61,6 +61,21 @@ struct JobDatum2 : Codable {
         let updatedAt : String?
         let userType : String?
         let workStartStatus : String?
+    
+    let drplatitude : String?
+           let drplongitude : String?
+           let driverlongitude : String?
+           let driverlatitude : String?
+           let puplatitude : String?
+           let puplongitude : String?
+    
+    let driverfirstName : String?
+    let driverlastName : String?
+    let driveraddress : String?
+    let driverprofileImg : String?
+    let driveremail : String?
+    let driverphone : String?
+    
 
         enum CodingKeys: String, CodingKey {
                 case additinalInstructions = "additinal_Instructions"
@@ -99,6 +114,23 @@ struct JobDatum2 : Codable {
                 case updatedAt = "updated_at"
                 case userType = "userType"
                 case workStartStatus = "workStartStatus"
+            case drplatitude = "drplatitude"
+            case drplongitude = "drplongitude"
+            case driverlongitude = "driverlongitude"
+            case driverlatitude = "driverlatitude"
+            case puplatitude = "puplatitude"
+            case puplongitude = "puplongitude"
+            
+            case driverfirstName = "driverfirstName"
+                       case driverlastName = "driverlastName"
+                       case driveraddress = "driveraddress"
+                       case driverprofileImg = "driverprofileImg"
+                       case driveremail = "driveremail"
+            case driverphone = "driverphone"
+                       
+            
+            
+            
         }
     
 

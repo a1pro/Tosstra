@@ -13,26 +13,54 @@ class TrackLoactionVC: UIViewController,MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var refrshBtn: UIButton!
+    
     var sourceLat = "30.7041"
      var sourceLong = "76.1025"
      var destinationLat = "28.7041"
     var destinationLong = "77.1025"
     
-    var sourceAdd = ""
+      var sourceAdd = ""
        var destinationAdd = ""
     
+    let annotation = MKPointAnnotation()
+
+    var driverLat = ""
+     var driverLong = ""
+
+    
+    var fromTrackDriver = "no"
+     var JobDetailData:JobDetailMedel?
+    var jobId = ""
+     var dispatcherId = ""
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         mapView.delegate=self
        
-        
-        if self.sourceLat != "" && self.sourceLong != "" && self.destinationLat != "" && self.destinationLong != ""
+        if self.fromTrackDriver == "yes"
         {
-          showRouteOnMap(pickupCoordinate: CLLocationCoordinate2D(latitude: Double(sourceLat)!, longitude: Double(sourceLong)!), destinationCoordinate: CLLocationCoordinate2D(latitude: Double(destinationLat)!, longitude: Double(destinationLong)!))
+            refrshBtn.isHidden=false
+              if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+              {
+                  NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+              }
+              else
+              {
+                  self.JobDetalsAPI()
+              }
+        }
+        else
+        {
+            refrshBtn.isHidden=true
+            if self.sourceLat != "" && self.sourceLong != "" && self.destinationLat != "" && self.destinationLong != ""
+            {
+              showRouteOnMap(pickupCoordinate: CLLocationCoordinate2D(latitude: Double(sourceLat)!, longitude: Double(sourceLong)!), destinationCoordinate: CLLocationCoordinate2D(latitude: Double(destinationLat)!, longitude: Double(destinationLong)!))
+            }
+            
+
         }
         
         
@@ -43,6 +71,22 @@ class TrackLoactionVC: UIViewController,MKMapViewDelegate {
         {
            self.navigationController?.popViewController(animated: true)
         }
+    
+    @IBAction func refreshAct(_ sender: UIButton)
+    {
+       if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+       {
+           NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+       }
+       else
+       {
+           self.JobDetalsAPI()
+       }
+    }
+    
+    
+    
+    
     func getDirections(loc1: CLLocationCoordinate2D, loc2: CLLocationCoordinate2D) {
        let source = MKMapItem(placemark: MKPlacemark(coordinate: loc1))
        source.name = "Your Location"
@@ -119,4 +163,96 @@ func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayR
     return renderer
     
     }
+    
+    //MARK:- JobDetalsAPI Api
+           
+           func JobDetalsAPI()
+           {
+             
+               
+               let params = ["jobId" : self.jobId,
+                             "dispatcherId" : self.dispatcherId]   as [String : String]
+               
+               ApiHandler.ModelApiPostMethod(url: JOB_DETAILS_API, parameters: params) { (response, error) in
+                   
+                   if error == nil
+                   {
+                       let decoder = JSONDecoder()
+                       do
+                       {
+                           self.JobDetailData = try decoder.decode(JobDetailMedel.self, from: response!)
+                           
+                           if self.JobDetailData?.code == "200"
+                               
+                           {
+                               
+                               NetworkEngine.commonAlert(message: self.JobDetailData?.message ?? "", vc: self)
+                           }
+                           else
+                           {
+                               self.view.makeToast(self.JobDetailData?.message)
+                               if self.JobDetailData?.data?.count ?? 0 > 0
+                               {
+                                   let dict = self.JobDetailData?.data?[0]
+                                
+                                  // self.amountTxt.isUserInteractionEnabled = false
+                                  
+                                   let driverId = dict?.driverId ?? ""
+                                   
+                  
+                                   
+                                        self.sourceLat = dict?.puplatitude ?? ""
+                                          self.sourceLong = dict?.puplongitude ?? ""
+
+
+
+                                          self.destinationLat = dict?.drplatitude ?? ""
+                                          self.destinationLong = dict?.drplongitude ?? ""
+                                 
+                                   
+                                   self.driverLat = dict?.driverlatitude ?? ""
+                                   self.driverLong = dict?.driverlongitude ?? ""
+                                   
+                           if self.sourceLat != "" && self.sourceLong != "" && self.destinationLat != "" && self.destinationLong != ""
+                                     {
+                                        self.showRouteOnMap(pickupCoordinate: CLLocationCoordinate2D(latitude: Double(self.sourceLat)!, longitude: Double(self.sourceLong)!), destinationCoordinate: CLLocationCoordinate2D(latitude: Double(self.destinationLat)!, longitude: Double(self.destinationLong)!))
+                                     }
+                                     if self.driverLat != "" && self.driverLong != ""
+                                     {
+                                     
+                                        self.annotation.coordinate = CLLocationCoordinate2D(latitude: Double(self.driverLat)!, longitude: Double(self.driverLong)!)
+                                        self.annotation.title = "Driver Location"
+                                        self.mapView.addAnnotation(self.annotation)
+                                     
+                                     }
+                                   
+                               }
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                           }
+                           
+                           
+                       }
+                       catch let error
+                       {
+                           self.view.makeToast(error.localizedDescription)
+                       }
+                       
+                   }
+                   else
+                   {
+                       self.view.makeToast(error)
+                   }
+               }
+           }
 }

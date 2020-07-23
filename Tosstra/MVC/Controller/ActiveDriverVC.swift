@@ -292,10 +292,14 @@ extension ActiveDriverVC:UITableViewDelegate,UITableViewDataSource
     {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisJobDetailsVC") as! DisJobDetailsVC
+        
         if let dict = self.allMarkerArray.object(at: indexPath.row) as? NSDictionary
         {
-            vc.dict = dict
+            vc.fromNoti = "no"
+            vc.jobId = dict.value(forKey: "jobId") as? String ?? ""
+            vc.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
         }
+        
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -475,11 +479,13 @@ extension ActiveDriverVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelega
     {
         print("btnGroupDetails click")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisJobDetailsVC") as! DisJobDetailsVC
-        if let dict = self.allMarkerArray.object(at: sender.tag) as? NSDictionary
-        {
-            vc.dict = dict
-        }
         
+        if let dict = self.allMarkerArray.object(at: sender.tag) as? NSDictionary
+               {
+                   vc.fromNoti = "no"
+                   vc.jobId = dict.value(forKey: "jobId") as? String ?? ""
+                   vc.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
+               }
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -822,11 +828,13 @@ extension ActiveDriverVC:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisJobDetailsVC") as! DisJobDetailsVC
+       
         if let dict = self.allMarkerArray.object(at: indexPath.row) as? NSDictionary
         {
-            vc.dict = dict
+            vc.fromNoti = "no"
+            vc.jobId = dict.value(forKey: "jobId") as? String ?? ""
+            vc.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
         }
-        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

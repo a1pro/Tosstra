@@ -22,6 +22,8 @@ class DisJobDetailsVC: UIViewController {
     @IBOutlet weak var emailTxt: UITextField!
     @IBOutlet weak var locationTxt: UILabel!
     
+     @IBOutlet weak var phoneNum: UILabel!
+    
            @IBOutlet weak var stsrt_FromTxt: UITextField!
            
            @IBOutlet weak var endTimeTxt: UITextField!
@@ -35,6 +37,18 @@ class DisJobDetailsVC: UIViewController {
     var dispatcherId = ""
     var fromNoti = "no"
      var JobDetailData:JobDetailMedel?
+    
+    
+    var sourceLat = "30.7041"
+     var sourceLong = "76.1025"
+     var destinationLat = "28.7041"
+    var destinationLong = "77.1025"
+    var driverLat = "28.7041"
+    var driverLong = "77.1025"
+    
+
+    var sourceAdd = ""
+            var destinationAdd = ""
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -55,34 +69,45 @@ class DisJobDetailsVC: UIViewController {
              else
              {
                     self.endBtn.isHidden = false
-        self.companyName.text = dict.value(forKey: "companyName") as? String ?? ""
-             self.emailTxt.text = dict.value(forKey: "email") as? String ?? ""
-             self.locationTxt.text = dict.value(forKey: "address") as? String ?? ""
-             
-             self.stsrt_FromTxt.text = dict.value(forKey: "startTime") as? String ?? ""
-        
-             self.endTimeTxt.text = dict.value(forKey: "endTime") as? String ?? ""
-        
-             self.date_fromTxt.text = dict.value(forKey: "dateFrom") as? String ?? ""
-        
-             self.date_totxt.text = dict.value(forKey: "dateTo") as? String ?? ""
-             
-              self.nameTxt.text = (dict.value(forKey: "firstName") as? String ?? "") + " " + (dict.value(forKey: "lastName") as? String ?? "")
-             
-             let d_add = (dict.value(forKey: "drpStreet") as? String ?? "") + " " + (dict.value(forKey: "drpCity") as? String ?? "")
-             
-             let d =  (dict.value(forKey: "drpState") as? String ?? "") + " " + (dict.value(forKey: "drpZipcode") as? String ?? "")
-             
-            self.dropOffAddress.text = d_add + " " + d
-             
-             let p_add = (dict.value(forKey: "pupStreet") as? String ?? "") + " " + (dict.value(forKey: "pupCity") as? String ?? "")
-                 
-                let p = (dict.value(forKey: "pupState") as? String ?? "") + " " + (dict.value(forKey: "pupZipcode") as? String ?? "")
-                    
-                    
-             self.pickupAddress.text = p_add + " " + p
-             
-             self.jobId = (dict.value(forKey: "jobId") as? String ?? "")
+//                self.phoneNum.text = dict.value(forKey: "phone") as? String ?? ""
+//
+//        self.companyName.text = dict.value(forKey: "companyName") as? String ?? ""
+//             self.emailTxt.text = dict.value(forKey: "email") as? String ?? ""
+//             self.locationTxt.text = dict.value(forKey: "address") as? String ?? ""
+//
+//             self.stsrt_FromTxt.text = dict.value(forKey: "startTime") as? String ?? ""
+//
+//             self.endTimeTxt.text = dict.value(forKey: "endTime") as? String ?? ""
+//
+//             self.date_fromTxt.text = dict.value(forKey: "dateFrom") as? String ?? ""
+//
+//             self.date_totxt.text = dict.value(forKey: "dateTo") as? String ?? ""
+//
+//              self.nameTxt.text = (dict.value(forKey: "firstName") as? String ?? "") + " " + (dict.value(forKey: "lastName") as? String ?? "")
+//
+//             let d_add = (dict.value(forKey: "drpStreet") as? String ?? "") + " " + (dict.value(forKey: "drpCity") as? String ?? "")
+//
+//             let d =  (dict.value(forKey: "drpState") as? String ?? "") + " " + (dict.value(forKey: "drpZipcode") as? String ?? "")
+//
+//            self.dropOffAddress.text = d_add + " " + d
+//
+//             let p_add = (dict.value(forKey: "pupStreet") as? String ?? "") + " " + (dict.value(forKey: "pupCity") as? String ?? "")
+//
+//                let p = (dict.value(forKey: "pupState") as? String ?? "") + " " + (dict.value(forKey: "pupZipcode") as? String ?? "")
+//
+//
+//             self.pickupAddress.text = p_add + " " + p
+//
+//             self.jobId = (dict.value(forKey: "jobId") as? String ?? "")
+                
+                if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                                {
+                                    NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                                }
+                                else
+                                {
+                                    self.JobDetalsAPI()
+                                }
         }
     }
     
@@ -90,6 +115,16 @@ class DisJobDetailsVC: UIViewController {
     @IBAction func MenuAct(_ sender: UIButton)
        {
         self.navigationController?.popViewController(animated: true)
+       }
+    @IBAction func PhoneCallAct(_ sender:UIButton)
+       {
+           
+        if let phone = self.phoneNum.text as? String
+           {
+
+               guard let number = URL(string: "tel://" + phone) else { return }
+               UIApplication.shared.open(number)
+           }
        }
     
     @IBAction func endJobAct(_ sender: UIButton)
@@ -127,6 +162,25 @@ class DisJobDetailsVC: UIViewController {
                          
                              present(alert, animated: true, completion: nil)
           }
+    
+    
+    @IBAction func driverLoc(_ sender: Any)
+       {
+           let vc = self.storyboard?.instantiateViewController(withIdentifier: "TrackLoactionVC") as! TrackLoactionVC
+        vc.fromTrackDriver = "yes"
+           vc.sourceLat=self.sourceLat
+           vc.sourceLong=self.sourceLong
+           vc.sourceAdd=self.sourceAdd
+           vc.destinationLat=self.destinationLat
+           vc.destinationLong=self.destinationLong
+           vc.destinationAdd=self.destinationAdd
+        vc.driverLat=self.driverLat
+        vc.driverLong=self.driverLong
+        vc.jobId = self.jobId
+        vc.dispatcherId = self.dispatcherId
+           
+        self.navigationController?.pushViewController(vc, animated: true)
+       }
     
     //MARK:- JoBEndAPI Api
        
@@ -220,8 +274,8 @@ class DisJobDetailsVC: UIViewController {
                                 let driverId = dict?.driverId ?? ""
                                 
                
-                                self.emailTxt.text = dict?.email ?? ""
-                                self.locationTxt.text = dict?.address ?? ""
+                                self.emailTxt.text = dict?.driveremail ?? ""
+                                self.locationTxt.text = dict?.driveraddress ?? ""
                            
                                 self.stsrt_FromTxt.text = dict?.startTime ?? ""
                       
@@ -229,7 +283,7 @@ class DisJobDetailsVC: UIViewController {
                       
                            self.date_fromTxt.text = dict?.dateFrom ?? ""
                            self.date_totxt.text = dict?.dateTo ?? ""
-                            self.nameTxt.text = (dict?.firstName ?? "") + " " + (dict?.lastName ?? " ")
+                                self.nameTxt.text = (dict?.driverfirstName ?? "") + " " + (dict?.driverlastName ?? " ")
                            
                                 let d_add = (dict?.drpStreet ?? " ") + " " + (dict?.drpCity ?? " ")
                            
@@ -243,7 +297,20 @@ class DisJobDetailsVC: UIViewController {
                                   
                                   
                            self.pickupAddress.text = p_add + " " + p
-                           
+                                self.phoneNum.text = dict?.driverphone ?? ""
+                                
+                                self.sourceLat = dict?.puplatitude ?? ""
+                                       self.sourceLong = dict?.puplongitude ?? ""
+
+
+
+                                       self.destinationLat = dict?.drplatitude ?? ""
+                                       self.destinationLong = dict?.drplongitude ?? ""
+                              
+                                
+                                self.driverLat = dict?.driverlatitude ?? ""
+                                self.driverLong = dict?.driverlongitude ?? ""
+                                
                         
                                 
                             }

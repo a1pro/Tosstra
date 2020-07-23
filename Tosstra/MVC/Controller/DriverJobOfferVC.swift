@@ -20,14 +20,14 @@ class DriverJobOfferVC: UIViewController {
     @IBOutlet weak var p_stresttxt: UITextView!
    // @IBOutlet weak var p_stateTxt: UITextField!
     
-    @IBOutlet weak var p_zipTxt: UITextField!
+    //@IBOutlet weak var p_zipTxt: UITextField!
    // @IBOutlet weak var p_cityTxt: UITextField!
     
     @IBOutlet weak var d_stresttxt: UITextView!
     
     //@IBOutlet weak var d_stateTxt: UITextField!
     
-    @IBOutlet weak var d_zipTxt: UITextField!
+    //@IBOutlet weak var d_zipTxt: UITextField!
     //@IBOutlet weak var d_cityTxt: UITextField!
     
     @IBOutlet weak var stsrt_FromTxt: UITextField!
@@ -55,6 +55,9 @@ class DriverJobOfferVC: UIViewController {
     
     var fromNoti = "no"
     
+     @IBOutlet weak var locView: UIView!
+    @IBOutlet weak var locationLbl: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addInfoText.layer.borderColor = UIColor.lightGray.cgColor
@@ -62,8 +65,8 @@ class DriverJobOfferVC: UIViewController {
         
         if fromNoti == "yes"
         {
-            self.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
-            self.jobId = dict.value(forKey: "jobId") as? String ?? ""
+            //self.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
+            //self.jobId = dict.value(forKey: "jobId") as? String ?? ""
             if !(NetworkEngine.networkEngineObj.isInternetAvailable())
             {
                 NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
@@ -105,12 +108,12 @@ class DriverJobOfferVC: UIViewController {
             self.date_fromTxt.text = dict.value(forKey: "dateFrom") as? String ?? ""
             self.date_totxt.text = dict.value(forKey: "dateTo") as? String ?? ""
             
-            self.p_zipTxt.text = (dict.value(forKey: "pupZipcode") as? String ?? "" )
+            //self.p_zipTxt.text = (dict.value(forKey: "pupZipcode") as? String ?? "" )
           //  self.p_cityTxt.text = dict.value(forKey: "pupCity") as? String ?? ""
             //self.p_stateTxt.text = dict.value(forKey: "pupState") as? String ?? ""
             self.p_stresttxt.text = dict.value(forKey: "pupStreet") as? String ?? ""
             
-            self.d_zipTxt.text = (dict.value(forKey: "drpZipcode") as? String ?? "" )
+            //self.d_zipTxt.text = (dict.value(forKey: "drpZipcode") as? String ?? "" )
             //self.d_cityTxt.text = dict.value(forKey: "drpCity") as? String ?? ""
             //self.d_stateTxt.text = dict.value(forKey: "drpState") as? String ?? ""
             self.d_stresttxt.text = dict.value(forKey: "drpStreet") as? String ?? ""
@@ -259,10 +262,13 @@ class DriverJobOfferVC: UIViewController {
                             if driverId == "0"
                             {
                                 self.buttonStack.isHidden = false
+                                self.locView.isHidden = true
+                               
                             }
                             else
                             {
                                 self.buttonStack.isHidden = true
+                                self.locView.isHidden = false
                             }
                             let rate = dict?.rateType ?? ""
                             
@@ -283,17 +289,20 @@ class DriverJobOfferVC: UIViewController {
                             self.date_fromTxt.text = dict?.dateFrom ?? ""
                            self.date_totxt.text =  dict?.dateTo ?? ""
 //
-                            self.p_zipTxt.text = dict?.pupZipcode ?? ""
+                            //self.p_zipTxt.text = dict?.pupZipcode ?? ""
                             
                             //self.p_cityTxt.text = dict?.pupCity ?? ""
                            // self.p_stateTxt.text = dict?.pupState ?? ""
                             self.p_stresttxt.text = dict?.pupStreet ?? ""
 
-                            self.d_zipTxt.text = dict?.drpZipcode ?? ""
+                         //   self.d_zipTxt.text = dict?.drpZipcode ?? ""
                             //self.d_cityTxt.text = dict?.drpCity ?? ""
                             //self.d_stateTxt.text = dict?.drpState ?? ""
                             self.d_stresttxt.text = dict?.drpStreet ?? ""
                             self.addInfoText.text = dict?.additinalInstructions ?? ""
+                            
+                            self.locationLbl.text = dict?.address ?? ""
+                            
 
                             
                             

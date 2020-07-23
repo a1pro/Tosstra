@@ -19,12 +19,12 @@ class DisSidebarVC: UIViewController {
     @IBOutlet weak var DriverLbl: UILabel!
     var viewProfiledata:ViewProfileModel?
     
-//    var DisArray = ["Available Trucks","Add a new Job","Active Driver","Profile","Notification","Setting"]
-//       var DisIconArray = ["all-job","Add-icon-1","all-job","Profile","notification","setting"]
-//
+    //    var DisArray = ["Available Trucks","Add a new Job","Active Driver","Profile","Notification","Setting"]
+    //       var DisIconArray = ["all-job","Add-icon-1","all-job","Profile","notification","setting"]
+    //
     var DisArray = ["Available Trucks","Active Driver","Profile","Notification","Setting"]
-          var DisIconArray = ["all-job","all-job","Profile","notification","setting"]
-       
+    var DisIconArray = ["all-job","all-job","Profile","notification","setting"]
+    
     
     
     var DriverArray = ["All Jobs","My Jobs","Profile","Notification","Setting"]
@@ -32,10 +32,10 @@ class DisSidebarVC: UIViewController {
     
     var appType="Dispatcher"
     
-     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var companyName: UILabel!
-           @IBOutlet weak var type: UILabel!
+    @IBOutlet weak var type: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,14 +45,14 @@ class DisSidebarVC: UIViewController {
         myTable.separatorStyle = .none
         myTable.tableHeaderView=headerUIView
         self.profileImage.layer.cornerRadius = self.profileImage.frame.height/2
-               self.profileImage.contentMode = .scaleAspectFill
-               
-               self.profileImage.clipsToBounds=true
+        self.profileImage.contentMode = .scaleAspectFill
+        
+        self.profileImage.clipsToBounds=true
         
         myTable.register(UINib(nibName: "DisSideTCell", bundle: nil), forCellReuseIdentifier: "DisSideTCell")
         
         
-            self.appType = DEFAULT.value(forKey: "APPTYPE") as? String ?? "Dispatcher"
+        self.appType = DEFAULT.value(forKey: "APPTYPE") as? String ?? "Dispatcher"
         
         
         if !(NetworkEngine.networkEngineObj.isInternetAvailable())
@@ -61,18 +61,18 @@ class DisSidebarVC: UIViewController {
         }
         else
         {
-         self.viewProfileAPI()
+            self.viewProfileAPI()
         }
         
         if appType == "Dispatcher"
         {
-           
-             self.DriverLbl.isHidden = true
+            
+            self.DriverLbl.isHidden = true
         }
         else
-        
+            
         {
-              self.DriverLbl.isHidden = false
+            self.DriverLbl.isHidden = false
         }
     }
     
@@ -84,10 +84,34 @@ class DisSidebarVC: UIViewController {
         }
         else
         {
-         self.viewProfileAPI()
+            self.viewProfileAPI()
         }
     }
-    
+    @IBAction func profileAct(_ sender: UIButton)
+    {
+        if appType == "driver"
+        {
+            let elDrawer = navigationController?.parent as? KYDrawerController
+            let home = storyboard?.instantiateViewController(withIdentifier: "DriverProfileVC") as? DriverProfileVC
+            
+            
+            let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+            _nav.isNavigationBarHidden = true
+            elDrawer?.mainViewController = _nav
+            elDrawer?.setDrawerState(.closed, animated: true)
+        }
+        else
+        {
+            let elDrawer = navigationController?.parent as? KYDrawerController
+            let home = storyboard?.instantiateViewController(withIdentifier: "DisProfileVC") as? DisProfileVC
+            
+            
+            let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+            _nav.isNavigationBarHidden = true
+            elDrawer?.mainViewController = _nav
+            elDrawer?.setDrawerState(.closed, animated: true)
+        }
+    }
 }
 extension DisSidebarVC:UITableViewDelegate,UITableViewDataSource
 {
@@ -170,17 +194,17 @@ extension DisSidebarVC:UITableViewDelegate,UITableViewDataSource
                 elDrawer?.mainViewController = _nav
                 elDrawer?.setDrawerState(.closed, animated: true)
             }
-                else if indexPath.row == 3
-                           {
-                               let elDrawer = navigationController?.parent as? KYDrawerController
-                               let home = storyboard?.instantiateViewController(withIdentifier: "DriverNotificationVC") as? DriverNotificationVC
-                               
-                               
-                               let _nav = UINavigationController(rootViewController: home ?? UIViewController())
-                               _nav.isNavigationBarHidden = true
-                               elDrawer?.mainViewController = _nav
-                               elDrawer?.setDrawerState(.closed, animated: true)
-                           }
+            else if indexPath.row == 3
+            {
+                let elDrawer = navigationController?.parent as? KYDrawerController
+                let home = storyboard?.instantiateViewController(withIdentifier: "DriverNotificationVC") as? DriverNotificationVC
+                
+                
+                let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+                _nav.isNavigationBarHidden = true
+                elDrawer?.mainViewController = _nav
+                elDrawer?.setDrawerState(.closed, animated: true)
+            }
                 
             else if indexPath.row == 4
             {
@@ -207,16 +231,16 @@ extension DisSidebarVC:UITableViewDelegate,UITableViewDataSource
                 elDrawer?.setDrawerState(.closed, animated: true)
             }
                 
-//            else if indexPath.row == 1
-//            {
-//                let elDrawer = navigationController?.parent as? KYDrawerController
-//                let home = storyboard?.instantiateViewController(withIdentifier: "DisjobDescriptionVC") as? DisjobDescriptionVC
-//
-//                let _nav = UINavigationController(rootViewController: home ?? UIViewController())
-//                _nav.isNavigationBarHidden = true
-//                elDrawer?.mainViewController = _nav
-//                elDrawer?.setDrawerState(.closed, animated: true)
-//            }
+                //            else if indexPath.row == 1
+                //            {
+                //                let elDrawer = navigationController?.parent as? KYDrawerController
+                //                let home = storyboard?.instantiateViewController(withIdentifier: "DisjobDescriptionVC") as? DisjobDescriptionVC
+                //
+                //                let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+                //                _nav.isNavigationBarHidden = true
+                //                elDrawer?.mainViewController = _nav
+                //                elDrawer?.setDrawerState(.closed, animated: true)
+                //            }
                 
             else if indexPath.row == 1
             {
@@ -254,16 +278,16 @@ extension DisSidebarVC:UITableViewDelegate,UITableViewDataSource
                 elDrawer?.setDrawerState(.closed, animated: true)
             }
             else if indexPath.row == 4
-                       {
-                           let elDrawer = navigationController?.parent as? KYDrawerController
-                           let home = storyboard?.instantiateViewController(withIdentifier: "DisSettingVC") as? DisSettingVC
-                           
-                           
-                           let _nav = UINavigationController(rootViewController: home ?? UIViewController())
-                           _nav.isNavigationBarHidden = true
-                           elDrawer?.mainViewController = _nav
-                           elDrawer?.setDrawerState(.closed, animated: true)
-                       }
+            {
+                let elDrawer = navigationController?.parent as? KYDrawerController
+                let home = storyboard?.instantiateViewController(withIdentifier: "DisSettingVC") as? DisSettingVC
+                
+                
+                let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+                _nav.isNavigationBarHidden = true
+                elDrawer?.mainViewController = _nav
+                elDrawer?.setDrawerState(.closed, animated: true)
+            }
         }
         
         
@@ -276,50 +300,50 @@ extension DisSidebarVC:UITableViewDelegate,UITableViewDataSource
 extension DisSidebarVC
 {
     //MARK:- Login With Email Api
-       
-       func viewProfileAPI()
-       {
+    
+    func viewProfileAPI()
+    {
         var id = ""
         if let userID = DEFAULT.value(forKey: "USERID") as? String
         {
             id = userID
         }
-      
-           let params = ["userId" : id]   as [String : String]
-           
-           ApiHandler.ModelApiPostMethod2(url: VIEW_PROFILE_API, parameters: params) { (response, error) in
-               
-               if error == nil
-               {
-                   let decoder = JSONDecoder()
-                   do
-                   {
-                       self.viewProfiledata = try decoder.decode(ViewProfileModel.self, from: response!)
+        
+        let params = ["userId" : id]   as [String : String]
+        
+        ApiHandler.ModelApiPostMethod2(url: VIEW_PROFILE_API, parameters: params) { (response, error) in
+            
+            if error == nil
+            {
+                let decoder = JSONDecoder()
+                do
+                {
+                    self.viewProfiledata = try decoder.decode(ViewProfileModel.self, from: response!)
                     
                     if self.viewProfiledata?.code == "200"
-                           
-                       {
-                           self.view.makeToast(self.viewProfiledata?.message)
-            
-                       }
-                       else
-                       {
+                        
+                    {
+                        self.view.makeToast(self.viewProfiledata?.message)
+                        
+                    }
+                    else
+                    {
                         let count = self.viewProfiledata?.data?.count ?? 0
                         if count > 0
                         {
                             let name1 = self.viewProfiledata?.data?[0].firstName ?? ""
-                             let name2 = self.viewProfiledata?.data?[0].lastName ?? ""
-                           
+                            let name2 = self.viewProfiledata?.data?[0].lastName ?? ""
+                            
                             
                             self.companyName.text = name1 + " " + name2
                             
                             self.DriverLbl.text = self.viewProfiledata?.data?[0].companyName
-                           
+                            
                             DEFAULT.set(self.viewProfiledata?.data?[0].userType, forKey: "APPTYPE")
                             DEFAULT.set(self.viewProfiledata?.data?[0].userType, forKey: "USERTYPE")
                             DEFAULT.synchronize()
                             
-                              DEFAULT.setValue(self.viewProfiledata?.data?[0].onlineStatus, forKey: "ONLINESTATUS")
+                            DEFAULT.setValue(self.viewProfiledata?.data?[0].onlineStatus, forKey: "ONLINESTATUS")
                             DEFAULT.synchronize()
                             
                             if let profile = self.viewProfiledata?.data?[0].profileImg
@@ -331,33 +355,33 @@ extension DisSidebarVC
                                 DEFAULT.synchronize()
                                 
                                 // headerView.profileImge.sd_setImage(with: fullUrl, completed: nil)
-                             self.profileImage.sd_setImage(with: fullUrl, placeholderImage: #imageLiteral(resourceName: "logo"), options: .refreshCached, context: nil)
+                                self.profileImage.sd_setImage(with: fullUrl, placeholderImage: #imageLiteral(resourceName: "logo"), options: .refreshCached, context: nil)
                             }
                             else
                                 
                             {
-                             
-                             self.profileImage.setImage(string: (self.companyName.text!), color: nil, circular: true,textAttributes: attrs)
-
+                                
+                                self.profileImage.setImage(string: (self.companyName.text!), color: nil, circular: true,textAttributes: attrs)
+                                
                             }
-                                                   
+                            
                         }
-                       
-                       }
-                       
-                       
-                   }
-                   catch let error
-                   {
-                       self.view.makeToast(error.localizedDescription)
-                   }
-                   
-               }
-               else
-               {
-                   self.view.makeToast(error)
-               }
-           }
-       }
-       
+                        
+                    }
+                    
+                    
+                }
+                catch let error
+                {
+                    self.view.makeToast(error.localizedDescription)
+                }
+                
+            }
+            else
+            {
+                self.view.makeToast(error)
+            }
+        }
+    }
+    
 }

@@ -55,7 +55,8 @@ class DriverHomeVC: UIViewController {
     var jobId = "1"
     var dispatcherId = "1"
     
-    
+    var gameTimer: Timer?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +69,9 @@ class DriverHomeVC: UIViewController {
         initGoogleMaps()
         self.collectionSetup()
          self.clusterView.isHidden = false
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.startMonitoringSignificantLocationChanges()
         
         if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
         {
@@ -108,7 +112,8 @@ class DriverHomeVC: UIViewController {
             self.myMapView.isUserInteractionEnabled = false
         }
         
-        
+        gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+
         
     }
     override func viewWillAppear(_ animated: Bool)
@@ -118,6 +123,45 @@ class DriverHomeVC: UIViewController {
         //self.pageRefresh()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        gameTimer?.invalidate()
+    }
+    
+    @objc func runTimedCode()
+    {
+        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
+        print(Date())
+//        if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
+//                            {
+//                                if status == "1"
+//                                {
+//
+//                                    if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+//                                    {
+//                                        NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+//                                    }
+//                                    else
+//                                    {
+//                                        self.onlineStatus="1"
+//                                        self.UserStatusAPI()
+//                                    }
+//                                }
+//                                else
+//                                {
+//
+//                                }
+//                            }
+//                            else
+//                            {
+//
+//                            }
+        
+    }
     @IBAction func MenuAct(_ sender: UIButton)
     {
         let drawer = navigationController?.parent as? KYDrawerController
@@ -372,8 +416,10 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
              print("btnGroupDetails click")
              let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
              
-            vc.dict = self.allMarkerArray.object(at: sender.tag) as! NSDictionary
+            let dict = self.allMarkerArray.object(at: sender.tag) as! NSDictionary
             vc.fromNoti = "yes"
+            vc.jobId = dict.value(forKey: "jobId") as? String ?? ""
+            vc.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
              self.navigationController?.pushViewController(vc, animated: true)
              
          }
@@ -633,47 +679,41 @@ extension DriverHomeVC:CLLocationManagerDelegate
 {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let _ :CLLocation = locations[0] as CLLocation
+        print("didUpdateLocations \(locations)")
         
         if let lastLocation = locations.last
         {
-            let geocoder = CLGeocoder()
-            
-            geocoder.reverseGeocodeLocation(lastLocation) { [weak self] (placemarks, error) in
-                if error == nil
-                {
-                    if let firstLocation = placemarks?[0],
-                        let cityName = firstLocation.locality,   // locality
-                        let stateName = firstLocation.subLocality,
-                        let nationality = firstLocation.administrativeArea,
-                        let latitude = firstLocation.location?.coordinate.latitude,
-                        let longitude = firstLocation.location?.coordinate.longitude
-                    {
-                        print(firstLocation)
-                        
-                        print(cityName + stateName + nationality)
-                        let country = firstLocation.country ?? ""
-                      //  self?.Mycoordinate = CLLocation(latitude: latitude, longitude: longitude)
-                        let address =   nationality + " , " + country
-                          CURRENTLOCATIONLONG=longitude
-                        CURRENTLOCATIONLAT=latitude
-                        DEFAULT.set(address, forKey: "CURRENTLOCATION")
-                        DEFAULT.synchronize()
-                    
-                        CURRENTLOCATIONLAT = latitude
-                        CURRENTLOCATIONLONG = longitude
-                        
+           
+                 
+                        let latitude = lastLocation.coordinate.latitude
+                        let longitude = lastLocation.coordinate.longitude
+               
                         DEFAULT.set("\(latitude)", forKey: "CURRENTLAT")
                         DEFAULT.set("\(longitude)", forKey: "CURRENTLONG")
-                        //  self?.CompanyLocationTF.text! = address
-                      //  self?.locLbl.text=address
+                       
+                        if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
+                                            {
+                                                if status == "1"
+                                                {
+                                                    if latitude != CURRENTLOCATIONLAT || longitude != CURRENTLOCATIONLONG
+                                                    {
+                                                        CURRENTLOCATIONLAT = latitude
+                                                        CURRENTLOCATIONLONG = longitude
+                                                        self.onlineStatus = "1"
+                                                        self.UserStatusAPI()
+                                                    }
+                                                        
+                                                  
+                                                    
+                                                }
+                        }
+                  
                         
-                        self?.locationManager.stopUpdatingLocation()
-                        
-                    }
-                }
+                    
+                
             }
         }
-    }
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
         print(error)
@@ -807,8 +847,10 @@ extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICol
     {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
          
-        vc.dict = self.allMarkerArray.object(at: indexPath.row) as! NSDictionary
+        let dict = self.allMarkerArray.object(at: indexPath.row) as! NSDictionary
         vc.fromNoti = "yes"
+        vc.jobId = dict.value(forKey: "jobId") as? String ?? ""
+        vc.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
          self.navigationController?.pushViewController(vc, animated: true)
     }
     

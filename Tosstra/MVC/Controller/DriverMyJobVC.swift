@@ -154,12 +154,22 @@ extension DriverMyJobVC:UITableViewDelegate,UITableViewDataSource
                   else
                   {
                      
-                      
+                      let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
+                                       
+                                           vc.fromNoti = "yes"
+                                   vc.jobId = celldData?.jobId ?? ""
+                                   vc.dispatcherId = celldData?.dispatcherId ?? ""
+                                            self.navigationController?.pushViewController(vc, animated: true)
                   }
               }
               else
               {
-                  
+                  let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
+                    
+                        vc.fromNoti = "yes"
+                vc.jobId = celldData?.jobId ?? ""
+                vc.dispatcherId = celldData?.dispatcherId ?? ""
+                         self.navigationController?.pushViewController(vc, animated: true)
               }
         
     }

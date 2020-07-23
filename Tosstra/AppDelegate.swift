@@ -30,6 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         //                    print(familyName, fontNames)
         //                })
         registerForRemoteNotification()
+        
+       // BackgroundLocationManager.instance.start()
+
+        
         if let type = DEFAULT.value(forKey: "USERTYPE") as? String
         {
             

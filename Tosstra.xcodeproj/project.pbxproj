@@ -60,6 +60,7 @@
 		5653E7F124AF37F6006C8C20 /* DisJobDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653E7F024AF37F6006C8C20 /* DisJobDetailsVC.swift */; };
 		5653E7F424AF4E39006C8C20 /* DisEndJonTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653E7F224AF4E39006C8C20 /* DisEndJonTCell.swift */; };
 		5653E7F524AF4E39006C8C20 /* DisEndJonTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5653E7F324AF4E39006C8C20 /* DisEndJonTCell.xib */; };
+		5666296D24C801BF00474A5B /* BackgroundLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5666296C24C801BF00474A5B /* BackgroundLocationManager.swift */; };
 		566F6E5924C1A4BA00B06EB6 /* TrackLoactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566F6E5824C1A4BA00B06EB6 /* TrackLoactionVC.swift */; };
 		566F6E5C24C1D4A200B06EB6 /* DriverHomeCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566F6E5A24C1D4A200B06EB6 /* DriverHomeCCell.swift */; };
 		566F6E5D24C1D4A200B06EB6 /* DriverHomeCCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566F6E5B24C1D4A200B06EB6 /* DriverHomeCCell.xib */; };
@@ -143,6 +144,7 @@
 		5653E7F024AF37F6006C8C20 /* DisJobDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisJobDetailsVC.swift; sourceTree = "<group>"; };
 		5653E7F224AF4E39006C8C20 /* DisEndJonTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisEndJonTCell.swift; sourceTree = "<group>"; };
 		5653E7F324AF4E39006C8C20 /* DisEndJonTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisEndJonTCell.xib; sourceTree = "<group>"; };
+		5666296C24C801BF00474A5B /* BackgroundLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundLocationManager.swift; sourceTree = "<group>"; };
 		566F6E5824C1A4BA00B06EB6 /* TrackLoactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackLoactionVC.swift; sourceTree = "<group>"; };
 		566F6E5A24C1D4A200B06EB6 /* DriverHomeCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverHomeCCell.swift; sourceTree = "<group>"; };
 		566F6E5B24C1D4A200B06EB6 /* DriverHomeCCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverHomeCCell.xib; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				5649EE6824B7225F00AEF83E /* ViewProfileVC.swift */,
 				56EBDCE324C1898C006F16D1 /* ChooseAddressVC.swift */,
 				566F6E5824C1A4BA00B06EB6 /* TrackLoactionVC.swift */,
+				5666296C24C801BF00474A5B /* BackgroundLocationManager.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				5602465B24AD9391003A67E9 /* AppDelegate.swift in Sources */,
 				5626EE2024B04C8000CAEA70 /* DriverSettingVC.swift in Sources */,
 				5602468024ADA2D2003A67E9 /* UserTypeViewController.swift in Sources */,
+				5666296D24C801BF00474A5B /* BackgroundLocationManager.swift in Sources */,
 				5676A45024B43BE600AFBCB4 /* NewPasswordVC.swift in Sources */,
 				56D2D1EB24B326790087B7B9 /* Dis_Register_Model.swift in Sources */,
 				566F6E5C24C1D4A200B06EB6 /* DriverHomeCCell.swift in Sources */,

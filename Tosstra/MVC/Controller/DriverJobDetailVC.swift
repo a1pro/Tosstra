@@ -50,6 +50,7 @@ class DriverJobDetailVC: UIViewController {
         super.viewDidLoad()
 
        
+        print(self.jobData)
         self.companyName.text = self.jobData?.companyName ?? ""
         self.emailTxt.text = self.jobData?.email ?? ""
         self.locationTxt.text = self.jobData?.phone ?? ""

@@ -21,13 +21,13 @@ class DisjobDescriptionVC: UIViewController {
     @IBOutlet weak var p_stresttxt: UITextView!
   //  @IBOutlet weak var p_stateTxt: UITextField!
     
-    @IBOutlet weak var p_zipTxt: UITextField!
+   // @IBOutlet weak var p_zipTxt: UITextField!
    // @IBOutlet weak var p_cityTxt: UITextField!
     
     @IBOutlet weak var d_stresttxt: UITextView!
     
     
-    @IBOutlet weak var d_zipTxt: UITextField!
+    //@IBOutlet weak var d_zipTxt: UITextField!
  
     
     @IBOutlet weak var stsrt_FromTxt: UITextField!
@@ -143,7 +143,7 @@ class DisjobDescriptionVC: UIViewController {
     
     @IBAction func sendJobAct(_ sender: UIButton)
     {
-        if amountTxt.text == "" || p_zipTxt.text == ""  || p_stresttxt.text == "" || d_zipTxt.text == ""  || d_stresttxt.text == "" || date_totxt.text == "" || date_fromTxt.text == "" || stsrt_FromTxt.text == "" || endTimeTxt.text == ""
+        if amountTxt.text == "" || p_stresttxt.text == ""  || d_stresttxt.text == "" || date_totxt.text == "" || date_fromTxt.text == "" || stsrt_FromTxt.text == "" || endTimeTxt.text == ""
                        {
                            
                            NetworkEngine.commonAlert(message: "Please fill all details.", vc: self)
@@ -366,11 +366,11 @@ extension DisjobDescriptionVC
                          "pupStreet" : p_stresttxt.text!,
                          "pupCity" : "",
                          "pupState" : "",
-                         "pupZipcode" : p_zipTxt.text!,
+                         "pupZipcode" : "",
                          "drpStreet" : d_stresttxt.text!,
                          "drpCity" : "",
                          "drpState" : "",
-                         "drpZipcode" : d_zipTxt.text!,
+                         "drpZipcode" : "",
                          "dateFrom" : date_fromTxt.text!,
                          "dateTo" : date_totxt.text!,
                          "startTime" : stsrt_FromTxt.text!,
