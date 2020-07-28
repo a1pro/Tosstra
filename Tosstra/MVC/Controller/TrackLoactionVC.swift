@@ -29,19 +29,23 @@ class TrackLoactionVC: UIViewController,MKMapViewDelegate {
      var driverLong = ""
 
     
-    var fromTrackDriver = "no"
+    var fromTrackDriver = ""
      var JobDetailData:JobDetailMedel?
     var jobId = ""
      var dispatcherId = ""
     
+    var gameTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         mapView.delegate=self
+        
+        print(self.fromTrackDriver)
        
         if self.fromTrackDriver == "yes"
         {
+             gameTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
             refrshBtn.isHidden=false
               if !(NetworkEngine.networkEngineObj.isInternetAvailable())
               {
@@ -63,7 +67,8 @@ class TrackLoactionVC: UIViewController,MKMapViewDelegate {
 
         }
         
-        
+       
+
         
         
     }
@@ -83,8 +88,21 @@ class TrackLoactionVC: UIViewController,MKMapViewDelegate {
            self.JobDetalsAPI()
        }
     }
-    
-    
+    override func viewWillDisappear(_ animated: Bool) {
+           super.viewWillDisappear(true)
+           gameTimer?.invalidate()
+       }
+    @objc func runTimedCode()
+       {
+        if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                     {
+                         NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                     }
+                     else
+                     {
+                         self.JobDetalsAPI()
+                     }
+    }
     
     
     func getDirections(loc1: CLLocationCoordinate2D, loc2: CLLocationCoordinate2D) {
@@ -186,7 +204,8 @@ func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayR
                                
                            {
                                
-                               NetworkEngine.commonAlert(message: self.JobDetailData?.message ?? "", vc: self)
+            
+                            NetworkEngine.showToast(controller: self, message: self.JobDetailData?.message ?? "")
                            }
                            else
                            {
@@ -245,13 +264,15 @@ func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayR
                        }
                        catch let error
                        {
-                           self.view.makeToast(error.localizedDescription)
+                          // self.view.makeToast(error.localizedDescription)
+                          NetworkEngine.showToast(controller: self, message: error.localizedDescription)
                        }
                        
                    }
                    else
                    {
-                       self.view.makeToast(error)
+                       //self.view.makeToast(error)
+                    NetworkEngine.showToast(controller: self, message: error)
                    }
                }
            }

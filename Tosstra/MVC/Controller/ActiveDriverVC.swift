@@ -59,12 +59,15 @@ class ActiveDriverVC: UIViewController {
     var jobIds = ""
     private let refreshControl = UIRefreshControl()
     
+    @IBOutlet weak var refrshBtn: UIButton!
+    
     @IBOutlet weak var endBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         myTable.delegate=self
         myTable.dataSource=self
+         refrshBtn.isHidden=true
         myTable.separatorStyle = .none
         myTable.register(UINib(nibName: "ActiveDriverTCell", bundle: nil), forCellReuseIdentifier: "ActiveDriverTCell")
         
@@ -117,7 +120,7 @@ class ActiveDriverVC: UIViewController {
         self.mapLineView.backgroundColor = UIColor.lightGray
         self.mapView.isHidden = true
         self.listView.isHidden = false
-        
+        refrshBtn.isHidden=true
         self.clusterView.isHidden = true
         self.myTable.reloadData()
         
@@ -125,6 +128,7 @@ class ActiveDriverVC: UIViewController {
     
     @IBAction func mapViewAct(_ sender: UIButton)
     {
+        refrshBtn.isHidden=false
         self.mapView.isHidden = false
         self.listView.isHidden = true
         self.listLineView.backgroundColor = UIColor.lightGray
@@ -134,6 +138,17 @@ class ActiveDriverVC: UIViewController {
         self.myTable.reloadData()
     }
     
+    @IBAction func refreshAct(_ sender: UIButton)
+       {
+          if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+          {
+              NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+          }
+          else
+          {
+              self.allActiveDriverAPI()
+          }
+       }
     
     @objc func PhoneCallAct(_ sender:UIButton)
     {
@@ -382,7 +397,8 @@ extension ActiveDriverVC
             }
             else
             {
-                self.view.makeToast(error)
+               
+                 NetworkEngine.showToast(controller: self, message: error)
             }
         }
     }

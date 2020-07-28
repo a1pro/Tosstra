@@ -19,6 +19,17 @@ let IMAGEBASEURL = "http://a1professionals.net/tosstra/assets/usersImg/"
 let VIDEOBASEURL = "https://a1professionals.net/dressApp/assets/videos/"
 //1.
 
+let Privacy = "https://tosstra.com/privacy-policy"
+
+let Terms_and_Conditions = "https://tosstra.com/terms-and-conditi"
+
+let CONTACTUS = "https://tosstra.com/contact-us"
+
+let HELP = "https://tosstra.com/help"
+
+
+
+
 
 //MARK:- Dispatcher API
 

@@ -32,6 +32,8 @@
 		5626EE2524B04FA100CAEA70 /* DriverNotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE2324B04FA100CAEA70 /* DriverNotiCell.swift */; };
 		5626EE2624B04FA100CAEA70 /* DriverNotiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5626EE2424B04FA100CAEA70 /* DriverNotiCell.xib */; };
 		5626EE2824B0553100CAEA70 /* DriverJobDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE2724B0553100CAEA70 /* DriverJobDetailVC.swift */; };
+		5627B31F24C975DC0087D587 /* StatticVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627B31E24C975DC0087D587 /* StatticVC.swift */; };
+		5627B32124C9BB090087D587 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5627B32024C9BB090087D587 /* WebKit.framework */; };
 		562DC88324B5D7C6006C5C83 /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562DC88224B5D7C6006C5C83 /* CustomMarkerView.swift */; };
 		56301FDD24B587B700B7D463 /* DriverMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56301FDC24B587B700B7D463 /* DriverMarkerView.xib */; };
 		5635CA4D24ADCDBC00A65374 /* DriverHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635CA4C24ADCDBC00A65374 /* DriverHomeVC.swift */; };
@@ -115,6 +117,8 @@
 		5626EE2324B04FA100CAEA70 /* DriverNotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverNotiCell.swift; sourceTree = "<group>"; };
 		5626EE2424B04FA100CAEA70 /* DriverNotiCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverNotiCell.xib; sourceTree = "<group>"; };
 		5626EE2724B0553100CAEA70 /* DriverJobDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverJobDetailVC.swift; sourceTree = "<group>"; };
+		5627B31E24C975DC0087D587 /* StatticVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatticVC.swift; sourceTree = "<group>"; };
+		5627B32024C9BB090087D587 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		562DC88224B5D7C6006C5C83 /* CustomMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
 		56301FDC24B587B700B7D463 /* DriverMarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverMarkerView.xib; sourceTree = "<group>"; };
 		5635CA4C24ADCDBC00A65374 /* DriverHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverHomeVC.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5627B32124C9BB090087D587 /* WebKit.framework in Frameworks */,
 				94763B89D70CC1BBCFE16223 /* Pods_Tosstra.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,6 +193,7 @@
 		162B62BA97D99A5C3EAC5591 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5627B32024C9BB090087D587 /* WebKit.framework */,
 				E5B18A390511219F857BB0E1 /* Pods_Tosstra.framework */,
 			);
 			name = Frameworks;
@@ -319,6 +325,7 @@
 				56EBDCE324C1898C006F16D1 /* ChooseAddressVC.swift */,
 				566F6E5824C1A4BA00B06EB6 /* TrackLoactionVC.swift */,
 				5666296C24C801BF00474A5B /* BackgroundLocationManager.swift */,
+				5627B31E24C975DC0087D587 /* StatticVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -529,6 +536,7 @@
 				56D2D1E924B3239D0087B7B9 /* NetworkEngine.swift in Sources */,
 				5626EE2824B0553100CAEA70 /* DriverJobDetailVC.swift in Sources */,
 				5635CA6324ADE65D00A65374 /* SeniorTrackTCell.swift in Sources */,
+				5627B31F24C975DC0087D587 /* StatticVC.swift in Sources */,
 				56D2D1ED24B32EBB0087B7B9 /* Dis_Login_Model.swift in Sources */,
 				5676A44E24B4397300AFBCB4 /* ForPassVC.swift in Sources */,
 				56D085EF24ADF3F000E6D2BF /* ActiveDriverVC.swift in Sources */,

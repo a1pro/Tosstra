@@ -107,8 +107,8 @@ extension ChangePasswordVC
                     if self.apiData?.code == "200"
                         
                     {
-                        
-                        NetworkEngine.commonAlert(message: self.apiData?.message ?? "", vc: self)
+                        NetworkEngine.showToast(controller: self, message: self.apiData?.message ?? "")
+
                     }
                     else
                     {

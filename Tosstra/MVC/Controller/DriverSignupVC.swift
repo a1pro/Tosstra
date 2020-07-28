@@ -30,6 +30,7 @@ class DriverSignupVC: UIViewController {
     var signupData:Dis_Register_Model?
        
        var SubUserType = "Owner"
+    @IBOutlet weak var termLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,30 @@ class DriverSignupVC: UIViewController {
                       
                       attributedString1.append(attributedString2)
                self.signInBtn.setAttributedTitle(attributedString1, for: .normal)
+        
+        
+    let attrs4 = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.lightGray]
+           
+           let attrs5 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : APPCOLOL]
+           
+           let attributedString4 = NSMutableAttributedString(string:"I agree to the", attributes:attrs1)
+           
+           let attributedString5 = NSMutableAttributedString(string:" term of services ", attributes:attrs2)
+           
+           attributedString4.append(attributedString5)
+        
+        let attributedString6 = NSMutableAttributedString(string:"and", attributes:attrs1)
+                  
+                  let attributedString7 = NSMutableAttributedString(string:" privacy Policy.", attributes:attrs2)
+                  
+        attributedString6.append(attributedString7)
+        attributedString4.append(attributedString6)
+        
+        self.termLbl.attributedText = attributedString4
+  
+        
+        
+        
     }
     
     @IBAction func goBackBtn(_ sender: Any)
@@ -69,7 +94,26 @@ class DriverSignupVC: UIViewController {
                 
               
              }
-          
+          @IBAction func seeTermAct(_ sender: Any)
+                     {
+                         
+                        
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "StatticVC") as! StatticVC
+                         vc.url = Terms_and_Conditions
+                        vc.pageTitle = "Term of Services"
+                        self.navigationController?.pushViewController(vc, animated: true)
+                     }
+             
+             @IBAction func seePrivacyAct(_ sender: Any)
+                        {
+                            
+                           
+                           let vc = self.storyboard?.instantiateViewController(withIdentifier: "StatticVC") as! StatticVC
+                            vc.url = Privacy
+                            vc.pageTitle = "Privacy Policy"
+                           self.navigationController?.pushViewController(vc, animated: true)
+                        }
+    
     
     @IBAction func signUpAct(_ sender: Any)
           {
@@ -242,8 +286,9 @@ extension DriverSignupVC
                     if self.signupData?.code == "200"
                            
                        {
-                           self.view.makeToast(self.signupData?.message)
-            
+                         
+            NetworkEngine.showToast(controller: self, message: self.signupData?.message)
+
                        }
                        else
                        {

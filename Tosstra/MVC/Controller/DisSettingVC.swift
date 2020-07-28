@@ -102,7 +102,36 @@ extension DisSettingVC:UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         
-         if indexPath.row == 4
+        if indexPath.row == 0
+        {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "StatticVC") as! StatticVC
+            vc.url = Terms_and_Conditions
+             vc.pageTitle = "Term of Services"
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        else if indexPath.row == 1
+               {
+               let vc = self.storyboard?.instantiateViewController(withIdentifier: "StatticVC") as! StatticVC
+                vc.url = Privacy
+                 vc.pageTitle = "Privacy Policy"
+                   self.navigationController?.pushViewController(vc, animated: true)
+               }
+            else if indexPath.row == 2
+                          {
+                          let vc = self.storyboard?.instantiateViewController(withIdentifier: "StatticVC") as! StatticVC
+                           vc.url = CONTACTUS
+                            vc.pageTitle = "Contact us"
+                              self.navigationController?.pushViewController(vc, animated: true)
+                          }
+            
+            else if indexPath.row == 3
+            {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "StatticVC") as! StatticVC
+             vc.url = HELP
+                vc.pageTitle = "Help"
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        else if indexPath.row == 4
                             {
                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChangePasswordVC") as! ChangePasswordVC
                             
@@ -226,8 +255,8 @@ extension DisSettingVC
                     if self.viewProfiledata?.code == "200"
                            
                        {
-                           self.view.makeToast(self.viewProfiledata?.message)
-            
+               
+             NetworkEngine.showToast(controller: self, message: self.viewProfiledata?.message)
                        }
                        else
                        {
@@ -297,8 +326,8 @@ extension DisSettingVC
                         if self.viewProfiledata?.code == "200"
                                
                            {
-                               self.view.makeToast(self.viewProfiledata?.message)
-                
+                           
+                NetworkEngine.showToast(controller: self, message: self.viewProfiledata?.message)
                            }
                            else
                            {
@@ -371,13 +400,14 @@ extension DisSettingVC
                            if self.viewProfiledata?.code == "200"
                                   
                               {
-                                  self.view.makeToast(self.viewProfiledata?.message)
-                   
+                                 
+                   NetworkEngine.showToast(controller: self, message: self.viewProfiledata?.message)
                               }
                               else
                               {
         
-                               self.view.makeToast(self.viewProfiledata?.message)
+                         
+                                NetworkEngine.showToast(controller: self, message: self.viewProfiledata?.message)
                               }
                               
                               

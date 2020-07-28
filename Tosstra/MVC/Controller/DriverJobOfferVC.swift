@@ -181,8 +181,8 @@ class DriverJobOfferVC: UIViewController {
                     if self.apiData?.code == "200"
                         
                     {
-                        
-                        NetworkEngine.commonAlert(message: self.apiData?.message ?? "", vc: self)
+                        NetworkEngine.showToast(controller: self, message: self.apiData?.message ?? "")
+
                     }
                     else
                     {
@@ -245,8 +245,8 @@ class DriverJobOfferVC: UIViewController {
                     if self.JobDetailData?.code == "200"
                         
                     {
-                        
-                        NetworkEngine.commonAlert(message: self.JobDetailData?.message ?? "", vc: self)
+                        NetworkEngine.showToast(controller: self, message: self.JobDetailData?.message ?? "")
+
                     }
                     else
                     {

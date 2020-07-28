@@ -93,8 +93,8 @@ extension ViewProfileVC
                     if self.viewProfiledata?.code == "200"
                            
                        {
-                           self.view.makeToast(self.viewProfiledata?.message)
-            
+                          
+         NetworkEngine.showToast(controller: self, message: self.viewProfiledata?.message)
                        }
                        else
                        {

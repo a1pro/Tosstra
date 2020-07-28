@@ -395,8 +395,8 @@ extension DisjobDescriptionVC
                     if self.apiData?.code == "200"
                            
                        {
-                           self.view.makeToast(self.apiData?.message)
-          
+                         
+          NetworkEngine.showToast(controller: self, message: self.apiData?.message)
                        }
                        else
                        {

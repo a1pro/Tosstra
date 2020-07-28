@@ -173,20 +173,22 @@ extension DisSigninVC
                     if self.signInData?.code == "200"
                         
                     {
-                        self.view.makeToast(self.signInData?.message)
+                   
+                        NetworkEngine.showToast(controller: self, message: self.signInData?.message)
+                        
                         
                     }
                     else
                     {
                         let count = self.signInData?.data?.count ?? 0
                         
-                        
+                         NetworkEngine.showToast(controller: self, message: self.signInData?.message)
                         
                         if count > 0
                         {
-                            var type = self.signInData?.data?[0].userType
+                            let type = self.signInData?.data?[0].userType
                             
-                            var status = self.signInData?.data?[0].verifiedStatus
+                            let status = self.signInData?.data?[0].verifiedStatus
                             
                             if status == "0"
                             {

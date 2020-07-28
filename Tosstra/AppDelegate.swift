@@ -33,7 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         
        // BackgroundLocationManager.instance.start()
 
-        
+        UIApplication.shared.windows.forEach { window in
+                   if #available(iOS 13.0, *) {
+                       window.overrideUserInterfaceStyle = .light
+                   } else {
+                       // Fallback on earlier versions
+                   }
+               }
         if let type = DEFAULT.value(forKey: "USERTYPE") as? String
         {
             
@@ -54,15 +60,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             
         }
         
-        let formatter : String = DateFormatter.dateFormat(fromTemplate: "j", options:0, locale:locale)!
-        if formatter.contains("a") {
-            //phone is set to 12 hours
-            print("//phone is set to 12 hours")
-            TIMEFORMATE = "12"
-        } else {
-            TIMEFORMATE = "24"
-            print("//phone is set to 24 hours")
-        }
+//        let formatter : String = DateFormatter.dateFormat(fromTemplate: "j", options:0, locale:locale)!
+//        if formatter.contains("a") {
+//            //phone is set to 12 hours
+//            print("//phone is set to 12 hours")
+//            TIMEFORMATE = "12"
+//        } else {
+//            TIMEFORMATE = "24"
+//            print("//phone is set to 24 hours")
+//        }
         
         return true
     }

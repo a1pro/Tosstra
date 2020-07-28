@@ -207,8 +207,8 @@ extension DisProfileVC
                     if self.viewProfiledata?.code == "200"
                            
                        {
-                           self.view.makeToast(self.viewProfiledata?.message)
-            
+                          
+            NetworkEngine.showToast(controller: self, message: self.viewProfiledata?.message)
                        }
                        else
                        {
@@ -386,8 +386,8 @@ extension DisProfileVC: UIImagePickerControllerDelegate, UINavigationControllerD
                                 if self.apiData?.code == "200"
                                     
                                 {
-                                    self.view.makeToast(self.apiData?.message)
-                                    
+                                  
+                                    NetworkEngine.showToast(controller: self, message: self.apiData?.message)
                                 }
                                 else
                                 {

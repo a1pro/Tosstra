@@ -173,7 +173,9 @@ class DriverJobDetailVC: UIViewController {
                            
                        {
                            
-                           NetworkEngine.commonAlert(message: self.apiData?.message ?? "", vc: self)
+                          
+                        NetworkEngine.showToast(controller: self, message: self.apiData?.message ?? "")
+
                        }
                        else
                        {
