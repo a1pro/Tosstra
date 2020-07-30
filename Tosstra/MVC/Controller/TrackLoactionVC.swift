@@ -33,7 +33,7 @@ class TrackLoactionVC: UIViewController,MKMapViewDelegate {
      var JobDetailData:JobDetailMedel?
     var jobId = ""
      var dispatcherId = ""
-    
+    var driverId = ""
     var gameTimer: Timer?
     
     override func viewDidLoad() {
@@ -189,6 +189,7 @@ func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayR
              
                
                let params = ["jobId" : self.jobId,
+                             "driverId" : self.driverId,
                              "dispatcherId" : self.dispatcherId]   as [String : String]
                
                ApiHandler.ModelApiPostMethod(url: JOB_DETAILS_API, parameters: params) { (response, error) in

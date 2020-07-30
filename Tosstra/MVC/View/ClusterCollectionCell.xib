@@ -20,7 +20,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="atB-YE-uFu" customClass="CardView" customModule="Tosstra" customModuleProvider="target">
                         <rect key="frame" x="4" y="4" width="367" height="188"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="RXj-21-rVu">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="RXj-21-rVu" customClass="CLImageViewPopup" customModule="CLImageViewPopup">
                                 <rect key="frame" x="153.5" y="8" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="ecM-8Z-1WV"/>

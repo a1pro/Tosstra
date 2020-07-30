@@ -224,13 +224,14 @@ class DriverJobOfferVC: UIViewController {
     
     func JobDetalsAPI()
     {
-        var id = ""
+        var id = "1"
         if let userID = DEFAULT.value(forKey: "USERID") as? String
         {
             id = userID
         }
         
         let params = ["jobId" : self.jobId,
+                      "driverId" : id,
                       "dispatcherId" : self.dispatcherId]   as [String : String]
         
         ApiHandler.ModelApiPostMethod(url: JOB_DETAILS_API, parameters: params) { (response, error) in
@@ -257,18 +258,18 @@ class DriverJobOfferVC: UIViewController {
                             self.companyName.text = dict?.companyName
                             self.amountTxt.isUserInteractionEnabled = false
                            
-                            let driverId = dict?.driverId ?? ""
+                            let driverId = dict?.jobStatus ?? ""
                             
-                            if driverId == "0"
+                            if driverId == "1"
                             {
-                                self.buttonStack.isHidden = false
-                                self.locView.isHidden = true
+                                self.buttonStack.isHidden = true
+                                self.locView.isHidden = false
                                
                             }
                             else
                             {
-                                self.buttonStack.isHidden = true
-                                self.locView.isHidden = false
+                                self.buttonStack.isHidden = false
+                                self.locView.isHidden = true
                             }
                             let rate = dict?.rateType ?? ""
                             

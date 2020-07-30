@@ -46,7 +46,11 @@ class ActiveDriverVC: UIViewController {
     @IBOutlet weak var myMapView: GMSMapView!
     
     var selectedDriverArray = NSMutableArray()
+    var selectedJobArray = NSMutableArray()
+    
+    
     var selectedgroupCatArray = NSMutableArray()
+    
     var checkArray = NSMutableArray()
     @IBOutlet var pBtn:UIButton!
     
@@ -55,7 +59,7 @@ class ActiveDriverVC: UIViewController {
     @IBOutlet weak var myCollection: UICollectionView!
     @IBOutlet weak var clusterView: UIView!
     
-    
+    var driverIds = ""
     var jobIds = ""
     private let refreshControl = UIRefreshControl()
     
@@ -188,7 +192,11 @@ class ActiveDriverVC: UIViewController {
                              
                              
                              self.jobIds = self.selectedDriverArray.componentsJoined(by: ",")
-                             self.EndJobStartAPI()
+                            self.driverIds = self.selectedJobArray.componentsJoined(by: ",")
+                            
+                            print(self.jobIds)
+                            print(self.driverIds)
+                            self.EndJobStartAPI()
                              
                              
                          }
@@ -214,10 +222,14 @@ class ActiveDriverVC: UIViewController {
     {
         
         
-        if self.selectedDriverArray.count>0
-        {
-            self.selectedDriverArray.removeAllObjects()
-        }
+//        if self.selectedDriverArray.count>0
+//        {
+//            self.selectedDriverArray.removeAllObjects()
+//        }
+//        if self.selectedJobArray.count>0
+//               {
+//                   self.selectedJobArray.removeAllObjects()
+//               }
         if self.selectedgroupCatArray.count>0
         {
             self.selectedgroupCatArray.removeAllObjects()
@@ -275,14 +287,19 @@ extension ActiveDriverVC:UITableViewDelegate,UITableViewDataSource
             
             if self.checkArray.contains(indexPath.row)
             {
-                let id = dict.value(forKey: "jobId") as? String
+                let id = dict.value(forKey: "jobId") as? String ?? ""
+                 let driverId = dict.value(forKey: "driverId") as? String ?? ""
+                 let dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
                 
-                if self.selectedDriverArray.contains(id)
+                if self.selectedJobArray.contains(driverId)
                 {
                     
                 }
                 else
                 {
+                
+                    
+                    self.selectedJobArray.add(driverId)
                     self.selectedDriverArray.add(id)
                     
                 }
@@ -312,6 +329,7 @@ extension ActiveDriverVC:UITableViewDelegate,UITableViewDataSource
         {
             vc.fromNoti = "no"
             vc.jobId = dict.value(forKey: "jobId") as? String ?? ""
+            vc.driverId = dict.value(forKey: "driverId") as? String ?? ""
             vc.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
         }
         
@@ -346,7 +364,10 @@ extension ActiveDriverVC
     func allActiveDriverAPI()
     {
         
-        
+        if self.allMarkerArray.count>0
+        {
+            self.allMarkerArray.removeAllObjects()
+        }
         
         var id = ""
         if let userID = DEFAULT.value(forKey: "USERID") as? String
@@ -397,7 +418,7 @@ extension ActiveDriverVC
             }
             else
             {
-               
+               self.myTable.reloadData()
                  NetworkEngine.showToast(controller: self, message: error)
             }
         }
@@ -445,7 +466,8 @@ extension ActiveDriverVC
             id = userID
         }
         
-        let params = ["userId" : id,
+        let params = ["dispatcherId" : id,
+                      "driverId" : self.driverIds,
                       "jobId" : self.jobIds]   as [String : String]
         
         ApiHandler.ModelApiPostMethod(url: END_JOB_API, parameters: params) { (response, error) in
@@ -500,6 +522,7 @@ extension ActiveDriverVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelega
                {
                    vc.fromNoti = "no"
                    vc.jobId = dict.value(forKey: "jobId") as? String ?? ""
+                vc.driverId = dict.value(forKey: "driverId") as? String ?? ""
                    vc.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
                }
         self.navigationController?.pushViewController(vc, animated: true)
@@ -849,6 +872,7 @@ extension ActiveDriverVC:UICollectionViewDelegate,UICollectionViewDataSource,UIC
         {
             vc.fromNoti = "no"
             vc.jobId = dict.value(forKey: "jobId") as? String ?? ""
+            vc.driverId = dict.value(forKey: "driverId") as? String ?? ""
             vc.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
         }
         self.navigationController?.pushViewController(vc, animated: true)

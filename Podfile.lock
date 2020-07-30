@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.9.1)
+  - CLImageViewPopup (0.1.1)
   - CountryList (1.1)
   - GoogleMaps (3.1.0):
     - GoogleMaps/Maps (= 3.1.0)
@@ -23,6 +24,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
+  - CLImageViewPopup
   - CountryList
   - GoogleMaps
   - GooglePlacePicker
@@ -38,6 +40,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - CLImageViewPopup
     - CountryList
     - GoogleMaps
     - GooglePlacePicker
@@ -52,6 +55,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  CLImageViewPopup: 66e459b179084dbcc8cf56749c27078b73640af6
   CountryList: ad58cd670c4ecab6bb014abebc12e63f619174b2
   GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
   GooglePlacePicker: fa975116ac202ac29822c0a79758ea1c4db5a95f
@@ -64,6 +68,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: c51c0831dc5ffa4e46130f097d18b23d6f1f553c
+PODFILE CHECKSUM: 90a777e0f665c71af8f5da69da021f3c05579bd4
 
 COCOAPODS: 1.9.3

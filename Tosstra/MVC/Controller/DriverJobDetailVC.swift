@@ -46,49 +46,26 @@ class DriverJobDetailVC: UIViewController {
     var destinationLong = "77.1025"
     var sourceAdd = ""
          var destinationAdd = ""
+    
+    var JobDetailData:JobDetailMedel?
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
+       if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                  {
+                      NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                  }
+                  else
+                  {
+                      self.JobDetalsAPI()
+                  }
+                   
+        
         print(self.jobData)
-        self.companyName.text = self.jobData?.companyName ?? ""
-        self.emailTxt.text = self.jobData?.email ?? ""
-        self.locationTxt.text = self.jobData?.phone ?? ""
-        
-        self.stsrt_FromTxt.text = self.jobData?.startTime ?? ""
-        self.endTimeTxt.text = self.jobData?.endTime ?? ""
-        self.date_fromTxt.text = self.jobData?.dateFrom ?? ""
-        self.date_totxt.text = self.jobData?.dateTo ?? ""
-        
-        self.sourceLat = self.jobData?.puplatitude ?? ""
-        self.sourceLong = self.jobData?.puplongitude ?? ""
-        
-    
-        
-        self.destinationLat = self.jobData?.drplatitude ?? ""
-        self.destinationLong = self.jobData?.drplongitude ?? ""
-        
-        
-         self.nameTxt.text = (self.jobData?.firstName ?? "") + " " + (self.jobData?.lastName ?? "")
-        
-        let d_add = (self.jobData?.drpStreet ?? "") + " " + (self.jobData?.drpCity ?? "")
-        
-        let d =  (self.jobData?.drpState ?? "") + " " + (self.jobData?.drpZipcode ?? "")
-        
-       self.dropOffAddress.text = d_add + " " + d
-        
-        let p_add = (self.jobData?.pupStreet ?? "") + " " + (self.jobData?.pupCity ?? "")
-            
-           let p = (self.jobData?.pupState ?? "") + " " + (self.jobData?.pupZipcode ?? "")
-               
-               
-        self.pickupAddress.text = p_add + " " + p
-        
-        self.sourceAdd = self.pickupAddress.text!
-        
-         self.destinationAdd = self.dropOffAddress.text!
-        
-        self.jobId = (self.jobData?.jobId ?? "")
+       
         
         
         
@@ -210,5 +187,111 @@ class DriverJobDetailVC: UIViewController {
                }
            }
        }
+      //MARK:- accept reject Api
+        
+        func JobDetalsAPI()
+        {
+            var id = "1"
+            if let userID = DEFAULT.value(forKey: "USERID") as? String
+            {
+                id = userID
+            }
+            
+            let params = ["jobId" : self.jobId,
+                          "driverId" : id,
+                          "dispatcherId" : self.dispatcherId]   as [String : String]
+            
+            ApiHandler.ModelApiPostMethod(url: JOB_DETAILS_API, parameters: params) { (response, error) in
+                
+                if error == nil
+                {
+                    let decoder = JSONDecoder()
+                    do
+                    {
+                        self.JobDetailData = try decoder.decode(JobDetailMedel.self, from: response!)
+                        
+                        if self.JobDetailData?.code == "200"
+                            
+                        {
+                            NetworkEngine.showToast(controller: self, message: self.JobDetailData?.message ?? "")
 
+                        }
+                        else
+                        {
+                            self.view.makeToast(self.JobDetailData?.message)
+                            if self.JobDetailData?.data?.count ?? 0 > 0
+                            {
+                                var jobData = self.JobDetailData?.data?[0]
+                                
+                              
+                              self.companyName.text = jobData?.companyName ?? ""
+                                     self.emailTxt.text = jobData?.email ?? ""
+                                     self.locationTxt.text = jobData?.phone ?? ""
+                                     
+                                     self.stsrt_FromTxt.text = jobData?.startTime ?? ""
+                                     self.endTimeTxt.text = jobData?.endTime ?? ""
+                                     self.date_fromTxt.text = jobData?.dateFrom ?? ""
+                                     self.date_totxt.text = jobData?.dateTo ?? ""
+                                     
+//                                self.sourceLat = jobData?.p ?? ""
+//                                     self.sourceLong = jobData?.puplongitude ?? ""
+//
+                                 
+                                     
+                                     self.destinationLat = jobData?.drplatitude ?? ""
+                                     self.destinationLong = jobData?.drplongitude ?? ""
+                                     
+                                     
+                                      self.nameTxt.text = (jobData?.firstName ?? "") + " " + (jobData?.lastName ?? "")
+                                     
+                                     let d_add = (jobData?.drpStreet ?? "") + " " + (jobData?.drpCity ?? "")
+                                     
+                                     let d =  (jobData?.drpState ?? "") + " " + (self.jobData?.drpZipcode ?? "")
+                                     
+                                    self.dropOffAddress.text = d_add + " " + d
+                                     
+                                     let p_add = (jobData?.pupStreet ?? "") + " " + (jobData?.pupCity ?? "")
+                                         
+                                        let p = (jobData?.pupState ?? "") + " " + (jobData?.pupZipcode ?? "")
+                                            
+                                            
+                                     self.pickupAddress.text = p_add + " " + p
+                                     
+                                     self.sourceAdd = self.pickupAddress.text!
+                                     
+                                      self.destinationAdd = self.dropOffAddress.text!
+                                     
+                                     self.jobId = (jobData?.jobId ?? "")
+                                
+                                
+                            }
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        }
+                        
+                        
+                    }
+                    catch let error
+                    {
+                        self.view.makeToast(error.localizedDescription)
+                    }
+                    
+                }
+                else
+                {
+                    self.view.makeToast(error)
+                }
+            }
+        }
+        
 }

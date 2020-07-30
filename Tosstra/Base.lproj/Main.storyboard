@@ -87,7 +87,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="174"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="F0U-qi-pgQ">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="F0U-qi-pgQ" customClass="CLImageViewPopup" customModule="CLImageViewPopup">
                                             <rect key="frame" x="115" y="15" width="90" height="90"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="90" id="cZx-3C-M88"/>
@@ -6850,7 +6850,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JYz-Un-BpG">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="oGd-Jh-Hn0">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="oGd-Jh-Hn0" customClass="CLImageViewPopup" customModule="CLImageViewPopup">
                                                                 <rect key="frame" x="15" y="15" width="90" height="90"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="90" id="JTy-1b-kFc"/>

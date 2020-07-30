@@ -35,6 +35,9 @@ class DisJobDetailsVC: UIViewController {
     var jobId = ""
     var apiData:ForgotPasswordModel?
     var dispatcherId = ""
+    var driverId = ""
+    
+    
     var fromNoti = "no"
      var JobDetailData:JobDetailMedel?
     
@@ -177,6 +180,8 @@ class DisJobDetailsVC: UIViewController {
         vc.driverLat=self.driverLat
         vc.driverLong=self.driverLong
         vc.jobId = self.jobId
+        vc.driverId = self.driverId
+        
         vc.dispatcherId = self.dispatcherId
            
         self.navigationController?.pushViewController(vc, animated: true)
@@ -191,8 +196,10 @@ class DisJobDetailsVC: UIViewController {
            {
                id = userID
            }
+     
            
-           let params = ["userId" : id,
+           let params = ["dispatcherId" : id,
+                         "driverId" : self.driverId,
                          "jobId" : self.jobId]   as [String : String]
            
            ApiHandler.ModelApiPostMethod(url: END_JOB_API, parameters: params) { (response, error) in
@@ -245,6 +252,7 @@ class DisJobDetailsVC: UIViewController {
             }
             
             let params = ["jobId" : self.jobId,
+                           "driverId" : self.driverId,
                           "dispatcherId" : self.dispatcherId]   as [String : String]
             
             ApiHandler.ModelApiPostMethod(url: JOB_DETAILS_API, parameters: params) { (response, error) in

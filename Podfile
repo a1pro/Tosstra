@@ -18,4 +18,6 @@ pod 'Toast-Swift'
 pod 'SwiftyJSON'
 pod 'SDWebImage'
 pod 'Letters'
+pod "CLImageViewPopup"
+
 end

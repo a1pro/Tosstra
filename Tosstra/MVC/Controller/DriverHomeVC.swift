@@ -273,16 +273,20 @@ extension DriverHomeVC
         
         self.clusterView.isHidden = false
         
+        if self.allMarkerArray.count>0
+        {
+          self.allMarkerArray.removeAllObjects()
+        }
+        
+        
         var id = ""
         if let userID = DEFAULT.value(forKey: "USERID") as? String
         {
             id = userID
         }
         
-        let params = ["userId" : id,
-                      "latitude" : "\(CURRENTLOCATIONLAT)",
-            "longitude" : "\(CURRENTLOCATIONLONG)",
-            "distance" : "2000"]   as [String : String]
+        
+        let params = ["userId" : id]   as [String : String]
         
         ApiHandler.PostMethod(url: GET_ALLJOB_API, parameters: params) { (response, error) in
             
@@ -310,7 +314,8 @@ extension DriverHomeVC
                             
                                 }
                 
-                            
+                            self.myCollection.reloadData()
+                        self.showPartyMarkers()
                            }
                            self.myCollection.reloadData()
                            self.showPartyMarkers()
@@ -318,6 +323,7 @@ extension DriverHomeVC
                        else
                        {
                           self.view.makeToast(error)
+                        self.myCollection.reloadData()
                        }
         }
     }
@@ -753,18 +759,18 @@ extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICol
     cell.aceeptBtn.addTarget(self, action: #selector(aceeptBtnAct), for: UIControl.Event.touchUpInside)
         
         
-        if let driverId = dict.value(forKey: "driverId") as? String
+        if let driverId = dict.value(forKey: "jobStatus") as? String
         {
             print(driverId)
             
             if  driverId != "0"
             {
                 
-                let workStartStatus = dict.value(forKey: "workStartStatus") as? String ?? ""
+                let workStartStatus = dict.value(forKey: "jobStatus") as? String ?? ""
                 
                 if workStartStatus == "1"
                 {
-                     cell.rejectBtn.setTitle("Started", for: UIControl.State.normal)
+                     cell.rejectBtn.setTitle("Start", for: UIControl.State.normal)
                 }
                 else
                 {
@@ -787,6 +793,7 @@ extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICol
         else
        {
          cell.rejectBtn.setTitle("Reject", for: UIControl.State.normal)
+        
         cell.rejectBtn.isHidden=false
         cell.aceeptBtn.isHidden=false
      }

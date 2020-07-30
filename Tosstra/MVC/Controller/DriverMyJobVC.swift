@@ -103,7 +103,7 @@ extension DriverMyJobVC:UITableViewDelegate,UITableViewDataSource
         cell.startBtn.tag = indexPath.row
         cell.startBtn.addTarget(self, action: #selector(startBtnAct), for: UIControl.Event.touchUpInside)
         
-        if let status = celldData?.workStartStatus
+        if let status = celldData?.jobStartStatus
         {
             if status == "1"
             {
@@ -140,15 +140,16 @@ extension DriverMyJobVC:UITableViewDelegate,UITableViewDataSource
         let celldData =  self.jobData?.data?.reversed()[indexPath.row]
         
         
-        if let status = celldData?.workStartStatus
+        if let status = celldData?.jobStartStatus
               {
                   if status == "1"
                   {
                     
                       let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobDetailVC") as! DriverJobDetailVC
-                                 vc.jobData = celldData
-                                 
-                                 self.navigationController?.pushViewController(vc, animated: true)
+                    vc.jobData = celldData
+                vc.jobId = celldData?.jobId ?? ""
+                vc.dispatcherId = celldData?.dispatcherId ?? ""
+                self.navigationController?.pushViewController(vc, animated: true)
                       
                   }
                   else
@@ -193,7 +194,8 @@ extension DriverMyJobVC:UITableViewDelegate,UITableViewDataSource
         {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobDetailVC") as! DriverJobDetailVC
             vc.jobData = celldData
-            
+            vc.jobId = celldData?.jobId ?? ""
+            vc.dispatcherId = celldData?.dispatcherId ?? ""
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else

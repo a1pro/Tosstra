@@ -61,6 +61,7 @@ struct JobDatum2 : Codable {
         let updatedAt : String?
         let userType : String?
         let workStartStatus : String?
+    let jobStatus : String?
     
     let drplatitude : String?
            let drplongitude : String?
@@ -127,6 +128,9 @@ struct JobDatum2 : Codable {
                        case driverprofileImg = "driverprofileImg"
                        case driveremail = "driveremail"
             case driverphone = "driverphone"
+            
+             case jobStatus = "jobStatus"
+            
                        
             
             
