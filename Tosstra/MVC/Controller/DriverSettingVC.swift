@@ -73,12 +73,12 @@ extension DriverSettingVC:UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         
-      
+        
         if indexPath.row == 0
         {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "StatticVC") as! StatticVC
             vc.url = Terms_and_Conditions
-               vc.pageTitle = "Term of Services"
+            vc.pageTitle = "Term of Services"
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else if indexPath.row == 1
@@ -207,7 +207,7 @@ extension DriverSettingVC
                     if self.viewProfiledata?.code == "200"
                         
                     {
-                       
+                        
                         NetworkEngine.showToast(controller: self, message: self.viewProfiledata?.message)
                     }
                     else
@@ -278,9 +278,9 @@ extension DriverSettingVC
                     if self.viewProfiledata?.code == "200"
                         
                     {
-                    
-                      NetworkEngine.showToast(controller: self, message: self.viewProfiledata?.message)
-
+                        
+                        NetworkEngine.showToast(controller: self, message: self.viewProfiledata?.message)
+                        
                     }
                     else
                     {

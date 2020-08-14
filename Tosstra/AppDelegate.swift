@@ -14,13 +14,23 @@ import GooglePlaces
 import KYDrawerController
 import UserNotifications
 import UserNotificationsUI
+import CoreLocation
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate {
     
-    
+    var gameTimer: Timer?
+    var locationManager = CLLocationManager()
+
     var window: UIWindow?
+    var bgTask:UIBackgroundTaskIdentifier?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(AppDelegate.onAppWillTerminate), name:UIApplication.willTerminateNotification, object:nil)
+
+        
+        
         IQKeyboardManager.shared.enable=true
         IQKeyboardManager.shared.shouldResignOnTouchOutside=true
         GMSPlacesClient.provideAPIKey("AIzaSyCmujmy2_NQH2T4OGWOcwV2wp6QhOc3t28")
@@ -137,6 +147,91 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+//self.scheduleNotification(notificationType: "applicationDidEnterBackground")
+        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+
+        bgTask = application.beginBackgroundTask(withName:"MyBackgroundTask", expirationHandler: {() -> Void in
+            // Do something to stop our background task or the app will be killed
+            application.endBackgroundTask(self.bgTask!)
+            //self.bgTask = UIBackgroundTaskIdentifier.invalid
+        })
+
+        DispatchQueue.global(qos: .background).async {
+            //make your API call here
+            
+            if let type = DEFAULT.value(forKey: "USERTYPE") as? String
+                 {
+                     
+                     if type == "Dispatcher"
+                     {
+                        // loadHomeView()
+                     }
+                     else
+                     {
+                        // loadDriverHomeView()
+                        self.gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: true)
+                        
+                     }
+                     
+                     
+                 }
+                 else
+                 {
+                     //loadLoginView()
+                     
+                 }
+            print("Api call")
+        }
+        // Perform your background task here
+        print("The task has started")
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        print("applicationWillResignActive")
+
+    }
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        print("applicationDidBecomeActive")
+
+    }
+    func applicationWillTerminate(_ application: UIApplication) {
+        
+       // self.scheduleNotification(notificationType: "applicationWillTerminate")
+
+        DispatchQueue.global(qos: .background).async {
+                   //make your API call here
+                   
+                   if let type = DEFAULT.value(forKey: "USERTYPE") as? String
+                        {
+                            
+                            if type == "Dispatcher"
+                            {
+                               // loadHomeView()
+                            }
+                            else
+                            {
+                               // loadDriverHomeView()
+                               self.gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: true)
+                               
+                            }
+                            
+                            
+                        }
+                        else
+                        {
+                            //loadLoginView()
+                            
+                        }
+                   print("Api call")
+               }
+    }
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        self.gameTimer?.invalidate()
+    }
+    
     // MARK: - Core Data stack
     
     lazy var persistentContainer: NSPersistentContainer = {
@@ -181,7 +276,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             }
         }
     }
-    
+  func scheduleNotification(notificationType: String) {
+        let notificationCenter  = UNUserNotificationCenter.current()
+
+        let content = UNMutableNotificationContent() // Содержимое уведомления
+        let userActions = "User Actions"
+        
+        content.title = notificationType
+        content.body = "This is example how to create " + notificationType
+        content.sound = UNNotificationSound.default
+        content.badge = 1
+        content.categoryIdentifier = userActions
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let identifier = "Local Notification"
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        
+        notificationCenter.add(request) { (error) in
+            if let error = error {
+                print("Error \(error.localizedDescription)")
+            }
+        }
+        
+        let snoozeAction = UNNotificationAction(identifier: "Snooze", title: "Snooze", options: [])
+        let deleteAction = UNNotificationAction(identifier: "Delete", title: "Delete", options: [.destructive])
+        let category = UNNotificationCategory(identifier: userActions, actions: [snoozeAction, deleteAction], intentIdentifiers: [], options: [])
+        
+        notificationCenter.setNotificationCategories([category])
+    }
     
     //MARK:-- remote notifications methods---
     func registerForRemoteNotification() {
@@ -366,5 +488,158 @@ func application(_ application: UIApplication, didRegisterForRemoteNotifications
     UserDefaults.standard.synchronize()
     
 }
+    
+    
+   @objc func onAppWillTerminate(notification:NSNotification)
+    {
+      print("onAppWillTerminate")
+        DispatchQueue.global(qos: .background).async {
+                 //make your API call here
+                 
+                 if let type = DEFAULT.value(forKey: "USERTYPE") as? String
+                      {
+                          
+                          if type == "Dispatcher"
+                          {
+                             // loadHomeView()
+                          }
+                          else
+                          {
+                             // loadDriverHomeView()
+                             self.gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: true)
+                             
+                          }
+                          
+                          
+                      }
+                      else
+                      {
+                          //loadLoginView()
+                          
+                      }
+                 print("Api call")
+             }
+    }
 }
+//MARK:- location work
 
+extension AppDelegate:CLLocationManagerDelegate
+{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let _ :CLLocation = locations[0] as CLLocation
+        print("didUpdateLocations \(locations)")
+        //let trigger = UNLocationNotificationTrigger(region: locations, repeats:false)
+        //   APPDEL.scheduleNotification(notificationType: "amar")
+        //self.scheduleNotification(notificationType: "\(locations)")
+        
+        if let lastLocation = locations.last
+        {
+            
+            
+            let latitude = lastLocation.coordinate.latitude
+            let longitude = lastLocation.coordinate.longitude
+            
+            DEFAULT.set("\(latitude)", forKey: "CURRENTLAT")
+            DEFAULT.set("\(longitude)", forKey: "CURRENTLONG")
+            
+            if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
+            {
+                if status == "1"
+                {
+                    if latitude != CURRENTLOCATIONLAT || longitude != CURRENTLOCATIONLONG
+                    {
+                        
+                        let coordinate₀ = CLLocation(latitude: CURRENTLOCATIONLAT, longitude: CURRENTLOCATIONLONG)
+                        let coordinate₁ = CLLocation(latitude: latitude, longitude: longitude)
+
+                        let distanceInMeters = coordinate₀.distance(from: coordinate₁)
+                        
+                        print("distanceInMeters = \(distanceInMeters)")
+                        
+                        
+//                        if(distanceInMeters <= 1609)
+//                         {
+//                         // under 1 mile
+//                         }
+//                         else
+//                        {
+                         CURRENTLOCATIONLAT = latitude
+                            CURRENTLOCATIONLONG = longitude
+                                              
+                        self.UserStatusAPI()
+                         //}
+                        
+                       
+                    }
+                    
+                    
+                    
+                }
+            }
+            
+            
+            
+            
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        print(error)
+    }
+    //MARK:- Change Status Account
+       func UserStatusAPI()
+       {
+           
+           
+           var id = ""
+           if let userID = DEFAULT.value(forKey: "USERID") as? String
+           {
+               id = userID
+           }
+           
+           let params = ["userId" : id,
+                         "onlineStatus" : "1",
+                         "latitude" : "\(CURRENTLOCATIONLAT)",
+                        "longitude" : "\(CURRENTLOCATIONLONG)"]   as [String : String]
+        
+        print(params)
+           
+           ApiHandler.ModelApiPostMethod2(url: CHANGE_ONLINESTATUS_API, parameters: params) { (response, error) in
+               
+               if error == nil
+               {
+                   let decoder = JSONDecoder()
+                   do
+                   {
+                      
+                       
+                       
+                   }
+                   catch let error
+                   {
+                       print(error.localizedDescription)
+                   }
+                   
+               }
+               else
+               {
+                 print(error)
+
+               }
+           }
+       }
+    
+    @objc func runTimedCode()
+    {
+       locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.allowsBackgroundLocationUpdates=true
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        
+    }
+}

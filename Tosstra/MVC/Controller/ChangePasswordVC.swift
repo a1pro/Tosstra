@@ -85,13 +85,13 @@ extension ChangePasswordVC
     func ChangePasswordAPI()
     {
         var id = ""
-               if let userID = DEFAULT.value(forKey: "USERID") as? String
-               {
-                   id = userID
-               }
+        if let userID = DEFAULT.value(forKey: "USERID") as? String
+        {
+            id = userID
+        }
         
         let params = ["userId" : id,
-            "oldPassword" : otpTxt.text!,
+                      "oldPassword" : otpTxt.text!,
                       "newPassword" : newPassswordTxt.text!,
                       "confirm_password" : confirmPassTxt.text!]   as [String : String]
         
@@ -108,7 +108,7 @@ extension ChangePasswordVC
                         
                     {
                         NetworkEngine.showToast(controller: self, message: self.apiData?.message ?? "")
-
+                        
                     }
                     else
                     {

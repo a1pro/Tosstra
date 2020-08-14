@@ -34,16 +34,16 @@ class DisSigninVC: UIViewController,CLLocationManagerDelegate {
     var coutry = ""
     var selectedLocation = ""
     var selectedAge = ""
-       var selectedGender = ""
-       var selectedLookingFor = ""
-       var fromGender = ""
-       
-       var contactNumber = ""
-       var lookingFor = ""
-       var aboutMe = ""
-       var country_code = ""
-       var state = ""
-       var city = ""
+    var selectedGender = ""
+    var selectedLookingFor = ""
+    var fromGender = ""
+    
+    var contactNumber = ""
+    var lookingFor = ""
+    var aboutMe = ""
+    var country_code = ""
+    var state = ""
+    var city = ""
     // For location
     let manager = CLLocationManager()
     var signInData:Dis_Login_Model?
@@ -65,9 +65,9 @@ class DisSigninVC: UIViewController,CLLocationManagerDelegate {
                                                         attributes: underLineText)
         forGotBtn.setAttributedTitle(attributeString, for: .normal)
         manager.delegate = self
-               manager.desiredAccuracy = kCLLocationAccuracyBest
-               manager.requestWhenInUseAuthorization()
-               manager.startUpdatingLocation()
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
     }
     
     @IBAction func goBackBtn(_ sender: Any)
@@ -119,7 +119,7 @@ class DisSigninVC: UIViewController,CLLocationManagerDelegate {
             }
             
         }
-  
+        
         
         
     }
@@ -148,18 +148,18 @@ extension DisSigninVC
     func SignInWithEmailAPI()
     {
         var DEVICETOKEN = "12312"
-               if let userID = DEFAULT.value(forKey: "DEVICETOKEN") as? String
-               {
-                   DEVICETOKEN = userID
-               }
+        if let userID = DEFAULT.value(forKey: "DEVICETOKEN") as? String
+        {
+            DEVICETOKEN = userID
+        }
         
         
         let params = ["email" : userNameTxt.text!,
                       "password" : passwordTxt.text!,
                       "latitude" : "\(CURRENTLOCATIONLAT)",
-                      "longitude" : "\(CURRENTLOCATIONLONG)",
-                      "deviceId" : DEVICETOKEN,
-                      "deviceType" : DEVICETYPE]   as [String : String]
+            "longitude" : "\(CURRENTLOCATIONLONG)",
+            "deviceId" : DEVICETOKEN,
+            "deviceType" : DEVICETYPE]   as [String : String]
         
         ApiHandler.ModelApiPostMethod(url: DISPATCHER_LOGIN_API, parameters: params) { (response, error) in
             
@@ -173,7 +173,7 @@ extension DisSigninVC
                     if self.signInData?.code == "200"
                         
                     {
-                   
+                        
                         NetworkEngine.showToast(controller: self, message: self.signInData?.message)
                         
                         
@@ -182,7 +182,7 @@ extension DisSigninVC
                     {
                         let count = self.signInData?.data?.count ?? 0
                         
-                         NetworkEngine.showToast(controller: self, message: self.signInData?.message)
+                        //NetworkEngine.showToast(controller: self, message: self.signInData?.message)
                         
                         if count > 0
                         {
@@ -287,7 +287,7 @@ extension DisSigninVC
                         DEFAULT.set("\(longitude)", forKey: "CURRENTLONG")
                         //  self?.CompanyLocationTF.text! = address
                         self?.manager.stopUpdatingLocation()
-                       
+                        
                     }
                 }
             }

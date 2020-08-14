@@ -71,12 +71,12 @@ class ActiveDriverVC: UIViewController {
         super.viewDidLoad()
         myTable.delegate=self
         myTable.dataSource=self
-         refrshBtn.isHidden=true
+        refrshBtn.isHidden=true
         myTable.separatorStyle = .none
         myTable.register(UINib(nibName: "ActiveDriverTCell", bundle: nil), forCellReuseIdentifier: "ActiveDriverTCell")
         
         myTable.register(UINib(nibName: "DisEndJonTCell", bundle: nil), forCellReuseIdentifier: "DisEndJonTCell")
-        
+        locationCheck()
         self.mapView.isHidden = true
         self.listView.isHidden = false
         self.customInfoWindow = markerDetailView().loadView()
@@ -102,6 +102,7 @@ class ActiveDriverVC: UIViewController {
     
     @objc private func refreshData(_ sender: Any)
     {
+        locationCheck()
         if !(NetworkEngine.networkEngineObj.isInternetAvailable())
         {
             NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
@@ -143,16 +144,16 @@ class ActiveDriverVC: UIViewController {
     }
     
     @IBAction func refreshAct(_ sender: UIButton)
-       {
-          if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-          {
-              NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-          }
-          else
-          {
-              self.allActiveDriverAPI()
-          }
-       }
+    {
+        if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+        {
+            NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+        }
+        else
+        {
+            self.allActiveDriverAPI()
+        }
+    }
     
     @objc func PhoneCallAct(_ sender:UIButton)
     {
@@ -172,48 +173,48 @@ class ActiveDriverVC: UIViewController {
         
         if self.checkArray.count>0
         {
-             let alert = UIAlertController(title: "Alert", message: "Are you sure you want to end job?", preferredStyle: UIAlertController.Style.alert)
-                 alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
-                     print("Handle Cancel Logic here")
-                 }))
-                 alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
-                     if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-                     {
-                         NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-                     }
-                     else
-                     {
-                         if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-                         {
-                             NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-                         }
-                         else
-                         {
-                             
-                             
-                             self.jobIds = self.selectedDriverArray.componentsJoined(by: ",")
-                            self.driverIds = self.selectedJobArray.componentsJoined(by: ",")
-                            
-                            print(self.jobIds)
-                            print(self.driverIds)
-                            self.EndJobStartAPI()
-                             
-                             
-                         }
-                     }
-                     
-                     
-                 }))
-                 
-                 present(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Alert", message: "Are you sure you want to end job?", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+                if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                {
+                    NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                }
+                else
+                {
+                    if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                    {
+                        NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                    }
+                    else
+                    {
+                        
+                        
+                        self.jobIds = self.selectedDriverArray.componentsJoined(by: ",")
+                        self.driverIds = self.selectedJobArray.componentsJoined(by: ",")
+                        
+                        print(self.jobIds)
+                        print(self.driverIds)
+                        self.EndJobStartAPI()
+                        
+                        
+                    }
+                }
+                
+                
+            }))
+            
+            present(alert, animated: true, completion: nil)
             
         }
         else
         {
-           NetworkEngine.commonAlert(message: "Please select driver to end job.", vc: self)
+            NetworkEngine.commonAlert(message: "Please select driver to end job.", vc: self)
             
         }
-     
+        
     }
     
     
@@ -222,14 +223,14 @@ class ActiveDriverVC: UIViewController {
     {
         
         
-//        if self.selectedDriverArray.count>0
-//        {
-//            self.selectedDriverArray.removeAllObjects()
-//        }
-//        if self.selectedJobArray.count>0
-//               {
-//                   self.selectedJobArray.removeAllObjects()
-//               }
+        //        if self.selectedDriverArray.count>0
+        //        {
+        //            self.selectedDriverArray.removeAllObjects()
+        //        }
+        //        if self.selectedJobArray.count>0
+        //               {
+        //                   self.selectedJobArray.removeAllObjects()
+        //               }
         if self.selectedgroupCatArray.count>0
         {
             self.selectedgroupCatArray.removeAllObjects()
@@ -288,8 +289,8 @@ extension ActiveDriverVC:UITableViewDelegate,UITableViewDataSource
             if self.checkArray.contains(indexPath.row)
             {
                 let id = dict.value(forKey: "jobId") as? String ?? ""
-                 let driverId = dict.value(forKey: "driverId") as? String ?? ""
-                 let dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
+                let driverId = dict.value(forKey: "driverId") as? String ?? ""
+                let dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
                 
                 if self.selectedJobArray.contains(driverId)
                 {
@@ -297,7 +298,7 @@ extension ActiveDriverVC:UITableViewDelegate,UITableViewDataSource
                 }
                 else
                 {
-                
+                    
                     
                     self.selectedJobArray.add(driverId)
                     self.selectedDriverArray.add(id)
@@ -418,8 +419,8 @@ extension ActiveDriverVC
             }
             else
             {
-               self.myTable.reloadData()
-                 NetworkEngine.showToast(controller: self, message: error)
+                self.myTable.reloadData()
+                NetworkEngine.showToast(controller: self, message: error)
             }
         }
     }
@@ -477,7 +478,7 @@ extension ActiveDriverVC
                 let decoder = JSONDecoder()
                 do
                 {
-                   // self.allActiveDriverAPI()
+                    // self.allActiveDriverAPI()
                     self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
                     
                     self.myTable.reloadData()
@@ -519,12 +520,12 @@ extension ActiveDriverVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelega
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisJobDetailsVC") as! DisJobDetailsVC
         
         if let dict = self.allMarkerArray.object(at: sender.tag) as? NSDictionary
-               {
-                   vc.fromNoti = "no"
-                   vc.jobId = dict.value(forKey: "jobId") as? String ?? ""
-                vc.driverId = dict.value(forKey: "driverId") as? String ?? ""
-                   vc.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
-               }
+        {
+            vc.fromNoti = "no"
+            vc.jobId = dict.value(forKey: "jobId") as? String ?? ""
+            vc.driverId = dict.value(forKey: "driverId") as? String ?? ""
+            vc.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
+        }
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -751,31 +752,48 @@ extension ActiveDriverVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelega
         self.dismiss(animated: true, completion: nil)
     }
     
-    func locationCheck()
-    {
-        if CLLocationManager.locationServicesEnabled()
-        {
-            switch CLLocationManager.authorizationStatus()
-            {
-            case .notDetermined, .restricted, .denied:
-                print("No access")
-                
-                
-            case .authorizedAlways, .authorizedWhenInUse:
-                print("Access")
-                
-                locationManager.requestWhenInUseAuthorization()
-                locationManager.startUpdatingLocation()
-                locationManager.startMonitoringSignificantLocationChanges()
-                
-            }
-        }
-        else {
-            print("Location services are not enabled")
-            
-            
-        }
-    }
+     func locationCheck()
+      {
+
+          if CLLocationManager.locationServicesEnabled()
+                {
+                    switch CLLocationManager.authorizationStatus()
+                    {
+                    case .notDetermined, .restricted, .denied:
+                        print("No access")
+                        
+                        let alertController = UIAlertController(title: "Enable GPS", message: "GPS is not enable.Do you want to go setting menu.", preferredStyle: .alert)
+                        
+                        let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel, handler: nil)
+                        let settingsAction = UIAlertAction(title: "SETTING", style: .default) { (UIAlertAction) in
+                            UIApplication.shared.openURL(NSURL(string: UIApplication.openSettingsURLString)! as URL)
+                        }
+                        
+                        alertController.addAction(cancelAction)
+                        alertController.addAction(settingsAction)
+                        self.present(alertController, animated: true, completion: nil)
+                    case .authorizedAlways, .authorizedWhenInUse:
+                        print("Access")
+                      
+                      locationManager.requestWhenInUseAuthorization()
+                      locationManager.startUpdatingLocation()
+                      locationManager.startMonitoringSignificantLocationChanges()
+                    }
+                }
+                else {
+                    print("Location services are not enabled")
+                    let alertController = UIAlertController(title: "Enable GPS", message: "GPS is not enable.Do you want to go setting menu.", preferredStyle: .alert)
+                    
+                    let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel, handler: nil)
+                    let settingsAction = UIAlertAction(title: "SETTING", style: .default) { (UIAlertAction) in
+                        UIApplication.shared.openURL(NSURL(string: UIApplication.openSettingsURLString)! as URL)
+                    }
+                    
+                    alertController.addAction(cancelAction)
+                    alertController.addAction(settingsAction)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+      }
     
 }
 extension ActiveDriverVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
@@ -867,7 +885,7 @@ extension ActiveDriverVC:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DisJobDetailsVC") as! DisJobDetailsVC
-       
+        
         if let dict = self.allMarkerArray.object(at: indexPath.row) as? NSDictionary
         {
             vc.fromNoti = "no"

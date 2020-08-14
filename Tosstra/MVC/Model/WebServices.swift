@@ -91,3 +91,5 @@ let END_JOB_API = BASEURL + "end-Driver-Job"
 
 let JOB_DETAILS_API = BASEURL + "get-Single-Job-Data"
 
+let NOTIFICATION_15MINS_API = BASEURL + "driver-Location-Point"
+

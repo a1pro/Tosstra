@@ -19,16 +19,16 @@ class DisjobDescriptionVC: UIViewController {
     
     @IBOutlet weak var amountTxt: UITextField!
     @IBOutlet weak var p_stresttxt: UITextView!
-  //  @IBOutlet weak var p_stateTxt: UITextField!
+    //  @IBOutlet weak var p_stateTxt: UITextField!
     
-   // @IBOutlet weak var p_zipTxt: UITextField!
-   // @IBOutlet weak var p_cityTxt: UITextField!
+    // @IBOutlet weak var p_zipTxt: UITextField!
+    // @IBOutlet weak var p_cityTxt: UITextField!
     
     @IBOutlet weak var d_stresttxt: UITextView!
     
     
     //@IBOutlet weak var d_zipTxt: UITextField!
- 
+    
     
     @IBOutlet weak var stsrt_FromTxt: UITextField!
     
@@ -44,7 +44,7 @@ class DisjobDescriptionVC: UIViewController {
     var apiData:ForgotPasswordModel?
     
     var puplongitude = ""
-   var puplatitude = ""
+    var puplatitude = ""
     var drplatitude = ""
     var drplongitude = ""
     
@@ -85,53 +85,53 @@ class DisjobDescriptionVC: UIViewController {
         
         
     }
-  @IBAction func locationAct(_ sender: UIButton)
-          {
-           let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "ChooseAddressVC") as! ChooseAddressVC
-            if sender.tag == 0
+    @IBAction func locationAct(_ sender: UIButton)
+    {
+        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "ChooseAddressVC") as! ChooseAddressVC
+        if sender.tag == 0
+        {
+            self.isPickUp=true
+        }
+        else
+        {
+            self.isPickUp=false
+        }
+        
+        self.navigationController?.pushViewController(locationSearchTable, animated: true)
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if let loc = DEFAULT.value(forKey: "CHOOSENLOC") as? String
+        {
+            
+            
+            print("location = \(loc)")
+            print("isPickUp = \(isPickUp)")
+            
+            
+            if isPickUp
             {
-               self.isPickUp=true
+                self.puplatitude  = DEFAULT.value(forKey: "CHOOSENLAT") as? String ?? "30.99"
+                self.puplongitude = DEFAULT.value(forKey: "CHOOSENLONG") as? String ?? "76.9889"
+                self.p_stresttxt.text = loc
             }
             else
             {
-                self.isPickUp=false
+                self.drplatitude = DEFAULT.value(forKey: "CHOOSENLAT") as? String ?? "30.99"
+                self.drplongitude = DEFAULT.value(forKey: "CHOOSENLONG") as? String ?? "76.9889"
+                self.d_stresttxt.text = loc
             }
             
-           self.navigationController?.pushViewController(locationSearchTable, animated: true)
-    
-          }
-    override func viewWillAppear(_ animated: Bool) {
-              super.viewWillAppear(true)
-              
-              if let loc = DEFAULT.value(forKey: "CHOOSENLOC") as? String
-              {
-                 
-                
-                print("location = \(loc)")
-                print("isPickUp = \(isPickUp)")
-                
-                
-                if isPickUp
-                {
-                    self.puplatitude  = DEFAULT.value(forKey: "CHOOSENLAT") as? String ?? "30.99"
-                    self.puplongitude = DEFAULT.value(forKey: "CHOOSENLONG") as? String ?? "76.9889"
-                     self.p_stresttxt.text = loc
-                }
-               else
-                {
-                    self.drplatitude = DEFAULT.value(forKey: "CHOOSENLAT") as? String ?? "30.99"
-                self.drplongitude = DEFAULT.value(forKey: "CHOOSENLONG") as? String ?? "76.9889"
-                    self.d_stresttxt.text = loc
-                }
-                
-                
-                  DEFAULT.removeObject(forKey: "CHOOSENLOC")
-                  DEFAULT.synchronize()
-                
-              }
-              
-              
-          }
+            
+            DEFAULT.removeObject(forKey: "CHOOSENLOC")
+            DEFAULT.synchronize()
+            
+        }
+        
+        
+    }
     
     @IBAction func MenuAct(_ sender: UIButton)
     {
@@ -144,27 +144,27 @@ class DisjobDescriptionVC: UIViewController {
     @IBAction func sendJobAct(_ sender: UIButton)
     {
         if amountTxt.text == "" || p_stresttxt.text == ""  || d_stresttxt.text == "" || date_totxt.text == "" || date_fromTxt.text == "" || stsrt_FromTxt.text == "" || endTimeTxt.text == ""
-                       {
-                           
-                           NetworkEngine.commonAlert(message: "Please fill all details.", vc: self)
-                           
-                       }
-                    
-
-                       else
-                       {
-                           
-                           if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-                           {
-                               NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-                           }
-                           else
-                           {
-                             self.CreateJobAPI()
-                           }
-                           
-                       }
-
+        {
+            
+            NetworkEngine.commonAlert(message: "Please fill all details.", vc: self)
+            
+        }
+            
+            
+        else
+        {
+            
+            if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+            {
+                NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+            }
+            else
+            {
+                self.CreateJobAPI()
+            }
+            
+        }
+        
     }
     
 }
@@ -197,8 +197,8 @@ extension DisjobDescriptionVC:UITextFieldDelegate
         }
         
         
-               datePicker.setValue(CALENDERCOLOL, forKeyPath: "textColor")
-                self.datePicker.setValue(true, forKey: "highlightsToday")
+        datePicker.setValue(CALENDERCOLOL, forKeyPath: "textColor")
+        self.datePicker.setValue(true, forKey: "highlightsToday")
         
         
         datePicker.backgroundColor = UIColor.white
@@ -237,7 +237,7 @@ extension DisjobDescriptionVC:UITextFieldDelegate
     
     @objc func dateChange()
     {
-      let formatter = DateFormatter()
+        let formatter = DateFormatter()
         //formatter.dateFormat = "dd/MM/yyyy"
         if self.currentTag == 0 || self.currentTag == 1
         {
@@ -341,91 +341,91 @@ extension DisjobDescriptionVC:UITextFieldDelegate
 extension DisjobDescriptionVC
 {
     //MARK:- Create job Api
-       
-       func CreateJobAPI()
-       {
-           var useriD="1"
-         var rateType="perHours"
-                  if let id = DEFAULT.value(forKey: "USERID") as? String
-                  {
-                      useriD=id
-                  }
+    
+    func CreateJobAPI()
+    {
+        var useriD="1"
+        var rateType="perHours"
+        if let id = DEFAULT.value(forKey: "USERID") as? String
+        {
+            useriD=id
+        }
         if segmentedControl.selectedSegmentIndex == 0
         {
-          rateType="perHours"
+            rateType="perHours"
         }
         else{
             rateType="perLoad"
         }
-                  
-      
+        
+        
         let params = ["dispatcherId" : useriD,
                       "offerForSelectedDrivers" : self.offerForSelectedDrivers,
                       "rateType" : rateType,
-                         "rate" : amountTxt.text!,
-                         "pupStreet" : p_stresttxt.text!,
-                         "pupCity" : "",
-                         "pupState" : "",
-                         "pupZipcode" : "",
-                         "drpStreet" : d_stresttxt.text!,
-                         "drpCity" : "",
-                         "drpState" : "",
-                         "drpZipcode" : "",
-                         "dateFrom" : date_fromTxt.text!,
-                         "dateTo" : date_totxt.text!,
-                         "startTime" : stsrt_FromTxt.text!,
-                         "endTime" : endTimeTxt.text!,
-                         
-                         "puplongitude" : self.puplongitude,
-                         "puplatitude" : self.puplatitude,
-                         "drplatitude" : self.drplatitude,
-                         "drplongitude" : self.drplongitude,
-                         
-                          "additinal_Instructions" : addInfoText.text!]   as [String : String]
-           
-           ApiHandler.ModelApiPostMethod(url: CREATE_JOB_API, parameters: params) { (response, error) in
-               
-               if error == nil
-               {
-                   let decoder = JSONDecoder()
-                   do
-                   {
-                       self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
+                      "rate" : amountTxt.text!,
+                      "pupStreet" : p_stresttxt.text!,
+                      "pupCity" : "",
+                      "pupState" : "",
+                      "pupZipcode" : "",
+                      "drpStreet" : d_stresttxt.text!,
+                      "drpCity" : "",
+                      "drpState" : "",
+                      "drpZipcode" : "",
+                      "dateFrom" : date_fromTxt.text!,
+                      "dateTo" : date_totxt.text!,
+                      "startTime" : stsrt_FromTxt.text!,
+                      "endTime" : endTimeTxt.text!,
+                      
+                      "puplongitude" : self.puplongitude,
+                      "puplatitude" : self.puplatitude,
+                      "drplatitude" : self.drplatitude,
+                      "drplongitude" : self.drplongitude,
+                      
+                      "additinal_Instructions" : addInfoText.text!]   as [String : String]
+        
+        ApiHandler.ModelApiPostMethod(url: CREATE_JOB_API, parameters: params) { (response, error) in
+            
+            if error == nil
+            {
+                let decoder = JSONDecoder()
+                do
+                {
+                    self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
                     
                     if self.apiData?.code == "200"
-                           
-                       {
-                         
-          NetworkEngine.showToast(controller: self, message: self.apiData?.message)
-                       }
-                       else
-                       {
-                     
-                         self.view.makeToast(self.apiData?.message)
-                          if #available(iOS 13.0, *) {
-                                                              SCENEDEL.loadHomeView()
-                                                              
-                                                          }
-                                                          else
-                                                          {
-                                                              APPDEL.loadHomeView()
-                                                          }
-                       
+                        
+                    {
+                        
+                        NetworkEngine.showToast(controller: self, message: self.apiData?.message)
                     }
-                   }
-                   catch let error
-                   {
-                       self.view.makeToast(error.localizedDescription)
-                   }
-                   
-               }
-               else
-               {
-                   self.view.makeToast(error)
-               }
-           }
-       }
-       
+                    else
+                    {
+                        
+                        self.view.makeToast(self.apiData?.message)
+                        if #available(iOS 13.0, *) {
+                            SCENEDEL.loadHomeView()
+                            
+                        }
+                        else
+                        {
+                            APPDEL.loadHomeView()
+                        }
+                        
+                    }
+                }
+                catch let error
+                {
+                    self.view.makeToast(error.localizedDescription)
+                }
+                
+            }
+            else
+            {
+                self.view.makeToast(error)
+            }
+        }
+    }
+    
 }
 
 

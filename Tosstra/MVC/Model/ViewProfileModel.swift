@@ -45,7 +45,8 @@ struct ViewProfileDatum : Codable {
         let createdAt : String?
         let updatedAt : String?
      let onlineStatus : String?
-
+    let latitude : String?
+    let longitude : String?
         enum CodingKeys: String, CodingKey {
                 case id = "id"
                 case firstName = "firstName"
@@ -66,6 +67,8 @@ struct ViewProfileDatum : Codable {
                 case createdAt = "created_at"
                 case updatedAt = "updated_at"
             case onlineStatus = "onlineStatus"
+            case latitude = "latitude"
+            case longitude = "longitude"
         }
     
       

@@ -15,7 +15,6 @@ import CoreLocation
 
 class DriverHomeVC: UIViewController {
     //MARK:- MAp work
-    
     @IBOutlet weak var myMapView: GMSMapView!
     
     @IBOutlet weak var onOfflineLbl: UILabel!
@@ -34,16 +33,16 @@ class DriverHomeVC: UIViewController {
     public var latitude:Double = 28.6517752463408
     
     var onlineStatus = "0"
-     //MARK:- Market task
+    //MARK:- Market task
     var allMarkerArray = NSMutableArray()
     
     var allMarkerArray1 = NSMutableArray()
     
     
-       var allMarkerArray2 = NSMutableArray()
+    var allMarkerArray2 = NSMutableArray()
     var markers = [GMSMarker]()
-   
-     var selectedMarkerIndex=0
+    
+    var selectedMarkerIndex=0
     var customInfoWindow : markerDetailView?
     var tappedMarker : GMSMarker?
     
@@ -56,6 +55,7 @@ class DriverHomeVC: UIViewController {
     var dispatcherId = "1"
     
     var gameTimer: Timer?
+    var now = Date()
 
     
     override func viewDidLoad() {
@@ -65,10 +65,14 @@ class DriverHomeVC: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.allowsBackgroundLocationUpdates=true
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+      
         self.customInfoWindow = markerDetailView().loadView()
         initGoogleMaps()
         self.collectionSetup()
-         self.clusterView.isHidden = false
+        self.clusterView.isHidden = false
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.startMonitoringSignificantLocationChanges()
@@ -90,13 +94,13 @@ class DriverHomeVC: UIViewController {
                 {
                     self.allDriverAPI()
                 }
-                 self.clusterView.isHidden = false
+                self.clusterView.isHidden = false
             }
             else
             {
                 self.onOfflineLbl.text = "You are offline"
                 self.onlineStatus = "1"
-                 self.clusterView.isHidden = true
+                self.clusterView.isHidden = true
                 self.OfflineBtn.isHidden = true
                 self.onLineBtn.isHidden = false
                 self.myMapView.isUserInteractionEnabled = false
@@ -106,14 +110,15 @@ class DriverHomeVC: UIViewController {
         {
             self.onOfflineLbl.text = "You are offline"
             self.onlineStatus = "1"
-                self.clusterView.isHidden = true
+            self.clusterView.isHidden = true
             self.OfflineBtn.isHidden = true
             self.onLineBtn.isHidden = false
             self.myMapView.isUserInteractionEnabled = false
         }
         
-        gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
 
+        gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+        
         
     }
     override func viewWillAppear(_ animated: Bool)
@@ -125,8 +130,11 @@ class DriverHomeVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        gameTimer?.invalidate()
+       // gameTimer?.invalidate()
     }
+    
+    
+    
     
     @objc func runTimedCode()
     {
@@ -135,31 +143,61 @@ class DriverHomeVC: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
+        
+    
         print(Date())
-//        if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
-//                            {
-//                                if status == "1"
-//                                {
+        let time15 = Date()
+        let diffComponents = Calendar.current.dateComponents([.minute], from: now, to: time15)
+
+        let timeGap = diffComponents.minute ?? 0
+        
+       // print("timeGap  is = \(timeGap)")
+        
+//        if timeGap == 15
+//        {
+//            //APPDEL.scheduleNotification(notificationType: "\(timeGap) passed")
+//            self.mins_15_NotificationAPI()
+//            self.now=Date()
+//        }
+//        else
 //
-//                                    if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-//                                    {
-//                                        NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-//                                    }
-//                                    else
-//                                    {
-//                                        self.onlineStatus="1"
-//                                        self.UserStatusAPI()
-//                                    }
-//                                }
-//                                else
-//                                {
+//        {
+//           //APPDEL.scheduleNotification(notificationType: "Not 15 min pass")
 //
-//                                }
-//                            }
-//                            else
-//                            {
-//
-//                            }
+//            print("timeGap  is = \(timeGap)")
+//        }
+        
+        
+     //   let min15Past = Calendar.current.date(byAdding: .minute, value: 2, to: now)
+
+    
+    
+        
+        
+        //        if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
+        //                            {
+        //                                if status == "1"
+        //                                {
+        //
+        //                                    if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+        //                                    {
+        //                                        NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+        //                                    }
+        //                                    else
+        //                                    {
+        //                                        self.onlineStatus="1"
+        //                                        self.UserStatusAPI()
+        //                                    }
+        //                                }
+        //                                else
+        //                                {
+        //
+        //                                }
+        //                            }
+        //                            else
+        //                            {
+        //
+        //                            }
         
     }
     @IBAction func MenuAct(_ sender: UIButton)
@@ -174,49 +212,49 @@ class DriverHomeVC: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func mapRefreshAct(_ sender: UIButton)
-       {
-          pageRefresh()
-       }
-       
-     func pageRefresh()
-      {
+    {
+        pageRefresh()
+    }
+    
+    func pageRefresh()
+    {
         customInfoWindow?.removeFromSuperview()
-               self.locationCheck()
-                if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
-                     {
-                         if status == "1"
-                         {
-                             self.onOfflineLbl.text = "You are online"
-                             self.OfflineBtn.isHidden = false
-                             self.onLineBtn.isHidden = true
-                             self.myMapView.isUserInteractionEnabled = true
-                             if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-                             {
-                                 NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-                             }
-                             else
-                             {
-                                 self.allDriverAPI()
-                             }
-                         }
-                         else
-                         {
-                             self.onOfflineLbl.text = "You are offline"
-                            
-                             self.onlineStatus = "1"
-                             self.OfflineBtn.isHidden = true
-                             self.onLineBtn.isHidden = false
-                             self.myMapView.isUserInteractionEnabled = false
-                         }
-                     }
-                     else
-                     {
-                         self.onOfflineLbl.text = "You are offline"
-                         self.onlineStatus = "1"
-                         self.OfflineBtn.isHidden = true
-                         self.onLineBtn.isHidden = false
-                         self.myMapView.isUserInteractionEnabled = false
-                     }
+        self.locationCheck()
+        if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
+        {
+            if status == "1"
+            {
+                self.onOfflineLbl.text = "You are online"
+                self.OfflineBtn.isHidden = false
+                self.onLineBtn.isHidden = true
+                self.myMapView.isUserInteractionEnabled = true
+                if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                {
+                    NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                }
+                else
+                {
+                    self.allDriverAPI()
+                }
+            }
+            else
+            {
+                self.onOfflineLbl.text = "You are offline"
+                
+                self.onlineStatus = "1"
+                self.OfflineBtn.isHidden = true
+                self.onLineBtn.isHidden = false
+                self.myMapView.isUserInteractionEnabled = false
+            }
+        }
+        else
+        {
+            self.onOfflineLbl.text = "You are offline"
+            self.onlineStatus = "1"
+            self.OfflineBtn.isHidden = true
+            self.onLineBtn.isHidden = false
+            self.myMapView.isUserInteractionEnabled = false
+        }
     }
     
     
@@ -275,7 +313,7 @@ extension DriverHomeVC
         
         if self.allMarkerArray.count>0
         {
-          self.allMarkerArray.removeAllObjects()
+            self.allMarkerArray.removeAllObjects()
         }
         
         
@@ -290,41 +328,41 @@ extension DriverHomeVC
         
         ApiHandler.PostMethod(url: GET_ALLJOB_API, parameters: params) { (response, error) in
             
-             if error == nil
-                       {
-                         
-                           if let dict = response as? NSDictionary
-                           {
-                               if let dataArray = dict.value(forKey: "data") as? NSArray
-                               {
-                                   
-                                self.allMarkerArray = dataArray.mutableCopy() as! NSMutableArray
-                                   
-                                   
-                               }
-                               if let dataArray = dict.value(forKey: "accecptedJobs") as? NSArray
-                                {
-                                                                 
-                                    var allMarkerArray3 = dataArray.mutableCopy() as! NSMutableArray
-                                      
-                                    for dict in allMarkerArray3
-                                    {
-                                        self.allMarkerArray.add(dict)
-                                    }
-                            
-                                }
+            if error == nil
+            {
                 
-                            self.myCollection.reloadData()
-                        self.showPartyMarkers()
-                           }
-                           self.myCollection.reloadData()
-                           self.showPartyMarkers()
-                       }
-                       else
-                       {
-                          self.view.makeToast(error)
-                        self.myCollection.reloadData()
-                       }
+                if let dict = response as? NSDictionary
+                {
+                    if let dataArray = dict.value(forKey: "data") as? NSArray
+                    {
+                        
+                        self.allMarkerArray = dataArray.mutableCopy() as! NSMutableArray
+                        
+                        
+                    }
+                    if let dataArray = dict.value(forKey: "accecptedJobs") as? NSArray
+                    {
+                        
+                        var allMarkerArray3 = dataArray.mutableCopy() as! NSMutableArray
+                        
+                        for dict in allMarkerArray3
+                        {
+                            self.allMarkerArray.add(dict)
+                        }
+                        
+                    }
+                    
+                    self.myCollection.reloadData()
+                    self.showPartyMarkers()
+                }
+                self.myCollection.reloadData()
+                self.showPartyMarkers()
+            }
+            else
+            {
+                self.view.makeToast(error)
+                self.myCollection.reloadData()
+            }
         }
     }
     
@@ -341,8 +379,8 @@ extension DriverHomeVC
         
         let params = ["userId" : id,
                       "onlineStatus" : self.onlineStatus,
-                    "latitude" : "\(CURRENTLOCATIONLAT)",
-                    "longitude" : "\(CURRENTLOCATIONLONG)"]   as [String : String]
+                      "latitude" : "\(CURRENTLOCATIONLAT)",
+            "longitude" : "\(CURRENTLOCATIONLONG)"]   as [String : String]
         
         ApiHandler.ModelApiPostMethod2(url: CHANGE_ONLINESTATUS_API, parameters: params) { (response, error) in
             
@@ -379,38 +417,78 @@ extension DriverHomeVC
             }
         }
     }
+    
+    //MARK:- 15 mins Notification Account
+       func mins_15_NotificationAPI()
+       {
+           
+           
+           var id = ""
+           if let userID = DEFAULT.value(forKey: "USERID") as? String
+           {
+               id = userID
+           }
+           
+           let params = ["jobId" : "1",
+                         "dispatcherId" : "3",
+                         "driverId" : id]   as [String : String]
+           
+           ApiHandler.ModelApiPostMethod2(url: NOTIFICATION_15MINS_API, parameters: params) { (response, error) in
+               
+               if error == nil
+               {
+                   let decoder = JSONDecoder()
+                   do
+                   {
+                    
+                       
+                   }
+                   catch let error
+                   {
+                       self.view.makeToast(error.localizedDescription)
+                   }
+                   
+               }
+               else
+               {
+                   self.view.makeToast(error)
+               }
+           }
+       }
+    
+    
     func showPartyMarkers()
-      {
-          myMapView.clear()
-          if markers.count>0
-          {
-              self.markers.removeAll()
-          }
-
-          for i in 0..<self.allMarkerArray.count
-          {
+    {
+        myMapView.clear()
+        if markers.count>0
+        {
+            self.markers.removeAll()
+        }
+        
+        for i in 0..<self.allMarkerArray.count
+        {
             if  let dict = self.allMarkerArray.object(at: i) as? NSDictionary
             {
-              
-             
-          
-              
-              let lat = Double(dict.value(forKey: "latitude") as? String ?? "30.0")
-              let long = Double(dict.value(forKey: "longitude") as? String ?? "76.00")
-              
-              if lat != nil || long != nil
-              {
-                 let marker=GMSMarker()
-                 marker.position = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
-        
-                marker.icon = UIImage(named: "selectedmarker")
-                self.markers.append(marker)
-            marker.map = self.myMapView
-              }
-              
+                
+                
+                
+                
+                let lat = Double(dict.value(forKey: "latitude") as? String ?? "30.0")
+                let long = Double(dict.value(forKey: "longitude") as? String ?? "76.00")
+                
+                if lat != nil || long != nil
+                {
+                    let marker=GMSMarker()
+                    marker.position = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+                    
+                    marker.icon = UIImage(named: "selectedmarker")
+                    self.markers.append(marker)
+                    marker.map = self.myMapView
+                }
+                
+            }
         }
-          }
-      }
+    }
 }
 
 //MARK:- Map Work
@@ -418,34 +496,34 @@ extension DriverHomeVC
 extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
 {
     @objc func btnMarkerDetails(_ sender:UIButton)
-         {
-             print("btnGroupDetails click")
-             let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
-             
-            let dict = self.allMarkerArray.object(at: sender.tag) as! NSDictionary
-            vc.fromNoti = "yes"
-            vc.jobId = dict.value(forKey: "jobId") as? String ?? ""
-            vc.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
-             self.navigationController?.pushViewController(vc, animated: true)
-             
-         }
+    {
+        print("btnGroupDetails click")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
+        
+        let dict = self.allMarkerArray.object(at: sender.tag) as! NSDictionary
+        vc.fromNoti = "yes"
+        vc.jobId = dict.value(forKey: "jobId") as? String ?? ""
+        vc.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
     
     // MARK: CLLocation Manager Delegate
     
     //MARK:- Map init code
-          func initGoogleMaps() {
-      //        let camera = GMSCameraPosition.camera(withLatitude: CURRENTLOCATIONLAT, longitude: CURRENTLOCATIONLONG, zoom: 17.0)
-              
-              let camera = GMSCameraPosition.camera(withLatitude: CURRENTLOCATIONLAT, longitude: CURRENTLOCATIONLONG, zoom: 6.0)
-              self.myMapView.camera = camera
-              self.myMapView.delegate = self
-              self.myMapView.settings.compassButton = true
-              self.myMapView.settings.myLocationButton=true
-              self.myMapView.isMyLocationEnabled = true
-            self.myMapView.padding = UIEdgeInsets(top: 0, left: 0, bottom: 270, right: 0)
-
-              showPartyMarkers()
-          }
+    func initGoogleMaps() {
+        //        let camera = GMSCameraPosition.camera(withLatitude: CURRENTLOCATIONLAT, longitude: CURRENTLOCATIONLONG, zoom: 17.0)
+        
+        let camera = GMSCameraPosition.camera(withLatitude: CURRENTLOCATIONLAT, longitude: CURRENTLOCATIONLONG, zoom: 6.0)
+        self.myMapView.camera = camera
+        self.myMapView.delegate = self
+        self.myMapView.settings.compassButton = true
+        self.myMapView.settings.myLocationButton=true
+        self.myMapView.isMyLocationEnabled = true
+        self.myMapView.padding = UIEdgeInsets(top: 0, left: 0, bottom: 270, right: 0)
+        
+        showPartyMarkers()
+    }
     
     //MARK:-  Marker tap
     
@@ -453,7 +531,7 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
         NSLog("marker was tapped")
         tappedMarker = marker
         
-  
+        
         
         
         marker.icon = UIImage(named: "selectedmarker")
@@ -472,20 +550,20 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
         customInfoWindow?.center.y -= 100
         
         customInfoWindow?.backgroundColor = UIColor.clear
-
+        
         if let index = markers.index(of: marker)
         {
             self.selectedMarkerIndex=index
-
-
-                 
+            
+            
+            
             print(index)
             if self.allMarkerArray.count>0
             {
                 if let dict = self.allMarkerArray.object(at: index) as? NSDictionary
                 {
                     
-                     customInfoWindow?.userName.layer.cornerRadius = ((customInfoWindow?.userName.frame.height ?? 5)/2)
+                    customInfoWindow?.userName.layer.cornerRadius = ((customInfoWindow?.userName.frame.height ?? 5)/2)
                     customInfoWindow?.userName.contentMode = .scaleAspectFill
                     customInfoWindow?.userName.clipsToBounds = true
                     
@@ -495,46 +573,46 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
                     customInfoWindow?.profileImg.clipsToBounds = true
                     
                     customInfoWindow?.userName.text  = dict.value(forKey: "companyName") as? String ?? ""
-                
-                if let groupIcon = dict.value(forKey: "profileImg") as? String
                     
-                {
-                    if groupIcon != ""
+                    if let groupIcon = dict.value(forKey: "profileImg") as? String
+                        
                     {
-                        let fullurl = IMAGEBASEURL + groupIcon
-                        let url = URL(string: fullurl)!
-                        customInfoWindow?.profileImg.image = nil
-                        customInfoWindow?.profileImg.sd_setImage(with: url, completed: nil)
+                        if groupIcon != ""
+                        {
+                            let fullurl = IMAGEBASEURL + groupIcon
+                            let url = URL(string: fullurl)!
+                            customInfoWindow?.profileImg.image = nil
+                            customInfoWindow?.profileImg.sd_setImage(with: url, completed: nil)
+                        }
+                        else
+                        {
+                            
+                            customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
+                        }
+                        
                     }
                     else
                     {
                         
-                         customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
+                        
+                        customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
+                        
                     }
+                    customInfoWindow?.profileBtn.tag = Int(dict.value(forKey: "jobId") as! String)!
                     
                 }
-                else
-                {
-                    
-                    
-                     customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
-                    
-                }
-                customInfoWindow?.profileBtn.tag = Int(dict.value(forKey: "jobId") as! String)!
-                
-            }
                 customInfoWindow?.profileBtn.tag = index
-            customInfoWindow?.profileBtn.addTarget(self, action: #selector(btnMarkerDetails), for: .touchUpInside)
-            // marker.iconView = customInfoWindow
-            mapView.addSubview(customInfoWindow!)
-        }
-                     
-                     
+                customInfoWindow?.profileBtn.addTarget(self, action: #selector(btnMarkerDetails), for: .touchUpInside)
+                // marker.iconView = customInfoWindow
+                mapView.addSubview(customInfoWindow!)
+            }
             
-       
+            
+            
+            
         }
         else
-        
+            
         {
             customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
             
@@ -543,7 +621,7 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
         
         return false
     }
-   
+    
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
         marker.icon = UIImage(named: "selectedmarker")
         return UIView()
@@ -551,17 +629,17 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         
-      // customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
-      
+        // customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
         
-       customInfoWindow?.removeFromSuperview()
+        
+        customInfoWindow?.removeFromSuperview()
     }
     
     
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         
         let position = tappedMarker?.position
-      //  customInfoWindow?.markerBtn.setBackgroundImage(#imageLiteral(resourceName: "MarkerImage"), for: .normal)
+        //  customInfoWindow?.markerBtn.setBackgroundImage(#imageLiteral(resourceName: "MarkerImage"), for: .normal)
         if position != nil
         {
             customInfoWindow?.center = mapView.projection.point(for: position!)
@@ -569,13 +647,13 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
         }
         if let marker =  mapView.selectedMarker
         {
-
-        //  customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
+            
+            //  customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
         }
         else
         {
-           // customInfoWindow?.markerBtn.setBackgroundImage(#imageLiteral(resourceName: "MarkerImage"), for: .normal)
-        //customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
+            // customInfoWindow?.markerBtn.setBackgroundImage(#imageLiteral(resourceName: "MarkerImage"), for: .normal)
+            //customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
         }
         
     }
@@ -587,7 +665,7 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
         print("amar d gh h df")
         if let marker =  mapView.selectedMarker
         {
-// customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
+            // customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
             
         }
         
@@ -597,7 +675,7 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
         let imageIcon = UIButton(frame: CGRect(x: 25, y: 0, width: 50, height: 50))
         imageIcon.setBackgroundImage(UIImage(named: "AppIcon-2"), for: .normal)
         
- //customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
+        //customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
         //view.addSubview(imageIcon)
         
         guard let customMarkerView = marker.iconView as? CustomMarkerView else { return nil }
@@ -609,14 +687,14 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker)
     {
         guard let customMarkerView = marker.iconView as? CustomMarkerView else { return }
- //customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
+        //customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
         
     }
     
     func mapView(_ mapView: GMSMapView, didCloseInfoWindowOf marker: GMSMarker) {
         
         marker.icon = UIImage(named: "selectedmarker")
-       // customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
+        // customInfoWindow?.profileImg.setImage(string: customInfoWindow?.userName.text, color: APPCOLOL, circular: true,textAttributes: attrs)
         guard let customMarkerView = marker.iconView as? CustomMarkerView else { return }
         let img = customMarkerView.img!
         let customMarker = CustomMarkerView(frame: CGRect(x: 0, y: 0, width: customMarkerWidth, height: customMarkerHeight), image: img, borderColor: UIColor.darkGray, tag: customMarkerView.tag)
@@ -651,33 +729,50 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
         self.dismiss(animated: true, completion: nil)
     }
-
+    
     func locationCheck()
-      {
-          if CLLocationManager.locationServicesEnabled()
-          {
-              switch CLLocationManager.authorizationStatus()
+    {
+
+        if CLLocationManager.locationServicesEnabled()
               {
-              case .notDetermined, .restricted, .denied:
-                  print("No access")
-                  
-                  
-              case .authorizedAlways, .authorizedWhenInUse:
-                  print("Access")
-                  
-                  locationManager.requestWhenInUseAuthorization()
-                  locationManager.startUpdatingLocation()
-                  locationManager.startMonitoringSignificantLocationChanges()
-                  
+                  switch CLLocationManager.authorizationStatus()
+                  {
+                  case .notDetermined, .restricted, .denied:
+                      print("No access")
+                      
+                      let alertController = UIAlertController(title: "Enable GPS", message: "GPS is not enable.Do you want to go setting menu.", preferredStyle: .alert)
+                      
+                      let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel, handler: nil)
+                      let settingsAction = UIAlertAction(title: "SETTING", style: .default) { (UIAlertAction) in
+                          UIApplication.shared.openURL(NSURL(string: UIApplication.openSettingsURLString)! as URL)
+                      }
+                      
+                      alertController.addAction(cancelAction)
+                      alertController.addAction(settingsAction)
+                      self.present(alertController, animated: true, completion: nil)
+                  case .authorizedAlways, .authorizedWhenInUse:
+                      print("Access")
+                    
+                    locationManager.requestWhenInUseAuthorization()
+                    locationManager.startUpdatingLocation()
+                    locationManager.startMonitoringSignificantLocationChanges()
+                  }
               }
-          }
-          else {
-              print("Location services are not enabled")
-              
-              
-          }
-      }
-      
+              else {
+                  print("Location services are not enabled")
+                  let alertController = UIAlertController(title: "Enable GPS", message: "GPS is not enable.Do you want to go setting menu.", preferredStyle: .alert)
+                  
+                  let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel, handler: nil)
+                  let settingsAction = UIAlertAction(title: "SETTING", style: .default) { (UIAlertAction) in
+                      UIApplication.shared.openURL(NSURL(string: UIApplication.openSettingsURLString)! as URL)
+                  }
+                  
+                  alertController.addAction(cancelAction)
+                  alertController.addAction(settingsAction)
+                  self.present(alertController, animated: true, completion: nil)
+              }
+    }
+    
 }
 //MARK:- location work
 
@@ -686,39 +781,69 @@ extension DriverHomeVC:CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let _ :CLLocation = locations[0] as CLLocation
         print("didUpdateLocations \(locations)")
+        //let trigger = UNLocationNotificationTrigger(region: locations, repeats:false)
+        //   APPDEL.scheduleNotification(notificationType: "amar")
         
+        
+       
+
         if let lastLocation = locations.last
         {
-           
-                 
-                        let latitude = lastLocation.coordinate.latitude
-                        let longitude = lastLocation.coordinate.longitude
-               
-                        DEFAULT.set("\(latitude)", forKey: "CURRENTLAT")
-                        DEFAULT.set("\(longitude)", forKey: "CURRENTLONG")
-                       
-                        if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
-                                            {
-                                                if status == "1"
-                                                {
-                                                    if latitude != CURRENTLOCATIONLAT || longitude != CURRENTLOCATIONLONG
-                                                    {
-                                                        CURRENTLOCATIONLAT = latitude
-                                                        CURRENTLOCATIONLONG = longitude
-                                                        self.onlineStatus = "1"
-                                                        self.UserStatusAPI()
-                                                    }
-                                                        
-                                                  
-                                                    
-                                                }
-                        }
-                  
+            
+            
+            let latitude = lastLocation.coordinate.latitude
+            let longitude = lastLocation.coordinate.longitude
+            
+            DEFAULT.set("\(latitude)", forKey: "CURRENTLAT")
+            DEFAULT.set("\(longitude)", forKey: "CURRENTLONG")
+            
+            if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
+            {
+                if status == "1"
+                {
+                    if latitude != CURRENTLOCATIONLAT || longitude != CURRENTLOCATIONLONG
+                    {
+                        let coordinate₀ = CLLocation(latitude: CURRENTLOCATIONLAT, longitude: CURRENTLOCATIONLONG)
+                        let coordinate₁ = CLLocation(latitude: latitude, longitude: longitude)
+
+                        let distanceInMeters = Int(coordinate₀.distance(from: coordinate₁)/1000)
                         
+            
+                        print("distanceInMeters KMs = \(distanceInMeters)")
+                        
+                        if(distanceInMeters <= 1)
+                         {
+                         // under 1 mile
+                            
+                         }
+                         else
+                        {
+                         CURRENTLOCATIONLAT = latitude
+                            CURRENTLOCATIONLONG = longitude
+                            self.now=Date()
+                           self.onlineStatus = "1"
+                          self.UserStatusAPI()
+                         }
+                        
+                        
+                        
+                        
+//                        CURRENTLOCATIONLAT = latitude
+//                        CURRENTLOCATIONLONG = longitude
+//                        self.onlineStatus = "1"
+//                        self.UserStatusAPI()
+                    }
                     
-                
+                    
+                    
+                }
             }
+            
+            
+            
+            
         }
+    }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
@@ -748,117 +873,117 @@ extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICol
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DriverHomeCCell", for: indexPath) as! DriverHomeCCell
         
-       if let dict = self.allMarkerArray.object(at: indexPath.row) as? NSDictionary
-       {
-        
-        cell.nameLbl.text  = "Company Name - " + (dict.value(forKey: "companyName") as? String ?? "")
-    cell.rejectBtn.tag = indexPath.row
-    cell.rejectBtn.addTarget(self, action: #selector(rejectBtnAct), for: UIControl.Event.touchUpInside)
-        
-      cell.aceeptBtn.tag = indexPath.row
-    cell.aceeptBtn.addTarget(self, action: #selector(aceeptBtnAct), for: UIControl.Event.touchUpInside)
-        
-        
-        if let driverId = dict.value(forKey: "jobStatus") as? String
+        if let dict = self.allMarkerArray.object(at: indexPath.row) as? NSDictionary
         {
-            print(driverId)
             
-            if  driverId != "0"
+            cell.nameLbl.text  = "Company Name - " + (dict.value(forKey: "companyName") as? String ?? "")
+            cell.rejectBtn.tag = indexPath.row
+            cell.rejectBtn.addTarget(self, action: #selector(rejectBtnAct), for: UIControl.Event.touchUpInside)
+            
+            cell.aceeptBtn.tag = indexPath.row
+            cell.aceeptBtn.addTarget(self, action: #selector(aceeptBtnAct), for: UIControl.Event.touchUpInside)
+            
+            
+            if let driverId = dict.value(forKey: "jobStatus") as? String
             {
+                print(driverId)
                 
-                let workStartStatus = dict.value(forKey: "jobStatus") as? String ?? ""
-                
-                if workStartStatus == "1"
+                if  driverId != "0"
                 {
-                     cell.rejectBtn.setTitle("Start", for: UIControl.State.normal)
+                    
+                    let workStartStatus = dict.value(forKey: "jobStatus") as? String ?? ""
+                    
+                    if workStartStatus == "1"
+                    {
+                        cell.rejectBtn.setTitle("Start", for: UIControl.State.normal)
+                    }
+                    else
+                    {
+                        cell.rejectBtn.setTitle("Start", for: UIControl.State.normal)
+                    }
+                    
+                    
+                    cell.rejectBtn.isHidden=false
+                    
+                    cell.aceeptBtn.isHidden=true
+                    
                 }
                 else
                 {
-                      cell.rejectBtn.setTitle("Start", for: UIControl.State.normal)
+                    cell.rejectBtn.setTitle("Reject", for: UIControl.State.normal)
+                    cell.rejectBtn.isHidden=false
+                    cell.aceeptBtn.isHidden=false
                 }
-                
+            }
+            else
+            {
+                cell.rejectBtn.setTitle("Reject", for: UIControl.State.normal)
                 
                 cell.rejectBtn.isHidden=false
-              
-                cell.aceeptBtn.isHidden=true
+                cell.aceeptBtn.isHidden=false
+            }
+            
+            
+            let rate = dict.value(forKey: "rateType") as? String ?? ""
+            
+            if rate == "perHours"
+            {
+                cell.priceLbl.text =  "$ " + (dict.value(forKey: "rate") as? String ?? "") + " " + ("per Hours")
+            }
+            else
+            {
+                cell.priceLbl.text =   "$ " + (dict.value(forKey: "rate") as? String ?? "") + " " + ("per Load")
+            }
+            
+            
+            cell.profileImg.layer.cornerRadius = cell.profileImg.bounds.height/2
+            cell.profileImg.contentMode = .scaleAspectFill
+            cell.profileImg.clipsToBounds = true
+            
+            
+            
+            
+            if let groupIcon = dict.value(forKey: "profileImg") as? String
+                
+            {
+                if groupIcon != ""
+                {
+                    let fullurl = IMAGEBASEURL + groupIcon
+                    let url = URL(string: fullurl)!
+                    cell.profileImg.image = nil
+                    cell.profileImg.sd_setImage(with: url, completed: nil)
+                }
+                else
+                {
+                    
+                    cell.profileImg.setImage(string: (dict.value(forKey: "companyName") as? String ?? "") , color: APPCOLOL, circular: true,textAttributes: attrs)
+                }
                 
             }
             else
             {
-                  cell.rejectBtn.setTitle("Reject", for: UIControl.State.normal)
-                cell.rejectBtn.isHidden=false
-                cell.aceeptBtn.isHidden=false
+                
+                
+                cell.profileImg.setImage(string: (dict.value(forKey: "companyName") as? String ?? ""), color: APPCOLOL, circular: true,textAttributes: attrs)
+                
             }
-        }
-        else
-       {
-         cell.rejectBtn.setTitle("Reject", for: UIControl.State.normal)
-        
-        cell.rejectBtn.isHidden=false
-        cell.aceeptBtn.isHidden=false
-     }
-        
-        
-        let rate = dict.value(forKey: "rateType") as? String ?? ""
-        
-        if rate == "perHours"
-        {
-          cell.priceLbl.text =  "$ " + (dict.value(forKey: "rate") as? String ?? "") + " " + ("per Hours")
-        }
-        else
-        {
-            cell.priceLbl.text =   "$ " + (dict.value(forKey: "rate") as? String ?? "") + " " + ("per Load")
+            
+            
+            
         }
         
-        
-        cell.profileImg.layer.cornerRadius = cell.profileImg.bounds.height/2
-        cell.profileImg.contentMode = .scaleAspectFill
-        cell.profileImg.clipsToBounds = true
-        
-        
-        
-                     
-                     if let groupIcon = dict.value(forKey: "profileImg") as? String
-                         
-                     {
-                         if groupIcon != ""
-                         {
-                             let fullurl = IMAGEBASEURL + groupIcon
-                             let url = URL(string: fullurl)!
-                             cell.profileImg.image = nil
-                             cell.profileImg.sd_setImage(with: url, completed: nil)
-                         }
-                         else
-                         {
-                             
-                              cell.profileImg.setImage(string: (dict.value(forKey: "companyName") as? String ?? "") , color: APPCOLOL, circular: true,textAttributes: attrs)
-                         }
-                         
-                     }
-                     else
-                     {
-                         
-                         
-                          cell.profileImg.setImage(string: (dict.value(forKey: "companyName") as? String ?? ""), color: APPCOLOL, circular: true,textAttributes: attrs)
-                         
-                     }
-        
-        
-        
-    }
-                 
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
-         
+        
         let dict = self.allMarkerArray.object(at: indexPath.row) as! NSDictionary
         vc.fromNoti = "yes"
         vc.jobId = dict.value(forKey: "jobId") as? String ?? ""
         vc.dispatcherId = dict.value(forKey: "dispatcherId") as? String ?? ""
-         self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -869,180 +994,193 @@ extension DriverHomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICol
     @objc func rejectBtnAct(_ sender:UIButton)
     {
         if let dict = self.allMarkerArray.object(at: sender.tag) as? NSDictionary
+        {
+            
+            self.jobId = (dict.value(forKey: "jobId") as? String ?? "")
+            self.dispatcherId = (dict.value(forKey: "dispatcherId") as? String ?? "")
+            self.jobStatus = "0"
+            if !(NetworkEngine.networkEngineObj.isInternetAvailable())
             {
-             
-             self.jobId = (dict.value(forKey: "jobId") as? String ?? "")
-              self.dispatcherId = (dict.value(forKey: "dispatcherId") as? String ?? "")
-             self.jobStatus = "0"
-             if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-             {
-                 NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-             }
-             else
-             {
+                NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+            }
+            else
+            {
                 let text =  sender.titleLabel?.text ?? ""
                 
                 print(text)
                 if text == "Start"
                 {
                     let alert = UIAlertController(title: "Alert", message: "Are you sure you want to start this job?", preferredStyle: UIAlertController.Style.alert)
-                               alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
-                                           print("Handle Cancel Logic here")
-                                       }))
-                               alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
-                                  if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-                                   {
-                                       NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-                                   }
-                                   else
-                                   {
-                                      if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-                                               {
-                                                   NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-                                               }
-                                               else
-                                               {
-                                                   
-                                                   
-                                                   
-                                                   self.JoBStartAPI()
-                                                   
-                                                   
-                                               }
-                                   }
-                                  
-                                   
-                               }))
-                           
-                               present(alert, animated: true, completion: nil)
-                }
-                else
-                {
-                     self.accept_rejectAPI()
-                }
-                
-                
-                
-             }
-        }
-    }
-    @objc func aceeptBtnAct(_ sender:UIButton)
-       {
-        if let dict = self.allMarkerArray.object(at: sender.tag) as? NSDictionary
-               {
-                
-                self.jobId = (dict.value(forKey: "jobId") as? String ?? "")
-                 self.dispatcherId = (dict.value(forKey: "dispatcherId") as? String ?? "")
-                self.jobStatus = "1"
-                if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-                {
-                    NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+                        print("Handle Cancel Logic here")
+                    }))
+                    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+                        if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                        {
+                            NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                        }
+                        else
+                        {
+                            if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                            {
+                                NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                            }
+                            else
+                            {
+                                
+                                
+                                
+                                self.JoBStartAPI()
+                                
+                                
+                            }
+                        }
+                        
+                        
+                    }))
+                    
+                    present(alert, animated: true, completion: nil)
                 }
                 else
                 {
                     self.accept_rejectAPI()
                 }
-           }
-       }
+                
+                
+                
+            }
+        }
+    }
+    @objc func aceeptBtnAct(_ sender:UIButton)
+    {
+        if let dict = self.allMarkerArray.object(at: sender.tag) as? NSDictionary
+        {
+            
+            self.jobId = (dict.value(forKey: "jobId") as? String ?? "")
+            self.dispatcherId = (dict.value(forKey: "dispatcherId") as? String ?? "")
+            self.jobStatus = "1"
+            if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+            {
+                NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+            }
+            else
+            {
+                self.accept_rejectAPI()
+            }
+        }
+    }
     
     //MARK:- accept reject Api
-      
-      func accept_rejectAPI()
-      {
-          var id = ""
-          if let userID = DEFAULT.value(forKey: "USERID") as? String
-          {
-              id = userID
-          }
-          
-          let params = ["driverId" : id,
-                        "jobId" : self.jobId,
-                        "dispatcherId" : self.dispatcherId,
-                        "jobStatus" : self.jobStatus]   as [String : String]
-          
-          ApiHandler.ModelApiPostMethod(url: ACEEPT_REJECT_JOB_API, parameters: params) { (response, error) in
-              
-              if error == nil
-              {
-                  let decoder = JSONDecoder()
-                  do
-                  {
-                      self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
-                      
-                      if self.apiData?.code == "200"
-                          
-                      {
-                          NetworkEngine.showToast(controller: self, message: self.apiData?.message)
+    
+    func accept_rejectAPI()
+    {
+        var id = ""
+        if let userID = DEFAULT.value(forKey: "USERID") as? String
+        {
+            id = userID
+        }
+        
+        let params = ["driverId" : id,
+                      "jobId" : self.jobId,
+                      "dispatcherId" : self.dispatcherId,
+                      "jobStatus" : self.jobStatus]   as [String : String]
+        
+        ApiHandler.ModelApiPostMethod(url: ACEEPT_REJECT_JOB_API, parameters: params) { (response, error) in
+            
+            if error == nil
+            {
+                let decoder = JSONDecoder()
+                do
+                {
+                    self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
+                    
+                    if self.apiData?.code == "200"
                         
-                      }
-                      else
-                      {
-                          self.view.makeToast(self.apiData?.message)
+                    {
+                        NetworkEngine.showToast(controller: self, message: self.apiData?.message)
                         
-                           self.allDriverAPI()
-                          
-                      }
-                      
-                      
-                  }
-                  catch let error
-                  {
-                      self.view.makeToast(error.localizedDescription)
-                  }
-                  
-              }
-              else
-              {
-                  self.view.makeToast(error)
-              }
-          }
-      }
+                    }
+                    else
+                    {
+                        self.view.makeToast(self.apiData?.message)
+                        
+                        self.allDriverAPI()
+                        
+                    }
+                    
+                    
+                }
+                catch let error
+                {
+                    self.view.makeToast(error.localizedDescription)
+                }
+                
+            }
+            else
+            {
+                self.view.makeToast(error)
+            }
+        }
+    }
     
     
     //MARK:- JoBStartAPI Api
-       
-       func JoBStartAPI()
-       {
-           var id = ""
-           if let userID = DEFAULT.value(forKey: "USERID") as? String
-           {
-               id = userID
-           }
-           
-           let params = ["userId" : id,
-                         "jobId" : self.jobId]   as [String : String]
-           
-           ApiHandler.ModelApiPostMethod(url: START_JOB_API, parameters: params) { (response, error) in
-               
-               if error == nil
-               {
-                   let decoder = JSONDecoder()
-                   do
-                   {
-                       self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
-                       
+    
+    func JoBStartAPI()
+    {
+        var id = ""
+        if let userID = DEFAULT.value(forKey: "USERID") as? String
+        {
+            id = userID
+        }
+        
+        let params = ["userId" : id,
+                      "jobId" : self.jobId]   as [String : String]
+        
+        ApiHandler.ModelApiPostMethod(url: START_JOB_API, parameters: params) { (response, error) in
+            
+            if error == nil
+            {
+                let decoder = JSONDecoder()
+                do
+                {
+                    self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
+                    
+                
+                    
+                    
+                    if self.apiData?.code == "200"
+                    {
+                       // NetworkEngine.showToast(controller: self, message: self.apiData?.message)
+                        NetworkEngine.commonAlert(message: self.apiData?.message ?? "", vc: self)
+
+                    }
+                    else
+                    {
                        self.view.makeToast(self.apiData?.message)
-                      
-                       
-                    self.allDriverAPI()
-                       
-                       
-                       
-                       
-                   }
-                   catch let error
-                   {
-                       self.view.makeToast(error.localizedDescription)
-                   }
-                   
-               }
-               else
-               {
-                   self.view.makeToast(error)
-               }
-           }
-       }
-      
+                      self.allDriverAPI()
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                catch let error
+                {
+                    self.view.makeToast(error.localizedDescription)
+                }
+                
+            }
+            else
+            {
+                self.view.makeToast(error)
+            }
+        }
+    }
+    
 }
 
 struct MyPlace {

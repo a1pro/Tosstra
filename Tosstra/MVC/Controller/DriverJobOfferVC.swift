@@ -18,10 +18,10 @@ class DriverJobOfferVC: UIViewController {
     
     @IBOutlet weak var amountTxt: UITextField!
     @IBOutlet weak var p_stresttxt: UITextView!
-   // @IBOutlet weak var p_stateTxt: UITextField!
+    // @IBOutlet weak var p_stateTxt: UITextField!
     
     //@IBOutlet weak var p_zipTxt: UITextField!
-   // @IBOutlet weak var p_cityTxt: UITextField!
+    // @IBOutlet weak var p_cityTxt: UITextField!
     
     @IBOutlet weak var d_stresttxt: UITextView!
     
@@ -55,7 +55,7 @@ class DriverJobOfferVC: UIViewController {
     
     var fromNoti = "no"
     
-     @IBOutlet weak var locView: UIView!
+    @IBOutlet weak var locView: UIView!
     @IBOutlet weak var locationLbl: UILabel!
     
     override func viewDidLoad() {
@@ -75,7 +75,7 @@ class DriverJobOfferVC: UIViewController {
             {
                 self.JobDetalsAPI()
             }
-             
+            
         }
         else
         {
@@ -109,7 +109,7 @@ class DriverJobOfferVC: UIViewController {
             self.date_totxt.text = dict.value(forKey: "dateTo") as? String ?? ""
             
             //self.p_zipTxt.text = (dict.value(forKey: "pupZipcode") as? String ?? "" )
-          //  self.p_cityTxt.text = dict.value(forKey: "pupCity") as? String ?? ""
+            //  self.p_cityTxt.text = dict.value(forKey: "pupCity") as? String ?? ""
             //self.p_stateTxt.text = dict.value(forKey: "pupState") as? String ?? ""
             self.p_stresttxt.text = dict.value(forKey: "pupStreet") as? String ?? ""
             
@@ -152,7 +152,7 @@ class DriverJobOfferVC: UIViewController {
         {
             self.accept_rejectAPI()
         }
-       
+        
     }
     //MARK:- accept reject Api
     
@@ -182,7 +182,7 @@ class DriverJobOfferVC: UIViewController {
                         
                     {
                         NetworkEngine.showToast(controller: self, message: self.apiData?.message ?? "")
-
+                        
                     }
                     else
                     {
@@ -247,7 +247,7 @@ class DriverJobOfferVC: UIViewController {
                         
                     {
                         NetworkEngine.showToast(controller: self, message: self.JobDetailData?.message ?? "")
-
+                        
                     }
                     else
                     {
@@ -257,14 +257,14 @@ class DriverJobOfferVC: UIViewController {
                             let dict = self.JobDetailData?.data?[0]
                             self.companyName.text = dict?.companyName
                             self.amountTxt.isUserInteractionEnabled = false
-                           
+                            
                             let driverId = dict?.jobStatus ?? ""
                             
                             if driverId == "1"
                             {
                                 self.buttonStack.isHidden = true
                                 self.locView.isHidden = false
-                               
+                                
                             }
                             else
                             {
@@ -279,46 +279,34 @@ class DriverJobOfferVC: UIViewController {
                             }
                             else
                             {
-                              
+                                
                                 
                                 self.amountTxt.text  = "$ " + (dict?.rate ?? "") + " " + ("per Load")
                             }
                             
                             self.stsrt_FromTxt.text = dict?.startTime ?? ""
-//
-                           self.endTimeTxt.text = dict?.endTime ?? ""
+                            //
+                            self.endTimeTxt.text = dict?.endTime ?? ""
                             self.date_fromTxt.text = dict?.dateFrom ?? ""
-                           self.date_totxt.text =  dict?.dateTo ?? ""
-//
+                            self.date_totxt.text =  dict?.dateTo ?? ""
+                            //
                             //self.p_zipTxt.text = dict?.pupZipcode ?? ""
                             
                             //self.p_cityTxt.text = dict?.pupCity ?? ""
-                           // self.p_stateTxt.text = dict?.pupState ?? ""
+                            // self.p_stateTxt.text = dict?.pupState ?? ""
                             self.p_stresttxt.text = dict?.pupStreet ?? ""
-
-                         //   self.d_zipTxt.text = dict?.drpZipcode ?? ""
+                            
+                            //   self.d_zipTxt.text = dict?.drpZipcode ?? ""
                             //self.d_cityTxt.text = dict?.drpCity ?? ""
                             //self.d_stateTxt.text = dict?.drpState ?? ""
                             self.d_stresttxt.text = dict?.drpStreet ?? ""
                             self.addInfoText.text = dict?.additinalInstructions ?? ""
                             
                             self.locationLbl.text = dict?.address ?? ""
-                            
-
-                            
+          
                             
                         }
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+            
                         
                     }
                     

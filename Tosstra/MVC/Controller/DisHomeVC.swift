@@ -8,7 +8,7 @@
 
 import UIKit
 import KYDrawerController
-
+import CoreLocation
 class DisHomeVC: UIViewController
 {
     @IBOutlet var myTable:UITableView!
@@ -20,7 +20,7 @@ class DisHomeVC: UIViewController
     
     @IBOutlet var noDataLbl:UILabel!
     
-      @IBOutlet var pBtn:UIButton!
+    @IBOutlet var pBtn:UIButton!
     
     var viewProfiledata:ViewProfileModel?
     var apiData:ForgotPasswordModel?
@@ -30,12 +30,15 @@ class DisHomeVC: UIViewController
     var selectedDriverArray = NSMutableArray()
     var selectedgroupCatArray = NSMutableArray()
     var checkArray = NSMutableArray()
-     private let refreshControl = UIRefreshControl()
-    
-    
+    private let refreshControl = UIRefreshControl()
+    var locationManager = CLLocationManager()
+
+    public var longitude:Double = 77.38066792488098
+       public var latitude:Double = 28.6517752463408
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        locationCheck()
         myTable.delegate=self
         myTable.dataSource=self
         myTable.separatorStyle = .none
@@ -51,22 +54,74 @@ class DisHomeVC: UIViewController
         }
         
         if #available(iOS 10.0, *) {
-                   self.myTable.refreshControl = refreshControl
-               } else {
-                   self.myTable.addSubview(refreshControl)
-               }
-               
-               refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+            self.myTable.refreshControl = refreshControl
+        } else {
+            self.myTable.addSubview(refreshControl)
+        }
+        
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        
+        locationManager.startUpdatingLocation()
+               locationManager.delegate = self
+               locationManager.requestWhenInUseAuthorization()
+               locationManager.startUpdatingLocation()
+               locationManager.startMonitoringSignificantLocationChanges()
+               locationManager.pausesLocationUpdatesAutomatically = false
+               locationManager.allowsBackgroundLocationUpdates=true
+               self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        locationCheck()
     }
+    
+    func locationCheck()
+      {
+
+          if CLLocationManager.locationServicesEnabled()
+                {
+                    switch CLLocationManager.authorizationStatus()
+                    {
+                    case .notDetermined, .restricted, .denied:
+                        print("No access")
+                        
+                        let alertController = UIAlertController(title: "Enable GPS", message: "GPS is not enable.Do you want to go setting menu.", preferredStyle: .alert)
+                        
+                        let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel, handler: nil)
+                        let settingsAction = UIAlertAction(title: "SETTING", style: .default) { (UIAlertAction) in
+                            UIApplication.shared.openURL(NSURL(string: UIApplication.openSettingsURLString)! as URL)
+                        }
+                        
+                        alertController.addAction(cancelAction)
+                        alertController.addAction(settingsAction)
+                        self.present(alertController, animated: true, completion: nil)
+                    case .authorizedAlways, .authorizedWhenInUse:
+                        print("Access")
+                      
+                      locationManager.requestWhenInUseAuthorization()
+                      locationManager.startUpdatingLocation()
+                      locationManager.startMonitoringSignificantLocationChanges()
+                    }
+                }
+                else {
+                    print("Location services are not enabled")
+                    let alertController = UIAlertController(title: "Enable GPS", message: "GPS is not enable.Do you want to go setting menu.", preferredStyle: .alert)
+                    
+                    let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel, handler: nil)
+                    let settingsAction = UIAlertAction(title: "SETTING", style: .default) { (UIAlertAction) in
+                        UIApplication.shared.openURL(NSURL(string: UIApplication.openSettingsURLString)! as URL)
+                    }
+                    
+                    alertController.addAction(cancelAction)
+                    alertController.addAction(settingsAction)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+      }
     
     @objc private func refreshData(_ sender: Any)
     {
-        
+        locationCheck()
         if !(NetworkEngine.networkEngineObj.isInternetAvailable())
         {
             NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
@@ -74,11 +129,11 @@ class DisHomeVC: UIViewController
         else
         {
             DispatchQueue.main.async {
-               
+                
                 
                 if self.truckType == "all"
                 {
-                     self.get_All_DriversAPI()
+                    self.get_All_DriversAPI()
                 }
                 else
                 {
@@ -88,9 +143,9 @@ class DisHomeVC: UIViewController
             }
             
         }
-         
+        
     }
-     
+    
     @IBAction func MenuAct(_ sender: UIButton)
     {
         let drawer = navigationController?.parent as? KYDrawerController
@@ -108,13 +163,13 @@ class DisHomeVC: UIViewController
     @IBAction func allTruckAct(_ sender: UIButton)
     {
         if self.selectedDriverArray.count>0
-               {
-                   self.selectedDriverArray.removeAllObjects()
-               }
-               if self.checkArray.count>0
-               {
-                   self.checkArray.removeAllObjects()
-               }
+        {
+            self.selectedDriverArray.removeAllObjects()
+        }
+        if self.checkArray.count>0
+        {
+            self.checkArray.removeAllObjects()
+        }
         self.truckType = "all"
         self.allTruckView.backgroundColor = APPCOLOL
         self.seniorTruckView.backgroundColor = UIColor.lightGray
@@ -133,13 +188,13 @@ class DisHomeVC: UIViewController
     @IBAction func seniorTruckAct(_ sender: UIButton)
     {
         if self.selectedDriverArray.count>0
-               {
-                   self.selectedDriverArray.removeAllObjects()
-               }
-               if self.checkArray.count>0
-               {
-                   self.checkArray.removeAllObjects()
-               }
+        {
+            self.selectedDriverArray.removeAllObjects()
+        }
+        if self.checkArray.count>0
+        {
+            self.checkArray.removeAllObjects()
+        }
         self.truckType = "senior"
         self.allTruckView.backgroundColor = UIColor.lightGray
         self.seniorTruckView.backgroundColor = APPCOLOL
@@ -193,32 +248,32 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
             
             cell.trsportName.text = celldData?.companyName
             
-       cell.checkBtn.tag = indexPath.row
-               cell.checkBtn.addTarget(self, action: #selector(AllTrackcheckAct), for: UIControl.Event.touchUpInside)
+            cell.checkBtn.tag = indexPath.row
+            cell.checkBtn.addTarget(self, action: #selector(AllTrackcheckAct), for: UIControl.Event.touchUpInside)
             
             if self.checkArray.contains(indexPath.row)
-                   {
-                    let id = celldData?.id ?? ""
-                       
-                    if self.selectedDriverArray.contains(id)
-                       {
-                           
-                       }
-                       else
-                       {
-                        self.selectedDriverArray.add(id)
-                      
-                       }
-                       
-                       
-                       cell.checkBtn.setImage(UIImage(named: "check-box"), for: .normal)
-                   }
-                   else
-                   {
-                       cell.checkBtn.setImage(UIImage(named: "check-box-1"), for: .normal)
-                   }
+            {
+                let id = celldData?.id ?? ""
+                
+                if self.selectedDriverArray.contains(id)
+                {
+                    
+                }
+                else
+                {
+                    self.selectedDriverArray.add(id)
+                    
+                }
+                
+                
+                cell.checkBtn.setImage(UIImage(named: "check-box"), for: .normal)
+            }
+            else
+            {
+                cell.checkBtn.setImage(UIImage(named: "check-box-1"), for: .normal)
+            }
             
-          
+            
             if self.selectedDriverArray.count>0
             {
                 self.pBtn.isEnabled = true
@@ -229,9 +284,9 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
                 self.pBtn.isEnabled = false
                 self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
             }
-//
+            //
             
-        
+            
             cell.favBtn.tag = indexPath.row
             cell.favBtn.addTarget(self, action: #selector(UnfavBtnAct), for: UIControl.Event.touchUpInside)
             
@@ -251,39 +306,39 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
             cell.checkBtn.addTarget(self, action: #selector(SeniorTrackcheckAct), for: UIControl.Event.touchUpInside)
             
             if self.checkArray.contains(indexPath.row)
-                              {
-                               let id = celldData?.id ?? ""
-                                  
-                               if self.selectedDriverArray.contains(id)
-                                  {
-                                      
-                                  }
-                                  else
-                                  {
-                                   self.selectedDriverArray.add(id)
-                                 
-                                  }
-                                  
-                                  
-                                  cell.checkBtn.setImage(UIImage(named: "check-box"), for: .normal)
-                              }
-                              else
-                              {
-                                  cell.checkBtn.setImage(UIImage(named: "check-box-1"), for: .normal)
-                              }
-                       
-                     
-                       if self.selectedDriverArray.count>0
-                       {
-                           self.pBtn.isEnabled = true
-                           self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
-                       }
-                       else
-                       {
-                           self.pBtn.isEnabled = false
-                           self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
-                       }
-                      
+            {
+                let id = celldData?.id ?? ""
+                
+                if self.selectedDriverArray.contains(id)
+                {
+                    
+                }
+                else
+                {
+                    self.selectedDriverArray.add(id)
+                    
+                }
+                
+                
+                cell.checkBtn.setImage(UIImage(named: "check-box"), for: .normal)
+            }
+            else
+            {
+                cell.checkBtn.setImage(UIImage(named: "check-box-1"), for: .normal)
+            }
+            
+            
+            if self.selectedDriverArray.count>0
+            {
+                self.pBtn.isEnabled = true
+                self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
+            }
+            else
+            {
+                self.pBtn.isEnabled = false
+                self.lblCount.text = "Total- " + "\(self.selectedDriverArray.count)" + " Selected"
+            }
+            
             
             
             
@@ -305,18 +360,18 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         
-     let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewProfileVC") as! ViewProfileVC
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewProfileVC") as! ViewProfileVC
         let celldData =  self.viewProfiledata?.data?.reversed()[indexPath.row]
-    
+        
         vc.userId = celldData?.id ?? ""
-           self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
     
-   
+    
     
     
     @objc func UnfavBtnAct(_ sender:UIButton)
@@ -337,7 +392,7 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
     
     @objc func AllTrackcheckAct(_ sender:UIButton)
     {
-       
+        
         
         if self.selectedDriverArray.count>0
         {
@@ -349,16 +404,16 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
         }
         
         if self.checkArray.contains(sender.tag)
-               {
-                   self.checkArray.remove(sender.tag)
-               }
-               else
-               {
-                   self.checkArray.add(sender.tag)
-               }
-               print("check array = \(self.checkArray)")
-               
-               
+        {
+            self.checkArray.remove(sender.tag)
+        }
+        else
+        {
+            self.checkArray.add(sender.tag)
+        }
+        print("check array = \(self.checkArray)")
+        
+        
         self.myTable.reloadData()
         
     }
@@ -367,26 +422,26 @@ extension DisHomeVC:UITableViewDelegate,UITableViewDataSource
     {
         
         if self.selectedDriverArray.count>0
-               {
-                   self.selectedDriverArray.removeAllObjects()
-               }
-               if self.selectedgroupCatArray.count>0
-               {
-                   self.selectedgroupCatArray.removeAllObjects()
-               }
-               
-               if self.checkArray.contains(sender.tag)
-                      {
-                          self.checkArray.remove(sender.tag)
-                      }
-                      else
-                      {
-                          self.checkArray.add(sender.tag)
-                      }
-                      print("check array = \(self.checkArray)")
-                      
-                      
-               self.myTable.reloadData()
+        {
+            self.selectedDriverArray.removeAllObjects()
+        }
+        if self.selectedgroupCatArray.count>0
+        {
+            self.selectedgroupCatArray.removeAllObjects()
+        }
+        
+        if self.checkArray.contains(sender.tag)
+        {
+            self.checkArray.remove(sender.tag)
+        }
+        else
+        {
+            self.checkArray.add(sender.tag)
+        }
+        print("check array = \(self.checkArray)")
+        
+        
+        self.myTable.reloadData()
     }
 }
 extension DisHomeVC
@@ -402,7 +457,9 @@ extension DisHomeVC
             id = userID
         }
         
-        let params = ["userId" : id]   as [String : String]
+        let params = ["userId" : id,
+                    "latitude" : "\(self.latitude)",
+                   "longitude" : "\(self.longitude)"]  as [String : String]
         
         ApiHandler.ModelApiPostMethod(url: GET_ALL_DRIVER_API, parameters: params) { (response, error) in
             
@@ -416,13 +473,13 @@ extension DisHomeVC
                     
                     self.myTable.reloadData()
                     
-                   if self.viewProfiledata?.data?.count ?? 0 > 0
+                    if self.viewProfiledata?.data?.count ?? 0 > 0
                     {
                         self.noDataLbl.isHidden = true
                     }
                     else
                     {
-                       self.noDataLbl.isHidden = false
+                        self.noDataLbl.isHidden = false
                     }
                 }
                 catch let error
@@ -448,7 +505,9 @@ extension DisHomeVC
             id = userID
         }
         
-        let params = ["userId" : id]   as [String : String]
+        let params = ["userId" : id,
+                      "latitude" : "\(self.latitude)",
+            "longitude" : "\(self.longitude)"]   as [String : String]
         
         ApiHandler.ModelApiPostMethod(url: GET_FAV_DRIVER_API, parameters: params) { (response, error) in
             
@@ -461,13 +520,13 @@ extension DisHomeVC
                     self.viewProfiledata = try decoder.decode(ViewProfileModel.self, from: response!)
                     
                     if self.viewProfiledata?.data?.count ?? 0 > 0
-                                       {
-                                           self.noDataLbl.isHidden = true
-                                       }
-                                       else
-                                       {
-                                          self.noDataLbl.isHidden = false
-                                       }
+                    {
+                        self.noDataLbl.isHidden = true
+                    }
+                    else
+                    {
+                        self.noDataLbl.isHidden = false
+                    }
                     self.myTable.reloadData()
                     
                     
@@ -511,14 +570,14 @@ extension DisHomeVC
                     
                     self.myTable.reloadData()
                     if self.truckType == "all"
-                                   {
-                                        self.get_All_DriversAPI()
-                                   }
-                                   else
-                                   {
-                                       self.get_Only_FavDriversAPI()
-                                   }
-                                   
+                    {
+                        self.get_All_DriversAPI()
+                    }
+                    else
+                    {
+                        self.get_Only_FavDriversAPI()
+                    }
+                    
                     
                 }
                 catch let error
@@ -533,4 +592,34 @@ extension DisHomeVC
             }
         }
     }
+}
+//MARK:- location work
+
+extension DisHomeVC:CLLocationManagerDelegate
+{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let _ :CLLocation = locations[0] as CLLocation
+        print("didUpdateLocations \(locations)")
+      
+        if let lastLocation = locations.last
+        {
+            
+            
+            self.latitude = lastLocation.coordinate.latitude
+            self.longitude = lastLocation.coordinate.longitude
+            
+            DEFAULT.set("\(latitude)", forKey: "CURRENTLAT")
+            DEFAULT.set("\(longitude)", forKey: "CURRENTLONG")
+   
+            CURRENTLOCATIONLAT = self.latitude
+            CURRENTLOCATIONLONG = self.longitude
+
+            }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        print(error)
+    }
+    
 }

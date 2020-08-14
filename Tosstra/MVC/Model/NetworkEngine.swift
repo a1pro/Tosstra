@@ -54,14 +54,14 @@ class NetworkEngine:UIViewController{
     }
     
     
-    func LOADERSHOW2()
+    static func LOADERSHOW2()
     {
         
         SVProgressHUD.setDefaultMaskType(.custom)
         SVProgressHUD.setForegroundColor(UIColor.white)
         //Ring Color
         
-        SVProgressHUD.setBackgroundColor(UIColor.black)        //HUD Color
+        SVProgressHUD.setBackgroundColor(APPCOLOL)        //HUD Color
         SVProgressHUD.setBackgroundLayerColor(UIColor.clear)    //Background Color
         SVProgressHUD.show()
     }

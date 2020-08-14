@@ -8,7 +8,10 @@
 
 import UIKit
 import KYDrawerController
-
+import UIKit
+import GoogleMaps
+import GooglePlaces
+import CoreLocation
 class DriverMyJobVC: UIViewController {
     
     @IBOutlet var myTable:UITableView!
@@ -18,8 +21,14 @@ class DriverMyJobVC: UIViewController {
     private let refreshControl = UIRefreshControl()
     
     var jobId = ""
-    
+    var locationManager = CLLocationManager()
+    var gameTimer: Timer?
+    var now = Date()
     @IBOutlet var noDataLbl:UILabel!
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         myTable.delegate=self
@@ -46,7 +55,7 @@ class DriverMyJobVC: UIViewController {
             }
             
         }
-        
+         
     }
     @objc private func refreshData(_ sender: Any)
     {
@@ -66,6 +75,42 @@ class DriverMyJobVC: UIViewController {
         }
         
     }
+    
+    @objc func runTimedCode()
+       {
+           locationManager.startUpdatingLocation()
+           locationManager.delegate = self
+           locationManager.requestWhenInUseAuthorization()
+           locationManager.startUpdatingLocation()
+           locationManager.startMonitoringSignificantLocationChanges()
+           
+       
+           print(Date())
+           let time15 = Date()
+           let diffComponents = Calendar.current.dateComponents([.minute], from: now, to: time15)
+
+           let timeGap = diffComponents.minute ?? 0
+           
+           print("timeGap  is = \(timeGap)")
+           
+           if timeGap == 15
+           {
+               //APPDEL.scheduleNotification(notificationType: "\(timeGap) passed")
+               self.mins_15_NotificationAPI()
+               self.now=Date()
+           }
+           else
+           
+           {
+              //APPDEL.scheduleNotification(notificationType: "Not 15 min pass")
+               
+               print("timeGap  is = \(timeGap)")
+           }
+
+           
+       }
+    
+    
     @IBAction func MenuAct(_ sender: UIButton)
     {
         let drawer = navigationController?.parent as? KYDrawerController
@@ -141,37 +186,37 @@ extension DriverMyJobVC:UITableViewDelegate,UITableViewDataSource
         
         
         if let status = celldData?.jobStartStatus
-              {
-                  if status == "1"
-                  {
-                    
-                      let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobDetailVC") as! DriverJobDetailVC
-                    vc.jobData = celldData
+        {
+            if status == "1"
+            {
+                
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobDetailVC") as! DriverJobDetailVC
+                vc.jobData = celldData
                 vc.jobId = celldData?.jobId ?? ""
                 vc.dispatcherId = celldData?.dispatcherId ?? ""
                 self.navigationController?.pushViewController(vc, animated: true)
-                      
-                  }
-                  else
-                  {
-                     
-                      let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
-                                       
-                                           vc.fromNoti = "yes"
-                                   vc.jobId = celldData?.jobId ?? ""
-                                   vc.dispatcherId = celldData?.dispatcherId ?? ""
-                                            self.navigationController?.pushViewController(vc, animated: true)
-                  }
-              }
-              else
-              {
-                  let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
-                    
-                        vc.fromNoti = "yes"
+                
+            }
+            else
+            {
+                
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
+                
+                vc.fromNoti = "yes"
                 vc.jobId = celldData?.jobId ?? ""
                 vc.dispatcherId = celldData?.dispatcherId ?? ""
-                         self.navigationController?.pushViewController(vc, animated: true)
-              }
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+        else
+        {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DriverJobOfferVC") as! DriverJobOfferVC
+            
+            vc.fromNoti = "yes"
+            vc.jobId = celldData?.jobId ?? ""
+            vc.dispatcherId = celldData?.dispatcherId ?? ""
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -202,35 +247,35 @@ extension DriverMyJobVC:UITableViewDelegate,UITableViewDataSource
         {
             let alert = UIAlertController(title: "Alert", message: "Are you sure you want to start this job?", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
-                        print("Handle Cancel Logic here")
-                    }))
+                print("Handle Cancel Logic here")
+            }))
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
-               if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                if !(NetworkEngine.networkEngineObj.isInternetAvailable())
                 {
                     NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
                 }
                 else
                 {
-                   if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-                            {
-                                NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-                            }
-                            else
-                            {
-                                
-                                
-                                
-                                self.JoBStartAPI()
-                                
-                                
-                            }
+                    if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                    {
+                        NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                    }
+                    else
+                    {
+                        
+                        
+                        
+                        self.JoBStartAPI()
+                        
+                        
+                    }
                 }
-               
+                
                 
             }))
-        
+            
             present(alert, animated: true, completion: nil)
-          
+            
         }
         
         
@@ -265,13 +310,14 @@ extension DriverMyJobVC
                     self.jobData = try decoder.decode(JobModel.self, from: response!)
                     
                     if self.jobData?.data?.count ?? 0 > 0
-                                       {
-                                           self.noDataLbl.isHidden = true
-                                       }
-                                       else
-                                       {
-                                          self.noDataLbl.isHidden = false
-                                       }
+                    {
+                        self.gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: true)
+                        self.noDataLbl.isHidden = true
+                    }
+                    else
+                    {
+                        self.noDataLbl.isHidden = false
+                    }
                     self.myTable.reloadData()
                     
                     
@@ -312,10 +358,22 @@ extension DriverMyJobVC
                 {
                     self.apiData = try decoder.decode(ForgotPasswordModel.self, from: response!)
                     
-                    self.view.makeToast(self.apiData?.message)
+                    
+                    if self.apiData?.code == "200"
+                    {
+                       // NetworkEngine.showToast(controller: self, message: self.apiData?.message)
+                        NetworkEngine.commonAlert(message: self.apiData?.message ?? "", vc: self)
+
+                    }
+                    else
+                    {
+                       self.view.makeToast(self.apiData?.message)
+                        self.MYJobAPI()
+                    }
+                    
                     self.myTable.reloadData()
                     
-                    self.MYJobAPI()
+                   
                     
                     
                     
@@ -333,4 +391,108 @@ extension DriverMyJobVC
             }
         }
     }
+    
+    //MARK:- 15 mins Notification Account
+          func mins_15_NotificationAPI()
+          {
+              
+              
+              var id = ""
+              if let userID = DEFAULT.value(forKey: "USERID") as? String
+              {
+                  id = userID
+              }
+              
+              let params = ["driverId" : id]   as [String : String]
+              
+              ApiHandler.ModelApiPostMethod2(url: NOTIFICATION_15MINS_API, parameters: params) { (response, error) in
+                  
+                  if error == nil
+                  {
+                      
+                  }
+                  else
+                  {
+                      self.view.makeToast(error)
+                  }
+              }
+          }
+    
+    
+}
+//MARK:- location work
+
+extension DriverMyJobVC:CLLocationManagerDelegate
+{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let _ :CLLocation = locations[0] as CLLocation
+        print("didUpdateLocations \(locations)")
+        //let trigger = UNLocationNotificationTrigger(region: locations, repeats:false)
+        //   APPDEL.scheduleNotification(notificationType: "amar")
+        
+        
+       
+
+        if let lastLocation = locations.last
+        {
+            
+            
+            let latitude = lastLocation.coordinate.latitude
+            let longitude = lastLocation.coordinate.longitude
+            
+            DEFAULT.set("\(latitude)", forKey: "CURRENTLAT")
+            DEFAULT.set("\(longitude)", forKey: "CURRENTLONG")
+            
+            if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
+            {
+                if status == "1"
+                {
+                    if latitude != CURRENTLOCATIONLAT || longitude != CURRENTLOCATIONLONG
+                    {
+                        let coordinate₀ = CLLocation(latitude: CURRENTLOCATIONLAT, longitude: CURRENTLOCATIONLONG)
+                        let coordinate₁ = CLLocation(latitude: latitude, longitude: longitude)
+
+                        let distanceInMeters = Int(coordinate₀.distance(from: coordinate₁)/1000)
+                        
+            
+                        print("distanceInMeters KMs = \(distanceInMeters)")
+                        
+                        if(distanceInMeters <= 1)
+                         {
+                         // under 1 mile
+                            
+                         }
+                         else
+                        {
+                         CURRENTLOCATIONLAT = latitude
+                            CURRENTLOCATIONLONG = longitude
+                            self.now=Date()
+                          
+                         }
+                        
+                        
+                        
+                        
+//                        CURRENTLOCATIONLAT = latitude
+//                        CURRENTLOCATIONLONG = longitude
+//                        self.onlineStatus = "1"
+//                        self.UserStatusAPI()
+                    }
+                    
+                    
+                    
+                }
+            }
+            
+            
+            
+            
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        print(error)
+    }
+    
 }

@@ -8,8 +8,9 @@
 
 import UIKit
 import WebKit
+import SVProgressHUD
 
-class StatticVC: UIViewController {
+class StatticVC: UIViewController,WKNavigationDelegate {
     @IBOutlet weak var webV: WKWebView!
        @IBOutlet weak var titleLbl: UILabel!
        
@@ -19,7 +20,9 @@ class StatticVC: UIViewController {
     
        override func viewDidLoad() {
            super.viewDidLoad()
-        
+        NetworkEngine.LOADERSHOW2()
+
+        self.webV.navigationDelegate = self
            if url != ""
            {
                
@@ -33,8 +36,14 @@ class StatticVC: UIViewController {
            
            
        }
+  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    
+     SVProgressHUD.dismiss()
+   }
 
-       
+   func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    SVProgressHUD.dismiss()
+   }
        @IBAction func closeAct(_ sender: UIButton)
           {
             self.navigationController?.popViewController(animated: true)
