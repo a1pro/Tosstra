@@ -33,8 +33,8 @@ class DisHomeVC: UIViewController
     private let refreshControl = UIRefreshControl()
     var locationManager = CLLocationManager()
 
-    public var longitude:Double = 77.38066792488098
-       public var latitude:Double = 28.6517752463408
+    public var longitude:Double = CURRENTLOCATIONLONG
+       public var latitude:Double = CURRENTLOCATIONLAT
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -44,14 +44,6 @@ class DisHomeVC: UIViewController
         myTable.separatorStyle = .none
         myTable.register(UINib(nibName: "SeniorTrackTCell", bundle: nil), forCellReuseIdentifier: "SeniorTrackTCell")
         myTable.register(UINib(nibName: "AllTrackTableViewCell", bundle: nil), forCellReuseIdentifier: "AllTrackTableViewCell")
-        if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-        {
-            NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-        }
-        else
-        {
-            self.get_All_DriversAPI()
-        }
         
         if #available(iOS 10.0, *) {
             self.myTable.refreshControl = refreshControl
@@ -69,6 +61,17 @@ class DisHomeVC: UIViewController
                locationManager.pausesLocationUpdatesAutomatically = false
                locationManager.allowsBackgroundLocationUpdates=true
                self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        
+        
+        if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+        {
+            NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+        }
+        else
+        {
+            self.get_All_DriversAPI()
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
