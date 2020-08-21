@@ -37,7 +37,7 @@ struct NotiDatum : Codable {
     let notificationTime : String?
 let jobId : String?
      let notificationDate : String?
-    
+    let create_at : String?
         enum CodingKeys: String, CodingKey {
                 case createdAt = "created_at"
                 case dispatcherId = "dispatcherId"
@@ -50,6 +50,7 @@ let jobId : String?
              case notificationTime = "notificationTime"
              case jobId = "jobId"
             case notificationDate = "notificationDate"
+            case create_at = "create_at"
             
         }
     

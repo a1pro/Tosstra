@@ -96,14 +96,16 @@ extension DriverNotificationVC:UITableViewDelegate,UITableViewDataSource
         
         let cellData = self.apiData?.data?.reversed()[indexPath.row]
         
-        let createDate = cellData?.notificationTime ?? "2020-07-10 10:55:18"
+        let createDate = cellData?.create_at ?? "2020-07-10 10:55:18"
         
         let date = createDate.toDate(withFormat: self.timeformat)
+        cell.timeLbl.isHidden = true
+        //cell.timeLbl.text = cellData?.notificationTime ?? "10:55:"
+   //     cell.timeLbl.text =  createDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "E,d MMM yyyy, h:mm a")
         
-        cell.timeLbl.text = cellData?.notificationTime ?? "10:55:"
         //createDate.toDateString(inputDateFormat:  self.timeformat, ouputDateFormat: "hh:mm a")
         
-        cell.dayAgoLbl.text = cellData?.notificationDate ?? "2020-07-10"
+        cell.dayAgoLbl.text = (createDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "d MMM yyyy, h:mm a"))//.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "E,d MMM yyyy, h:mm a") //cellData?.notificationDate ?? "2020-07-10"
         //"".convertDateFormater(createDate)
         // cell.dayAgoLbl.text =  date?.timeAgoSinceDate()
         cell.dateLbl.isHidden = true
@@ -150,6 +152,17 @@ extension DriverNotificationVC:UITableViewDelegate,UITableViewDataSource
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func convertToUTC(dateToConvert:String) -> String
+    {
+        //"2020-08-14 18:22:46"s
+     let formatter = DateFormatter()
+     formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+     let convertedDate = formatter.date(from: dateToConvert)
+     formatter.timeZone = TimeZone(identifier: "UTC")
+     return formatter.string(from: convertedDate!)
+        
     }
 }
 extension DriverNotificationVC
@@ -326,64 +339,52 @@ extension String {
         
     }
 }
-extension String
-{
-    func toDateString( inputDateFormat inputFormat  : String,  ouputDateFormat outputFormat  : String ) -> String
+extension String {
+    
+    //MARK:- Convert UTC To Local Date by passing date formats value
+    func UTCToLocal(incomingFormat: String, outGoingFormat: String) -> String
     {
         let dateFormatter = DateFormatter()
-        // dateFormatter.timeZone = TimeZone.init(abbreviation: "UTC")
-        dateFormatter.dateFormat = inputFormat
-        let date = dateFormatter.date(from: self)
-        dateFormatter.dateFormat = outputFormat
-        if date != nil
-        {
-            return dateFormatter.string(from: date!)
-        }
-        else
-        {
-            let dateFormatter = DateFormatter()
-            //dateFormatter.timeZone = TimeZone.init(abbreviation: "UTC")
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let date = dateFormatter.date(from: self)
-            dateFormatter.dateFormat = outputFormat
-            return ""
-        }
+        dateFormatter.dateFormat = incomingFormat
+       dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         
+        let dt = dateFormatter.date(from: self)
+        dateFormatter.timeZone = TimeZone.current
+        
+        print("TimeZone.current = \(TimeZone.current)")
+        dateFormatter.dateFormat = outGoingFormat
+        print(dt)
+        return dateFormatter.string(from: dt ?? Date())
+    }
+    
+    //MARK:- Convert Local To UTC Date by passing date formats value
+    func localToUTC(incomingFormat: String, outGoingFormat: String) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = incomingFormat
+        dateFormatter.calendar = NSCalendar.current
+        dateFormatter.timeZone = TimeZone.current
+        
+        let dt = dateFormatter.date(from: self)
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.dateFormat = outGoingFormat
+        
+        return dateFormatter.string(from: dt ?? Date())
     }
     
     func convertDateFormater(_ date: String) -> String
     {
-        
-        //2020-07-10 15:37:24
-        
         let dateFormatter = DateFormatter()
-        
-        dateFormatter.timeZone = TimeZone.ReferenceType.local
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        if let date = dateFormatter.date(from: date)
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let date = dateFormatter.date(from: date)
+        dateFormatter.dateFormat = "E,d MMM yyyy, h:mm a"
+        if date != nil
         {
-            dateFormatter.timeZone = TimeZone(identifier: "UTC")
-            let calendar = Calendar.current
-            let dayComponent = calendar.component(.year, from: date)
-            
-            return dateFormatter.string(from: date)
+           return  dateFormatter.string(from: date!)
         }
         else
         {
-            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss" // Date as 12 hour
-            if let date = dateFormatter.date(from: date)
-            {
-                dateFormatter.timeZone = TimeZone(identifier: "UTC")
-                let calendar = Calendar.current
-                let dayComponent = calendar.component(.year, from: date)
-                return dateFormatter.string(from: date)
-            }
-            else{
-                print("Cannot format Date")
-                
-                return ""
-            }
-            return ""
+            return  ""
         }
         
     }
