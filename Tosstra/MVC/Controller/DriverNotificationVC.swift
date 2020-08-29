@@ -105,7 +105,7 @@ extension DriverNotificationVC:UITableViewDelegate,UITableViewDataSource
         
         //createDate.toDateString(inputDateFormat:  self.timeformat, ouputDateFormat: "hh:mm a")
         
-        cell.dayAgoLbl.text = (createDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "d MMM yyyy, h:mm a"))//.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "E,d MMM yyyy, h:mm a") //cellData?.notificationDate ?? "2020-07-10"
+        cell.dayAgoLbl.text = "".convertDateFormater(createDate)//(createDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "d MMM yyyy, h:mm a"))//.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "E,d MMM yyyy, h:mm a") //cellData?.notificationDate ?? "2020-07-10"
         //"".convertDateFormater(createDate)
         // cell.dayAgoLbl.text =  date?.timeAgoSinceDate()
         cell.dateLbl.isHidden = true
@@ -372,19 +372,33 @@ extension String {
         return dateFormatter.string(from: dt ?? Date())
     }
     
-    func convertDateFormater(_ date: String) -> String
+    func convertDateFormater(_ dateX: String) -> String
     {
+       // (createDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "d MMM yyyy, h:mm a"))
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        let date = dateFormatter.date(from: date)
-        dateFormatter.dateFormat = "E,d MMM yyyy, h:mm a"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = dateFormatter.date(from: dateX)
+        dateFormatter.dateFormat = "d MMM yyyy, h:mm a"
         if date != nil
         {
            return  dateFormatter.string(from: date!)
         }
         else
         {
-            return  ""
+               let dateFormatter2 = DateFormatter()
+                 dateFormatter2.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                 let date2 = dateFormatter2.date(from: dateX)
+                 dateFormatter2.dateFormat = "d MMM yyyy, h:mm a"
+            if date2 != nil
+            {
+               return  dateFormatter2.string(from: date2!)
+            }
+            else
+            {
+                return  "29 Aug 2020 11:22 AM"
+            }
+            
+           
         }
         
     }

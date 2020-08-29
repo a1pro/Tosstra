@@ -156,6 +156,7 @@ extension DisSigninVC
         
         let params = ["email" : userNameTxt.text!,
                       "password" : passwordTxt.text!,
+                      "timeZone" : CURRENTTIMEZONE,
                       "latitude" : "\(CURRENTLOCATIONLAT)",
             "longitude" : "\(CURRENTLOCATIONLONG)",
             "deviceId" : DEVICETOKEN,
