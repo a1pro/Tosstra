@@ -151,21 +151,33 @@ class DriverHomeVC: UIViewController {
 
         let timeGap = diffComponents.minute ?? 0
         
-       // print("timeGap  is = \(timeGap)")
+        print("timeGap  is = \(timeGap)")
         
-//        if timeGap == 15
-//        {
-//            //APPDEL.scheduleNotification(notificationType: "\(timeGap) passed")
-//            self.mins_15_NotificationAPI()
-//            self.now=Date()
-//        }
-//        else
-//
-//        {
-//           //APPDEL.scheduleNotification(notificationType: "Not 15 min pass")
-//
-//            print("timeGap  is = \(timeGap)")
-//        }
+        
+        if timeGap == 15
+        {
+            
+
+            if DEFAULT.value(forKey: "true") != nil
+            {
+              
+            }
+            else
+            {
+                 self.mins_15_NotificationAPI()
+            }
+            //APPDEL.scheduleNotification(notificationType: "\(timeGap) passed")
+            
+           
+        }
+        else
+
+        {
+           //APPDEL.scheduleNotification(notificationType: "Not 15 min pass")
+
+            DEFAULT.removeObject(forKey: "true")
+            DEFAULT.synchronize()
+        }
         
         
      //   let min15Past = Calendar.current.date(byAdding: .minute, value: 2, to: now)
@@ -429,12 +441,12 @@ extension DriverHomeVC
                id = userID
            }
            
-           let params = ["jobId" : "1",
-                         "dispatcherId" : "3",
-                         "driverId" : id]   as [String : String]
+           let params = ["driverId" : id]   as [String : String]
            
            ApiHandler.ModelApiPostMethod2(url: NOTIFICATION_15MINS_API, parameters: params) { (response, error) in
-               
+            DEFAULT.set("yes", forKey: "true")
+            DEFAULT.synchronize()
+                self.now=Date()
                if error == nil
                {
                    let decoder = JSONDecoder()
@@ -445,7 +457,7 @@ extension DriverHomeVC
                    }
                    catch let error
                    {
-                       self.view.makeToast(error.localizedDescription)
+                       //self.view.makeToast(error.localizedDescription)
                    }
                    
                }

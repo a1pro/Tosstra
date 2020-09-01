@@ -96,8 +96,8 @@ class DriverMyJobVC: UIViewController {
            if timeGap == 15
            {
                //APPDEL.scheduleNotification(notificationType: "\(timeGap) passed")
-               self.mins_15_NotificationAPI()
-               self.now=Date()
+              // self.mins_15_NotificationAPI()
+              // self.now=Date()
            }
            else
            

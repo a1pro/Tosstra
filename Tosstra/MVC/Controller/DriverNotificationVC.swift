@@ -62,6 +62,10 @@ class DriverNotificationVC: UIViewController {
             }
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+         print("current data = \(Date())")
+    }
     
     @IBAction func MenuAct(_ sender: UIButton)
     {
@@ -374,6 +378,8 @@ extension String {
     
     func convertDateFormater(_ dateX: String) -> String
     {
+        
+       
        // (createDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "d MMM yyyy, h:mm a"))
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -395,7 +401,7 @@ extension String {
             }
             else
             {
-                return  "29 Aug 2020 11:22 AM"
+                return  ""
             }
             
            
