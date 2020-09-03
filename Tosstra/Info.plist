@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -36,9 +36,9 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>${PRODUCT_NAME} need media library access permission to Take Photos and Video</string>
+	<string>App would like to access your media library for your profile photo upload. Your photos wont be shared without your permission.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>${PRODUCT_NAME} need Camera access permission to Take Photos and Video</string>
+	<string>App would like to access your camera for your profile photo upload. Your photos wont be shared without your permission.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>${PRODUCT_NAME}  would like to use your current location to display it on the app, also for directions and estimation of your travel times. It is secure and private.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -92,8 +92,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
