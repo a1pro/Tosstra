@@ -274,6 +274,21 @@ class DriverHomeVC: UIViewController {
     
     @IBAction func offlineOnlineAct(_ sender: UIButton)
     {
+        
+        
+        
+     
+               let popUpVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentPopupVC") as! PaymentPopupVC
+               //Don't forget initialize protocal deletage
+               // EditOrDelete = "Delete"
+               //  popUpVc.from = "Delete"
+              // popUpVc.delegate = self
+               self.addChild(popUpVc)
+               popUpVc.view.frame = self.view.frame
+               self.view.addSubview(popUpVc.view)
+               popUpVc.didMove(toParent: self)
+        
+        /*
         customInfoWindow?.removeFromSuperview()
         if sender.tag == 0
         {
@@ -310,6 +325,8 @@ class DriverHomeVC: UIViewController {
         {
             self.UserStatusAPI()
         }
+        
+        */
     }
     
 }

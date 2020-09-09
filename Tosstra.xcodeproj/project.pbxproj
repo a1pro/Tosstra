@@ -23,6 +23,7 @@
 		5602468224ADA82F003A67E9 /* DisSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602468124ADA82F003A67E9 /* DisSignupVC.swift */; };
 		5602468424ADB89B003A67E9 /* DriverSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602468324ADB89B003A67E9 /* DriverSignupVC.swift */; };
 		5602864D24ADBBBC0013A826 /* DisSigninVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602864C24ADBBBC0013A826 /* DisSigninVC.swift */; };
+		56229C9725089E6200972B5A /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56229C9625089E6200972B5A /* PaymentViewController.swift */; };
 		5626EE1824B043E200CAEA70 /* DriverMyJobVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE1724B043E200CAEA70 /* DriverMyJobVC.swift */; };
 		5626EE1B24B045BE00CAEA70 /* DriveMyJobCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE1924B045BE00CAEA70 /* DriveMyJobCell.swift */; };
 		5626EE1C24B045BE00CAEA70 /* DriveMyJobCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5626EE1A24B045BE00CAEA70 /* DriveMyJobCell.xib */; };
@@ -73,6 +74,10 @@
 		5676A46224B4978A00AFBCB4 /* DriverJobOfferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676A46124B4978A00AFBCB4 /* DriverJobOfferVC.swift */; };
 		5694C4C724BDD3790017FADF /* JobDetailMedel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5694C4C624BDD3790017FADF /* JobDetailMedel.swift */; };
 		5698CB2324B8351800A7CED2 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5698CB2224B8351800A7CED2 /* NotificationModel.swift */; };
+		56B6275B2508B21400D965EA /* PKIAPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6275A2508B21400D965EA /* PKIAPHandler.swift */; };
+		56B6275E2508BD3100D965EA /* ScrollCollect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6275C2508BD3100D965EA /* ScrollCollect.swift */; };
+		56B6275F2508BD3100D965EA /* ScrollCollect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56B6275D2508BD3100D965EA /* ScrollCollect.xib */; };
+		56B627612508BEA000D965EA /* PaymentPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B627602508BEA000D965EA /* PaymentPopupVC.swift */; };
 		56D085EF24ADF3F000E6D2BF /* ActiveDriverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085EE24ADF3F000E6D2BF /* ActiveDriverVC.swift */; };
 		56D085F224ADF66300E6D2BF /* ActiveDriverTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D085F024ADF66300E6D2BF /* ActiveDriverTCell.swift */; };
 		56D085F324ADF66300E6D2BF /* ActiveDriverTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56D085F124ADF66300E6D2BF /* ActiveDriverTCell.xib */; };
@@ -108,6 +113,7 @@
 		5602468124ADA82F003A67E9 /* DisSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSignupVC.swift; sourceTree = "<group>"; };
 		5602468324ADB89B003A67E9 /* DriverSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverSignupVC.swift; sourceTree = "<group>"; };
 		5602864C24ADBBBC0013A826 /* DisSigninVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSigninVC.swift; sourceTree = "<group>"; };
+		56229C9625089E6200972B5A /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		5626EE1724B043E200CAEA70 /* DriverMyJobVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverMyJobVC.swift; sourceTree = "<group>"; };
 		5626EE1924B045BE00CAEA70 /* DriveMyJobCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveMyJobCell.swift; sourceTree = "<group>"; };
 		5626EE1A24B045BE00CAEA70 /* DriveMyJobCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriveMyJobCell.xib; sourceTree = "<group>"; };
@@ -159,6 +165,10 @@
 		5676A46124B4978A00AFBCB4 /* DriverJobOfferVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverJobOfferVC.swift; sourceTree = "<group>"; };
 		5694C4C624BDD3790017FADF /* JobDetailMedel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailMedel.swift; sourceTree = "<group>"; };
 		5698CB2224B8351800A7CED2 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		56B6275A2508B21400D965EA /* PKIAPHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKIAPHandler.swift; sourceTree = "<group>"; };
+		56B6275C2508BD3100D965EA /* ScrollCollect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollCollect.swift; sourceTree = "<group>"; };
+		56B6275D2508BD3100D965EA /* ScrollCollect.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrollCollect.xib; sourceTree = "<group>"; };
+		56B627602508BEA000D965EA /* PaymentPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPopupVC.swift; sourceTree = "<group>"; };
 		56D085EE24ADF3F000E6D2BF /* ActiveDriverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveDriverVC.swift; sourceTree = "<group>"; };
 		56D085F024ADF66300E6D2BF /* ActiveDriverTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveDriverTCell.swift; sourceTree = "<group>"; };
 		56D085F124ADF66300E6D2BF /* ActiveDriverTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveDriverTCell.xib; sourceTree = "<group>"; };
@@ -261,6 +271,7 @@
 				5649EE6024B6F1ED00AEF83E /* JobModel.swift */,
 				5698CB2224B8351800A7CED2 /* NotificationModel.swift */,
 				5694C4C624BDD3790017FADF /* JobDetailMedel.swift */,
+				56B6275A2508B21400D965EA /* PKIAPHandler.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -291,6 +302,8 @@
 				5649EE6524B70CE500AEF83E /* ClusterCollectionCell.xib */,
 				566F6E5A24C1D4A200B06EB6 /* DriverHomeCCell.swift */,
 				566F6E5B24C1D4A200B06EB6 /* DriverHomeCCell.xib */,
+				56B6275C2508BD3100D965EA /* ScrollCollect.swift */,
+				56B6275D2508BD3100D965EA /* ScrollCollect.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -326,6 +339,8 @@
 				566F6E5824C1A4BA00B06EB6 /* TrackLoactionVC.swift */,
 				5666296C24C801BF00474A5B /* BackgroundLocationManager.swift */,
 				5627B31E24C975DC0087D587 /* StatticVC.swift */,
+				56229C9625089E6200972B5A /* PaymentViewController.swift */,
+				56B627602508BEA000D965EA /* PaymentPopupVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -435,6 +450,7 @@
 				5635CA5924ADD1F400A65374 /* Proxima Nova Alt Bold.otf in Resources */,
 				5635CA6424ADE65D00A65374 /* SeniorTrackTCell.xib in Resources */,
 				5635CA6024ADE07E00A65374 /* AllTrackTableViewCell.xib in Resources */,
+				56B6275F2508BD3100D965EA /* ScrollCollect.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,7 +545,9 @@
 				5653E7EF24AEECA8006C8C20 /* DisjobDescriptionVC.swift in Sources */,
 				564F2AAF24ADC1C5004116A4 /* DisSidebarVC.swift in Sources */,
 				5602468424ADB89B003A67E9 /* DriverSignupVC.swift in Sources */,
+				56B6275B2508B21400D965EA /* PKIAPHandler.swift in Sources */,
 				5635CA5F24ADE07E00A65374 /* AllTrackTableViewCell.swift in Sources */,
+				56B6275E2508BD3100D965EA /* ScrollCollect.swift in Sources */,
 				5635CA4D24ADCDBC00A65374 /* DriverHomeVC.swift in Sources */,
 				5626EE1824B043E200CAEA70 /* DriverMyJobVC.swift in Sources */,
 				5626EE2524B04FA100CAEA70 /* DriverNotiCell.swift in Sources */,
@@ -541,6 +559,8 @@
 				5676A44E24B4397300AFBCB4 /* ForPassVC.swift in Sources */,
 				56D085EF24ADF3F000E6D2BF /* ActiveDriverVC.swift in Sources */,
 				5653E7F424AF4E39006C8C20 /* DisEndJonTCell.swift in Sources */,
+				56229C9725089E6200972B5A /* PaymentViewController.swift in Sources */,
+				56B627612508BEA000D965EA /* PaymentPopupVC.swift in Sources */,
 				56EBDCE424C1898C006F16D1 /* ChooseAddressVC.swift in Sources */,
 				56D2D1E724B3237E0087B7B9 /* WebServices.swift in Sources */,
 				5602864D24ADBBBC0013A826 /* DisSigninVC.swift in Sources */,
