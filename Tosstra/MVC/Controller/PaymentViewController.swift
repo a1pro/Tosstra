@@ -35,14 +35,14 @@ class PaymentViewController: UIViewController {
           var expiryDate = ""
           var purchaseDate = "1"
          var plan = "Monthly"
-          var amount = "0.99 GBP"
+          var amount = "29.99 USD"
      
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        PKIAPHandler.shared.setProductIds(ids: ["com.MoocherMonthlyPlan","com.MoocherMonthlyPlan"])
+        PKIAPHandler.shared.setProductIds(ids: ["com.Tosstra.monthlySubscription"])
                PKIAPHandler.shared.fetchAvailableProducts { [weak self](products)   in
                    guard let sSelf = self else {return}
                    sSelf.productsArray = products
@@ -74,7 +74,7 @@ class PaymentViewController: UIViewController {
     }
        override func viewWillAppear(_ animated: Bool) {
  
-           PKIAPHandler.shared.setProductIds(ids:  ["com.MoocherSubscriptionAutoNewPlann","com.MoocherMonthlyNewPlanNonRenew"])
+           PKIAPHandler.shared.setProductIds(ids:  ["com.Tosstra.monthlySubscription"])
                   PKIAPHandler.shared.fetchAvailableProducts { [weak self](products)   in
                       guard let sSelf = self else {return}
                       sSelf.productsArray = products
@@ -89,7 +89,7 @@ class PaymentViewController: UIViewController {
           self.expiryDate = ""
             ApiHandler.LOADERSHOW()
             self.plan = "Monthly"
-            self.amount = "0.99 GBP"
+            self.amount = "29.99 USD"
             if let id = self.productsArray
             {
                 if self.productsArray.count>0//self.productsArray.count>1
@@ -142,7 +142,16 @@ class PaymentViewController: UIViewController {
         
         func receiptValidation()
         {
-           let  verifyReceiptURL = "https://sandbox.itunes.apple.com/verifyReceipt"
+          // let  verifyReceiptURL = "https://sandbox.itunes.apple.com/verifyReceipt"
+            let receiptURL = Bundle.main.appStoreReceiptURL
+            let receipt = NSData(contentsOf: receiptURL!)
+          
+     
+            let appleServer = receiptURL?.lastPathComponent == "sandboxReceipt" ? "sandbox" : "buy"
+            
+            let verifyReceiptURL = "https://\(appleServer).itunes.apple.com/verifyReceipt"
+          
+            
             
             let receiptFileURL = Bundle.main.appStoreReceiptURL
             let receiptData = try? Data(contentsOf: receiptFileURL!)
@@ -205,9 +214,9 @@ class PaymentViewController: UIViewController {
             let receipt = NSData(contentsOf: receiptURL!)
             let requestContents: [String: Any] = [
                 "receipt-data": receipt!.base64EncodedString(options: []),
-                "password": "99852e3cd1ab4f628794dbc1bfa925ae"
+                "password": "dd5ff0d542624863a91e504a2649c7cd"
             ]
-            
+      
             let appleServer = receiptURL?.lastPathComponent == "sandboxReceipt" ? "sandbox" : "buy"
             
             let stringURL = "https://\(appleServer).itunes.apple.com/verifyReceipt"
@@ -220,7 +229,7 @@ class PaymentViewController: UIViewController {
                     {
                          print("Data in = ")
                         print(value)
-                        
+                        print(response)
                         
                         if let receiptInfo: NSArray = value["latest_receipt_info"] as? NSArray
                         {
@@ -461,7 +470,7 @@ class PaymentViewController: UIViewController {
     }
     @IBAction func restoreAct(_ sender: UIButton)
       {
-         print(PKIAPHandler.shared.canMakePurchases())
+    
                  self.expiryDate = ""
                  PKIAPHandler.shared.restorePurchase()
                 if  let receiptURL = Bundle.main.appStoreReceiptURL
