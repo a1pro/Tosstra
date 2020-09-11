@@ -400,7 +400,15 @@ class PaymentViewController: UIViewController {
                             DEFAULT.set("yes", forKey: "ISPAID")
                             
                             DEFAULT.synchronize()
-                            self.navigationController?.popViewController(animated: true)
+                           if #available(iOS 13.0, *)
+                                                              {
+                                                                  SCENEDEL.loadDriverHomeView()
+                                                                  
+                                                              }
+                                                              else
+                                                              {
+                                                                  APPDEL.loadDriverHomeView()
+                                                              }
                         }
                     }
                     

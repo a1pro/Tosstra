@@ -81,6 +81,8 @@ class DriverHomeVC: UIViewController {
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.startMonitoringSignificantLocationChanges()
+        
+       
         /*
         if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
         {
@@ -126,6 +128,15 @@ class DriverHomeVC: UIViewController {
         
         
         
+            if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                           {
+                               NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                           }
+                           else
+                           {
+                               self.viewProfileAPI()
+                           }
+        
         
         
         
@@ -136,18 +147,8 @@ class DriverHomeVC: UIViewController {
         
         super.viewWillAppear(true)
         //self.pageRefresh()
-        self.viewProfileAPI()
-        if DEFAULT.value(forKey: "PAYBACK") != nil
-        {
-            if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-                           {
-                               NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-                           }
-                           else
-                           {
-                               //self.viewProfileAPI()
-                           }
-        }
+      
+       
     
     }
     
@@ -303,6 +304,25 @@ class DriverHomeVC: UIViewController {
     {
         customInfoWindow?.removeFromSuperview()
         self.locationCheck()
+         if self.onOfflineLbl.text == "You are online"
+         {
+            if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                           {
+                               NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                           }
+                           else
+                           {
+                               self.allDriverAPI()
+                           }
+          }
+        else
+         {
+            
+         }
+        
+        /*
+        
+        
         if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
         {
             if status == "1"
@@ -338,6 +358,8 @@ class DriverHomeVC: UIViewController {
             self.onLineBtn.isHidden = false
             self.myMapView.isUserInteractionEnabled = false
         }
+        
+        */
     }
     
     
@@ -998,6 +1020,10 @@ extension DriverHomeVC
                                                  
                                                  if  dayDiffrent == 1
                                                  {
+                                                    DEFAULT.set("yes", forKey: "ISPAID")
+                                                     
+                                                     DEFAULT.synchronize()
+                                                    
                                                     if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
                                                           {
                                                               if status == "1"
@@ -1041,7 +1067,7 @@ extension DriverHomeVC
                                 {
                                            DEFAULT.removeObject(forKey: "ISPAID")
                                             DEFAULT.synchronize()
-                                           self.gameTimer?.invalidate()
+                                           
                                              let popUpVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentPopupVC") as! PaymentPopupVC
                                              //Don't forget initialize protocal deletage
                                              // EditOrDelete = "Delete"
@@ -1062,9 +1088,8 @@ extension DriverHomeVC
                             
                             
                             DEFAULT.removeObject(forKey: "PAYBACK")
-                              DEFAULT.removeObject(forKey: "ISPAID")
-                            DEFAULT.synchronize()
-                            self.gameTimer?.invalidate()
+                           
+                            
                             DEFAULT.removeObject(forKey: "ISPAID")
                              DEFAULT.synchronize()
                             

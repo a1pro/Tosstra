@@ -245,38 +245,69 @@ extension DriverMyJobVC:UITableViewDelegate,UITableViewDataSource
         }
         else
         {
-            let alert = UIAlertController(title: "Alert", message: "Are you sure you want to start this job?", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
-                print("Handle Cancel Logic here")
-            }))
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
-                if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-                {
-                    NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-                }
-                else
-                {
-                    if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-                    {
-                        NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-                    }
-                    else
-                    {
-                        
-                        
-                        
-                        self.JoBStartAPI()
-                        
-                        
-                    }
-                }
-                
-                
-            }))
             
-            present(alert, animated: true, completion: nil)
+            if DEFAULT.value(forKey: "ISPAID") != nil
+            {
+               
+                
+                let alert = UIAlertController(title: "Alert", message: "Are you sure you want to start this job?", preferredStyle: UIAlertController.Style.alert)
+                                       alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+                                           print("Handle Cancel Logic here")
+                                       }))
+                                       alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+                                           if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                                           {
+                                               NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                                           }
+                                           else
+                                           {
+                                               if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                                               {
+                                                   NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                                               }
+                                               else
+                                               {
+                                                   
+                                                   
+                                                   
+                                                   self.JoBStartAPI()
+                                                   
+                                                   
+                                               }
+                                           }
+                                           
+                                           
+                                       }))
+                                       
+                                       present(alert, animated: true, completion: nil)
+                                       
+                                   }
+            else
+                      {
+                                   DEFAULT.removeObject(forKey: "ISPAID")
+                                         DEFAULT.synchronize()
+                                         
+                                        
+                                          let popUpVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentPopupVC") as! PaymentPopupVC
+                                          //Don't forget initialize protocal deletage
+                                          // EditOrDelete = "Delete"
+                                          //  popUpVc.from = "Delete"
+                                         // popUpVc.delegate = self
+                                         self.gameTimer?.invalidate()
+                                          self.addChild(popUpVc)
+                                          popUpVc.view.frame = self.view.frame
+                                          self.view.addSubview(popUpVc.view)
+                                          popUpVc.didMove(toParent: self)
+                      }
+            }
+          
             
-        }
+            
+            
+            
+            
+            
+        
         
         
         
