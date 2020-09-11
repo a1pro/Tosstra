@@ -57,6 +57,11 @@ class DriverHomeVC: UIViewController {
     var gameTimer: Timer?
     var now = Date()
 
+    var paymentData:DiverProfileModel?
+    var payMentExpire = ""
+       
+    var payMentStart = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +81,7 @@ class DriverHomeVC: UIViewController {
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.startMonitoringSignificantLocationChanges()
-        
+        /*
         if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
         {
             if status == "1"
@@ -115,9 +120,14 @@ class DriverHomeVC: UIViewController {
             self.onLineBtn.isHidden = false
             self.myMapView.isUserInteractionEnabled = false
         }
-        
+        */
 
         gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+        
+        
+        
+        
+        
         
         
     }
@@ -126,6 +136,19 @@ class DriverHomeVC: UIViewController {
         
         super.viewWillAppear(true)
         //self.pageRefresh()
+        self.viewProfileAPI()
+        if DEFAULT.value(forKey: "PAYBACK") != nil
+        {
+            if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                           {
+                               NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                           }
+                           else
+                           {
+                               //self.viewProfileAPI()
+                           }
+        }
+    
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -225,7 +248,55 @@ class DriverHomeVC: UIViewController {
     }
     @IBAction func mapRefreshAct(_ sender: UIButton)
     {
-        pageRefresh()
+        
+        
+        if self.payMentStart != "" || self.payMentExpire != ""
+        {
+            
+            let dayDiffrent =  self.dateDiff(dateStr: self.payMentExpire) //self.daysBetweenDates(startDate1: self.payMentStart, endDate1: self.payMentExpire) //((Int(self.payMentExpire)!) -  (Int(self.payMentStart)!))
+            
+            print("dayDiffrent = \(dayDiffrent)")
+            
+            if  dayDiffrent == 1
+            {
+              pageRefresh()
+            }
+            else
+            {
+                
+                DEFAULT.removeObject(forKey: "ISPAID")
+                DEFAULT.synchronize()
+               
+                 let popUpVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentPopupVC") as! PaymentPopupVC
+                self.gameTimer?.invalidate()
+                 //Don't forget initialize protocal deletage
+                 // EditOrDelete = "Delete"
+                 //  popUpVc.from = "Delete"
+                // popUpVc.delegate = self
+                 self.addChild(popUpVc)
+                 popUpVc.view.frame = self.view.frame
+                 self.view.addSubview(popUpVc.view)
+                 popUpVc.didMove(toParent: self)
+            }
+        }
+        else
+        {
+            DEFAULT.removeObject(forKey: "ISPAID")
+            DEFAULT.synchronize()
+            
+           
+             let popUpVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentPopupVC") as! PaymentPopupVC
+             //Don't forget initialize protocal deletage
+             // EditOrDelete = "Delete"
+             //  popUpVc.from = "Delete"
+            // popUpVc.delegate = self
+            self.gameTimer?.invalidate()
+             self.addChild(popUpVc)
+             popUpVc.view.frame = self.view.frame
+             self.view.addSubview(popUpVc.view)
+             popUpVc.didMove(toParent: self)
+        }
+        
     }
     
     func pageRefresh()
@@ -274,59 +345,139 @@ class DriverHomeVC: UIViewController {
     
     @IBAction func offlineOnlineAct(_ sender: UIButton)
     {
-        
-        
+        /*
+        if let ISPAID = DEFAULT.value(forKey: "ISPAID") as? String
+              {
+                  
+               if sender.tag == 0
+               {
+                   self.onOfflineLbl.text = "You are online"
+                   self.onlineStatus = "1"
+                   self.OfflineBtn.isHidden = false
+                   self.onLineBtn.isHidden = true
+                   self.myMapView.isUserInteractionEnabled = true
+                   if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                   {
+                       NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                   }
+                   else
+                   {
+                       self.allDriverAPI()
+                   }
+                   self.clusterView.isHidden = false
+               }
+               else
+               {
+                   self.onOfflineLbl.text = "You are offline"
+                   self.onlineStatus = "0"
+                   self.clusterView.isHidden = true
+                   self.myMapView.clear()
+                   self.OfflineBtn.isHidden = true
+                   self.onLineBtn.isHidden = false
+                   self.myMapView.isUserInteractionEnabled = false
+               }
+               if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+               {
+                   NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+               }
+               else
+               {
+                   self.UserStatusAPI()
+               }
+                
+              }
+              else
+              {
+                */
+                  if self.payMentStart != "" || self.payMentExpire != ""
+                  {
+                      
+                      let dayDiffrent =  self.dateDiff(dateStr: self.payMentExpire) //self.daysBetweenDates(startDate1: self.payMentStart, endDate1: self.payMentExpire) //((Int(self.payMentExpire)!) -  (Int(self.payMentStart)!))
+                      
+                      print("dayDiffrent = \(dayDiffrent)")
+                      
+                      if  dayDiffrent == 1
+                      {
+                        if sender.tag == 0
+                          {
+                              self.onOfflineLbl.text = "You are online"
+                              self.onlineStatus = "1"
+                              self.OfflineBtn.isHidden = false
+                              self.onLineBtn.isHidden = true
+                              self.myMapView.isUserInteractionEnabled = true
+                              if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                              {
+                                  NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                              }
+                              else
+                              {
+                                  self.allDriverAPI()
+                              }
+                              self.clusterView.isHidden = false
+                          }
+                          else
+                          {
+                              self.onOfflineLbl.text = "You are offline"
+                              self.onlineStatus = "0"
+                              self.clusterView.isHidden = true
+                              self.myMapView.clear()
+                              self.OfflineBtn.isHidden = true
+                              self.onLineBtn.isHidden = false
+                              self.myMapView.isUserInteractionEnabled = false
+                          }
+                          if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                          {
+                              NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                          }
+                          else
+                          {
+                              self.UserStatusAPI()
+                          }
+                          
+                      }
+                      else
+                      {
+                          
+                          DEFAULT.removeObject(forKey: "ISPAID")
+                          DEFAULT.synchronize()
+                         self.gameTimer?.invalidate()
+                           let popUpVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentPopupVC") as! PaymentPopupVC
+                           //Don't forget initialize protocal deletage
+                           // EditOrDelete = "Delete"
+                           //  popUpVc.from = "Delete"
+                          // popUpVc.delegate = self
+                           self.addChild(popUpVc)
+                           popUpVc.view.frame = self.view.frame
+                           self.view.addSubview(popUpVc.view)
+                           popUpVc.didMove(toParent: self)
+                      }
+                  }
+                  else
+                  {
+                      DEFAULT.removeObject(forKey: "ISPAID")
+                      DEFAULT.synchronize()
+                      
+                     self.gameTimer?.invalidate()
+                       let popUpVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentPopupVC") as! PaymentPopupVC
+                       //Don't forget initialize protocal deletage
+                       // EditOrDelete = "Delete"
+                       //  popUpVc.from = "Delete"
+                      // popUpVc.delegate = self
+                       self.addChild(popUpVc)
+                       popUpVc.view.frame = self.view.frame
+                       self.view.addSubview(popUpVc.view)
+                       popUpVc.didMove(toParent: self)
+                  }
+              //}
+              
         
      
-               let popUpVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentPopupVC") as! PaymentPopupVC
-               //Don't forget initialize protocal deletage
-               // EditOrDelete = "Delete"
-               //  popUpVc.from = "Delete"
-              // popUpVc.delegate = self
-               self.addChild(popUpVc)
-               popUpVc.view.frame = self.view.frame
-               self.view.addSubview(popUpVc.view)
-               popUpVc.didMove(toParent: self)
         
-        /*
+        
         customInfoWindow?.removeFromSuperview()
-        if sender.tag == 0
-        {
-            self.onOfflineLbl.text = "You are online"
-            self.onlineStatus = "1"
-            self.OfflineBtn.isHidden = false
-            self.onLineBtn.isHidden = true
-            self.myMapView.isUserInteractionEnabled = true
-            if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-            {
-                NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-            }
-            else
-            {
-                self.allDriverAPI()
-            }
-            self.clusterView.isHidden = false
-        }
-        else
-        {
-            self.onOfflineLbl.text = "You are offline"
-            self.onlineStatus = "0"
-            self.clusterView.isHidden = true
-            self.myMapView.clear()
-            self.OfflineBtn.isHidden = true
-            self.onLineBtn.isHidden = false
-            self.myMapView.isUserInteractionEnabled = false
-        }
-        if !(NetworkEngine.networkEngineObj.isInternetAvailable())
-        {
-            NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
-        }
-        else
-        {
-            self.UserStatusAPI()
-        }
         
-        */
+        
+        
     }
     
 }
@@ -803,6 +954,279 @@ extension DriverHomeVC:GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate
     }
     
 }
+
+extension DriverHomeVC
+{
+    //MARK:-  payment Api
+    
+    func viewProfileAPI()
+    {
+        var id = ""
+        if let userID = DEFAULT.value(forKey: "USERID") as? String
+        {
+            id = userID
+        }
+        
+        let params = ["userId" : id]   as [String : String]
+        
+        ApiHandler.ModelApiPostMethod(url: VIEW_PROFILE_API, parameters: params) { (response, error) in
+            
+            if error == nil
+            {
+                let decoder = JSONDecoder()
+                do
+                {
+                    self.paymentData = try decoder.decode(DiverProfileModel.self, from: response!)
+                    
+                    if self.paymentData?.code == "200"
+                        
+                    {
+                        
+                        NetworkEngine.showToast(controller: self, message: self.paymentData?.message)
+                        
+                    }
+                    else
+                    {
+                        if self.paymentData?.payment?.count ?? 0>0
+                        {
+                            self.payMentStart = self.paymentData?.payment?[0].purchaseDate ?? ""
+                            self.payMentExpire = self.paymentData?.payment?[0].expiryDate ?? ""
+                            
+                            let dayDiffrent =  self.dateDiff(dateStr: self.payMentExpire) //self.daysBetweenDates(startDate1: self.payMentStart, endDate1: self.payMentExpire) //((Int(self.payMentExpire)!) -  (Int(self.payMentStart)!))
+                                                 
+                                                 print("dayDiffrent = \(dayDiffrent)")
+                                                 
+                                                 if  dayDiffrent == 1
+                                                 {
+                                                    if let  status = DEFAULT.value(forKey: "ONLINESTATUS") as? String
+                                                          {
+                                                              if status == "1"
+                                                              {
+                                                                  self.onOfflineLbl.text = "You are online"
+                                                                  self.onlineStatus = "0"
+                                                                  self.OfflineBtn.isHidden = false
+                                                                  self.onLineBtn.isHidden = true
+                                                                  self.myMapView.isUserInteractionEnabled = true
+                                                                  if !(NetworkEngine.networkEngineObj.isInternetAvailable())
+                                                                  {
+                                                                      NetworkEngine.networkEngineObj.showInterNetAlert(vc:self)
+                                                                  }
+                                                                  else
+                                                                  {
+                                                                      self.allDriverAPI()
+                                                                  }
+                                                                  self.clusterView.isHidden = false
+                                                              }
+                                                              else
+                                                              {
+                                                                  self.onOfflineLbl.text = "You are offline"
+                                                                  self.onlineStatus = "1"
+                                                                  self.clusterView.isHidden = true
+                                                                  self.OfflineBtn.isHidden = true
+                                                                  self.onLineBtn.isHidden = false
+                                                                  self.myMapView.isUserInteractionEnabled = false
+                                                              }
+                                                          }
+                                                          else
+                                                          {
+                                                              self.onOfflineLbl.text = "You are offline"
+                                                              self.onlineStatus = "1"
+                                                              self.clusterView.isHidden = true
+                                                              self.OfflineBtn.isHidden = true
+                                                              self.onLineBtn.isHidden = false
+                                                              self.myMapView.isUserInteractionEnabled = false
+                                                          }
+                                                  }
+                            else
+                                {
+                                           DEFAULT.removeObject(forKey: "ISPAID")
+                                            DEFAULT.synchronize()
+                                           self.gameTimer?.invalidate()
+                                             let popUpVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentPopupVC") as! PaymentPopupVC
+                                             //Don't forget initialize protocal deletage
+                                             // EditOrDelete = "Delete"
+                                             //  popUpVc.from = "Delete"
+                                            // popUpVc.delegate = self
+                                             self.addChild(popUpVc)
+                                             popUpVc.view.frame = self.view.frame
+                                             self.view.addSubview(popUpVc.view)
+                                             popUpVc.didMove(toParent: self)
+                                    
+                                    
+                                       }
+                            
+                            
+                        }
+                        else
+                        {
+                            
+                            
+                            DEFAULT.removeObject(forKey: "PAYBACK")
+                              DEFAULT.removeObject(forKey: "ISPAID")
+                            DEFAULT.synchronize()
+                            self.gameTimer?.invalidate()
+                            DEFAULT.removeObject(forKey: "ISPAID")
+                             DEFAULT.synchronize()
+                            
+                              let popUpVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentPopupVC") as! PaymentPopupVC
+                              //Don't forget initialize protocal deletage
+                              // EditOrDelete = "Delete"
+                              //  popUpVc.from = "Delete"
+                             // popUpVc.delegate = self
+                              self.addChild(popUpVc)
+                              popUpVc.view.frame = self.view.frame
+                              self.view.addSubview(popUpVc.view)
+                              popUpVc.didMove(toParent: self)
+                        }
+                        
+                    }
+                    
+                    
+                }
+                catch let error
+                {
+                    self.view.makeToast(error.localizedDescription)
+                }
+                
+            }
+            else
+            {
+                self.view.makeToast(error)
+            }
+        }
+    }
+    
+      
+        func dateDiff(dateStr:String) -> Int32
+        {
+            let f:DateFormatter = DateFormatter()
+            f.timeZone = NSTimeZone.local
+            f.dateFormat = "yyyy-MM-dd HH:mm:ss VV"
+            f.timeZone = TimeZone(abbreviation: "UTC")
+            
+            let now = f.string(from: Date())
+            let startDate = f.date(from: dateStr)
+            let endDate = f.date(from: now)
+            var _: Calendar = Calendar.current
+        
+            print("current  date = \(String(describing: startDate))")
+            print("expire  date = \(String(describing: endDate))")
+            
+            
+    //
+    //        let dateComponents = calendar.dateComponents([Calendar.Component.year,Calendar.Component.month,Calendar.Component.weekOfMonth,Calendar.Component.day,Calendar.Component.hour,Calendar.Component.minute,Calendar.Component.second], from: startDate!, to: endDate!)
+    //
+    //        let endOfMinutes = Calendar.current.date(byAdding: .minute, value: 1, to: endDate!)
+    //
+    //
+    //
+    //
+           
+            
+            
+    //        let years = abs(Int32(dateComponents.year!)) //
+    //        let months = abs(Int32(dateComponents.month!))
+    //        let weeks = abs(Int32(dateComponents.weekOfMonth!)) //
+    //        let days = abs(Int32(dateComponents.day!))
+    //        let hours = abs(Int32(dateComponents.hour!))
+    //        let min = abs(Int32(dateComponents.minute!))
+    //        let sec = abs(Int32(dateComponents.second!))
+    //
+           var timeAgo:Int32 = 0
+    //
+    //        if (sec > 0){
+    //
+    //                timeAgo = sec
+    //
+    //        }
+    //
+    //        if (min > 0){
+    //
+    //                timeAgo = min
+    //
+    //        }
+    //
+    //        if(hours > 0){
+    //
+    //                timeAgo = hours
+    //
+    //        }
+    //
+    //        if (days > 0) {
+    //
+    //                timeAgo = days
+    //
+    //        }
+    //
+    //        if(weeks > 0){
+    //
+    //                timeAgo = weeks
+    //
+    //        }
+    //
+    //        if (months > 0) {
+    //
+    //            timeAgo = months
+    //
+    //        }
+    //
+    //        if(years > 0){
+    //
+    //            timeAgo = years
+    //
+    //        }
+    //
+    //        print("timeAgo is===> \(timeAgo)")
+    //
+    //
+            
+    //        if endDate!.compare(startDate!) != ComparisonResult.orderedDescending
+    //        {
+    //            print("Valid")
+    //            timeAgo = 1
+    //        }
+    //        else
+    //        {
+    //            print("Not Valid")
+    //            timeAgo = 0
+    //        }
+            if let endDate1 = endDate
+            {
+                if let startDate1 = startDate
+                {
+                    if endDate!.compare(startDate!) != ComparisonResult.orderedDescending
+                    {
+                        print("Valid")
+                        timeAgo = 1
+                    }
+                    else
+                    {
+                        print("Not Valid")
+                        timeAgo = 0
+                    }
+                }
+                    
+                else
+                {
+                    print("Not Valid")
+                    timeAgo = 0
+                }
+            }
+                
+            else
+            {
+                print("Not Valid")
+                timeAgo = 0
+            }
+            
+            
+            
+    //
+            return timeAgo;
+        }
+}
+
+
 //MARK:- location work
 
 extension DriverHomeVC:CLLocationManagerDelegate

@@ -172,22 +172,22 @@ extension PKIAPHandler: SKProductsRequestDelegate, SKPaymentTransactionObserver{
         SVProgressHUD.dismiss()
         
         
-        if DEFAULT.value(forKey: "CREATEPAY2") != nil
-        {
-            DEFAULT.removeObject(forKey: "CREATEPAY2")
-            DEFAULT.synchronize()
-
-            DEFAULT.set("yes", forKey: "FROMBACK")
-            DEFAULT.synchronize()
-            //APPDEL.loadRetailerView()
-        }
-        if DEFAULT.value(forKey: "CREATEPAY6") != nil
-               {
-                   DEFAULT.removeObject(forKey: "CREATEPAY6")
-                   DEFAULT.synchronize()
-               // APPDEL.loadCustomerView()
-                 NotificationCenter.default.post(name: Notification.Name("GroupPromotionNoti"), object: nil, userInfo: nil)
-               }
+//        if DEFAULT.value(forKey: "CREATEPAY2") != nil
+//        {
+//            DEFAULT.removeObject(forKey: "CREATEPAY2")
+//            DEFAULT.synchronize()
+//
+//            DEFAULT.set("yes", forKey: "FROMBACK")
+//            DEFAULT.synchronize()
+//            //APPDEL.loadRetailerView()
+//        }
+//        if DEFAULT.value(forKey: "CREATEPAY6") != nil
+//               {
+//                   DEFAULT.removeObject(forKey: "CREATEPAY6")
+//                   DEFAULT.synchronize()
+//               // APPDEL.loadCustomerView()
+//                 NotificationCenter.default.post(name: Notification.Name("GroupPromotionNoti"), object: nil, userInfo: nil)
+//               }
         
     }
     
@@ -214,21 +214,21 @@ extension PKIAPHandler: SKProductsRequestDelegate, SKPaymentTransactionObserver{
                     
                     // NetworkEngine.networkEngineObj.showAlert(messageToShow: "Product purchase failed.", title: "Transaction Message!")
               
-                    if DEFAULT.value(forKey: "CREATEPAY") != nil
-                    {
-                        DEFAULT.set("CREATEPAY2", forKey: "CREATEPAY2")
-                        DEFAULT.removeObject(forKey: "CREATEPAY")
-                        DEFAULT.synchronize()
-                      
-                    }
-                    if DEFAULT.value(forKey: "CREATEPAY5") != nil
-                                       {
-                                           DEFAULT.set("CREATEPAY6", forKey: "CREATEPAY6")
-                                           DEFAULT.removeObject(forKey: "CREATEPAY5")
-                                           DEFAULT.synchronize()
-                                         
-                                       }
-                    
+//                    if DEFAULT.value(forKey: "CREATEPAY") != nil
+//                    {
+//                        DEFAULT.set("CREATEPAY2", forKey: "CREATEPAY2")
+//                        DEFAULT.removeObject(forKey: "CREATEPAY")
+//                        DEFAULT.synchronize()
+//
+//                    }
+//                    if DEFAULT.value(forKey: "CREATEPAY5") != nil
+//                                       {
+//                                           DEFAULT.set("CREATEPAY6", forKey: "CREATEPAY6")
+//                                           DEFAULT.removeObject(forKey: "CREATEPAY5")
+//                                           DEFAULT.synchronize()
+//
+//                                       }
+//
                     
                     SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
                     

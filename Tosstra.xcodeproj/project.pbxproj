@@ -91,6 +91,7 @@
 		56D2D1EB24B326790087B7B9 /* Dis_Register_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1EA24B326790087B7B9 /* Dis_Register_Model.swift */; };
 		56D2D1ED24B32EBB0087B7B9 /* Dis_Login_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1EC24B32EBB0087B7B9 /* Dis_Login_Model.swift */; };
 		56EBDCE424C1898C006F16D1 /* ChooseAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EBDCE324C1898C006F16D1 /* ChooseAddressVC.swift */; };
+		56F80744250B47DA004582F4 /* DiverProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F80743250B47DA004582F4 /* DiverProfileModel.swift */; };
 		94763B89D70CC1BBCFE16223 /* Pods_Tosstra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B18A390511219F857BB0E1 /* Pods_Tosstra.framework */; };
 /* End PBXBuildFile section */
 
@@ -182,6 +183,7 @@
 		56D2D1EA24B326790087B7B9 /* Dis_Register_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dis_Register_Model.swift; sourceTree = "<group>"; };
 		56D2D1EC24B32EBB0087B7B9 /* Dis_Login_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dis_Login_Model.swift; sourceTree = "<group>"; };
 		56EBDCE324C1898C006F16D1 /* ChooseAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAddressVC.swift; sourceTree = "<group>"; };
+		56F80743250B47DA004582F4 /* DiverProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiverProfileModel.swift; sourceTree = "<group>"; };
 		E5B18A390511219F857BB0E1 /* Pods_Tosstra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tosstra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E645612C3ACD9FFE04591AA5 /* Pods-Tosstra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tosstra.release.xcconfig"; path = "Target Support Files/Pods-Tosstra/Pods-Tosstra.release.xcconfig"; sourceTree = "<group>"; };
 		F86A1CC6F6FE719B3020AAFC /* Pods-Tosstra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tosstra.debug.xcconfig"; path = "Target Support Files/Pods-Tosstra/Pods-Tosstra.debug.xcconfig"; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				5698CB2224B8351800A7CED2 /* NotificationModel.swift */,
 				5694C4C624BDD3790017FADF /* JobDetailMedel.swift */,
 				56B6275A2508B21400D965EA /* PKIAPHandler.swift */,
+				56F80743250B47DA004582F4 /* DiverProfileModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				5602465F24AD9391003A67E9 /* ViewController.swift in Sources */,
 				56D085F224ADF66300E6D2BF /* ActiveDriverTCell.swift in Sources */,
 				562DC88324B5D7C6006C5C83 /* CustomMarkerView.swift in Sources */,
+				56F80744250B47DA004582F4 /* DiverProfileModel.swift in Sources */,
 				5653E7EF24AEECA8006C8C20 /* DisjobDescriptionVC.swift in Sources */,
 				564F2AAF24ADC1C5004116A4 /* DisSidebarVC.swift in Sources */,
 				5602468424ADB89B003A67E9 /* DriverSignupVC.swift in Sources */,

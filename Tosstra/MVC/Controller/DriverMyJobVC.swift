@@ -316,6 +316,7 @@ extension DriverMyJobVC
                     }
                     else
                     {
+                        self.gameTimer?.invalidate()
                         self.noDataLbl.isHidden = false
                     }
                     self.myTable.reloadData()

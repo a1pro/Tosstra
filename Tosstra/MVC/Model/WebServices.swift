@@ -93,3 +93,5 @@ let JOB_DETAILS_API = BASEURL + "get-Single-Job-Data"
 
 let NOTIFICATION_15MINS_API = BASEURL + "driver-Location-Point"
 
+let UPADATEPAYMENTAPI = BASEURL + "user-Payment"
+

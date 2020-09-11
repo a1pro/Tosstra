@@ -640,7 +640,7 @@ class ApiHandler: NSObject
         SVProgressHUD.show()
         SVProgressHUD.setBorderColor(UIColor.white)
         SVProgressHUD.setForegroundColor(UIColor.white)
-        SVProgressHUD.setBackgroundColor(UIColor.black)
+        SVProgressHUD.setBackgroundColor(APPCOLOL)
     }
     
   
