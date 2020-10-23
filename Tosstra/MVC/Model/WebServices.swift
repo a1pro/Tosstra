@@ -12,24 +12,36 @@ import Foundation
 
 //MARK:- all websevices
 
-let BASEURL = "http://a1professionals.net/tosstra/api/"
+//let BASEURL = "http://a1professionals.net/tosstra/api/"
+//
+//let IMAGEBASEURL = "http://a1professionals.net/tosstra/assets/usersImg/"
+//
+//let VIDEOBASEURL = "https://a1professionals.net/dressApp/assets/videos/"
+////1.
+//
+//let Privacy = "https://tosstra.com/privacy-policy"
+//
+//let Terms_and_Conditions = "https://tosstra.com/terms-and-conditi"
+//
+//let CONTACTUS = "https://tosstra.com/contact-us"
+//
+//let HELP = "https://tosstra.com/help"
 
-let IMAGEBASEURL = "http://a1professionals.net/tosstra/assets/usersImg/"
 
-let VIDEOBASEURL = "https://a1professionals.net/dressApp/assets/videos/"
+let BASEURL = "http://tosstra.tosstra.com/api/"
+
+let IMAGEBASEURL = "http://tosstra.tosstra.com/assets/usersImg/"
+
+let VIDEOBASEURL = "http://tosstra.tosstra.com/assets/videos/"
 //1.
 
 let Privacy = "https://tosstra.com/privacy-policy"
 
-let Terms_and_Conditions = "https://tosstra.com/terms-and-conditi"
+let Terms_and_Conditions = "https://tosstra.com/terms-and-conditions"
 
 let CONTACTUS = "https://tosstra.com/contact-us"
 
 let HELP = "https://tosstra.com/help"
-
-
-
-
 
 //MARK:- Dispatcher API
 
@@ -94,4 +106,9 @@ let JOB_DETAILS_API = BASEURL + "get-Single-Job-Data"
 let NOTIFICATION_15MINS_API = BASEURL + "driver-Location-Point"
 
 let UPADATEPAYMENTAPI = BASEURL + "user-Payment"
+
+let ADDLOGBOOKAPI = BASEURL + "logBook"
+
+let GETLOGBOOKAPI = BASEURL + "getDriverLogBook"
+
 

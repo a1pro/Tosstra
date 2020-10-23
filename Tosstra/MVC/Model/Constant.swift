@@ -42,7 +42,7 @@ var CURRENTLOCATIONLAT = Double(latX)!
 var CURRENTLOCATIONLONG = Double(longX)!
 
 var DEVICEID = "1213"
-var DEVICETYPE = "2"
+var DEVICETYPE = "1"
 
 let underLineText: [NSAttributedString.Key: Any] = [
 .font: UIFont.systemFont(ofSize: 14),

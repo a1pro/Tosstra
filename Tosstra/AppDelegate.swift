@@ -15,8 +15,14 @@ import KYDrawerController
 import UserNotifications
 import UserNotificationsUI
 import CoreLocation
+import Firebase
+import FirebaseAuth
+import UserNotifications
+import UserNotificationsUI
+import MessageUI
+import Messages
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate,MessagingDelegate {
     
     var gameTimer: Timer?
     var locationManager = CLLocationManager()
@@ -30,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         NotificationCenter.default.addObserver(self, selector:#selector(AppDelegate.onAppWillTerminate), name:UIApplication.willTerminateNotification, object:nil)
 
         
-        
+        FirebaseApp.configure()
         IQKeyboardManager.shared.enable=true
         IQKeyboardManager.shared.shouldResignOnTouchOutside=true
         GMSPlacesClient.provideAPIKey("AIzaSyCmujmy2_NQH2T4OGWOcwV2wp6QhOc3t28")
@@ -40,7 +46,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         //                    print(familyName, fontNames)
         //                })
         registerForRemoteNotification()
-        
+        Messaging.messaging().isAutoInitEnabled = true
+                  if #available(iOS 10.0, *) {
+                    // For iOS 10 display notification (sent via APNS)
+                    UNUserNotificationCenter.current().delegate = self
+
+                    let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+                    UNUserNotificationCenter.current().requestAuthorization(
+                      options: authOptions,
+                      completionHandler: {_, _ in })
+                  } else {
+                    let settings: UIUserNotificationSettings =
+                    UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+                    application.registerUserNotificationSettings(settings)
+                  }
+
+                  application.registerForRemoteNotifications()
+           
+           Messaging.messaging().delegate = self
        // BackgroundLocationManager.instance.start()
 
         UIApplication.shared.windows.forEach { window in
@@ -305,6 +328,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         notificationCenter.setNotificationCategories([category])
     }
     
+    //MARK:- FCM
+    
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+      print("Firebase registration token: \(fcmToken)")
+      UserDefaults.standard.setValue(fcmToken, forKey: "DEVICETOKEN")
+                UserDefaults.standard.synchronize()
+      
+      
+      
+      let dataDict:[String: String] = ["token": fcmToken]
+      NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+      // TODO: If necessary send token to application server.
+      // Note: This callback is fired at each app startup and whenever a new token is generated.
+        
+        InstanceID.instanceID().instanceID { (result, error) in
+          if let error = error {
+            print("Error fetching remote instance ID: \(error)")
+          } else if let result = result {
+            print("Remote instance ID token: \(result.token)")
+           // self.instanceIDTokenMessage.text  = "Remote InstanceID token: \(result.token)"
+            
+            
+          }
+        }
+        
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        print(response)
+      let userInfo = response.notification.request.content.userInfo
+               let storyBoard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+               
+               print("Notification Data = \(userInfo)")
+      
+      if let test = userInfo["message"] as? String
+      {
+               //if let info = userInfo["aps"] as? Dictionary<String, AnyObject>
+              // {
+                
+                if  let noti_type = userInfo["gcm.notification.type"] as? String
+                {
+          }
+    }
+    }
+    
+    
     //MARK:-- remote notifications methods---
     func registerForRemoteNotification() {
         if #available(iOS 10.0, *)
@@ -403,12 +473,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     //completionHandler([.alert, .badge, .sound])
 }
 //Called to let your app know which action was selected by the user for a given notification.
+    
+    /*
 @available(iOS 10.0, *)
 func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
     let userInfo = response.notification.request.content.userInfo
     let storyBoard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
     
     print("Notification Data = \(userInfo)")
+    
+    
+    
     
     if let info = userInfo["aps"] as? Dictionary<String, AnyObject>
     {
@@ -452,7 +527,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive respo
     
     completionHandler()
 }
-
+*/
 
 func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                  fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -476,18 +551,34 @@ func application(_ application: UIApplication, didReceiveRemoteNotification user
 
 
 //--MARK:--Get Token-----
-func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-    var token = ""
-    for i in 0..<deviceToken.count
-    {
-        token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
-    }
-    print("device token =  \(token)")
     
-    UserDefaults.standard.setValue(token, forKey: "DEVICETOKEN")
-    UserDefaults.standard.synchronize()
+      func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+          Messaging.messaging().apnsToken = deviceToken
+        
+                var token = ""
+                for i in 0..<deviceToken.count
+                {
+                    token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
+                }
+                print("device token =  \(token)")
+        
+    //            UserDefaults.standard.setValue(token, forKey: "DEVICETOKEN")
+    //            UserDefaults.standard.synchronize()
+          
+      }
     
-}
+//func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//    var token = ""
+//    for i in 0..<deviceToken.count
+//    {
+//        token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
+//    }
+//    print("device token =  \(token)")
+//
+//    UserDefaults.standard.setValue(token, forKey: "DEVICETOKEN")
+//    UserDefaults.standard.synchronize()
+//
+//}
     
     
    @objc func onAppWillTerminate(notification:NSNotification)

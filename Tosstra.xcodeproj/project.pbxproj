@@ -23,6 +23,7 @@
 		5602468224ADA82F003A67E9 /* DisSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602468124ADA82F003A67E9 /* DisSignupVC.swift */; };
 		5602468424ADB89B003A67E9 /* DriverSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602468324ADB89B003A67E9 /* DriverSignupVC.swift */; };
 		5602864D24ADBBBC0013A826 /* DisSigninVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602864C24ADBBBC0013A826 /* DisSigninVC.swift */; };
+		56162420253471D600469193 /* VehicleReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616241F253471D600469193 /* VehicleReportVC.swift */; };
 		56229C9725089E6200972B5A /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56229C9625089E6200972B5A /* PaymentViewController.swift */; };
 		5626EE1824B043E200CAEA70 /* DriverMyJobVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE1724B043E200CAEA70 /* DriverMyJobVC.swift */; };
 		5626EE1B24B045BE00CAEA70 /* DriveMyJobCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5626EE1924B045BE00CAEA70 /* DriveMyJobCell.swift */; };
@@ -64,6 +65,7 @@
 		5653E7F424AF4E39006C8C20 /* DisEndJonTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653E7F224AF4E39006C8C20 /* DisEndJonTCell.swift */; };
 		5653E7F524AF4E39006C8C20 /* DisEndJonTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5653E7F324AF4E39006C8C20 /* DisEndJonTCell.xib */; };
 		5666296D24C801BF00474A5B /* BackgroundLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5666296C24C801BF00474A5B /* BackgroundLocationManager.swift */; };
+		566A2AD325403FF9009530D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 566A2AD225403FF7009530D6 /* GoogleService-Info.plist */; };
 		566F6E5924C1A4BA00B06EB6 /* TrackLoactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566F6E5824C1A4BA00B06EB6 /* TrackLoactionVC.swift */; };
 		566F6E5C24C1D4A200B06EB6 /* DriverHomeCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566F6E5A24C1D4A200B06EB6 /* DriverHomeCCell.swift */; };
 		566F6E5D24C1D4A200B06EB6 /* DriverHomeCCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566F6E5B24C1D4A200B06EB6 /* DriverHomeCCell.xib */; };
@@ -92,6 +94,8 @@
 		56D2D1ED24B32EBB0087B7B9 /* Dis_Login_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2D1EC24B32EBB0087B7B9 /* Dis_Login_Model.swift */; };
 		56EBDCE424C1898C006F16D1 /* ChooseAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EBDCE324C1898C006F16D1 /* ChooseAddressVC.swift */; };
 		56F80744250B47DA004582F4 /* DiverProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F80743250B47DA004582F4 /* DiverProfileModel.swift */; };
+		56FB4A2D25381F40006ABAAE /* VIewReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FB4A2C25381F40006ABAAE /* VIewReportVC.swift */; };
+		56FB4A2F253862DF006ABAAE /* LogBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FB4A2E253862DF006ABAAE /* LogBookModel.swift */; };
 		94763B89D70CC1BBCFE16223 /* Pods_Tosstra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B18A390511219F857BB0E1 /* Pods_Tosstra.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +118,7 @@
 		5602468124ADA82F003A67E9 /* DisSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSignupVC.swift; sourceTree = "<group>"; };
 		5602468324ADB89B003A67E9 /* DriverSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverSignupVC.swift; sourceTree = "<group>"; };
 		5602864C24ADBBBC0013A826 /* DisSigninVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisSigninVC.swift; sourceTree = "<group>"; };
+		5616241F253471D600469193 /* VehicleReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleReportVC.swift; sourceTree = "<group>"; };
 		56229C9625089E6200972B5A /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		5626EE1724B043E200CAEA70 /* DriverMyJobVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverMyJobVC.swift; sourceTree = "<group>"; };
 		5626EE1924B045BE00CAEA70 /* DriveMyJobCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveMyJobCell.swift; sourceTree = "<group>"; };
@@ -156,6 +161,7 @@
 		5653E7F224AF4E39006C8C20 /* DisEndJonTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisEndJonTCell.swift; sourceTree = "<group>"; };
 		5653E7F324AF4E39006C8C20 /* DisEndJonTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisEndJonTCell.xib; sourceTree = "<group>"; };
 		5666296C24C801BF00474A5B /* BackgroundLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundLocationManager.swift; sourceTree = "<group>"; };
+		566A2AD225403FF7009530D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		566F6E5824C1A4BA00B06EB6 /* TrackLoactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackLoactionVC.swift; sourceTree = "<group>"; };
 		566F6E5A24C1D4A200B06EB6 /* DriverHomeCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverHomeCCell.swift; sourceTree = "<group>"; };
 		566F6E5B24C1D4A200B06EB6 /* DriverHomeCCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverHomeCCell.xib; sourceTree = "<group>"; };
@@ -184,6 +190,8 @@
 		56D2D1EC24B32EBB0087B7B9 /* Dis_Login_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dis_Login_Model.swift; sourceTree = "<group>"; };
 		56EBDCE324C1898C006F16D1 /* ChooseAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAddressVC.swift; sourceTree = "<group>"; };
 		56F80743250B47DA004582F4 /* DiverProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiverProfileModel.swift; sourceTree = "<group>"; };
+		56FB4A2C25381F40006ABAAE /* VIewReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIewReportVC.swift; sourceTree = "<group>"; };
+		56FB4A2E253862DF006ABAAE /* LogBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogBookModel.swift; sourceTree = "<group>"; };
 		E5B18A390511219F857BB0E1 /* Pods_Tosstra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tosstra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E645612C3ACD9FFE04591AA5 /* Pods-Tosstra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tosstra.release.xcconfig"; path = "Target Support Files/Pods-Tosstra/Pods-Tosstra.release.xcconfig"; sourceTree = "<group>"; };
 		F86A1CC6F6FE719B3020AAFC /* Pods-Tosstra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tosstra.debug.xcconfig"; path = "Target Support Files/Pods-Tosstra/Pods-Tosstra.debug.xcconfig"; sourceTree = "<group>"; };
@@ -232,6 +240,7 @@
 		5602465924AD9391003A67E9 /* Tosstra */ = {
 			isa = PBXGroup;
 			children = (
+				566A2AD225403FF7009530D6 /* GoogleService-Info.plist */,
 				5649EE6224B70A7600AEF83E /* Assets.xcassets */,
 				5649EE5F24B6DE2100AEF83E /* Tosstra.entitlements */,
 				5635CA4E24ADD15400A65374 /* Font */,
@@ -275,6 +284,7 @@
 				5694C4C624BDD3790017FADF /* JobDetailMedel.swift */,
 				56B6275A2508B21400D965EA /* PKIAPHandler.swift */,
 				56F80743250B47DA004582F4 /* DiverProfileModel.swift */,
+				56FB4A2E253862DF006ABAAE /* LogBookModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -344,6 +354,8 @@
 				5627B31E24C975DC0087D587 /* StatticVC.swift */,
 				56229C9625089E6200972B5A /* PaymentViewController.swift */,
 				56B627602508BEA000D965EA /* PaymentPopupVC.swift */,
+				5616241F253471D600469193 /* VehicleReportVC.swift */,
+				56FB4A2C25381F40006ABAAE /* VIewReportVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -451,6 +463,7 @@
 				5635CA5724ADD1F400A65374 /* Proxima Nova Thin.otf in Resources */,
 				56D085F324ADF66300E6D2BF /* ActiveDriverTCell.xib in Resources */,
 				5635CA5924ADD1F400A65374 /* Proxima Nova Alt Bold.otf in Resources */,
+				566A2AD325403FF9009530D6 /* GoogleService-Info.plist in Resources */,
 				5635CA6424ADE65D00A65374 /* SeniorTrackTCell.xib in Resources */,
 				5635CA6024ADE07E00A65374 /* AllTrackTableViewCell.xib in Resources */,
 				56B6275F2508BD3100D965EA /* ScrollCollect.xib in Resources */,
@@ -527,6 +540,7 @@
 				5602467A24AD9529003A67E9 /* Constant.swift in Sources */,
 				5626EE2224B04F7F00CAEA70 /* DriverNotificationVC.swift in Sources */,
 				5676A45424B4639000AFBCB4 /* ChangePasswordVC.swift in Sources */,
+				56FB4A2F253862DF006ABAAE /* LogBookModel.swift in Sources */,
 				564F2AB224ADC237004116A4 /* DisSideTCell.swift in Sources */,
 				5600A85F24B59A4E00C87FBB /* markerDetailView.swift in Sources */,
 				5602466524AD9391003A67E9 /* Tosstra.xcdatamodeld in Sources */,
@@ -565,6 +579,7 @@
 				5653E7F424AF4E39006C8C20 /* DisEndJonTCell.swift in Sources */,
 				56229C9725089E6200972B5A /* PaymentViewController.swift in Sources */,
 				56B627612508BEA000D965EA /* PaymentPopupVC.swift in Sources */,
+				56162420253471D600469193 /* VehicleReportVC.swift in Sources */,
 				56EBDCE424C1898C006F16D1 /* ChooseAddressVC.swift in Sources */,
 				56D2D1E724B3237E0087B7B9 /* WebServices.swift in Sources */,
 				5602864D24ADBBBC0013A826 /* DisSigninVC.swift in Sources */,
@@ -583,6 +598,7 @@
 				5649EE6124B6F1ED00AEF83E /* JobModel.swift in Sources */,
 				5602468224ADA82F003A67E9 /* DisSignupVC.swift in Sources */,
 				5602467824AD951A003A67E9 /* CardView.swift in Sources */,
+				56FB4A2D25381F40006ABAAE /* VIewReportVC.swift in Sources */,
 				5602465D24AD9391003A67E9 /* SceneDelegate.swift in Sources */,
 				5649EE6924B7225F00AEF83E /* ViewProfileVC.swift in Sources */,
 			);
@@ -642,7 +658,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development: Ayano Handaroo (35CNWW54V3)";
+				CODE_SIGN_IDENTITY = "Apple Distribution: Ayano Handaroo (437K2K5J76)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -704,7 +720,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development: Ayano Handaroo (35CNWW54V3)";
+				CODE_SIGN_IDENTITY = "Apple Distribution: Ayano Handaroo (437K2K5J76)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -734,7 +750,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = Tosstra/Tosstra.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development: Ayano Handaroo (35CNWW54V3)";
+				CODE_SIGN_IDENTITY = "Apple Distribution: Ayano Handaroo (437K2K5J76)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 437K2K5J76;
 				INFOPLIST_FILE = Tosstra/Info.plist;
@@ -743,10 +759,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Tosstra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Tosstra_Dev12Sept;
+				PROVISIONING_PROFILE_SPECIFIER = Tosstra_Dis12Aug;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -758,7 +774,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = Tosstra/Tosstra.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development: Ayano Handaroo (35CNWW54V3)";
+				CODE_SIGN_IDENTITY = "Apple Distribution: Ayano Handaroo (437K2K5J76)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 437K2K5J76;
 				INFOPLIST_FILE = Tosstra/Info.plist;
@@ -767,10 +783,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Tosstra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Tosstra_Dev12Sept;
+				PROVISIONING_PROFILE_SPECIFIER = Tosstra_Dis12Aug;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

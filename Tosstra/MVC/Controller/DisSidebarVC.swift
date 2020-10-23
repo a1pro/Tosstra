@@ -27,8 +27,8 @@ class DisSidebarVC: UIViewController {
     
     
     
-    var DriverArray = ["All Jobs","My Jobs","Profile","Notification","Setting"]
-    var DriverIconArray = ["all-job","all-job","Profile","notification","setting"]
+    var DriverArray = ["All Jobs","My Jobs","Profile","Log Book","Notification","Setting"]
+    var DriverIconArray = ["all-job","all-job","Profile","list-icon","notification","setting"]
     
     var appType="Dispatcher"
     
@@ -194,7 +194,18 @@ extension DisSidebarVC:UITableViewDelegate,UITableViewDataSource
                 elDrawer?.mainViewController = _nav
                 elDrawer?.setDrawerState(.closed, animated: true)
             }
-            else if indexPath.row == 3
+                else if indexPath.row == 3
+                           {
+                               let elDrawer = navigationController?.parent as? KYDrawerController
+                               let home = storyboard?.instantiateViewController(withIdentifier: "VehicleReportVC") as? VehicleReportVC
+                               
+                               
+                               let _nav = UINavigationController(rootViewController: home ?? UIViewController())
+                               _nav.isNavigationBarHidden = true
+                               elDrawer?.mainViewController = _nav
+                               elDrawer?.setDrawerState(.closed, animated: true)
+                           }
+            else if indexPath.row == 4
             {
                 let elDrawer = navigationController?.parent as? KYDrawerController
                 let home = storyboard?.instantiateViewController(withIdentifier: "DriverNotificationVC") as? DriverNotificationVC
@@ -206,7 +217,7 @@ extension DisSidebarVC:UITableViewDelegate,UITableViewDataSource
                 elDrawer?.setDrawerState(.closed, animated: true)
             }
                 
-            else if indexPath.row == 4
+            else if indexPath.row == 5
             {
                 let elDrawer = navigationController?.parent as? KYDrawerController
                 let home = storyboard?.instantiateViewController(withIdentifier: "DriverSettingVC") as? DriverSettingVC

@@ -19,7 +19,7 @@ class StartedViewController: UIViewController {
     @IBAction func signupBtn(_ sender: Any)
     {
         
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserTypeViewController") as! UserTypeViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserTypeViewController") as! UserTypeViewController //UserTypeViewController
         vc.loginsignUp = "signup"
         self.navigationController?.pushViewController(vc, animated: true)
         
