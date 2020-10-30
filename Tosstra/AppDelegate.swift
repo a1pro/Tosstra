@@ -390,6 +390,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
                     
                 }
             }
+            //Live code
             // For iOS 10 data message (sent via FCM
             //            Messaging.messaging().delegate = self
             
